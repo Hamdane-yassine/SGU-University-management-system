@@ -1,0 +1,390 @@
+-Dans Unix tout est fichier. yassinenadibzafbzaf/yassinenadinadi
+- le système de fichier est de structure hiérarchique , arborescence.
+-Les différents types de fichiers Unix : On distingue 4 types de fichiers Unix : 
+   *Les fichiers normaux ou réguliers(-): simple suite linéaire sans structure particulière.
+   *Les répertoires (d) : dossier dans lequel on peutranger des fichiers ou d’autres sous-répertoires.
+   *Les liens symbolique(|) : sont des alias , ils facilitent le partage des fichiers entre les différents répertoires.
+   *Les fichiers spéciaux : les périphériques (c,b :fichiers /dev/qqchose) et les tubes nommés (p: namedpipe)
+-Les Fichiers ordinaires :Un fichier ordinaire est une simple suitelinéaire de caractères sans structure particulière.
+   Un certain nombre de caractéristiques sont 
+     associées à un fichier : la date de sa
+     création, celle de la dernière modification,
+     le propriétaire, la taille, etc ... Ces
+     caractéristiques sont regroupées dans un
+     descripteur de fichier, appelé noeud d’index
+     (i-node ou index-node).
+        Y3ni f fichier ordinaire 3dna contenue w 3dna une partie smitha i_noeud : Date de création , de modification , propriétaire , taille...
+  -Les principales commandes sur les fichiers : 
+      a- Création d’un fichier : cat had commande katcreér fichier  Pour créer un fichier court(rd lbale lhade court), la méthode la plus simple est d’utiliser la commande ‘’cat’’, avec une redirection vers nom-fichier.
+       hna kanktbo cat moraha > moraha smit fichier w sf mn b3d kay3tina nktbo chno brina nd5lo flfichier  kandiro cntrl d bach n7bso saisie dyal les donnes wst fichier exemple ( cat > hamdane (entre) yassine wa3r (cntrl + D))
+       b- bach n2affichiw dak lfichier ya2ima kandiro (cat smitfichier) awla (more smitfichier) had more katbyno sf7a b sf7a.
+       - kayn wa7d commande 5ra bach tcreér fichier smitha vi ms chabka fiha hiya 3ibara 3la editeur dyal text bo7do
+       b- bnisba l affichage kayn commandat 5ra b7al (head -n smitfichier) hna had head kat2affichi lfichier w dik n hiya chmn stora y3ni radi t2affichi lik n str lwl w hiya rada w ila madrtihach default kay2affichi lik 10 stora lwlin
+       b- kayna commande 5ra 3ks dyal head 7it head kat2ffichi n str lwla had commande li smithe (tail) kat2affichi n str l5r b7al haka (tail -n smitfichier) hna dik n y3ndi n str l5r w ila madrtihach default kay2affichi 10 stora l5rin
+      c- db ranchofo kifach nlistiw les fichiers : blcommande ls lm3rofa 
+             -ls kat2affichi lista dyal les fichiers f repertoire intila9an mn bzf dyal les option w 3ndna mnhom : -ls -a hadi kat2affichi ga3 les fichier ta hadok li kaybdaw bn9ta b7al matalan wa7d lfichier .login hada makaybanch ila drti ra ls 7it howa kaybda b n9ta idan labriti yban 5ask dir ls -a ( les fichiers qui commence par point sont des fichiers caches)
+                                                                                                                   -ls -l hadi kat2affichi lik les fichiers m3a des informations supplémentaires y3ni m3lomat idafiya b7al tari5 w lw9t w taill w droit d'acces ..
+                                                                                                                   -ls -x hadi affichage 3adi ms fmulticolone y3ni bzf dyal les colones y3ni mfr9 fli colone  w sf 
+                                                                                                                   -ls -d hadi kat2affichi fichier ila kan repertoire w sf  w bla smiya (si le fichier est un répertoire,liste uniquement son nom).
+                                                                                                                   -ls -t hadi kat2affichi les fichiers mrtbin bina2an 3la a5ir modification y3ni a5it fichier tmodifya howa li rayban lwl w hiya rada.
+                                                                                                                   -ls -f hadi kat2affichi w kat7dd lik les fichiers li homa repertoire w li repertoire katzid 9damo "/".
+                                                                                                                   -ls -g hadi kat2affichi lgrp fin kayn utilisateur w b7alha b7al ls -l t9riban mn ri4 had lblan.
+      d- db ranchofo kifach tms7 fichier : - 3dna commande rm kandiro (rm smitfichier / hna radi ytms7 fichier nichan) ,ms kayn wa7d option li kayst5dmoha bzaf hiya -i hadi katswlk b3da wach briti tms7 nit wla la y3ni kadir verfication exemple(rm -i smitfichier /hna raywslk) , kayn wa7d command 5ra hiya -r hadi katms7 chjra kamla dyal chi repertoire exemple(rm -r smitrepertoir/hna radi ytms7 repertoire m3a fils dyalo ila a5irih).
+                                           - 3dna commande mv hadi 3ndha joj sti3malat : isti3mal lwl ( katbrenomi smiya dyal chi fichier w kayb9a kima howa kandiro (mv smitfichier smiytojdida) ) / ist3mal tani ( katdeplaci chi fichier w kat7to fchi repertoir y3ni kathz dak fichier w kat7to fchi repertoir exemple(mv smitfichier ./repertoire_fin_bari_t7to/smitfichier //hna 7tina fichier fdak repertoire) w t9d dir 3awtani (mv smitfichier ./repertoire_fin_bari_t7to/smitfichierjdida //hna radi yt7t fdak repertoire ms raykon bsmiya jdida)).
+     
+      f-hna ranchofo kifach ncopiw les fichiers : -3dna commande cp kandiro (cp fichierlwl fichiertani) hna kancopier dakchi li flwl w kansiftoh ltani w kayna wa7d option -p hadi kat7afd 3la le meme mode de protection y3ni la date de modification dyal fichier kayb9a kima howa hna dak fichier tani machi darori ykon kayn aslan 7it lamakanch had kaysaybo w kaycopir fih w ila kan aslan w fih chi donner dik donner katmchi w kayt7d fih ra dakchi dyal fichier lwl sf.
+      g-hna ranchofo wa7d commande kat3rf wla kat7dd wla kat3ti lchi fichier un chemin d'accés kaychbh lchemin d'accés l7a9i9i dyalo bach tshl lpartage dyal had fichier smitha ln.
+      h-hna ranchofo wa7d commande kat9lb 3la chi fichier smitha find kandiro (find  /repertoire smitfichier ). 
+      i-hna ranchofo wa7d commande kat3tik type dyal fichier( file smitefichier)
+      j - 
+         hna 3dna ugoa / hna u : user / g : group/ o : other / a : all | rwx / r: accessible pour lecture ((-)fichier ordinaire) r: qu'on peut lister mais on peut pas lecture si il'est proteger pour la lecture((d)repertoire) / w : accessible pour ecriture ((-)fichier ordinaire) w : on a le droit d'écriture dans le repertoire donc on a le droit de suppression ((d)repertoire) / x : le fichier est exécutable( (-)fichier ordinaire) x : on a le droit de se positionner dans le repertoire( (d)repertoir) / - : la permission est non accordée.
+           
+               (rwx)   (rwx)   (rwx)    
+                 u      g        o
+        
+        -kandiro ls -l bach n3rfo le droit d'accés dyal fichier.
+        -hna 3dna wa7d commande smitha chmod kandiro par exemple : chmod a+x smifichier.extention / hna a m3nitha all y3ni ga3 nas 3ndhom le droit de ecriture 3la had fichier.
+                                                                   chmod g+w smifichier.extention / hna g y3ni groupe y3ni les utilisateurs de group 3ndhom le droit dyal lecture. remarque n9do ndiro - y3ni kan7ydo dak droit wla = y3ni kan2isyaliwz dak fichier bdak droit ldok personnes
+           r:4 
+           w:2
+           x:1
+   hna kola wa7d 3tinah ra9m y3ni ila brina ga3 les droit kandiro 7 li hiya 4 + 2 + 1 w labrina ra droit dyal ecriture w lecture kandiro 6 w hiya rada exemple : (chmod 777 smitfichier.extension // hna radi ntb3o namat dyal ugo y3ni 777 y3ni u 3ndo 7 w g 3ndo 7 w o 3ndo 7 y3ni kolchi 3ndo droit lkolchi w hiya all) , another exemple(755 hna user 3ndo ga3 les droit w group w other 3ndhom droit dyal lecture w exécutable y3ni 4 +1 = 5)
+    
+B - LES REPERTOIRES 
+   - //3dna le chemin absolue howa chemin kbir li haz kolchi w fih kolchi / (had hdra fiha chk)
+   - 3dna chemin courant howa li katkon 5dam fih db.
+   - . hadi m3nitha chemin li 5dam fih db w hadi .. m3intha chemin pére.
+ ---hna ranchofo chi commandat 3la les répertoire : -3dna commande mkdir li katcrée répertoite 
+                                                    -3dna commande rmdir hadi katms7 répertoite ila kan machi répertoire courant w ila kan vide.
+                                                    -kayn cd lm3rofa kat5lik changi repertoire.
+                                                    -kayn pwd kat2affichi lik chemin absolue dyal répertoire courant.
+
+C-Génération de noms de fichiers
+      - 3dna njma * m3nitha ay chaine de caractére y3ni matalan briti t2affichi chi fichier w nta ma3a9lch 3la smyto kamla katktb : more smitfich* hna raykml mn raso w kayn ? had m3nitha machi ay chaine de caractere m3nitha ay caractere y3ni wa7d.
+D - commandat 5ra fsabil lah but daroriyin: 
+                      - 3dna commande find ra dwit 3liha lbar7.
+                      - 3dna commande test hadi katesti w katchof fichier chno type dyalo 3la 7sab l'option li drtiha 3dna fli option : 1) -f : fichier normal.
+                                                                                                                                           -d : répertoire.                       
+                                                                                                                                           -w : autorisé en écriture.   // HNA FHAD options kan5dmo haka (test -n smitfichier) hna had command katreturni lina 0 ila kan bs7 type dyalo hiya type li katchofha l'option w katrj3 échec il makanch
+                                                                                                                                           -r : autorisé lecture.
+                                                                                                                                           -x : autorisé en exécution.
+                                                                                                                                           -s : taille du fichier supérieur a 0.   
+                      - 3dna umask 022 katkon haka fdefauld hiya ach kadir kat5lik tbdl droit d'acces li kaykon par default 5ask t3rf ra ch7al howa droit d'acces par default dyal les fichier w repertoire matalan l repertoir howa 777 hna par defaut umask fiha 022 y3ni 777-022=755 y3ni drwxr-xr-x ms 7na brina mli nceryiw chi repertoire ykon 3dna par fdefault droit d'acces dyalo hiya 555 hna 5asna nbdlo umask kandiro 777-222=555 y3ni umask 5asha tkon 222 w kanbdloha bhad tari9a kandiro (umask 222) had kancriyiw repertoir w kaykon fih 555 y3ni dr-xr-xr-x ms mli kantfiw pc umask katrj3 ldefault li howa 022 labrina nbdloha bsifa niha2iya 5asha nbdlohz mn fichier li hiya fihb editeur vi kandiro had command(ms machi darori tkon fhad dossier 3la 7sab system d'exploitation) : vi /etc/profile // w kanl9awha w kanbdloha w droit d'acces par default lfichier howa 666.
+                      - 3dna wa7d command smitha chgrp hadi katbdl lik lgroup lmalik lchi fichier y3ni group proprietaire kandiro(chgrp smitlgroup fichier). w 5as tkom nta ykon 3ndk fichier had dir had l3amaliya.
+                      - 3dna wa7d command smitha chown hadi katbdl lik l'utilisateur lmalik ldak fichier y3ni proprietaire kandiro-chown smitutilisateur fichier).w 5as tkom nta ykon 3ndk fichier had dir had l3amaliya.zid sudo fhado
+                      - 3dna wa7d command smitha compress katdrt fichier w kat5li lih misa7a s4ira kadir (compress [optionli3batk] smitfichier_wla_lista_dyal_fichiers // hna fichiers 9dam kaytm7aw w kaytjm3o fdossier wa7d kaykon b extension .Z w ila brina ndiro l3ks kandiro uncompress[option] liste_fichiers).
+                      - 3dna wa7d command smitha tar katgérer wa7d archives dyal fichiers fchi charit(band) wla disque wla fichier kandiro (tar clé [réf..] hna dik clé hiya action dyal command kat7tawi 3la suite dyal caractères kay3rfo fonction (crtux) w qualificatifs dyal command(Abfhmov).
+                  
+
+G-editeur V:
+     -kayn wa7d command mxhora bzf smitha vi had vi howa editeur dyal fichier kandiro (vi smitfichier) had vi fih 3 dyal modes de fonctionnement : -Le mode normal: howa li kaykon mli yalah kaytft7 fichier kay5lik taper chi command 
+ 
+                                                                                                                                                   -Le mode insertion : kay5lik t2inserer caracteres li saisit fda5l dyal document w bach ndozo lhad lmode kabrko 3la buttona Inser fclavier.
+                                                                                                                                                   -Le mode remplacement : hada kay5lik tremplaci text li kayn bchi text a5or katsaisih nta ta hna katwrk 3la Inser bach doz lhad mode w l Echap bach trj3 lmode l3adi.
+                                                                                                                                                    |bach t2insérer text katwrk 3la i w mli katsali katwrk 3la Echap bach trj3 lmode l3adi, bach tms7 caractere katbrk 3la x w bach tms7 ligne dyal entière katbrk 3la d bach tsauvegarder katbrk 3la :w w fach katbri t5rj katbrk 3la :q.
+                                                                                                                                                    |bach t2insiri flblasa fin kayn curseur: (i) /bach t2insiri flwl dstr : (I) / bach tzid flblasa li 9dam curseur : (a) / bach tzid fl5r dyal ligne :(A)/ bach tdif wa7d str flblasa fin kayn curseur : (o) /bach tzid wa7d str 9dam blasa li fiha curseur : (O).
+                                                                                                                                                    |bach deplaci flimn(droit): (l wla ->) / deplaci flisr(gauche):(h wla <-)/deplacement lfo9 : (j wla butona dlfo9 ) /deplacement lta7t :(k < wla buttona dyal ta7t) /deplacement dyal rb3a dyal stora lta7t (4k wla 4 w buttona dyal ta7t)/Placement fsr :(23 w had return).
+                                                                                                                                                    |tms7 caractre : (x) / tms7 5 dyal caracter : (5x) / tms7 ligne : (dd) / tms7 tlata dyal lignes : (3dd).
+                                                                                                                                                    |bach tsauvegarde wa7d fichier : (:w mnb3d return)/bach tw9f ziyada : (:q mnb3d Return)/bach tsauvgarde w had tw9f : (:wq mnb3d Return)/bach t2ajouti fichier truc : (r truc whad Return)/bach tcopier wa7d bloc dyal 6 dyal stora :(6yy)/bach tcoller wa7d bloc ta7t(au-curseur)curseur : (p)/bach tcoller wa7d bloc fo9(au-dessus) curseur kanbrko 3la : (P).
+                                                                                                                                                    |bach dir recherche dyal wa7d chaine matalan(toto):(/toto whad Return) w bach tkml lrecherche tal lt7t kadir n w bach tkml recherch tal lfo9 kadir N
+                                                     
+P- Les redirections d'entrées/sorties : 
+      1-kola processus y3ni kola 3amaliya kadir mod5alat dyalha w lmo5rajat dyalha(entrées/sorties) bina2an 3la <<descripteurs de fichiers>> y3ni wa7d 7wayj kaywsfo les fichiers w kaytr9mo mn 0 y3ni kaybdaw mn 0 w blmojib dyal wa7d itifa9iya kola programme wla command katst5dm wa7d descripteur m3yan : -le descripteur 0 (entrée standard) pour lire des données.
+                                                                                                                                                                                                                                                                                                               -le descripteur 1 (sortie standard) pour envoyer ses données en sortie.
+                                                                                                                                                                                                                                                                                                               -le descripteur 2 (sortie d'erreur) pour envoyer ses messages d'erreurs.
+                                                                                                                                                                                                                                                                                                                  |3dna commandes(processus) fiha Sortie standard(STDOUT) w fiha Entrée standard(STDIN) w fiha Sortie d'erreur(STDERR).
+             - n9dro nrbto descripteur b un fichier matalan , wb un périphérique(b7al terminal matalan) , wb chi descripteur dyal chi processus a5or.
+             - lconfiguration dyal had descripteurs y3ni l2irtibat dyalhom m3a chi fichier wla périphérique howa joz2 mn lbi2a (l'environnement)dyal processus.
+           -Redirection de la sortie standard : bach nwjho sortie standard lchi fichier kanst5dmo had syntaxe : commande > fichier //hna ila kan fichier makaynch shell kaycrééyih w ila kan déja shell kaydmr w kay7yd contenue dyalo w kay3wdo b sortie standard dyal commande.
+                                                                                                                 -3dna matalan who > who.t had str makay5rj ta resulta f terminal 7it ga3 information dyal who kaynin f fichier who.t w who.t fih sortie dyal commande li 9bl y3ni personnes connectées au système fl7da fin had commande a été exécutée(chof tp exemple).
+                                                                                                                 - n9dro nwjho sortie dyal bzaf dyal les commandes f fichier wa7d kandiro had syntax li fhad exemple : (date; who) > who.x //hna sortie standard dyal date et who machaw y3ni tredirigaw f fnfs fichier li howa who.x w kaytkon resulta dyal date hiya lwla had moraha who btrtib.
+                                                                                                                 - w 3dna 3awtani ta bach nwjho sortie standard fwa7d fichier n9dro ndiro : commande >> fichier //hna fr9 howa radi yzid 3la dakchi li kan 9bl flfichier ila kan fichier kayn machi kayms7 dakchi li kayn w ila makanch fichier kaycréeyih.
+           -Redirection de l’entrée standard : shell kay9dr aydan anaho ywjh l'entrée standard dyal wa7d command kandiro syntaxe suivant : command < fichier //hna command kat9ra données dyal fichier exemple : $ mail root < who.x hna had command katsift flmail lroot dak lfichier who.x
+                                                                                                                                           - 3dna << hadi katsift contenu li kad5Lo blclavier lwa7d lcommande.
+         Syntaxe générale : - n < fichier //twjih flecture descripteur n 3la dak fichier ila kan n mam7ddch kaykon 0 par default (entrée standard) , w ila kan fichier makaynch aslan shell raysift error. 
+                            -n > fichier //twjih f ecriture descripteur n 3la dak fichier ila makanch m7dd kaykon 1 par default (sortie standard),ila kan fichier kayn radi yt3awd yt2insyaliza ila makanch radi tcréé.
+                            -n >> fichier //twjih f ecriture descipteur n f la fin dyal fichier bla may7yd dakchi l9dim ila kan n mam7ddch kaykon 1(sortie standard) ila kan fichier makaynch kaytcrééya.
+                            -n <&m kan3awdo descripteur n 3la descripteur m f lecture , n w m kaytwjho lnfs fichier w nfs périphérique.
+                            -n >&m kan3awdo descripteur n 3la descripteur m fl' ecriture.
+                            -n <&- ferme le descripteur n en lecture.
+                            -n>&- ferme le descripteur n en ecriture.
+ 
+ - Communication entre processus : 
+    -n9do nlanciw bzf dyal command fnfs lw9t w btari9a motazamina.
+       -principe de fonctionnement : sortie standard dyal wa7d command(processus) katwjh ( est redirigée) f entrée dyal wa7d tube(buffer) w l'entreé standard dyal command la5ra katwjh ljiht sortie dyal tube y3ndi : cmd1 sortie dyalha katmchi jiht l'entreé dyal tube w sortie dyal tube katls9 f entreé dyal cmd tanya .
+                                                                                                                                                                                                               -w had joj command y9dro ytbadlo lm3lomat(données) bla maydozo bchi fichier flwst 
+                                                                                                                                                                                                               -had 3amaliya dyal tazamon kadoz deux par deux par tube li kaykon wst w tube katréalisa par une commande bhad form : cmd1 | cmd2 | cmdn
+           -mol5as : •> : kanchangiw sortie standard dyal chi commande bach nlanciwha fchi fichier.
+                     •< : kanchangiw l'entrée standard dyal chi commade bach na5do donnée mn fichier.
+                     •| : nls9o sortie standard dyal chi commande kayna flisr f entrée standard dyal commande li flimn.
+                     •>>: nchangiw sortie standard bach ndizo f la fin dyal fichier kayn .
+                     •||: hadi kanlosiw command li jaya mn b3d ila lwla fchlat.(exécuter la deuxième commande si la première commande est passé mal)
+                     •&&: hadi kanlosiw commad li jaya mn b3d ila kant li 9bl mnha nj7at. exécuter la deuxième commande si la première commande est passé sans problemes
+
+
+
+
+    - commandat zaydin n9do ndiro ls chemindyalfichier > fichierjdid exemple : ls /usr/bin > toto // hna kan7to contenue dyal bin li kayn f usr fwa7d fichier smito toto y3ni dak affichage dyal donner li kaynin f bin dazo l toto n9do ndiro ta ls -l > toto 3adi y3ni bach tsift contenu dyal fichier lfichier a5or kadir ls smitfichier > smitfichierfinbarit7to.
+                                                                              -bach nchofo chno kayn ftoto n9do ndiro cat wla more wla ta wa7d commande jdida smitha less.
+     - had commande dyal wc kat2affichi lik nombre dyal caracteres f fichier : ladrna wc tata w tata fichier makaynch ray3tina error w ladrna wc tata > erreur y3ni brina nsifto resulta dyal wc tata vers wa7d fichier smito erreur maradich ybri raygol lik 3awtani tata makaynch y3ni erreur mais ila drna wc tata 2> erreur hna radi y5dm w raysift resulat l erreur db 3laaaaach : 7it ila drna ra wc tata > erreur hna par default kayn 1 li howa sortie standard w 7na ma3dna ta sortie standtard ms mli kanbdloha l 2 li hiya sortie d'erreur kay5dm hna raysift dakchi li jay mn sortie d'erreur li howa message dyal erreur lfichier erreur.
+
+
+
+     - 3dna matalan had file smito /dev brina nliriw dakchi dyalo kayna tari9a anana ndiro ls -l /dev > devcontenue w had moraha | less devcontenue walakin t9ila 7it katcreeyi fichier a5or 7na brina lcontenue bla fichier kandiro : ls -l /dev |less : hna drna tube bach yb9a 3dna contenue bla mansaybo fichier a5or sortie standard dyal command ls -l /dev mchat l'entrée dyal tube w sortie dyal tube mchat l'entrée dyal less w ila brina n7sbo ch7al mn element fdiv kal3ada bla mancreéyiw fichier kandiro had blan nit : ls -l /dev |less | wc -l /
+
+
+     -sudo -i hadi kadik kadik lchemin dyal root : root@smitutilisateur-smitmachine:~#/
+     -sudo chage -l smitutilisateur /hadi kat3tik des informations 3la mot de pass dyal compte
+     -sudo useradd nomutilisateur /hadi katzid smiya 5ra l utilisateur.
+     -sudo userdel nomutilisateur /hadi katms7 chi smiya mn smiyat dyal utilisateur li nta kat5tarha.
+     -sudo usermod [option] nomutilisateur /hadi kat5lik dir des opération blmode dyal utilisateur 3la 7sab option li 5tritiha.
+         - bach t5rj mn mode dyal root user wrk ctrl+D.
+                
+
+
+
+-f man t9d dir /smiyatchercher kay9lb fdak man.
+- touch had command tahiya katsla7 bach ncreyiw fichier.
+- chmod g = o fichier.txt m3nitha kat3ti lgroup nfs droit d'acces li 3nd other.
+- touch hell{10..50} //hna kaycreyi mn 10 tal 50 fichier w kaysmihom hell10 , hell11,........,hell50.
+-t9d dir chmod u + w fic* y3ni tmodifyi bzf dyal fichiers.
+- mli kadir mkdir -p rep1/rep2  hna wakha rep1 makaynch kaytsayb  w kaytsayb wst mno rep2 ms ila drti ra mkdir rep1/rep2 bla dik option radi y3ti error raygol lik rep1 makaynch.
+- 3dna matalan brina brina nms7o chi repertoir 3amr kandiro : rm -R rep1 .
+- ila drti ls .* radi y2affichi lik tout les fichiers li kaybdaw b . w mnhom repertoire courant w radi y2affichi lik ta contenue dyal had repertoire.
+- wa7d commande smitha echo $SHELL hadi kat2affichi le nom de shell li 5dam bih
+- command 5ra smitha printenv hadi kat2affichi les variables d'envirenment.s
+- f[12xy]  kaybda b f w 7arf li morah ykon ya2ima 1 wla 2 wla x wla y . (y3ni klma mn joj caracter)
+-f[a-z]  kaybda b f w 7arf li morah ykon  m7sor mabin a w z miniscule.(y3ni klma mn joj caracter)
+-*.c kaysali b .c w li 9bl mno ay chaine.
+-?.c kaysali b .c w li 9bl mno caractere wa7d
+-?? fih joj caracteres.
+-*.[A-Za-z] kaysali b no9ta w 7arf li morah ykon m7sor mabin a w z miniscule wla majuscule.
+-*.[ch0-9] kaysali b n9ta w 7arf li morah ykon ya2ima c wla h wla ra9m mabin 0 w 9.
+-[!f]* kaybda b2ay 7rf ri maykonch f .
+-*[!0-9] kaysali b7arf maykonch mabin ar9am mn 0 tal 9.
+- sudo find / -name smitfichier -print . //t9d dir -iname hadi z3ma ga3 les fichiers sawa2an majiscule wla miniscule.
+-chmod u=rwx,g+x,o+w smitfichier //ta hada syntaxe l chmod w matzidch espace.
+-chmod g+w f* / radi ybdl lkolchi li kaybdaw b f w hiya rada.
+-chmod x+y f[1-9] /ga3 les fichiers li kaybdaw b f w caracter li morah mabin 1 w 9.
+-sudo su w moraha chown new util smitfichiers. /kayna ta chgrp kat5dm bnfs concept ms katbdl lgrp machi util
+
+- katmchi l etc w katl9a wa7d fichier smito passwd howa password dyalk.
+-sudo cat shadow /f etc 1 janv 1970 
+-cat /etc/passwd
+- ila drti !462 / hadi commande katexucuti lcommand li fst 462 f history.
+-alias ll ='ls -alF'// hna 3dna had alias ila lanciti ll radi ylanci ls -alF /
+-alias la ='ls -A'
+-alias l='ls -CF' 
+- bach tcreeyi alias katmchi lfichier .bashrc w tma 9ado w ktb alias ta3k t7t alias l5rin.
+-kayna commade users hadi kat2affichi utilisateurs li mconnectyin or (whoami).
+- kayna usermod katchangi compte dyal utilisateur.
+- kayna id kat3tik userid.
+-kayna commande useradd hadi katcreé utilisateur w t9d tmodifier les parametres par default dyal chi utilisateur : 
+-kayna user kat2affichi lik les commandes li 3ndhom 3ala9a b gestion dyal utilisateur w kayna ta group tadir nfs blan bnisba l groups.
+- groups katbyn lik les groups li active.
+-test had command t9d testi biha w t3rf type dyal fichier wla tcompari des valeurs kano chain wla whatever : -kandiro test -e smitfichier / hna dik option kat3ni existe y3ni kantestiw wach dak fichier kayn wla la w bach n3rfo natija kanchofo variable $? chno fih blcommande : echo $?
+                                                                                                             - kayna option -s kanchofo wach fichier 3ndo taill wach kbr mn 0 wla la ila kan kbr raytl3 0 kan la raytl3 1 f commande echo $? .
+- n9dro ndiro : echo "HELL YEAH" > fich /hna kan7to f fich dik jomla.
+-3dna commande tar hadi t9d tsayb biha archife li t9d t7t fih les fichiers w tjm3hom w tgroupihom fblasa w7da exemple : tar -cf smitarchife.tar smifichier_wla_les_fichiers_l5rin like : tar -cf archife.tar fichi*
+-bach t7t chi file fchi repertoire 5as dak repertoire ykon 3ndo droit d'acces li howa x .
+-bach nchofo lcontenue dyal chi archife kandiro :-tar -tvf smitarchife.tar //hna t y3ti nlistiw contenue w v bach ywrina dakchi dyalo w f bach n3tiwh lfile : -tvf.
+                                                 - 3dna tar -xvf smitarchife.tar // hna had commande kat5rj ga3 les fichiers li kaynin f dak archife w kat7thom fdak repertoire.
+-3dna commande tar -f smitarchife.tar -r smitfichies : hadi katzid dak fichiers wst dak archife.
+-kayna cal = calendry : kandiro cal katl3 calendry dyal mois courant ladrna cal 2020 kaytl3 calendry dyal 3am kaml w n9do ndiro : cal 2020 > fichier.txt .
+-kayn wa7d editeur dyal text smito nano kandiro : nano smitfichier //hna kaycreéyi fichier w kay3tik bach d5l les informations dyalo m3a des options w kda 7it nano editeur dyal text.
+-kayna wa7d commande smitha df hadi kat2indiqué taille ocuppé par le systéme .
+-kayna commande sleep hadi katdormir processus lwa7d moda mo7dada matalan kandiro : sleep 20 // hadi katw9f terminal lmoda 20s .
+-kayna wa7d commande smitha shutdown -r 5min /hadi mn b3d 5 min radi ytfa pc w radi y3awd ych3l w kayna : shutdown -h now /hadi katfi lpc flblasa.
+-kayna wa7d commande smitha uname hadi kat3tik smit system wla briti dakchi b les details kadir : uname -a .
+- f history t9d t exucuter a5ir commande b : !!.
+-t9dr t exucter bzaf dyal les commandes f str wa7d 5ask ra tfr9hom b ; b7al : ls -l; date
+-sudo apt -get update //hadi kadir update l package w kda.
+-kayna wa7d commane smitha sort hadi katrtb lik les lignes d'un fichier text appartient d'un parametre donné matalan : sort << text //hna radi yrtbhom 3la 7sab alphabétique ama ladrti -n radi yrtbhom 3la 7sab 3la 7sab valeur némirique.
+-matalan brina brina b sort nrbo wa7d mjmo3a dyal ar9am kandiro : sort -n << FIN // moraha kay3tina nd5lo dak ar9am 7it FIN machi fichier existe w mli kan3tiw ar9am w nsaliw kanktbo FIN howa maraha kayrtbhom croissante .
+-kayn wa7d repertoire dayr ki mzbala n9dro ngolo to9b l2aswad y3ni ay 7aja 7titiha fih katmchi smito /dev/null hna la7titi fih chi7aja katmchi matalan mabrinach n7fdo les sortie dyal les erreurs kansiftohom lih b sortie d'erreur mital : ls -l foch 2> /dev/null
+- ls -l fich foch > fichier 2>&1 //hna radi ysift resulta dyal erreur w sortie standard bjoj l fichier ila 7ydti dak & radi ycreeyi wa7d fichier smito 1.
+-ls fich foch > fichier 2> fichier1 // hna 3dna fich kayn y3ni sortie standard radi tmchi l fichier ms 3dna foch makaynch y3ni radi t5rj mno sortie d'erreur w radi tmchi l fichier1 7it dayrin 2>.
+-kayna wa7d commande smitha tee hadi kat5rj lik sortie f consol w kat7to f fichier fnfs lw9t matalan drna : date | tee -a fichier.txt //hna radi yban date f ecran w radi yt7t fdak fichier.txt bjoj.
+-bach tbyn contenue dyal chi variable kandiro : echo $variabledyalk.
+-bach t2affichi ga3 les variables kandiro env.
+-bach nsaybo variables simplement kandiro : smitvariableta3k= dakchi li briti fih.
+-kayn variable smito ? kandiro : echo $? //hada kay2affichi le resulat de la dernier commande (0: commande bien passé/ AUTRE: commande mal passé).
+- hadok les informations dyal bash kaynin fwa7d fichier text telechatgito smito shell1.txt w hada howa contenue dyalo : |	shell , script , 
+
+Les commandes du shell bash sont des fichiers executables qui se trouvent dans le répertoire "/bin". Le shell "sait" qu'un nom de fichier saisie à l'invite de commande est une "commande" parce que le fichier est marqué comme étant un executable (le fichier est un programme compilé), c'est à dire qu'un droit d'éxecution est associé à l'un des "sujets" (le propriétaire, un groupe, ou tout le monde) du fichier.
+
+Le shell peut servir d'éditeur de ligne de commande , c'est à dire qu'il est possible d'utiliser les flèches de direction pour déplacer le curseur sur la ligne de commande sans écraser les caractères qui y sont déjà saisis. L'édition de la ligne de commande permettait dans les premiers temps des shells, de corriger ou de modifier une ligne de commande. Il fallait faire basculer le shell, du mode d'interprèteur de commande, vers le mode d'éditeur de ligne de commande.
+
+Pour connaître le shell utilisé à l'aide de sa variable d'environnement:
+
+    echo $SHELL
+
+Pour connaître l'utilisation en détail du shell bash:
+
+    man bash
+
+
+Bash (acronyme de Bourne-Again shell)« Bourne encore » est un interpréteur en ligne de commande de type script. C'est le shell Unix du projet GNU. 
+Fondé sur le Bourne shell, Bash lui apporte de nombreuses améliorations, provenant notamment du Korn shell et du C shell. Bash est un logiciel libre publié sous licence publique générale GNU. Il est l'interprète par défaut sur de nombreux Unix libres, notamment sur les systèmes GNU/Linux. C'était aussi le shell par défaut de Mac OS X, remplacé avec Mac OS Catalina (v10.15) par zsh. Il a été d'abord porté sous Microsoft Windows par le projet Cygwin, et depuis Windows 10 constitue une option à part entière, nommée Windows Subsystem for Linux du système d'exploitation. 
+
+Scripts exécutés lors du lancement de bash
+Scripts exécutés quand bash est utilisé pour une ouverture de session :
+
+    communs à tous les utilisateurs :
+        /etc/profile
+    spécifiques à chaque utilisateur
+        .bash_profile
+        .bash_login
+        .profile
+        .bash_logout : Script exécuté lors de la déconnexion
+
+Quelques variables d'environnement : USER, PID, HOME, PATH et SHELL
+env : commande (affiche les variables env)
+echo $0
+bash script.sh ou sh script.sh 
+
+echo{a..z} avec sh et bash 
+Le sha-bang (#!) : #!/bin/bash ou /bin/sh ou #!/usr/bin/php
+$PATH
+PATH="" DANS .bashrc
+PATH=$PATH":~/Bureau/MesScripts"
+
+Nom	fonction
+$*	contient tous les arguments passés à la fonction
+$#	contient le nombre d'arguments
+$?	contient le code de retour de la dernière opération
+$0	contient le nom du script
+$n	contient l'argument n, n étant un nombre
+$!	contient le PID de la dernière commande lancée
+
+ Exemple : créer le fichier arg.sh avec le contenu qui suit :
+
+#!/bin/bash
+echo "Nombre d'arguments ... :  "$#
+echo "Les arguments sont ... :  "$*
+echo "Le second argument est :  "$2
+ 
+echo "Et le code de retour du dernier echo est :  "$?
+
+./arg.sh 1 2 3
+Nombre d'arguments ... :  3
+Les arguments sont ... :  1 2 3
+Le second argument est :  2
+Et le code de retour du dernier echo est :  0
+
+
+
+
+|
+-t9d tsayb script dyalk y3ni fichier text fih des commandes w mli tbri texuctih blbash kadir : bash smitscript.
+-bach texecuti script wla prog wla chi7aja 5ask tzid lih droit d'execution li hiya x b chmod w t9d texecuti script dyal bash btari9a 5ra li hiya : ./smitscript //5ask t7dd repertoire fin howa 3la 7sab fin 7titih.
+-f script labriti t7dd chmn programme li radi yexecuti dak script y3ni wach bash wla sh wla php kandiro had str flwl dyal script li kansmiwh Le sha-bang : #!/bin/bash ou #!/bin/sh ou #!/usr/bin/php  //kandiro wa7d w kan7ddo bach radi ytexecuti dakchi moraha kanktbo script kaml lta7t.
+-kayn commande o5ra bach t2affichi mn ri4 echo smitha printf ms 3ndha toro9 dyal l5dma dyalha bo7dha.
+- labriti tlb smiya yd5lha utilisateur flbash kandiro : read -p "Vore Nom" nom //hna dak nom variable radi yd5l w labrina n 2affichiwh kandiro echo "Bonjour "$nom.
+-ila drti read -p "Donner Votre nom " -t 5 nom //hna radi ytsna 5s bach t3tih smiya w mn b3d radi tw9f commande.
+-dak variable path fih ga3 les chemin li kay9lb fihom system y3ni la3titi path walo matalan path ="" hna mli radi dir ls maradi yl9a walo 7it path 5awi so maradi y9lb fta blasa.
+- labriti script dyalk y texecuta nichan bla madir walo mital tktb ra smitscript 5ask thz chemin dyalo y3ni path dyalo w tzido l variable PATH.
+- hna labrina n9ado alias kandiro : alias "alo=date;cal" //hna wla 3dna alias smito alo mli radi nbrko 3la alo ka2anaha commande radi y2ixecuti date w calendary.
+- bach nbdlo dak smiya dyal utilisateur w kda li katban fterminal flwl b7al hamdane@hamdane~$: kandiro lcommande dyal (PS1="HAHA $")  hna raywli yban HAHA $ : w hadchi li kansmiwh promt.
+- var = 10 && echo $((var+10)) && var1 = $((var+10)) //hna kandiro joj a9was nfr9o mabin operation li lwst w resulta dyalha.
+-hna 3dna ls kayna fdak dossier dyal /bin hna ladrna ls wla ta /bin/ls -l radi y5dm 7it ls jaya mn tma.
+-ila drti echo bonjour                      tout le monde //hna radi t7yd dok les espaces li zaydin w radi ybyn Bonjour tout le monde ama ladrtiha wst "" wla wst '' radi ybynha kima hiya 
+-ila drti echo -n 'bonjour tout le monde' //maradich yrj3 lstr ga3 3la 7sab dak parametre -n.
+-les commandes kaykono kaybdaw b # w ri kaybdaw.
+- hna 3dna labrina nktbo jomla wst fiha ' matalan n'a pas supp kandiro n/'a pas supp bach maydir lina dak ' error.
+-labriti dir condition kadirha wst [] w hna 5ask t5li espace mabin kola [ wla ] w condition exemple [ 2 = 2 ] hadi condition labriti tchof wach s7i7a katmchi tchof variable $?.
+-3dna pour les chaines kan5dmo b = w != w -z katkon vrai ila kant chaine vide w 3dna -n katkon s7i7a ila kant chaine machi 5awya.
+- [9lb kifach momkin tcompari bhad l3ibat]bnisba l2ar9am 3dna n1 -eq n2 y3ni vrai ila kan n1 kaysawi n2 w 3dna -ne ila kan n1 makaysawich n2 w 3dna -lt (lower than) ila n1 striquetement inférieure mn n2 w 3dna -le (lower or equal) ila kan n1 inferieur mn n2 w 3dna -gt(greater than) ila kan n1 struquetement superieur mn n2 w 3dna -ge (greater or equal) ila kan n1 kbr mn aw yosawi n2.
+- -a kat3ni and w -o kat3ni or.
+-ila drti echo * radi y2affichi smiyat dyal ga3 les fichier fdak repertoir.
+-kayna wa7d commande smitha seq hadi kat3tik valeur kamlin entre kda w kda exemple : seq 10 //hna ray3tiw mn 1 tal 10 ila drti seq 4 10 hna ray3tik mn 4 tal 10 w ila drti seq 0 5 50 //hna raymchi mn 0 tal 5 ms radi yn9z b 5 y3ni 0 5 10 15..
+-ila briti dir for mn 1 tal 10 kadir : for i in `seq 10` //hna darori hado `` wla rah maradich y3ti.
+-ila drti echo "ls" radi ybyn ls y3ni labriti texecuti ay commande 5ask dirha wst `` machi wst "" wla ''.
+-ila drti "''" dak variables li lwst rayban bles valeures dyalhom.
+-bach dir a++ f bash kandiro : a=1 or a=0 w moraha a=$(($a+1)) wla n5dmo blcommande let ndiro let "a=$a + 1".
+-kayna wa7d commande kadir calcule smitha expr matalan kandiro : expr 10 + 20 wla brina ndiro darb y3ni * 5asna nzido \ bach yfr9ha mabin caractere w symbole dyal calcule exemple kandiro expr 10 \* 5  w 5dama ra fles entier y3ni 9isma ratkon ra f N.
+-n9do ndiro echo $((10+20)) wla echo `expr 10 + 10` bjoj 5damin.
+-kayna wa7d commande smitha bc hadi 5asa bles calcules w kda w fiha des options kayn bc -q hadi kat5lik tktb des opérations mathématique w kat3tik le resulta dyal kola mo3adala w li mzyan fiha howa t5dm f R machi ri fles enties y3ni N w bach tbyn li mor lfasila z3ma mli dir 10/3 tban lik 3.33 kat3tik lvariable d'envirenemant dyal bc li smito scale ch7al mn ra9m briti mor fasila matalan scale=2 hadchi f bc -q.
+-labrina n5dmo b bc kandiro matalan : echo "10^2" |bc //hna raymchi resulta l bc w rayt7sb biha w labrina fl9isma yban dakchi li mor lfasila kandiro echo "scale=2;10^2" |bc //hna raybano joj ar9am mora lfasila.
+- t9d dir labriti tsift resulta dyal chi mo3adala lchi variable b bc dir haka : x=`echo "scale=2;10/4"|bc` //hna x raykon fih 2.50.
+-w t9d t5dm b bc += w = w *= w /= w ^= .
+-kayna f bc t9d d7dd chmn base t5dm biha wac binary wla hexadicimal wla li kan matalan f bc -q drna obase=2 tma raywli y5dm b binary w par default kaykon obase=10 w ladrtoha =16 raywli y5dm b hexadecimal ms ra f resulat y3ni f output machi input dakchi lach smitha obase (output base) ms labrina 7na nd5lo f input binary wla hexadicimal wla y3ni brina input base kan5dmo b variable ibase kan3tiwh 2 labrina nd5lo ar9am binary w kda.
+-kayn f bc ta < w > w <= w >= w != w == w resultat kaykon boolean b7al C y3ni ya 0 ya 1 kandiro matalan : echo "10>5" | bc //hna 7it true ray5rj lina 1 w kayn && w ||.
+-kaynin ta les fonctions mathématique f bc 3dna s(x) hiya sin w kayn c(x) hiya cos w kayn a(x) howa arctange w kayn l(x) li howa logarithm y3n ln w kayn e(x) li howa exponsiel w kayn sqrt dyal square w kayn length(x) li kat3ti nombres dyal les valeur f x .
+-labriti t5dm bdok les fonctions mathématique kadir bc -l exemple : pi = `echo "h=10;4*a(1)"|bc -l`.
+-kayn ta for w while w dakchi dyal langage C f bc b9dro ndiro matalan : echo "for(i=1;i<=10;i++){i;}"|bc //hna radi ybyn mn 1 tal 10.
+-t9d tsayb fichier.bc t7t fih chi programme w moraha bach texucitih kadir bc smitfichier.bc //hna lakan 3ndk chi7aja radi texecuta nichan rah radi tmchi lakan 3ndk ra des fonctions raykon 5ask tktb smit fonction w t3tiha parametre tma radi y3tik resulat.
+-les editeur dyal text li kaynin : bluefish , vim,vi , emacs , nano , gedit.
+- f vi t9d dir :set number //bach yr9m lik lignes.
+-kayna wa7d commande locate hadi b7al find ms sr3 mnha kandiro : locate smitfichier //hna kayjbd lik repertoire fin kayn dak fichier ms ila ma5damtch 5ask dir update ldatabase dyal mnin rayjib les fichiers blcommande updatedb w kayjib lik ta des fichiers li reprtoire dyalhom fih dak smiya ms labriti yjib lik ra les fichier li basename dyalhom howa hadak katzid option -b w kayna -c hadi katjib ch7al mn fichier l9a fih dak smiya w kayna ta -i hadi labriti mayfr9ch mabin majuscule w miniscule f search.
+-kayna wa7d commande li smitha grep ta hadi kay5dmoha f search w bach zwina katdir search wst file kandiro matalan : grep "^t" smifile //hna 9lb flfile 3la les lignes li kaybdaw b t wla briti l3ks z3ma 9lb 3la les lignes li makaybdawch b t kanzido -v hadi kadir inverse.
+-hna n9do ndiro less /kda/kda | grep "^[a-z]" //hna f resulat li radi t5rjo less radi n9lbo 3la les ligne li kaybdaw bl7orof mabin a w z w tma t9d tbdl less b cat.
+-t9d dir grep [abc] "haha.txt" m3nitha ay ligne fih a wla b wla c w momkin ndiro "a$" hna les lignes li kaysaliw b a .
+-file +smitfichier kat3tik les info 3la dak file.
+-les commandes dyal compress kayn(tar,gzip,zip,gunzip).
+-n9do ndiro gzip smitfhichier //hna dak fichier radi ytremplaca b fichier bnfs smiya.gz y3ni tcompressa w ila mabritihch ytremplaca y3ni ykon 3ndk fichier howa nit yb9a w ytzad 3ndk fichiera5or w ykon howa compresage dyalo kanzido -k.
+-n9do ndiro gzip -k -9 smitfichier //hna radi ycompressih b afdal tari9a y3ni taille raykon 9lil l2a9sa daraja ms rayt3tl ktr w labrina ysrbi w hanya ykon taill kbr kandiro -1 w kayn mn -1 tal -9 darajat dyal compressagat li briti.
+-labrina ndecompresiw ya2ima kandiro gzip -d smitfichier.gz //hna had fichier kaymchi w kaytdecompressa wla kandiro gunzip smitfichier.gz //hna fichier kaymchi w kaytdecompressa.
+-t9dr t5dm b bzip2 bnfs lblanat dyal gzip kaykon fr9 f vitesse w kda w dakchi dyal compression.
+
+
+export PATH="$HOME/bin:$PATH" //kifach tzid chi directly fchi path
+
+Le sha-bang (#!) : #!/bin/bash ou /bin/sh ou #!/usr/bin/php
+$PATH
+PATH="" DANS .bashrc
+PATH=$PATH":~/Bureau/MesScripts"
+
+Nom	fonction
+$*	contient tous les arguments passés à la fonction
+$#	contient le nombre d'arguments
+$?	contient le code de retour de la dernière opération
+$0	contient le nom du script
+$n	contient l'argument n, n étant un nombre
+
+
+
+f 111 t7esbat 777-111
+
+f 222 t7esbat 666-222
+
+f 333 t7esbat 777-333
+
+f 444 t7esbat 666-444
+
+f 555 t7esbat 777-555
+
+f 666 t7esbat 666-666
+$!	contient le PID de la dernière commande lancée
+
+
+RMDIR [/S] [/Q] [lecteur:]chemin
+RD [/S] [/Q] [lecteur:]chemin
+
+    /S      Supprime tous les répertoires et les fichiers dans le
+            répertoire spécifié en plus du répertoire lui-même.
+            Utilisé pour supprimer une arborescence.
+
+    /Q      Mode silencieux, ne demande pas de confirmation pour supprimer
+            une arborescence de répertoires avec /S.
+
+type nul > yassine.txt //creer fichier empty of any type
+copy con testfile.txt // b7al cat
+echo enter your text here > filename.txt //hadi kad5l lik dak text li f echo wsl dak filename tahiya katchbh l cat
+//n9do ndiro >>
+C:\Users\Hamdane\Desktop\learnse>move filefile.txt ..\ //hadi kadeplacer filefile mn learnse l Desktop w 3ks dhad commande hiya C:\Users\Hamdane\Desktop\learnse>move ..\filefile.txt ..\learnse
+C:\Users\Hamdane\Desktop\learnse>copy filefile.txt ..\ //hadi katcopi filefile f desktop
+
+
+//useradd w userdel katzid smiya 5ra l user li kayn aslan wla katms7 smiya
+//adduser w deluser hadi katzid user a5or w katms7 user kayn a5or machi smiya
+//rmdir -p a/b/c katms7 lik a w b w c fd9a ama rmdir a/b/c katms7 ra c 
+//mkdir ap/ag //hna aygolk makaynch ap bach ysayb wst mno ag ama ladrti mkdir -p ap/ag aysayb ap w had aysayb wst mno ag^
+//bunzip2 -z filename //katcompressi
+//bunzip2 -d filename //katdecompressi kolchi
+//tar -cvf namearchive.tar namefiles //kayd5l lik les files f dak archive.tar
+//tar -tvf namearchive.tar //kay2affichi lik files li kaynin fdak archive
+//tar -xvf namearchive.tar //decomprisi dakchi
+//tu lis la sortie d'error avec la sortie standard et tu mis sa dans le fichier //z3ma sortie d'error w sortie standard bjoj aymchiw lfichier bla may5rjo w hiya 2>&1 w kandiroha fl5r d fichier : cat haha.txt > fichier 2>&1
+// x kat3ni droit d'accéder lrepertoire (accès pour un repertoire)/
+ 
