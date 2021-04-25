@@ -57,8 +57,8 @@
 								<input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Email " name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 								
 								@error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message="email Incorrect" }}</strong>
+                                    <span class="invalid-feedback pl-2" role="alert">
+                                        <strong style="font-family: 'Inter',sans-serif; font-weight: 400;">{{ $message="Email Incorrect" }}</strong>
                                     </span>
 								@else
 								<div class="input-group-append custom">
@@ -68,10 +68,10 @@
 
 							</div>
 							<div class="input-group custom">
-								<input id="password" type="password" class="form-control form-control-lg" placeholder="**********"  @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+								<input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror " placeholder="**********" name="password" required autocomplete="current-password">
 								@error('password')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message ="Mot de passe Incorrect"}}</strong>
+									<span class="invalid-feedback pl-2" role="alert">
+										<strong style="font-family: 'Inter',sans-serif; font-weight: 400;">{{ $message ="Mot de passe Incorrect"}}</strong>
 									</span>
 								@else
 									<div class="input-group-append custom">
