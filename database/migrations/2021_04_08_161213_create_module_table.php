@@ -15,7 +15,6 @@ class CreateModuleTable extends Migration {
 	{
 		Schema::create('module', function(Blueprint $table)
 		{
-			$table->integer('idSemestre')->nullable()->index('FK_association27');
 			$table->integer('idModule')->primary();
 			$table->string('nom', 254)->nullable();
 			$table->integer('vh')->nullable();
