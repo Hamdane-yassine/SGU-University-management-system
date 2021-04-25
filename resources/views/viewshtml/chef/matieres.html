@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>Génie Logiciel- GL1</title>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="vendors/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="vendors/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="vendors/images/favicon-16x16.png">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
+    <link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+    <!-- switchery css -->
+    <link rel="stylesheet" type="text/css" href="src/plugins/switchery/switchery.min.css">
+    <!-- bootstrap-tagsinput css -->
+    <link rel="stylesheet" type="text/css" href="src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+    <!-- bootstrap-touchspin css -->
+    <link rel="stylesheet" type="text/css" href="src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="menu-icon dw dw-menu"></div>
+            <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+            <div class="header-search">
+                <form>
+                    <div class="form-group mb-0">
+                        <i class="dw dw-search2 search-icon"></i>
+                        <input type="text" class="form-control search-input" placeholder="Cherche ici">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-notification">
+                <div class="dropdown">
+                    <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+                        <i class="icon-copy dw dw-notification"></i>
+                        <span class="badge notification-active"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="notification-list mx-h-350 customscroll">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <img src="vendors/images/img.jpg" alt="">
+                                        <h3>John Doe</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="vendors/images/photo1.jpg" alt="">
+                                        <h3>Lea R. Frith</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="vendors/images/photo2.jpg" alt="">
+                                        <h3>Erik L. Richards</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="vendors/images/photo3.jpg" alt="">
+                                        <h3>John Doe</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="vendors/images/photo4.jpg" alt="">
+                                        <h3>Renee I. Hansen</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="vendors/images/img.jpg" alt="">
+                                        <h3>Vicki M. Coleman</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-info-dropdown">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        <span class="user-icon">
+                            <img src="vendors/images/user.svg" alt="">
+                        </span>
+                        <span class="user-name">Otman doda</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                        <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
+                        <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Aide</a>
+                        <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Se déconnecter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="github-link">
+                <span><img src="vendors/images/draw.svg" alt=""></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="left-side-bar">
+        <div class="brand-logo">
+            <a href="index.html">
+                <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
+                <img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
+            </a>
+            <div class="close-sidebar" data-toggle="left-sidebar-close">
+                <i class="ion-close-round"></i>
+            </div>
+        </div>
+        <div class="menu-block customscroll">
+            <div class="sidebar-menu">
+                <ul id="accordion-menu">
+                    <li>
+                        <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                            <span class="micon fa fa-dashboard"
+                                style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau de
+                                board</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <span class="micon fa fa-graduation-cap"
+                                style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Les
+                                etudiants</span>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="index.html">Génie Logiciel - GL1</a></li>
+                            <li><a href="index2.html">Administrateur Réseaux</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <span class="micon fa fa-bar-chart"
+                                style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Notes</span>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="index.html">Génie Logiciel - GL1</a></li>
+                            <li><a href="index2.html">Administrateur Réseaux</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                            <span class="micon fa fa-calendar"
+                                style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi du
+                                temps</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                            <span class="micon fa fa-user-o"
+                                style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Gestion des
+                                Professeurs</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                            <span class="micon fa fa-calendar-check-o"
+                                style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                                class="mtext">Absenses</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                            <span class="micon fa fa-calendar-minus-o"
+                                style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                                class="mtext">Rattrapage</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                            <span class="micon fa fa-bell-o"
+                                style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                                class="mtext">Notifications</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-menu-overlay"></div>
+
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="card-box mb-30">
+                    <div class="pd-20 row pt-30">
+                        <div class="col-md-6 col-sm-12">
+                            <h4 class="text-blue h4">Génie Logiciel - GL1</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-12 text-right">
+                            <div class="text-right font-14 text-secondary weight-500">Insértion des notes <input
+                                    type="checkbox" checked class="switch-btn" data-color="#0099ff" data-size="small">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pb-20">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Semestre</th>
+                                    <th scope="col">Module</th>
+                                    <th scope="col">Intitulé du module</th>
+                                    <th scope="col">Matières</th>
+                                    <th scope="col">VH</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row" rowspan="4">Semestre 1</td>
+                                    <td scope="row" class="text-center">M1</td>
+                                    <td scope="row">Langues et Techniques d’Expression</td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Français</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Anglais</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Motricité et Activité de Développement</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Techniques d’Expression et de Communication
+                                                    (TEC)</a></li>
+                                        </ul>
+                                    </td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li>25</li>
+                                            <li>25</li>
+                                            <li>20</li>
+                                            <li>30</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="text-center">M2</td>
+                                    <td scope="row">Mathématiques pour informatique</td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Analyse</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Algèbre</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Probabilités et Statistique</a></li>
+                                        </ul>
+                                    </td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li>40</li>
+                                            <li>30</li>
+                                            <li>20</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="text-center">M3</td>
+                                    <td scope="row">Architecture des Ordinateurs</td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Architecture d’ordinateur</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Electronique numérique</a></li>
+                                        </ul>
+                                    </td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li>40</li>
+                                            <li>40</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="text-center">M4</td>
+                                    <td scope="row">Algorithmique et Programmation</td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Algorithmique</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Programmation C</a></li>
+                                        </ul>
+                                    </td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li>44</li>
+                                            <li>46</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" rowspan="4">Semestre 2</td>
+                                    <td scope="row" class="text-center">M5</td>
+                                    <td scope="row">Programmation orientée objet</td>
+                                    <td scope="row">
+                                        <ul>
+
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Structures de données</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Pratique de la programmation JAVA</a></li>
+                                        </ul>
+                                    </td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li>44</li>
+                                            <li>46</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="text-center">M6</td>
+                                    <td scope="row">Systèmes d’Exploitation et Réseaux Informatique</td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Introduction au Système d’exploitation Unix</a>
+                                            </li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Introduction aux réseaux informatiques</a></li>
+                                        </ul>
+                                    </td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li>44</li>
+                                            <li>46</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="text-center">M7</td>
+                                    <td scope="row">Systèmes d’Information et Bases de Données</td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Analyse et Conception des Systèmes
+                                                    d’Information</a>
+                                            </li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Bases de données Relationnelles</a></li>
+                                        </ul>
+                                    </td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li>50</li>
+                                            <li>40</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="text-center">M8</td>
+                                    <td scope="row">Langues et Techniques Communication</td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Français</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Anglais</a></li>
+                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
+                                                    target="_blank">Techniques d’Expression et de Communication
+                                                    (TEC)</a></li>
+                                        </ul>
+                                    </td>
+                                    <td scope="row">
+                                        <ul>
+                                            <li>30</li>
+                                            <li>30</li>
+                                            <li>30</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="footer-wrap pd-20 mb-20 card-box">
+                DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
+                    Hingarajiya</a>
+            </div>
+        </div>
+    </div>
+    <!-- js -->
+    <script src="vendors/scripts/core.js"></script>
+    <script src="vendors/scripts/script.min.js"></script>
+    <script src="vendors/scripts/process.js"></script>
+    <script src="vendors/scripts/print.min.js"></script>
+    <script src="vendors/scripts/layout-settings.js"></script>
+    <!-- switchery js -->
+    <script src="src/plugins/switchery/switchery.min.js"></script>
+    <!-- bootstrap-tagsinput js -->
+    <script src="src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    <!-- bootstrap-touchspin js -->
+    <script src="src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+    <script src="vendors/scripts/advanced-components.js"></script>
+      
+</body>
+
+</html>
