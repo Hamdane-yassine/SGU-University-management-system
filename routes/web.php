@@ -21,3 +21,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/absences',function()
+{
+    return view('viewshtml.professeur.absences'); 
+}); 
+
