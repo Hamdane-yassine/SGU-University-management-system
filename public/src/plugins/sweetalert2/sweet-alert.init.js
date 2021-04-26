@@ -22,7 +22,7 @@
         });
 
         //Success Message
-        $('#sa-success').click(function () {
+        $('#sa-success').dismiss(function () {
             swal(
                 {
                     title: 'Good job!',
