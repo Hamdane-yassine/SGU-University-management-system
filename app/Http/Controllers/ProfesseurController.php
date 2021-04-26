@@ -17,10 +17,5 @@ class ProfesseurController extends Controller
         ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsencee','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
         return view('viewshtml.professeur.absences', ['absences' => $absences]);
-        /*
-        foreach (Flight::all() as $flight) {
-            echo $flight->name;
-        }
-        */
     }
 }
