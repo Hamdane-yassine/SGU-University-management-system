@@ -222,7 +222,7 @@
                         <tbody>
                             @foreach($absences as $absence)
                             <tr>
-                                <td>{{ $absence->IdAbsence }}</td>
+                                <td>{{ $absence->IdAbsence }}</td>  
                                 <td>{{ $absence->nomMatiere }}</td>
                                 <td>{{ $absence->nomFiliere }}</td>
                                 <td>{{ $absence->dateAbsencee }}</td>
