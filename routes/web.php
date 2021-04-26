@@ -22,8 +22,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/absences',[ProfesseurController::class, 'getAbsences']); 
+Route::get('/absences',[ProfesseurController::class, 'getAllData']); 
 
 Route::get('/hello',function() {
     return view('viewshtml.Auth.login');
 });
+
+Route::post('addRatt',[ProfesseurController::class, 'addRatt']); 

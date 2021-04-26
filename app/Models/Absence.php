@@ -40,10 +40,10 @@ class Absence extends Model
 
 	protected $dates = [
 		'dateAbsencee',
-		'dateRattrapage'
 	];
 
 	protected $fillable = [
+		'IdAbsence',
 		'idProf',
 		'idMatier',
 		'dateAbsencee',
