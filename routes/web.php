@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfesseurController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/absences',function()
-{
-    return view('viewshtml.professeur.absences'); 
-}); 
+Route::get('/absences',[ProfesseurController::class, 'getAbsences']); 
 
 Route::get('/hello',function() {
     return view('viewshtml.Auth.login');

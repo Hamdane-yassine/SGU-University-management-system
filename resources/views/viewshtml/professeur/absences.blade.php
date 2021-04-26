@@ -220,74 +220,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($absences as $absence)
                             <tr>
-                                <td>1</td>
-                                <td>PL SQL</td>
-                                <td>Génie logiciel 2</td>
-                                <td>27 April 2021 11:55 am</td>
+                                <td>{{ $absence->IdAbsence }}</td>
+                                <td>{{ $absence->nomMatiere }}</td>
+                                <td>{{ $absence->nomFiliere }}</td>
+                                <td>{{ $absence->dateAbsencee }}</td>
+                                @if($absence->etat == 1)
                                 <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="green">Rattrapé</span>
+                                @else
+                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En attend</span>
+                                @endif
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>SQL SOUS ORACLE</td>
-                                <td>Administration reseaux informatique 1</td>
-                                <td>16 April 2021 08:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En
-                                        attend</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>JAVA AVANCE</td>
-                                <td>Génie logiciel 2</td>
-                                <td>30 April 2021 04:55 pm</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="green">Rattrapé</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>SQL SOUS ORACLE</td>
-                                <td>Administration reseaux informatique 1</td>
-                                <td>27 April 2021 11:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En
-                                        attend</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>PL SQL</td>
-                                <td>Génie logiciel 2</td>
-                                <td>16 April 2021 08:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="green">Rattrapé</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>PL SQL</td>
-                                <td>Génie logiciel 2</td>
-                                <td>16 April 2021 08:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="green">Rattrapé</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>JAVA AVANCE</td>
-                                <td>Génie logiciel 2</td>
-                                <td>27 April 2021 11:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En
-                                        attend</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>PL SQL</td>
-                                <td>Génie logiciel 2</td>
-                                <td>16 April 2021 08:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En
-                                        attend</span>
-                                </td>
-                            </tr>
+				            @endforeach
                         </tbody>
                     </table>
                 </div>
