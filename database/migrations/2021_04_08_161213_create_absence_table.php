@@ -15,7 +15,7 @@ class CreateAbsenceTable extends Migration {
 	{
 		Schema::create('absence', function(Blueprint $table)
 		{
-			$table->integer('idProf')->nullable()->index('FK_association151');
+			$table->integer('idProf')->index('FK_association151');
 			$table->id('IdAbsence');
 			$table->integer('idMatier')->nullable()->index('FK_association152');
 			$table->dateTime('dateAbsencee')->nullable();
