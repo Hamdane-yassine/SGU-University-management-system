@@ -16,7 +16,7 @@ class CreateFiliereTable extends Migration {
 		Schema::create('filiere', function(Blueprint $table)
 		{
 			$table->id('idFiliere');
-			$table->integer('idDepartement');
+			$table->bigInteger('idDepartement')->unsigned();
 			$table->string('nom', 254);
 			$table->integer('niveau');
 

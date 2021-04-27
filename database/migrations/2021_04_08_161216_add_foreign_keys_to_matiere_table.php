@@ -15,8 +15,8 @@ class AddForeignKeysToMatiereTable extends Migration {
 	{
 		Schema::table('matiere', function(Blueprint $table)
 		{
-			$table->foreign('idProf')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idModule')->references('idModule')->on('module')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idProf','fk14')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idModule','fk15')->references('idModule')->on('module')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -30,8 +30,8 @@ class AddForeignKeysToMatiereTable extends Migration {
 	{
 		Schema::table('matiere', function(Blueprint $table)
 		{
-			$table->dropForeign('FK_association10');
-			$table->dropForeign('FK_association28');
+			$table->dropForeign('fk14');
+			$table->dropForeign('fk15');
 		});
 	}
 

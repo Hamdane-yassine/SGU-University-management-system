@@ -15,8 +15,8 @@ class AddForeignKeysToNoteTable extends Migration {
 	{
 		Schema::table('note', function(Blueprint $table)
 		{
-			$table->foreign('idEtudiant')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idMatier')->references('idMatier')->on('matiere')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idEtudiant','fk16')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idMatier','fk17')->references('idMatier')->on('matiere')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -30,8 +30,8 @@ class AddForeignKeysToNoteTable extends Migration {
 	{
 		Schema::table('note', function(Blueprint $table)
 		{
-			$table->dropForeign('FK_association16');
-			$table->dropForeign('FK_association17');
+			$table->dropForeign('fk16');
+			$table->dropForeign('fk17');
 		});
 	}
 

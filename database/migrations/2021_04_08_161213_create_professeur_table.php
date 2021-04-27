@@ -16,8 +16,8 @@ class CreateProfesseurTable extends Migration {
 		Schema::create('professeur', function(Blueprint $table)
 		{
 			$table->id('idProf');
-			$table->integer('idUtilisateur');
-			$table->integer('idDepartement');
+			$table->bigInteger('idUtilisateur')->unsigned();
+			$table->bigInteger('idDepartement')->unsigned();
 			$table->string('specialite', 254);
 			$table->string('echellon', 254);
 

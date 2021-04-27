@@ -16,9 +16,9 @@ class CreateSemestreTable extends Migration {
 		Schema::create('semestre', function(Blueprint $table)
 		{
 			$table->id('idSemestre');
-			$table->integer('idFiliere');
-			$table->integer('idModule');
-			$table->integer('idAnnee');
+			$table->bigInteger('idFiliere')->unsigned();
+			$table->bigInteger('idModule')->unsigned();
+			$table->bigInteger('idAnnee')->unsigned();
 			$table->string('nom', 254);
 
 			

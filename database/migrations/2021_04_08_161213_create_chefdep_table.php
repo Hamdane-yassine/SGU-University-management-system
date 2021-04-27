@@ -16,8 +16,8 @@ class CreateChefdepTable extends Migration {
 		Schema::create('chefdep', function(Blueprint $table)
 		{
 			$table->id('ID_chef');
-			$table->integer('idDepartement');
-			$table->integer('idProf');
+			$table->bigInteger('idDepartement')->unsigned();
+			$table->bigInteger('idProf')->unsigned();
 
 			
 		});

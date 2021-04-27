@@ -16,8 +16,8 @@ class CreateNoteTable extends Migration {
 		Schema::create('note', function(Blueprint $table)
 		{
 			$table->id('idNote');
-			$table->integer('idEtudiant');
-			$table->integer('idMatier');
+			$table->bigInteger('idEtudiant')->unsigned();
+			$table->bigInteger('idMatier')->unsigned();
 			$table->float('controle', 10, 0)->nullable();
 			$table->float('exam', 10, 0)->nullable();
 			$table->float('noteGeneral', 10, 0)->nullable();

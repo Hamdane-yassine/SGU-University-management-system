@@ -15,7 +15,7 @@ class AddForeignKeysToEvenemntTable extends Migration {
 	{
 		Schema::table('evenemnt', function(Blueprint $table)
 		{
-			$table->foreign('ID_chef')->references('ID_chef')->on('chefdep')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('ID_chef','fk12')->references('ID_chef')->on('chefdep')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -29,7 +29,7 @@ class AddForeignKeysToEvenemntTable extends Migration {
 	{
 		Schema::table('evenemnt', function(Blueprint $table)
 		{
-			$table->dropForeign('FK_association22');
+			$table->dropForeign('fk12');
 		});
 	}
 

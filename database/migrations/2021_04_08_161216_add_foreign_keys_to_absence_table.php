@@ -15,8 +15,8 @@ class AddForeignKeysToAbsenceTable extends Migration {
 	{
 		Schema::table('absence', function(Blueprint $table)
 		{
-			$table->foreign('idProf')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idMatier')->references('idMatier')->on('matiere')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idProf','fk1')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idMatier','fk2')->references('idMatier')->on('matiere')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -30,8 +30,8 @@ class AddForeignKeysToAbsenceTable extends Migration {
 	{
 		Schema::table('absence', function(Blueprint $table)
 		{
-			$table->dropForeign('FK_association151');
-			$table->dropForeign('FK_association152');
+			$table->dropForeign('fk1');
+			$table->dropForeign('fk2');
 		});
 	}
 

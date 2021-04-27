@@ -16,9 +16,9 @@ class CreateAbsenceTable extends Migration {
 		Schema::create('absence', function(Blueprint $table)
 		{
 			$table->id('IdAbsence');
-			$table->integer('idProf');
-			$table->integer('idMatier');
-			$table->dateTime('dateAbsencee');
+			$table->bigInteger('idProf')->unsigned();
+			$table->bigInteger('idMatier')->unsigned();
+			$table->dateTime('dateAbsence');
 			$table->string('dateRattrapage');
 			$table->enum('etat', [0,1]);
 

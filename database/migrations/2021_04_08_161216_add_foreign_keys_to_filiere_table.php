@@ -15,7 +15,7 @@ class AddForeignKeysToFiliereTable extends Migration {
 	{
 		Schema::table('filiere', function(Blueprint $table)
 		{
-			$table->foreign('idDepartement')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idDepartement','fk13')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -29,7 +29,7 @@ class AddForeignKeysToFiliereTable extends Migration {
 	{
 		Schema::table('filiere', function(Blueprint $table)
 		{
-			$table->dropForeign('FK_association18');
+			$table->dropForeign('fk13');
 		});
 	}
 
