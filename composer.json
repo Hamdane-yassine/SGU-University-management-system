@@ -15,6 +15,7 @@
         "reliese/laravel": "^1.1"
     },
     "require-dev": {
+        "aiiro/laravel-factory-generator": "^0.0.4",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
