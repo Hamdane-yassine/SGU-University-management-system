@@ -16,11 +16,12 @@ class CreateAbsenceTable extends Migration {
 		Schema::create('absence', function(Blueprint $table)
 		{
 			$table->id('IdAbsence');
-			$table->integer('idProf')->references('idProf')->on('professeur');
-			$table->integer('idMatier')->references('idMatier')->on('matiere');
+			$table->integer('idProf');
+			$table->integer('idMatier');
 			$table->dateTime('dateAbsencee');
 			$table->string('dateRattrapage');
 			$table->enum('etat', [0,1]);
+
 		});
 	}
 

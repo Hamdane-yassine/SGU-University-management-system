@@ -15,8 +15,8 @@ class AddForeignKeysToProfesseurTable extends Migration {
 	{
 		Schema::table('professeur', function(Blueprint $table)
 		{
-			$table->foreign('idUtilisateur', 'FK_Generalisation_4')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idDepartement', 'FK_association26')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idUtilisateur')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idDepartement')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

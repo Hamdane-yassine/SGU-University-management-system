@@ -15,7 +15,7 @@ class CreateDepartementTable extends Migration {
 	{
 		Schema::create('departement', function(Blueprint $table)
 		{
-			$table->id('idDepartement');
+			$table->id('idDepartement'); 
 			$table->string('nom', 254);
 		});
 	}

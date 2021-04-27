@@ -15,7 +15,7 @@ class AddForeignKeysToFiliereTable extends Migration {
 	{
 		Schema::table('filiere', function(Blueprint $table)
 		{
-			$table->foreign('idDepartement', 'FK_association18')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idDepartement')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

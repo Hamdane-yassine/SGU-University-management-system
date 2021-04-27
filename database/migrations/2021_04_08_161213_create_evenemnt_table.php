@@ -16,7 +16,7 @@ class CreateEvenemntTable extends Migration {
 		Schema::create('evenemnt', function(Blueprint $table)
 		{
 			$table->id('idEvenemt');
-			$table->integer('ID_chef')->references('ID_chef')->on('chefdep');
+			$table->integer('ID_chef');
 			$table->dateTime('Date_even');
 			$table->string('message', 254)->nullable();
 		});

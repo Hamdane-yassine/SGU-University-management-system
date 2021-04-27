@@ -15,7 +15,7 @@ class CreateModuleTable extends Migration {
 	{
 		Schema::create('module', function(Blueprint $table)
 		{
-			$table->id('idModule');
+			$table->id('idModule'); 
 			$table->string('nom', 254);
 			$table->integer('vh');
 		});

@@ -15,7 +15,7 @@ class AddForeignKeysToEvenemntTable extends Migration {
 	{
 		Schema::table('evenemnt', function(Blueprint $table)
 		{
-			$table->foreign('ID_chef', 'FK_association22')->references('ID_chef')->on('chefdep')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('ID_chef')->references('ID_chef')->on('chefdep')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

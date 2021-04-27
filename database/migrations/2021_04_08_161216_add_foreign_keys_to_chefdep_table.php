@@ -15,8 +15,8 @@ class AddForeignKeysToChefdepTable extends Migration {
 	{
 		Schema::table('chefdep', function(Blueprint $table)
 		{
-			$table->foreign('idProf', 'FK_Generalisation_15')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idDepartement', 'FK_association24')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idDepartement')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idProf')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

@@ -16,10 +16,12 @@ class CreateProfesseurTable extends Migration {
 		Schema::create('professeur', function(Blueprint $table)
 		{
 			$table->id('idProf');
-			$table->integer('idUtilisateur')->references('id')->on('users');
-			$table->integer('idDepartement')->references('idDepartement')->on('departement');
+			$table->integer('idUtilisateur');
+			$table->integer('idDepartement');
 			$table->string('specialite', 254);
 			$table->string('echellon', 254);
+
+
 		});
 	}
 

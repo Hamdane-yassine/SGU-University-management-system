@@ -15,8 +15,8 @@ class AddForeignKeysToNoteTable extends Migration {
 	{
 		Schema::table('note', function(Blueprint $table)
 		{
-			$table->foreign('idEtudiant', 'FK_association16')->references('idEtudiant')->on('etudiant')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idMatier', 'FK_association17')->references('idMatier')->on('matiere')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idEtudiant')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idMatier')->references('idMatier')->on('matiere')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

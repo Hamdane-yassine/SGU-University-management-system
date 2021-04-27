@@ -16,8 +16,9 @@ class CreateChefdepTable extends Migration {
 		Schema::create('chefdep', function(Blueprint $table)
 		{
 			$table->id('ID_chef');
-			$table->integer('idDepartement')->references('idDepartement')->on('departement');
-			$table->integer('idProf')->references('idProf')->on('professeur');
+			$table->integer('idDepartement');
+			$table->integer('idProf');
+
 			
 		});
 	}

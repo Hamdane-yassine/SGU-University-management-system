@@ -28,7 +28,7 @@ class CreatePersonneTable extends Migration {
 			$table->enum('genre', ['mâle', 'femelle']);
 			$table->string('emailInstitutionne', 254);
 			$table->string('situationFamiliale', 254)->nullable();
-		});
+		}); 
 	}
 
 

@@ -16,9 +16,11 @@ class CreateFiliereTable extends Migration {
 		Schema::create('filiere', function(Blueprint $table)
 		{
 			$table->id('idFiliere');
-			$table->integer('idDepartement')->references('idDepartement')->on('departement');
+			$table->integer('idDepartement');
 			$table->string('nom', 254);
 			$table->integer('niveau');
+
+			
 		});
 	}
 

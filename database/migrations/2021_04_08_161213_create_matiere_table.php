@@ -16,8 +16,8 @@ class CreateMatiereTable extends Migration {
 		Schema::create('matiere', function(Blueprint $table)
 		{
 			$table->id('idMatier');
-			$table->integer('idProf')->references('idProf')->on('professeur');
-			$table->integer('idModule')->references('idModule')->on('module');
+			$table->integer('idProf');
+			$table->integer('idModule');
 			$table->string('nom', 254);
 			$table->integer('vh');
 			$table->integer('coeff');

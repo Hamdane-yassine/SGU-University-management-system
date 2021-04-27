@@ -16,14 +16,16 @@ class CreateEtudiantTable extends Migration {
 		Schema::create('etudiant', function(Blueprint $table)
 		{
 			$table->id('idEtudiant');
-			$table->integer('idPersonne')->references('idPersonne')->on('idPersonne');
-			$table->integer('idFiliere')->references('idFiliere')->on('filiere');
+			$table->integer('idPersonne');
+			$table->integer('idFiliere');
 			$table->string('cne', 254);
 			$table->integer('apogee');
 			$table->dateTime('anneeDuBaccalaureat');
 			$table->string('cinMere', 254);
 			$table->string('cinPere', 254);
 			$table->string('regimeDeCovertureMedicale', 254)->nullable();
+
+			
 		});
 	}
 

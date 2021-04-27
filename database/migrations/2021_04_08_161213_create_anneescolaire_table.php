@@ -17,7 +17,7 @@ class CreateAnneescolaireTable extends Migration {
 		{
 			$table->id('idAnnee');
 			$table->dateTime('annee');
-		});
+		}); 
 	}
 
 
