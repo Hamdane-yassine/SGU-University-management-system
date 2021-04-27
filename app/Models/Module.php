@@ -12,13 +12,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Module
  * 
- * @property int|null $idSemestre
  * @property int $idModule
  * @property string|null $nom
  * @property int|null $vh
  * 
- * @property Semestre|null $semestre
  * @property Collection|Matiere[] $matieres
+ * @property Collection|Semestre[] $semestres
  *
  * @package App\Models
  */
@@ -30,24 +29,22 @@ class Module extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'idSemestre' => 'int',
 		'idModule' => 'int',
 		'vh' => 'int'
 	];
 
 	protected $fillable = [
-		'idSemestre',
 		'nom',
 		'vh'
 	];
 
-	public function semestre()
-	{
-		return $this->belongsTo(Semestre::class, 'idSemestre');
-	}
-
 	public function matieres()
 	{
 		return $this->hasMany(Matiere::class, 'idModule');
+	}
+
+	public function semestres()
+	{
+		return $this->hasMany(Semestre::class, 'idModule');
 	}
 }

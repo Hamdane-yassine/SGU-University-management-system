@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $specialite
  * @property string|null $echellon
  * 
- * @property Utilisateur|null $utilisateur
+ * @property User|null $user
  * @property Departement|null $departement
  * @property Collection|Absence[] $absences
  * @property Collection|Chefdep[] $chefdeps
@@ -47,9 +47,9 @@ class Professeur extends Model
 		'echellon'
 	];
 
-	public function utilisateur()
+	public function user()
 	{
-		return $this->belongsTo(Utilisateur::class, 'idUtilisateur');
+		return $this->belongsTo(User::class, 'idUtilisateur');
 	}
 
 	public function departement()

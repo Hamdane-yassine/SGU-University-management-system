@@ -1,43 +1,76 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+/**
+ * Class User
+ * 
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property Carbon|null $email_verified_at
+ * @property string $password
+ * @property int|null $idPersonne
+ * @property string|null $role
+ * @property string|null $remember_token
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property Personne|null $personne
+ * @property Collection|Notification[] $notifications
+ * @property Collection|Professeur[] $professeurs
+ *
+ * @package App\Models
+ */
+class User extends Model
 {
-    use HasFactory, Notifiable;
+	protected $table = 'users';
+	public $incrementing = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	protected $casts = [
+		'id' => 'int',
+		'idPersonne' => 'int'
+	];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	protected $dates = [
+		'email_verified_at'
+	];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+	protected $hidden = [
+		'password',
+		'remember_token'
+	];
+
+	protected $fillable = [
+		'name',
+		'email',
+		'email_verified_at',
+		'password',
+		'idPersonne',
+		'role',
+		'remember_token'
+	];
+
+	public function personne()
+	{
+		return $this->belongsTo(Personne::class, 'idPersonne');
+	}
+
+	public function notifications()
+	{
+		return $this->hasMany(Notification::class, 'idUtilisateur');
+	}
+
+	public function professeurs()
+	{
+		return $this->hasMany(Professeur::class, 'idUtilisateur');
+	}
 }

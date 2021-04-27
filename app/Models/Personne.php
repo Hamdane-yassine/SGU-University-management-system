@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $situationFamiliale
  * 
  * @property Collection|Etudiant[] $etudiants
- * @property Collection|Utilisateur[] $utilisateurs
+ * @property Collection|User[] $users
  *
  * @package App\Models
  */
@@ -68,8 +68,8 @@ class Personne extends Model
 		return $this->hasMany(Etudiant::class, 'idPersonne');
 	}
 
-	public function utilisateurs()
+	public function users()
 	{
-		return $this->hasMany(Utilisateur::class, 'idPersonne');
+		return $this->hasMany(User::class, 'idPersonne');
 	}
 }

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $idUtilisateur
  * @property string|null $message
  * 
- * @property Utilisateur|null $utilisateur
+ * @property User|null $user
  *
  * @package App\Models
  */
@@ -36,8 +36,8 @@ class Notification extends Model
 		'message'
 	];
 
-	public function utilisateur()
+	public function user()
 	{
-		return $this->belongsTo(Utilisateur::class, 'idUtilisateur');
+		return $this->belongsTo(User::class, 'idUtilisateur');
 	}
 }
