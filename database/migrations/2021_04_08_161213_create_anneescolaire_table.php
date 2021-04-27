@@ -15,8 +15,8 @@ class CreateAnneescolaireTable extends Migration {
 	{
 		Schema::create('anneescolaire', function(Blueprint $table)
 		{
-			$table->integer('idAnnee')->primary();
-			$table->dateTime('annee')->nullable();
+			$table->id('idAnnee');
+			$table->dateTime('annee');
 		});
 	}
 

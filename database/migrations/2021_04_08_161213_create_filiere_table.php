@@ -15,10 +15,10 @@ class CreateFiliereTable extends Migration {
 	{
 		Schema::create('filiere', function(Blueprint $table)
 		{
-			$table->integer('idDepartement')->nullable()->index('FK_association18');
-			$table->integer('idFiliere')->primary();
-			$table->string('nom', 254)->nullable();
-			$table->integer('niveau')->nullable();
+			$table->id('idFiliere');
+			$table->integer('idDepartement')->references('idDepartement')->on('departement');
+			$table->string('nom', 254);
+			$table->integer('niveau');
 		});
 	}
 

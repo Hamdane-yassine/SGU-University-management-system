@@ -15,9 +15,9 @@ class CreateEvenemntTable extends Migration {
 	{
 		Schema::create('evenemnt', function(Blueprint $table)
 		{
-			$table->integer('idEvenemt')->primary();
-			$table->integer('ID_chef')->nullable()->index('FK_association22');
-			$table->dateTime('Date_even')->nullable();
+			$table->id('idEvenemt');
+			$table->integer('ID_chef')->references('ID_chef')->on('chefdep');
+			$table->dateTime('Date_even');
 			$table->string('message', 254)->nullable();
 		});
 	}

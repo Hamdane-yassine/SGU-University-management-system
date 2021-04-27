@@ -15,12 +15,12 @@ class CreateMatiereTable extends Migration {
 	{
 		Schema::create('matiere', function(Blueprint $table)
 		{
-			$table->integer('idProf')->nullable()->index('FK_association10');
-			$table->integer('idMatier')->primary();
-			$table->integer('idModule')->nullable()->index('FK_association28');
-			$table->string('nom', 254)->nullable();
-			$table->integer('vh')->nullable();
-			$table->integer('coeff')->nullable();
+			$table->id('idMatier');
+			$table->integer('idProf')->references('idProf')->on('professeur');
+			$table->integer('idModule')->references('idModule')->on('module');
+			$table->string('nom', 254);
+			$table->integer('vh');
+			$table->integer('coeff');
 		});
 	}
 

@@ -15,9 +15,9 @@ class CreateNoteTable extends Migration {
 	{
 		Schema::create('note', function(Blueprint $table)
 		{
-			$table->integer('idEtudiant')->nullable()->index('FK_association16');
-			$table->integer('idNote')->primary();
-			$table->integer('idMatier')->nullable()->index('FK_association17');
+			$table->id('idNote');
+			$table->integer('idEtudiant')->references('idProf')->on('professeur');
+			$table->integer('idMatier')->references('idMatier')->on('matiere');
 			$table->float('controle', 10, 0)->nullable();
 			$table->float('exam', 10, 0)->nullable();
 			$table->float('noteGeneral', 10, 0)->nullable();

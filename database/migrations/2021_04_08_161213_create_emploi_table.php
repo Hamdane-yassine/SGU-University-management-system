@@ -15,8 +15,8 @@ class CreateEmploiTable extends Migration {
 	{
 		Schema::create('emploi', function(Blueprint $table)
 		{
-			$table->integer('idProf')->nullable()->index('FK_association21');
-			$table->integer('idEmploi')->primary();
+			$table->id('idEmploi');
+			$table->integer('idProf')->references('idProf')->on('professeur');
 		});
 	}
 

@@ -15,11 +15,11 @@ class CreateProfesseurTable extends Migration {
 	{
 		Schema::create('professeur', function(Blueprint $table)
 		{
-			$table->integer('idUtilisateur')->nullable()->index('FK_Generalisation_4');
-			$table->integer('idDepartement')->nullable()->index('FK_association26');
-			$table->integer('idProf')->primary();
-			$table->string('specialite', 254)->nullable();
-			$table->string('echellon', 254)->nullable();
+			$table->id('idProf');
+			$table->integer('idUtilisateur')->references('id')->on('users');
+			$table->integer('idDepartement')->references('idDepartement')->on('departement');
+			$table->string('specialite', 254);
+			$table->string('echellon', 254);
 		});
 	}
 

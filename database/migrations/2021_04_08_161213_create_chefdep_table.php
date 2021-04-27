@@ -15,9 +15,10 @@ class CreateChefdepTable extends Migration {
 	{
 		Schema::create('chefdep', function(Blueprint $table)
 		{
-			$table->integer('idDepartement')->nullable()->index('FK_association24');
-			$table->integer('idProf')->nullable()->index('FK_Generalisation_15');
-			$table->integer('ID_chef')->primary();
+			$table->id('ID_chef');
+			$table->integer('idDepartement')->references('idDepartement')->on('departement');
+			$table->integer('idProf')->references('idProf')->on('professeur');
+			
 		});
 	}
 

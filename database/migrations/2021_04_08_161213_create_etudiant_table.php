@@ -15,14 +15,14 @@ class CreateEtudiantTable extends Migration {
 	{
 		Schema::create('etudiant', function(Blueprint $table)
 		{
-			$table->integer('idPersonne')->nullable()->index('FK_Generalisation_8');
-			$table->integer('idFiliere')->nullable()->index('FK_association14');
-			$table->integer('idEtudiant')->primary();
-			$table->string('cne', 254)->nullable();
-			$table->integer('apogee')->nullable();
-			$table->dateTime('anneeDuBaccalaureat')->nullable();
-			$table->string('cinMere', 254)->nullable();
-			$table->string('cinPere', 254)->nullable();
+			$table->id('idEtudiant');
+			$table->integer('idPersonne')->references('idPersonne')->on('idPersonne');
+			$table->integer('idFiliere')->references('idFiliere')->on('filiere');
+			$table->string('cne', 254);
+			$table->integer('apogee');
+			$table->dateTime('anneeDuBaccalaureat');
+			$table->string('cinMere', 254);
+			$table->string('cinPere', 254);
 			$table->string('regimeDeCovertureMedicale', 254)->nullable();
 		});
 	}

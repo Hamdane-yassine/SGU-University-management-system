@@ -15,8 +15,8 @@ class CreateNotificationTable extends Migration {
 	{
 		Schema::create('notification', function(Blueprint $table)
 		{
-			$table->integer('idNotification')->primary();
-			$table->integer('idUtilisateur')->nullable()->index('FK_sqdqsdqsd');
+			$table->id('idNotification');
+			$table->integer('idUtilisateur')->references('id')->on('users');
 			$table->string('message', 254)->nullable();
 		});
 	}

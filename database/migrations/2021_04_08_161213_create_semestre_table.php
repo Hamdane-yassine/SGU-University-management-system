@@ -15,11 +15,11 @@ class CreateSemestreTable extends Migration {
 	{
 		Schema::create('semestre', function(Blueprint $table)
 		{
-			$table->integer('idSemestre')->primary();
-			$table->integer('idFiliere')->nullable()->index('FK_association19');
-			$table->integer('idModule')->nullable()->index('FK_association25');
-			$table->integer('idAnnee')->nullable()->index('FK_association20');
-			$table->string('nom', 254)->nullable();
+			$table->id('idSemestre');
+			$table->integer('idFiliere')->references('idFiliere')->on('filiere');
+			$table->integer('idModule')->references('idModule')->on('module');
+			$table->integer('idAnnee')->references('idAnnee')->on('anneescolaire');
+			$table->string('nom', 254);
 		});
 	}
 

@@ -15,18 +15,18 @@ class CreatePersonneTable extends Migration {
 	{
 		Schema::create('personne', function(Blueprint $table)
 		{
-			$table->integer('idPersonne')->primary();
-			$table->string('nom', 254)->nullable();
-			$table->string('prenom', 254)->nullable();
-			$table->string('adressePersonnele', 254)->nullable();
-			$table->string('cin', 254)->nullable();
-			$table->string('email', 254)->nullable();
-			$table->string('tel', 254)->nullable();
-			$table->dateTime('dateNaissance')->nullable();
-			$table->string('nationalite', 254)->nullable();
-			$table->dateTime('lieuNaissance')->nullable();
-			$table->string('genre', 254)->nullable();
-			$table->string('emailInstitutionne', 254)->nullable();
+			$table->id('idPersonne');
+			$table->string('nom', 254);
+			$table->string('prenom', 254);
+			$table->string('adressePersonnele', 254);
+			$table->string('cin', 254);
+			$table->string('email', 254);
+			$table->string('tel', 254);
+			$table->dateTime('dateNaissance');
+			$table->string('nationalite', 254);
+			$table->String('lieuNaissance');
+			$table->string('genre', 254);$table->enum('genre', ['mâle', 'femelle']);
+			$table->string('emailInstitutionne', 254);
 			$table->string('situationFamiliale', 254)->nullable();
 		});
 	}

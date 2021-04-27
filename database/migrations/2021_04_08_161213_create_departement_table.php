@@ -15,8 +15,8 @@ class CreateDepartementTable extends Migration {
 	{
 		Schema::create('departement', function(Blueprint $table)
 		{
-			$table->integer('idDepartement')->primary();
-			$table->string('nom', 254)->nullable();
+			$table->id('idDepartement');
+			$table->string('nom', 254);
 		});
 	}
 
