@@ -39,7 +39,7 @@ class ProfesseurController extends Controller
         $matiers = Matiere::where('idMatier',1)->select('nom as nomMatier')->get(); 
 
 
-        return view('viewshtml.professeur.absences', ['absences' => $absences, 'MatiersList' => $matiers]);
+        return view('prof.absences', ['absences' => $absences, 'MatiersList' => $matiers]);
     }
 
     public function addRatt()
