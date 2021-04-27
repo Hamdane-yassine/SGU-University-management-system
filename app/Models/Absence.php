@@ -11,14 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Absence
- * 
+ *
  * @property int|null $idProf
  * @property int $IdAbsence
  * @property int|null $idMatier
  * @property Carbon|null $dateAbsencee
  * @property Carbon|null $dateRattrapage
  * @property bool|null $etat
- * 
+ *
  * @property Professeur|null $professeur
  * @property Matiere|null $matiere
  *
