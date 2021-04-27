@@ -244,25 +244,25 @@
                         <p class="mb-26"></p>
                     </div>
                     <div class="wizard-content">
-                        <form class="tab-wizard wizard-circle wizard">
+                        
+                        <form class="tab-wizard wizard-circle wizard" method='POST' action='/addRatt'>
+                            @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Matiére :</label>
-                                            <select class="custom-select2 form-control" name="state" style="width: 100%; height: 38px;">
-                                                <optgroup>
-                                                    <option value="PL SQL">PL SQL</option>
-                                                    <option value="DBA">DBA</option>
-                                                    <option value="SQL SOUS ORACLE">SQL SOUS ORACLE</option>
-                                                </optgroup>
+                                            <select class="custom-select2 form-control" name="matiere" style="width: 100%; height: 38px;" required>
+                                                    @foreach ($MatiersList as $matier)
+                                                        <option value={{ $matier->nomMatier }} >{{ $matier->nomMatier }}</option> 
+                                                    @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date d'absence :</label>
-                                            <input class="form-control datetimepicker" placeholder="Date d'absence :" type="text">
+                                            <input class="form-control datetimepicker" name="dataAbsence" placeholder="Date d'absence :" type="text" required>
                                         </div>
                                     </div>
                                 </div>
@@ -270,12 +270,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Dates de rattrapage possible :</label>
-                                            <input class="form-control datetimepicker-range datetimepicker" placeholder="Date de rattrapage :" type="text">
+                                            <input class="form-control datetimepicker-range datetimepicker" name="dateRatt" placeholder="Date de rattrapage :" type="text" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="custom-control custom-checkbox mb-5" style="padding-top: 42px;">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                            <input type="checkbox" name="informerEtudiants"class="custom-control-input" id="customCheck1" >
                                             <label class="custom-control-label" for="customCheck1">Informer les
                                                 étudiants pour l'absence</label>
                                         </div>
