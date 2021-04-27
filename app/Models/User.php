@@ -14,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 /**
  * Class User
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -25,7 +25,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Personne|null $personne
  * @property Collection|Notification[] $notifications
  * @property Collection|Professeur[] $professeurs

@@ -1,12 +1,33 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Etudiant;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Etudiant::class, function (Faker $faker) {
-    return [
-        'idPersonne' => factory(App\Personne::class),
-        'idFiliere' => factory(App\Filiere::class),
-    ];
-});
+class EtudiantFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Etudiant::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'idPersonne' => function(){
+                return \App\Models\Personne::factory()->create()->pluck('idPersonne')[0];
+            },
+            'idFiliere' => function(){
+                return \App\Models\Filiere::factory()->create()->pluck('idFiliere')[0];
+            },
+        ];
+    }
+}
