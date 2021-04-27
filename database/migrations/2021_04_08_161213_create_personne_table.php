@@ -25,7 +25,7 @@ class CreatePersonneTable extends Migration {
 			$table->dateTime('dateNaissance');
 			$table->string('nationalite', 254);
 			$table->String('lieuNaissance');
-			$table->string('genre', 254);$table->enum('genre', ['mâle', 'femelle']);
+			$table->enum('genre', ['mâle', 'femelle']);
 			$table->string('emailInstitutionne', 254);
 			$table->string('situationFamiliale', 254)->nullable();
 		});
