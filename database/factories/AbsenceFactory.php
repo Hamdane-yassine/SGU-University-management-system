@@ -22,8 +22,12 @@ class AbsenceFactory extends Factory
     public function definition()
     {
         return [
-            'idProf' => factory(App\Professeur::class),
-            'idMatier' => factory(App\Matiere::class),
+            'idProf' => function (){
+                return \App\Models\Professeur::factory()->create()->pluc('idProf');
+            },
+            'idMatier' => function (){
+                return \App\Models\Matiere::factory()->create()->pluc('idMatier');
+            },
         ];
     }
 }
