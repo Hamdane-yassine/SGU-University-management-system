@@ -23,7 +23,7 @@ class EmploiFactory extends Factory
     {
         return [
             'idProf' => function() {
-                return \App\Models\Professeur::factory()->creeate()->pluck('idProf');
+                return \App\Models\Professeur::factory()->creeate()->pluck('idProf')[0];
             },
         ];
     }

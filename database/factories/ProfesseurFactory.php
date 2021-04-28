@@ -23,11 +23,13 @@ class ProfesseurFactory extends Factory
     {
         return [
             'idUtilisateur' => function (){
-                return \App\Models\User::factory()->create()->pluck('idUtilisateur');
+                return \App\Models\User::factory()->create()->pluck('idUtilisateur')[0];
             },
             'idDepartement' => function (){
-                return \App\Models\Departement::factory()->create()->pluck('idDepartement');
+                return \App\Models\Departement::factory()->create()->pluck('idDepartement')[0];
             },
+            'specialite'=>$this->faker->word(),
+            'echellon'=>$this->faker->word(),
         ];
     }
 }

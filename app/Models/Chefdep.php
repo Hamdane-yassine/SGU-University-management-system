@@ -8,14 +8,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Chefdep
- * 
+ *
  * @property int|null $idDepartement
  * @property int|null $idProf
  * @property int $ID_chef
- * 
+ *
  * @property Professeur|null $professeur
  * @property Departement|null $departement
  * @property Collection|Evenemnt[] $evenemnts
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Chefdep extends Model
 {
+    use HasFactory;
 	protected $table = 'chefdep';
 	protected $primaryKey = 'ID_chef';
 	public $incrementing = false;

@@ -28,6 +28,12 @@ class EtudiantFactory extends Factory
             'idFiliere' => function(){
                 return \App\Models\Filiere::factory()->create()->pluck('idFiliere')[0];
             },
+            'cne'=>$this->faker->randomDigit(),
+            'apogee'=>$this->faker->randomDigit(),
+            'anneeDuBaccalaureat'=>$this->faker->date(),
+            'cinMere'=>$this->faker->randomDigit(),
+            'cinPere'=>$this->faker->randomDigit(),
+            'regimeDeCovertureMedicale'=>'yes',
         ];
     }
 }

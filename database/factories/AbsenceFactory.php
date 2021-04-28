@@ -28,6 +28,9 @@ class AbsenceFactory extends Factory
             'idMatier' => function (){
                 return \App\Models\Matiere::factory()->create()->pluc('idMatier');
             },
+            'dateAbsence'=>$this->faker->date(),
+            'dateRattrapage'=>$this->faker->date(),
+            'etat'=>$this->faker->boolean(),
         ];
     }
 }
