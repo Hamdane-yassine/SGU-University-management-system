@@ -41,15 +41,15 @@
                                             <label>Matiére :</label>
                                             <select class="custom-select2 form-control" name="matiere" style="width: 100%; height: 38px;" required>
                                                     @foreach ($MatiersList as $matier)
-                                                        <option value={{ $matier->nomMatier }} >{{ $matier->nomMatier }}</option> 
+                                                        <option value= {{ $matier->id }}>{{ $matier->nomMatier }}</option> 
                                                     @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6">      
                                         <div class="form-group">
                                             <label>Date d'absence :</label>
-                                            <input class="form-control datetimepicker" name="dataAbsence    " placeholder="Date d'absence :" type="text" autocomplete="off" required>
+                                            <input class="form-control datetimepicker" name="dateAbsence" placeholder="Date d'absence :" type="text" autocomplete="off" required>
                                         </div>
                                     </div>
                                 </div>

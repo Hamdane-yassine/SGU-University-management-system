@@ -7,6 +7,7 @@ use App\Models\Absence;
 use App\Models\Matiere;
 use phpDocumentor\Reflection\Types\This;
 use DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class ProfesseurController extends Controller
 {
@@ -18,7 +19,7 @@ class ProfesseurController extends Controller
     
     public function getAbsences(Request $request)  //an ajax function to retrieve tha data
     {
-        $absences = Absence::where('absence.idProf',1)  //first inint a user id
+        $absences = Absence::where('absence.idProf',Auth::id())  //first inint a user id
         ->join('matiere','absence.idMatier','=','matiere.idMatier') //retrieved matiere
         ->join('semestre','matiere.idModule','=','semestre.idModule')
         ->join('filiere','semestre.idFiliere','=','filiere.idFiliere')
@@ -34,33 +35,31 @@ class ProfesseurController extends Controller
         }
     }
     
-
     public function getMatiers()
     {
-        $matiers = Matiere::where('idProf',1)->select('nom as nomMatier')->get();
+        $matiers = Matiere::where('idProf',Auth::id())->select('idMatier as id','nom as nomMatier')->get();
         return $matiers;
     }
 
     public function addRatt()
     {
         //all of String datatype
-        $matier = request('matiere');
-        $dataAbsence = request('dataAbsence');
+        $idMatier = request('matiere');
+        $dateAbsence = request('dateAbsence');
         $dateRatt = request('dateRatt');
         $informerEtudiants = request('informerEtudiants');
 
         //parsing data
-        if($matier == NULL)
+        if($idMatier == NULL)
         {
             return redirect('/absences');
         }
         else
         {
             $absence = Absence::create([
-                'IdAbsence' => 7,
-                'idProf' => 1,
-                'idMatier' => 1,
-                'dateAbsence' => $dataAbsence,
+                'idProf' => Auth::id(),
+                'idMatier' => $idMatier,
+                'dateAbsence' => $dateAbsence,
                 'dateRattrapage' => str_replace('-',' ',$dateRatt),
                 'etat' => 'en attendant',
             ]);
