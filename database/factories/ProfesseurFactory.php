@@ -23,7 +23,7 @@ class ProfesseurFactory extends Factory
     {
         return [
             'idUtilisateur' => function (){
-                return \App\Models\User::factory()->create()->pluck('idUtilisateur')[0];
+                return \App\Models\User::factory()->create()->pluck('id')[0];
             },
             'idDepartement' => function (){
                 return \App\Models\Departement::factory()->create()->pluck('idDepartement')[0];
