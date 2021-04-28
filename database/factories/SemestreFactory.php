@@ -22,7 +22,9 @@ class SemestreFactory extends Factory
     public function definition()
     {
         return [
-            'idFiliere' => factory(App\Filiere::class),
+            'idFiliere' => function (){
+                return \App\Models\Filiere::factory()->create()->pluck('idFiliere');
+            },
             'idAnnee' => factory(App\Anneescolaire::class),
             'idModule' => factory(App\Module::class),
         ];

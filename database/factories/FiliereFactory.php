@@ -22,7 +22,9 @@ class FiliereFactory extends Factory
     public function definition()
     {
         return [
-            'idDepartement' => factory(App\Departement::class),
+            'idDepartement' => function (){
+                return \App\Models\Departement::factory()->create()->pluck('idDepartement')[0];
+            },
         ];
     }
 }

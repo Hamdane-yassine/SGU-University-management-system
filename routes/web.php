@@ -22,6 +22,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/absences',[ProfesseurController::class, 'getAllData']); 
+Route::get('/absences',[ProfesseurController::class, 'getAllData']);
 
-Route::post('addRatt',[ProfesseurController::class, 'addRatt']); 
+Route::post('addRatt',[ProfesseurController::class, 'addRatt']);

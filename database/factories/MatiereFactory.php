@@ -22,8 +22,8 @@ class MatiereFactory extends Factory
     public function definition()
     {
         return [
-            'idProf' => factory(App\Professeur::class),
-            'idModule' => factory(App\Module::class),
+            'idProf' => \App\Models\Professeur::factory()->create()->pluck('idProf'),
+            'idModule' => \App\Models\Module::factory(),
         ];
     }
 }

@@ -22,7 +22,11 @@ class EvenemntFactory extends Factory
     public function definition()
     {
         return [
-            'ID_chef' => factory(App\Chefdep::class),
+            'ID_chef' => function (){
+              return \App\Models\Chefdep::factory()->create()->pluck('ID_chef');
+            },
+            'Date_even' => $this->faker->date(),
+            'message' => $this->faker->paragraph(),
         ];
     }
 }

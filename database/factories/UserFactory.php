@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->safeEmail,
             'email_verified_at' => $this->faker->dateTime(),
-            'password' => bcrypt($this->faker->password),
+            'password' => bcrypt('secret'),
             'remember_token' => Str::random(10),
             'idPersonne' =>function(){
                 return \App\Models\Personne::factory()->create()->pluck('idPersonne')[0];
