@@ -22,7 +22,7 @@ class AnneescolaireFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'annee'=> $this->faker->dateTimeThisYear(),
         ];
     }
 }

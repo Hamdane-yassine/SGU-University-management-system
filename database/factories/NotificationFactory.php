@@ -22,7 +22,10 @@ class NotificationFactory extends Factory
     public function definition()
     {
         return [
-            'idUtilisateur' => factory(App\User::class),
+            'idUtilisateur' => function (){
+                return \App\Models\User::factory()->create()->get()[0]['idUtilisateur'];
+            },
+            'message'=> $this->faker->text(),
         ];
     }
 }

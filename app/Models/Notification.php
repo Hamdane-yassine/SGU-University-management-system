@@ -7,20 +7,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Notification
- * 
+ *
  * @property int $idNotification
  * @property int|null $idUtilisateur
  * @property string|null $message
- * 
+ *
  * @property User|null $user
  *
  * @package App\Models
  */
 class Notification extends Model
 {
+    use HasFactory;
 	protected $table = 'notification';
 	protected $primaryKey = 'idNotification';
 	public $incrementing = false;

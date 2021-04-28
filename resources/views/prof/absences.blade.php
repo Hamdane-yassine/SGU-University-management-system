@@ -10,7 +10,7 @@
                         <h4 class="text-blue h4">Table d'absence</h4>
                         <p class="mb-26"></p>
                     </div>
-                    <table class="data-table table nowrap">
+                    <table class=" table   yajra-datatable">
                         <thead>
                             <tr>
                                 <th>N°</th>
@@ -21,20 +21,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($absences as $absence)
-                            <tr>
-                                <td>{{ $absence->IdAbsence }}</td>  
-                                <td>{{ $absence->nomMatiere }}</td>
-                                <td>{{ $absence->nomFiliere }}</td>
-                                <td>{{ $absence->dateAbsence }}</td>
-                                @if($absence->etat == 1)
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="green">Rattrapé</span>
-                                @else
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En attend</span>
-                                @endif
-                                </td>
-                            </tr>
-				            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -63,7 +49,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date d'absence :</label>
-                                            <input class="form-control datetimepicker" name="dataAbsence" placeholder="Date d'absence :" type="text" required>
+                                            <input class="form-control datetimepicker" name="dataAbsence    " placeholder="Date d'absence :" type="text" autocomplete="off" required>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +57,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Dates de rattrapage possible :</label>
-                                            <input class="form-control datetimepicker-range datetimepicker" name="dateRatt" placeholder="Date de rattrapage :" type="text" required>
+                                            <input class="form-control datetimepicker-range datetimepicker" name="dateRatt" placeholder="Date de rattrapage :" type="text" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -107,4 +93,24 @@
     <script src="{{ asset('vendors/scripts/dashboard3.js') }}"></script>
     <script src="{{ asset('src/plugins/jquery-steps/jquery.steps.js') }}"></script>
     <script src="{{ asset('vendors/scripts/steps-setting.js') }}"></script>
+    <script type="text/javascript">
+        $(function () {
+          var table = $('.yajra-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+
+              ajax: "{{ route('getAbsencesList') }}",
+              columns: [
+                  {data: 'IdAbsence', name: 'IdAbsence',},
+                  {data: 'nomMatiere', name: 'nomMatiere'},
+                  {data: 'nomFiliere', name: 'nomFiliere'},
+                  {data: 'dateAbsence', name: 'dateAbsence'},
+                  {data: 'etat', name: 'etat'}
+              ]
+          });
+          
+        });
+      </script>
+
+    
     @endsection

@@ -7,17 +7,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Note
- * 
+ *
  * @property int|null $idEtudiant
  * @property int $idNote
  * @property int|null $idMatier
  * @property float|null $controle
  * @property float|null $exam
  * @property float|null $noteGeneral
- * 
+ *
  * @property Etudiant|null $etudiant
  * @property Matiere|null $matiere
  *
@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Note extends Model
 {
+    use HasFactory;
 	protected $table = 'note';
 	protected $primaryKey = 'idNote';
 	public $incrementing = false;

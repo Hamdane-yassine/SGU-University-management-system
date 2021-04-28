@@ -22,8 +22,15 @@ class MatiereFactory extends Factory
     public function definition()
     {
         return [
-            'idProf' => \App\Models\Professeur::factory()->create()->pluck('idProf'),
-            'idModule' => \App\Models\Module::factory(),
+            'idProf' => function(){
+                return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
+            },
+            'idModule' => function(){
+              return \App\Models\Module::factory()->create()->get()[0]['idModule'];
+            },
+            'nom'=> $this->faker->name(),
+            'vh'=> $this->faker->randomNumber(),
+            'coeff'=> $this->faker->randomFloat,
         ];
     }
 }

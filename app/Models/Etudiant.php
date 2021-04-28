@@ -9,10 +9,11 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Etudiant
- * 
+ *
  * @property int|null $idPersonne
  * @property int|null $idFiliere
  * @property int $idEtudiant
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $cinMere
  * @property string|null $cinPere
  * @property string|null $regimeDeCovertureMedicale
- * 
+ *
  * @property Personne|null $personne
  * @property Filiere|null $filiere
  * @property Collection|Note[] $notes
@@ -31,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Etudiant extends Model
 {
+    use HasFactory;
 	protected $table = 'etudiant';
 	protected $primaryKey = 'idEtudiant';
 	public $incrementing = false;

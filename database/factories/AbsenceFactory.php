@@ -22,8 +22,15 @@ class AbsenceFactory extends Factory
     public function definition()
     {
         return [
-            'idProf' => factory(App\Professeur::class),
-            'idMatier' => factory(App\Matiere::class),
+            'idProf' => function (){
+                return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
+            },
+            'idMatier' => function (){
+                return \App\Models\Matiere::factory()->create()->get()[0]['idMatier'];
+            },
+            'dateAbsence'=>$this->faker->date(),
+            'dateRattrapage'=>$this->faker->date(),
+            'etat'=>$this->faker->randomElement(['0','1']),
         ];
     }
 }

@@ -8,15 +8,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Filiere
- * 
+ *
  * @property int|null $idDepartement
  * @property int $idFiliere
  * @property string|null $nom
  * @property int|null $niveau
- * 
+ *
  * @property Departement|null $departement
  * @property Collection|Etudiant[] $etudiants
  * @property Collection|Semestre[] $semestres
@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Filiere extends Model
 {
+    use HasFactory;
 	protected $table = 'filiere';
 	protected $primaryKey = 'idFiliere';
 	public $incrementing = false;

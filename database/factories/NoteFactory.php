@@ -22,7 +22,15 @@ class NoteFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'idEtudiant'=>function(){
+                return \App\Models\Etudiant::factory()->create()->get()[0]['idEtudiant'];
+            },
+            'idMatier'=>function(){
+                return \App\Models\Matiere::factory()->create()->get()[0]['idMatier'];
+            },
+            'controle' => $this->faker->randomFloat,
+            'exam' => $this->faker->randomFloat,
+            'noteGeneral'=>$this->faker->randomFloat,
         ];
     }
 }
