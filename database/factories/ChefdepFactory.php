@@ -22,8 +22,12 @@ class ChefdepFactory extends Factory
     public function definition()
     {
         return [
-            'idProf' => factory(App\Professeur::class),
-            'idDepartement' => factory(App\Departement::class),
+            'idProf' => function (){
+                return \App\Models\Professeur::factory()->create()->pluc('idProf');
+            },
+            'idDepartement' => function (){
+                return \App\Models\Departement::factory()->create()->pluc('idDepartement');
+            }
         ];
     }
 }
