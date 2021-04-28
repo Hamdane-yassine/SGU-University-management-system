@@ -29,7 +29,7 @@ class PersonneFactory extends Factory
             'email' => $this->faker->safeEmail,
             'tel' => $this->faker->phoneNumber,
             'dateNaissance' => now(),
-            'nationalite' => 'Marocain',
+            'nationalite' => $this->faker->colorName,
             'lieuNaissance' => now(),
             'emailInstitutionne' =>  $this->faker->safeEmail,
 

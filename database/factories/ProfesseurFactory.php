@@ -28,6 +28,8 @@ class ProfesseurFactory extends Factory
             'idDepartement' => function (){
                 return \App\Models\Departement::factory()->create()->pluck('idDepartement')[0];
             },
+            'specialite'=>$this->faker->word(),
+            'echellon'=>$this->faker->word(),
         ];
     }
 }
