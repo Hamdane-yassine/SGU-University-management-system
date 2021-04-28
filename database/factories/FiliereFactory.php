@@ -25,6 +25,8 @@ class FiliereFactory extends Factory
             'idDepartement' => function (){
                 return \App\Models\Departement::factory()->create()->pluck('idDepartement')[0];
             },
+            'nom'=>$this->faker->word(),
+            'niveau'=>$this->faker->randomDigit,
         ];
     }
 }
