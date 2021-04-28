@@ -44,8 +44,8 @@ class Module extends Model
 		return $this->hasMany(Matiere::class, 'idModule');
 	}
 
-	public function semestres()
+	public function semestre()
 	{
-		return $this->hasMany(Semestre::class, 'idModule');
+		return $this->belongsTo(Semestre::class, 'idModule');
 	}
 }

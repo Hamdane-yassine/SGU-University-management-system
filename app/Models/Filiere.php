@@ -52,7 +52,7 @@ class Filiere extends Model
 	{
 		return $this->hasMany(Etudiant::class, 'idFiliere');
 	}
-
+ 
 	public function semestres()
 	{
 		return $this->hasMany(Semestre::class, 'idFiliere');

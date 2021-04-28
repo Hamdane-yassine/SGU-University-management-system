@@ -50,7 +50,7 @@ class Professeur extends Model
 
 	public function user()
 	{
-		return $this->belongsTo(User::class, 'idUtilisateur');
+		return $this->hasOne(User::class, 'idUtilisateur');
 	}
 
 	public function departement()
@@ -63,14 +63,14 @@ class Professeur extends Model
 		return $this->hasMany(Absence::class, 'idProf');
 	}
 
-	public function chefdeps()
+	public function chefdep()
 	{
-		return $this->hasMany(Chefdep::class, 'idProf');
+		return $this->hasOne(Chefdep::class, 'idProf');
 	}
 
-	public function emplois()
+	public function emploi()
 	{
-		return $this->hasMany(Emploi::class, 'idProf');
+		return $this->hasOne(Emploi::class, 'idProf');
 	}
 
 	public function matieres()

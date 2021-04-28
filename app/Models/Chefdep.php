@@ -51,7 +51,7 @@ class Chefdep extends Model
 	{
 		return $this->belongsTo(Departement::class, 'idDepartement');
 	}
-
+ 
 	public function evenemnts()
 	{
 		return $this->hasMany(Evenemnt::class, 'ID_chef');

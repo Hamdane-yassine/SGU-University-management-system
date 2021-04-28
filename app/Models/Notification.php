@@ -35,7 +35,7 @@ class Notification extends Model
 	protected $fillable = [
 		'idUtilisateur',
 		'message'
-	];
+	]; 
 
 	public function user()
 	{

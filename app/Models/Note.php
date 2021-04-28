@@ -51,7 +51,7 @@ class Note extends Model
 	public function etudiant()
 	{
 		return $this->belongsTo(Etudiant::class, 'idEtudiant');
-	}
+	} 
 
 	public function matiere()
 	{

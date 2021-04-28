@@ -65,8 +65,8 @@ class Matiere extends Model
 		return $this->hasMany(Absence::class, 'idMatier');
 	}
 
-	public function notes()
+	public function note()
 	{
-		return $this->hasMany(Note::class, 'idMatier');
+		return $this->hasOne(Note::class, 'idMatier');
 	}
 }

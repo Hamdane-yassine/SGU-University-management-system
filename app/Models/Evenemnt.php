@@ -48,4 +48,4 @@ class Evenemnt extends Model
 	{
 		return $this->belongsTo(Chefdep::class, 'ID_chef');
 	}
-}
+} 

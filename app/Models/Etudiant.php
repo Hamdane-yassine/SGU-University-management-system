@@ -74,4 +74,4 @@ class Etudiant extends Model
 	{
 		return $this->hasMany(Note::class, 'idEtudiant');
 	}
-}
+} 

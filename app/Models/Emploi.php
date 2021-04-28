@@ -39,5 +39,5 @@ class Emploi extends Model
 	public function professeur()
 	{
 		return $this->belongsTo(Professeur::class, 'idProf');
-	}
+	} 
 }

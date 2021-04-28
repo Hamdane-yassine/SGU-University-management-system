@@ -38,9 +38,9 @@ class Departement extends Model
 		'nom'
 	];
 
-	public function chefdeps()
+	public function chefdep()
 	{
-		return $this->hasMany(Chefdep::class, 'idDepartement');
+		return $this->hasOne(Chefdep::class, 'idDepartement');
 	}
 
 	public function filieres()

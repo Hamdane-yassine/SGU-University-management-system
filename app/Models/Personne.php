@@ -65,13 +65,13 @@ class Personne extends Model
 		'situationFamiliale'
 	];
 
-	public function etudiants()
+	public function etudiant()
 	{
-		return $this->hasMany(Etudiant::class, 'idPersonne');
+		return $this->hasOne(Etudiant::class, 'idPersonne');
 	}
 
-	public function users()
+	public function user()
 	{
-		return $this->hasMany(User::class, 'idPersonne');
+		return $this->hasOne(User::class, 'idPersonne');
 	}
 }

@@ -55,8 +55,8 @@ class Semestre extends Model
 		return $this->belongsTo(Anneescolaire::class, 'idAnnee');
 	}
 
-	public function module()
+	public function modules()
 	{
-		return $this->belongsTo(Module::class, 'idModule');
+		return $this->hasMany(Module::class, 'idModule');
 	}
 }
