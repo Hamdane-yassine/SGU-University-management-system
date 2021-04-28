@@ -81,7 +81,9 @@
                     <span class="user-icon">
                         <img src="{{ asset('vendors/images/user.svg') }}" alt="">
                     </span>
-                    <span class="user-name">Otman doda</span>
+                    <span class="user-name">
+                       {{ auth()->user()->personne->prenom.' '.auth()->user()->personne->nom }}
+                    </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                     <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
