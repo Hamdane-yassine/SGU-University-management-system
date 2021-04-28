@@ -15,7 +15,7 @@ class ProfesseurController extends Controller
         ->join('matiere','absence.idMatier','=','matiere.idMatier') //retrieved matiere
         ->join('semestre','matiere.idModule','=','semestre.idModule')
         ->join('filiere','semestre.idFiliere','=','filiere.idFiliere')
-        ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsencee','etat')
+        ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsence','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
         return $absences; 
         
@@ -33,7 +33,7 @@ class ProfesseurController extends Controller
         ->join('matiere','absence.idMatier','=','matiere.idMatier') //retrieved matiere
         ->join('semestre','matiere.idModule','=','semestre.idModule')
         ->join('filiere','semestre.idFiliere','=','filiere.idFiliere')
-        ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsencee','etat')
+        ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsence','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
 
         $matiers = Matiere::where('idMatier',1)->select('nom as nomMatier')->get(); 
