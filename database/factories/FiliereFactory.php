@@ -23,7 +23,7 @@ class FiliereFactory extends Factory
     {
         return [
             'idDepartement' => function (){
-                return \App\Models\Departement::factory()->create()->pluck('idDepartement')[0];
+                return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
             },
             'nom'=>$this->faker->word(),
             'niveau'=>$this->faker->randomDigit,

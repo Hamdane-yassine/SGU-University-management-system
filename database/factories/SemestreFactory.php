@@ -23,13 +23,13 @@ class SemestreFactory extends Factory
     {
         return [
             'idFiliere' => function (){
-                return \App\Models\Filiere::factory()->create()->pluck('idFiliere')[0];
+                return \App\Models\Filiere::factory()->create()->get()[0]['idFiliere'];
             },
             'idModule' =>function (){
-                return \App\Models\Module::factory()->create()->pluck('idModule')[0];
+                return \App\Models\Module::factory()->create()->get()[0]['idModule'];
             },
             'idAnnee' => function (){
-                return \App\Models\Anneescolaire::factory()->create()->pluck('idAnnee')[0];
+                return \App\Models\Anneescolaire::factory()->create()->get()[0]['idAnnee'];
             },
             'nom'=> $this->faker->name(),
 

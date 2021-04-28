@@ -23,10 +23,10 @@ class NoteFactory extends Factory
     {
         return [
             'idEtudiant'=>function(){
-                return \App\Models\Etudiant::factory()->create()->pluck('idEtudiant')[0];
+                return \App\Models\Etudiant::factory()->create()->get()[0]['idEtudiant'];
             },
             'idMatier'=>function(){
-                return \App\Models\Matiere::factory()->create()->pluck('idMatier')[0];
+                return \App\Models\Matiere::factory()->create()->get()[0]['idMatier'];
             },
             'controle' => $this->faker->randomFloat,
             'exam' => $this->faker->randomFloat,

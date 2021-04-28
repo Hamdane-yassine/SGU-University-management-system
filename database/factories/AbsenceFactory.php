@@ -23,10 +23,10 @@ class AbsenceFactory extends Factory
     {
         return [
             'idProf' => function (){
-                return \App\Models\Professeur::factory()->create()->pluck('idProf')[0];
+                return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
             },
             'idMatier' => function (){
-                return \App\Models\Matiere::factory()->create()->pluck('idMatier')[0];
+                return \App\Models\Matiere::factory()->create()->get()[0]['idMatier'];
             },
             'dateAbsence'=>$this->faker->date(),
             'dateRattrapage'=>$this->faker->date(),

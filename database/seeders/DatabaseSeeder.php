@@ -27,21 +27,31 @@ class DatabaseSeeder extends Seeder
         }
         // +++++++++++ END +++++++++++++++=
 
-        // \App\Models\User::factory()->count(2)->create();
+        \App\Models\User::factory()->create();
         // \App\Models\User::factory()->create([
             //         'email' => 'fbed1af31d-199be7@inbox.mailtrap.io'
             // ]);
 
-        // $deparements = \App\Models\Departement::factory(2)->create();
 
-        // \App\Models\Filiere::factory(3)->for($deparements[0]->get()[0])->create();
-        // \App\Models\Filiere::factory(3)->for($deparements[0]->get()[1])->create();
+        // $deparements = (\App\Models\Departement::factory(2)->create()]->get();
+        // $profs = (\App\Models\Professeur::factory(2)->create()]->get();
+        // $profs = (\App\Models\Professeur::factory(2)->create()]->get();
 
-        \App\Models\Absence::factory(3)->create();
+        // $chef1 = \App\Models\Chefdep::factory()->for($deparements[0])->create();
+        // $chef1 = \App\Models\Chefdep::factory()->for($deparements[0]->get()[1])->create();
 
-        // $filieres = \App\Models\Filiere::factory(3)->create([
-        //     'idDepartement'=>$deparements[0]->get()[1]->idDepartement,
+
+
+
+        // $filieres1 = \App\Models\Filiere::factory(3)->create([
+        //     'idDepartement'=>$deparements[0]->get()->idDepartement,
         // ]);
+
+        // $filieres2 = \App\Models\Filiere::factory(3)->create([
+        //     'idDepartement'=>$deparements[0]->get()->idDepartement')[1],
+        // ]);
+
+
 
 
 

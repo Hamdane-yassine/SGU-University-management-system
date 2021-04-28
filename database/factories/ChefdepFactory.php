@@ -23,10 +23,10 @@ class ChefdepFactory extends Factory
     {
         return [
             'idProf' => function (){
-                return \App\Models\Professeur::factory()->create()->pluck('idProf')[0];
+                return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
             },
             'idDepartement' => function (){
-                return \App\Models\Departement::factory()->create()->pluck('idDepartement')[0];
+                return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
             }
         ];
     }

@@ -23,10 +23,10 @@ class EtudiantFactory extends Factory
     {
         return [
             'idPersonne' => function(){
-                return \App\Models\Personne::factory()->create()->pluck('idPersonne')[0];
+                return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
             },
             'idFiliere' => function(){
-                return \App\Models\Filiere::factory()->create()->pluck('idFiliere')[0];
+                return \App\Models\Filiere::factory()->create()->get()[0]['idFiliere'];
             },
             'cne'=>$this->faker->randomDigit(),
             'apogee'=>$this->faker->randomDigit(),

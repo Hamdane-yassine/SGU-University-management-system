@@ -23,7 +23,7 @@ class NotificationFactory extends Factory
     {
         return [
             'idUtilisateur' => function (){
-                return \App\Models\User::factory()->create()->pluck('idUtilisateur')[0];
+                return \App\Models\User::factory()->create()->get()[0]['idUtilisateur'];
             },
             'message'=> $this->faker->text(),
         ];

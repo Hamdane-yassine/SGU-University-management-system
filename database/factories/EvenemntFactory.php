@@ -23,7 +23,7 @@ class EvenemntFactory extends Factory
     {
         return [
             'ID_chef' => function (){
-              return \App\Models\Chefdep::factory()->create()->pluck('ID_chef')[0];
+              return \App\Models\Chefdep::factory()->create()->get()[0]['ID_chef'];
             },
             'Date_even' => $this->faker->date(),
             'message' => $this->faker->paragraph(),
