@@ -6,11 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Absence;
 use App\Models\Matiere;
 use phpDocumentor\Reflection\Types\This;
+use DataTables;
 
 class ProfesseurController extends Controller
 {
-
-    public function getAbsences()
+    public function index()   //returns the page without the absence section (a non ajax request)
+    {
+        $matiers = $this->getMatiers();  //fill matiers drop down menue
+        return view('prof.absences', ['MatiersList' => $matiers]);
+    }
+    
+    public function getAbsences(Request $request)  //an ajax function to retrieve tha data
     {
         $absences = Absence::where('absence.idProf',1)  //first inint a user id
         ->join('matiere','absence.idMatier','=','matiere.idMatier') //retrieved matiere
@@ -18,23 +24,21 @@ class ProfesseurController extends Controller
         ->join('filiere','semestre.idFiliere','=','filiere.idFiliere')
         ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsence','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
-        return $absences;
-
+        //return $absences; 
+         if ($request->ajax()) {
+            return Datatables::of($absences)
+            ->editColumn('dateAbsence', function ($request) {
+                return $request->dateAbsence->toDayDateTimeString();
+            })
+            ->make(true);
+        }
     }
+    
 
     public function getMatiers()
     {
         $matiers = Matiere::where('idProf',1)->select('nom as nomMatier')->get();
         return $matiers;
-    }
-
-    public function getAllData()
-    {
-        $absences = $this->getAbsences(); 
-
-        $matiers = Matiere::where('idMatier',1)->select('nom as nomMatier')->get();
-
-        return view('prof.absences', ['absences' => $absences, 'MatiersList' => $matiers]);
     }
 
     public function addRatt()
@@ -56,13 +60,14 @@ class ProfesseurController extends Controller
                 'IdAbsence' => 7,
                 'idProf' => 1,
                 'idMatier' => 1,
-                'dateAbsencee' => $dataAbsence,
+                'dateAbsence' => $dataAbsence,
                 'dateRattrapage' => str_replace('-',' ',$dateRatt),
-                'etat' => 0,
+                'etat' => 'en attendant',
             ]);
         }
 
-        //test on informer les etudiants
+        //send mails if informerEtudiants=on
+
 
     }
 }

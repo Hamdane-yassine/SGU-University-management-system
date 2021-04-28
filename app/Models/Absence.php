@@ -37,18 +37,18 @@ class Absence extends Model
 		'idProf' => 'int',
 		'IdAbsence' => 'int',
 		'idMatier' => 'int',
-		'etat' => 'bool'
+		'dateAbsence' => 'date'
 	];
 
 	protected $dates = [
-		'dateAbsencee',
+		'dateAbsence'
 	];
 
 	protected $fillable = [
 		'IdAbsence',
 		'idProf',
 		'idMatier',
-		'dateAbsencee',
+		'dateAbsence',
 		'dateRattrapage',
 		'etat'
 	];

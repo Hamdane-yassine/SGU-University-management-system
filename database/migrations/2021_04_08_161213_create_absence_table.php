@@ -20,7 +20,7 @@ class CreateAbsenceTable extends Migration {
 			$table->bigInteger('idMatier')->unsigned();
 			$table->dateTime('dateAbsence');
 			$table->string('dateRattrapage');
-			$table->enum('etat', [0,1]);
+			$table->enum('etat', ['rattrapée','en attendant']);
 
 		});
 	}
