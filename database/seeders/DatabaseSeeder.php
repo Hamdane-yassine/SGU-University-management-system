@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Departement;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -30,11 +31,19 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory()->create([
             //         'email' => 'fbed1af31d-199be7@inbox.mailtrap.io'
             // ]);
-        $deparements = \App\Models\Departement::factory(2)->create();
-        echo $deparements;
-        // $filieres = \App\Models\Filiere::factory()->create([
-        //     'idDepartement'=>$deparements[0]->idDepartement
+
+        // $deparements = \App\Models\Departement::factory(2)->create();
+
+        // \App\Models\Filiere::factory(3)->for($deparements[0]->get()[0])->create();
+        // \App\Models\Filiere::factory(3)->for($deparements[0]->get()[1])->create();
+
+        \App\Models\Absence::factory(3)->create();
+
+        // $filieres = \App\Models\Filiere::factory(3)->create([
+        //     'idDepartement'=>$deparements[0]->get()[1]->idDepartement,
         // ]);
+
+
 
 
 
