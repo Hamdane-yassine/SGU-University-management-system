@@ -1,13 +1,30 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Semestre;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Semestre::class, function (Faker $faker) {
-    return [
-        'idFiliere' => factory(App\Filiere::class),
-        'idAnnee' => factory(App\Anneescolaire::class),
-        'idModule' => factory(App\Module::class),
-    ];
-});
+class SemestreFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Semestre::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'idFiliere' => factory(App\Filiere::class),
+            'idAnnee' => factory(App\Anneescolaire::class),
+            'idModule' => factory(App\Module::class),
+        ];
+    }
+}

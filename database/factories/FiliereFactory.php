@@ -1,11 +1,28 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Filiere;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Filiere::class, function (Faker $faker) {
-    return [
-        'idDepartement' => factory(App\Departement::class),
-    ];
-});
+class FiliereFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Filiere::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'idDepartement' => factory(App\Departement::class),
+        ];
+    }
+}

@@ -1,11 +1,28 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Notification;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Notification::class, function (Faker $faker) {
-    return [
-        'idUtilisateur' => factory(App\User::class),
-    ];
-});
+class NotificationFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Notification::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'idUtilisateur' => factory(App\User::class),
+        ];
+    }
+}

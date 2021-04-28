@@ -1,11 +1,28 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Emploi;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Emploi::class, function (Faker $faker) {
-    return [
-        'idProf' => factory(App\Professeur::class),
-    ];
-});
+class EmploiFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Emploi::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'idProf' => factory(App\Professeur::class),
+        ];
+    }
+}

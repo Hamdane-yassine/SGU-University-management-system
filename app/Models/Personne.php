@@ -8,11 +8,12 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Personne
- * 
+ *
  * @property int $idPersonne
  * @property string|null $nom
  * @property string|null $prenom
@@ -26,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $genre
  * @property string|null $emailInstitutionne
  * @property string|null $situationFamiliale
- * 
+ *
  * @property Collection|Etudiant[] $etudiants
  * @property Collection|User[] $users
  *
@@ -34,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Personne extends Model
 {
+    use HasFactory;
 	protected $table = 'personne';
 	protected $primaryKey = 'idPersonne';
 	public $incrementing = false;

@@ -1,11 +1,28 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Evenemnt;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Evenemnt::class, function (Faker $faker) {
-    return [
-        'ID_chef' => factory(App\Chefdep::class),
-    ];
-});
+class EvenemntFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Evenemnt::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'ID_chef' => factory(App\Chefdep::class),
+        ];
+    }
+}

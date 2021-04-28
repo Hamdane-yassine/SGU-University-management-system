@@ -1,12 +1,29 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Absence;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Absence::class, function (Faker $faker) {
-    return [
-        'idProf' => factory(App\Professeur::class),
-        'idMatier' => factory(App\Matiere::class),
-    ];
-});
+class AbsenceFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Absence::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'idProf' => factory(App\Professeur::class),
+            'idMatier' => factory(App\Matiere::class),
+        ];
+    }
+}
