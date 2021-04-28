@@ -22,8 +22,12 @@ class ProfesseurFactory extends Factory
     public function definition()
     {
         return [
-            'idUtilisateur' => factory(App\User::class),
-            'idDepartement' => factory(App\Departement::class),
+            'idUtilisateur' => function (){
+                return \App\Models\User::factory()->create()->pluck('idUtilisateur');
+            },
+            'idDepartement' => function (){
+                return \App\Models\Departement::factory()->create()->pluck('idDepartement');
+            },
         ];
     }
 }
