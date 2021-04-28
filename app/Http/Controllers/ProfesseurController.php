@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Absence;
 use App\Models\Matiere;
+use phpDocumentor\Reflection\Types\This;
 
 class ProfesseurController extends Controller
 {
@@ -23,21 +24,15 @@ class ProfesseurController extends Controller
 
     public function getMatiers()
     {
-        $matiers = Matiere::where('idMatier',1)->select('nom as nomMatier')->get();
+        $matiers = Matiere::where('idProf',1)->select('nom as nomMatier')->get();
         return $matiers;
     }
 
     public function getAllData()
     {
-        $absences = Absence::where('absence.idProf',1)  //first inint a user id
-        ->join('matiere','absence.idMatier','=','matiere.idMatier') //retrieved matiere
-        ->join('semestre','matiere.idModule','=','semestre.idModule')
-        ->join('filiere','semestre.idFiliere','=','filiere.idFiliere')
-        ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsence','etat')
-        ->get(); //altough this object is a Collection , we can still iterate overit using loops
+        $absences = $this->getAbsences(); 
 
         $matiers = Matiere::where('idMatier',1)->select('nom as nomMatier')->get();
-
 
         return view('prof.absences', ['absences' => $absences, 'MatiersList' => $matiers]);
     }
@@ -66,6 +61,8 @@ class ProfesseurController extends Controller
                 'etat' => 0,
             ]);
         }
+
+        //test on informer les etudiants
 
     }
 }
