@@ -30,7 +30,7 @@ class MatiereFactory extends Factory
             },
             'nom'=> $this->faker->name(),
             'vh'=> $this->faker->randomNumber(),
-            'coef'=> $this->faker->randomFloat,
+            'coeff'=> $this->faker->randomFloat,
         ];
     }
 }

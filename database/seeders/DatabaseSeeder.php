@@ -30,9 +30,12 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory()->create([
             //         'email' => 'fbed1af31d-199be7@inbox.mailtrap.io'
             // ]);
+        $deparements = \App\Models\Departement::factory(2)->create();
+        echo $deparements;
+        // $filieres = \App\Models\Filiere::factory()->create([
+        //     'idDepartement'=>$deparements[0]->idDepartement
+        // ]);
 
-        // \App\Models\Personne::factory()->has(\App\Models\User::factory()->create())->create();
-        \App\Models\User::factory()->count(10)->create();
 
 
         // =======================================
