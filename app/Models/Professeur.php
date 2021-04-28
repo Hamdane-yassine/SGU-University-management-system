@@ -8,16 +8,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Professeur
- * 
+ *
  * @property int|null $idUtilisateur
  * @property int|null $idDepartement
  * @property int $idProf
  * @property string|null $specialite
  * @property string|null $echellon
- * 
+ *
  * @property User|null $user
  * @property Departement|null $departement
  * @property Collection|Absence[] $absences
@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Professeur extends Model
 {
+    use HasFactory;
 	protected $table = 'professeur';
 	protected $primaryKey = 'idProf';
 	public $incrementing = false;

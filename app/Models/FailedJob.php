@@ -8,10 +8,10 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class FailedJob
- * 
+ *
  * @property int $id
  * @property string $uuid
  * @property string $connection

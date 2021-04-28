@@ -8,17 +8,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Matiere
- * 
+ *
  * @property int|null $idProf
  * @property int $idMatier
  * @property int|null $idModule
  * @property string|null $nom
  * @property int|null $vh
  * @property int|null $coeff
- * 
+ *
  * @property Professeur|null $professeur
  * @property Module|null $module
  * @property Collection|Absence[] $absences
@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Matiere extends Model
 {
+    use HasFactory;
 	protected $table = 'matiere';
 	protected $primaryKey = 'idMatier';
 	public $incrementing = false;
