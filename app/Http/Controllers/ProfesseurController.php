@@ -7,6 +7,7 @@ use App\Models\Absence;
 use App\Models\Etudiant;
 use App\Models\Filiere;
 use App\Models\Matiere;
+use App\Models\Professeur;
 use phpDocumentor\Reflection\Types\This;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -21,10 +22,11 @@ class ProfesseurController extends Controller
 
     public function getAbsences(Request $request)  //an ajax function to retrieve tha data
     {
-        $absences = Absence::where('absence.idProf',Auth::id())  //first inint a user id
+        $id_prof = Auth::user()->professeur->idProf;
+        $absences = Absence::where('absence.idProf',$id_prof)  //first inint a user id
         ->join('matiere','absence.idMatiere','=','matiere.idMatiere') //retrieved matiere
-        ->join('semestre','matiere.idModule','=','semestre.idModule')
-        ->join('filiere','semestre.idFiliere','=','filiere.idFiliere')
+        ->join('module','matiere.idModule','=','module.idModule')
+        ->join('filiere','module.idFiliere','=','filiere.idFiliere')
         ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsence','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
         //return $absences;
@@ -39,7 +41,8 @@ class ProfesseurController extends Controller
 
     public function getMatiers()
     {
-        $matiers = Matiere::where('idProf',Auth::id())->select('idMatiere as id','nom as nomMatier')->get();
+        $id = Auth::user()->professeur->idProf; 
+        $matiers = Matiere::where('idProf',$id)->select('idMatiere as id','nom as nomMatiere')->get();
         return $matiers;
     }
 
@@ -51,6 +54,9 @@ class ProfesseurController extends Controller
         $dateRatt = request('dateRatt');
         $informerEtudiants = request('informerEtudiants');
 
+        echo Auth::user()->professeur->idProf.'<br>'.$idMatiere.'<br>'.$dateAbsence.'<br>'.$dateRatt.'<br>'.$informerEtudiants; 
+       
+        $id = Auth::user()->professeur->idProf; 
         //parsing data
         if($idMatiere == NULL)
         {
@@ -59,13 +65,14 @@ class ProfesseurController extends Controller
         else
         {
             $absence = Absence::create([
-                'idProf' => Auth::id(),
+                'idProf' => $id,
                 'idMatiere' => $idMatiere,
                 'dateAbsence' => $dateAbsence,
                 'dateRattrapage' => str_replace('-',' ',$dateRatt),
                 'etat' => 'en attendant',
             ]);
         }
+      
 
         //send mails if informerEtudiants=on
 

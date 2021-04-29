@@ -38,5 +38,6 @@ Route::middleware(['auth','prof'])->group(function () {
     Route::get('/hah',function(){
         return dd("Hello");
     });
+    
 });
 

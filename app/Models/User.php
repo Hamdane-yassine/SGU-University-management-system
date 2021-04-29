@@ -72,11 +72,6 @@ class User extends Authenticatable
 		return $this->belongsTo(Personne::class, 'idPersonne');
 	}
 
-	public function notifications()
-	{
-		return $this->hasMany(Notification::class, 'idUtilisateur');
-	}
-
 	public function professeur()
 	{
 		return $this->hasOne(Professeur::class, 'idUtilisateur');

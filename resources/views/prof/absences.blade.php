@@ -10,7 +10,7 @@
                         <h4 class="text-blue h4">Table d'absence</h4>
                         <p class="mb-26"></p>
                     </div>
-                    <table class=" table   yajra-datatable">
+                    <table class=" table  yajra-datatable">
                         <thead>
                             <tr>
                                 <th>N°</th>
@@ -41,7 +41,7 @@
                                             <label>Matiére :</label>
                                             <select class="custom-select2 form-control" name="matiere" style="width: 100%; height: 38px;" required>
                                                     @foreach ($MatiersList as $matiere)
-                                                        <option value= {{ $matiere->id }}>{{ $matiere->nomMatier }}</option>
+                                                        <option value= {{ $matiere->id }}>{{ $matiere->nomMatiere }}</option>
                                                     @endforeach
                                             </select>
                                         </div>
@@ -98,7 +98,6 @@
           var table = $('.yajra-datatable').DataTable({
               processing: true,
               serverSide: true,
-
               ajax: "{{ route('getAbsencesList') }}",
               columns: [
                   {data: 'IdAbsence', name: 'IdAbsence'},
