@@ -129,13 +129,13 @@
                             {
                                 foreach (auth()->user()->professeur->matieres as $matiere)
                                 {
-                                    array_push($filieres, $matiere->module->semestre->filiere->nom.' '.$matiere->module->semestre->filiere->niveau);
+                                    array_push($filieres, $matiere->module->semestre->filiere);
                                 }
                                 $filieres = array_unique($filieres);
                             }
                         @endphp
                         @foreach ($filieres as $filiere)
-                             <li><a href="index.html">{{ $filiere }}</a></li>
+                             <li><a href="/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom.' '.$filiere->niveau }}</a></li>
                         @endforeach
                         {{-- <li><a href="index.html">Génie Logiciel - GL1</a></li>
                         <li><a href="index2.html">Administrateur Réseaux</a></li> --}}

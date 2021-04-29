@@ -29,3 +29,5 @@ Route::post('addRatt',[ProfesseurController::class, 'addRatt']);
 Route::get('/absences',[ProfesseurController::class, 'index']);
 
 Route::get('/AbsencesList',[ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
+
+Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('Etudiants');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Absence;
+use App\Models\Filiere;
 use App\Models\Matiere;
 use phpDocumentor\Reflection\Types\This;
 use DataTables;
@@ -67,6 +68,10 @@ class ProfesseurController extends Controller
 
         //send mails if informerEtudiants=on
 
-
+    }
+    
+    public function getEtudiants(Filiere $filiere)
+    {
+        return view('prof.Etudiant', ['filiere' => $filiere]);
     }
 }

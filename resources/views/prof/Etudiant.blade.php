@@ -1,12 +1,12 @@
 @extends('layouts.prof')
-@section('title','Génie logiciel - GL1')
+@section('title'," $filiere->nom")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
                 <div class="card-box mb-30">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">Génie Logiciel - GL1</h4>
+                        <h4 class="text-blue h4">{{ $filiere->nom.' '.$filiere->niveau }}</h4>
                     </div>
                     <div class="pb-20">
 
@@ -23,138 +23,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAooNE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td class="table-plus">19020547</td>
                                     <td>HAMDANE</td>
