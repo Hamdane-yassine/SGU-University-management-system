@@ -24,7 +24,7 @@ class EtudiantFactory extends Factory
         return [
             'idPersonne' => function(){
                 if(\App\Models\Personne::count())
-                    return $this->faker->randomElement(\App\Models\Personne::pluck('idPersonne'));
+                    return $this->faker->unique->randomElement(\App\Models\Personne::pluck('idPersonne'));
                 return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
             },
             'idFiliere' => function(){
