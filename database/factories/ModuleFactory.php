@@ -22,6 +22,16 @@ class ModuleFactory extends Factory
     public function definition()
     {
         return [
+            'idFiliere' => function (){
+                if(\App\Models\Filiere::count())
+                    return $this->faker->randomElement(\App\Models\Filiere::pluck('idFiliere'));
+                return \App\Models\Filiere::factory()->create()->get()[0]['idFiliere'];
+            },
+            'idSemestre' => function (){
+                if(\App\Models\Semestre::count())
+                    return $this->faker->randomElement(\App\Models\Semestre::pluck('idSemestre'));
+                return \App\Models\Semestre::factory()->create()->get()[0]['idSemestre'];
+            },
             'nom'=> $this->faker->name(),
             'vh'=> $this->faker->randomNumber(),
         ];
