@@ -50,7 +50,7 @@ class Professeur extends Model
 
 	public function user()
 	{
-		return $this->hasOne(User::class, 'idUtilisateur');
+		return $this->belongsTo(User::class, 'idUtilisateur');
 	}
 
 	public function departement()
