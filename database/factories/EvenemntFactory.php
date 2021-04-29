@@ -23,10 +23,12 @@ class EvenemntFactory extends Factory
     {
         return [
             'ID_chef' => function (){
-              return \App\Models\Chefdep::factory()->create()->get()[0]['ID_chef'];
+            if(\App\Models\Chefdep::count())
+                    return $this->faker->randomElement(\App\Models\Chefdep::pluck('ID_chef'));
+            return \App\Models\Chefdep::factory()->create()->get()[0]['ID_chef'];
             },
             'Date_even' => $this->faker->date(),
-            'message' => $this->faker->paragraph(),
+            'message' => $this->faker->text(),
         ];
     }
 }

@@ -23,9 +23,13 @@ class ProfesseurFactory extends Factory
     {
         return [
             'idUtilisateur' => function (){
+                if(\App\Models\User::count())
+                    return $this->faker->randomElement(\App\Models\User::pluck('id'));
                 return \App\Models\User::factory()->create()->get()[0]['id'];
             },
             'idDepartement' => function (){
+                if(\App\Models\Departement::count())
+                    return $this->faker->randomElement(\App\Models\Departement::pluck('idDepartement'));
                 return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
             },
             'specialite'=>$this->faker->word(),

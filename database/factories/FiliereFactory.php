@@ -23,6 +23,8 @@ class FiliereFactory extends Factory
     {
         return [
             'idDepartement' => function (){
+                if(\App\Models\Departement::count())
+                    return $this->faker->randomElement(\App\Models\Departement::pluck('idDepartement'));
                 return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
             },
             'nom'=>$this->faker->word(),

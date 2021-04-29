@@ -23,9 +23,13 @@ class NoteFactory extends Factory
     {
         return [
             'idEtudiant'=>function(){
+                if(\App\Models\Etudiant::count())
+                    return $this->faker->randomElement(\App\Models\Etudiant::pluck('idEtudiant'));
                 return \App\Models\Etudiant::factory()->create()->get()[0]['idEtudiant'];
             },
             'idMatier'=>function(){
+                if(\App\Models\Matiere::count())
+                    return $this->faker->randomElement(\App\Models\Matiere::pluck('idMatier'));
                 return \App\Models\Matiere::factory()->create()->get()[0]['idMatier'];
             },
             'controle' => $this->faker->randomFloat,
