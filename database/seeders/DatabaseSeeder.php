@@ -42,11 +42,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Chefdep::factory(10)->create();
         \App\Models\Filiere::factory(10)->create();
         \App\Models\Etudiant::factory(10)->create();
+        \App\Models\Semestre::factory(8)->create();
         \App\Models\Module::factory(10)->create();
         \App\Models\Matiere::factory(10)->create();
         \App\Models\Note::factory(10)->create();
         \App\Models\Notification::factory(10)->create();
-        \App\Models\Semestre::factory(10)->create();
         \App\Models\Emploi::factory(10)->create();
         \App\Models\Evenemnt::factory(10)->create();
         \App\Models\Absence::factory(10)->create();

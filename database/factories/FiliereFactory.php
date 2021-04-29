@@ -28,7 +28,7 @@ class FiliereFactory extends Factory
                 return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
             },
             'nom'=>$this->faker->word(),
-            'niveau'=>$this->faker->randomNumber(8),
+            'niveau'=>$this->faker->randomNumber(),
         ];
     }
 }
