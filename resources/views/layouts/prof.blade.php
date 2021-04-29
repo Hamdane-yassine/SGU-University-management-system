@@ -88,7 +88,10 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                     <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
                     <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Aide</a>
-                    <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Se déconnecter</a>
+                    <a class="dropdown-item"  href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="dw dw-logout"></i> Se déconnecter</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>
@@ -129,13 +132,13 @@
                             {
                                 foreach (auth()->user()->professeur->matieres as $matiere)
                                 {
-                                    array_push($filieres, $matiere->module->semestre->filiere->nom.' '.$matiere->module->semestre->filiere->niveau);
+                                    array_push($filieres, $matiere->module->semestre->filiere);
                                 }
                                 $filieres = array_unique($filieres);
                             }
                         @endphp
                         @foreach ($filieres as $filiere)
-                             <li><a href="index.html">{{ $filiere }}</a></li>
+                             <li><a href="/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom.' '.$filiere->niveau }}</a></li>
                         @endforeach
                         {{-- <li><a href="index.html">Génie Logiciel - GL1</a></li>
                         <li><a href="index2.html">Administrateur Réseaux</a></li> --}}

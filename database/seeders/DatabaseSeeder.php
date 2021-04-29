@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         // +++++++++++ END +++++++++++++++=
 
         \App\Models\User::factory()->create([
-            'email'=>"fbed1af31d-199be7@inbox.mailtrap.io",
+            'email'=>"amirnet001@gmail.com",
             'password'=>bcrypt('secret')
         ]);
 
