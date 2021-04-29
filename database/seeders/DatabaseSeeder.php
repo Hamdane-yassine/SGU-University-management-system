@@ -40,8 +40,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Departement::factory(10)->create();
         \App\Models\Professeur::factory(10)->create();
         \App\Models\Chefdep::factory(10)->create();
-        \App\Models\Etudiant::factory(10)->create();
         \App\Models\Filiere::factory(10)->create();
+        \App\Models\Etudiant::factory(10)->create();
         \App\Models\Module::factory(10)->create();
         \App\Models\Matiere::factory(10)->create();
         \App\Models\Note::factory(10)->create();
