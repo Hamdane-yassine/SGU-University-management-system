@@ -53,8 +53,8 @@ class Filiere extends Model
 		return $this->hasMany(Etudiant::class, 'idFiliere');
 	}
  
-	public function semestres()
+	public function modules()
 	{
-		return $this->hasMany(Semestre::class, 'idFiliere');
+		return $this->hasMany(Module::class, 'idFiliere');
 	}
 }
