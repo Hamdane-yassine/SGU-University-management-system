@@ -30,7 +30,9 @@ Route::get('/absences',[ProfesseurController::class, 'index']);
 
 Route::get('/AbsencesList',[ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
 
-Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('Etudiants');
+Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'Etudiants'])->name('Etudiants');
+
+Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList');
 
 Route::middleware(['auth','prof'])->group(function () {
     Route::get('/hah',function(){

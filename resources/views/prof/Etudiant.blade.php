@@ -1,5 +1,5 @@
 @extends('layouts.prof')
-@section('title'," $filiere->nom")
+@section('title'," $filiere->nom $filiere->niveau")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
@@ -10,7 +10,7 @@
                     </div>
                     <div class="pb-20">
 
-                        <table class="table hover multiple-select-row data-table-export nowrap">
+                        <table class="table hover multiple-select-row data-table-export nowrap yajra-datatable">
                             <thead>
                                 <tr>
                                     <th>N° Apogée</th>
@@ -23,18 +23,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td>amirnet001@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -134,4 +122,31 @@
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
     <!-- Datatable Setting js -->
     <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
+    <script type="text/javascript">
+        $(function () {
+          var table = $('.yajra-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+
+              ajax: "{{ route('getEtudiantsList',['filiere' => $filiere]) }}",
+              columns: [
+                  {data: 'apogee', name: 'apogee'},
+                  {data: 'nom', name: 'nom'},
+                  {data: 'prenom', name: 'prenom'},
+                  {data: 'cne', name: 'cne'},
+                  {data: 'email', name: 'email'},
+                  {data: 'tel', name: 'tel'},
+                  {
+                    data: 'a', 
+                    name: 'a', 
+                    orderable: true, 
+                    searchable: true
+                  },
+              ]
+          });
+
+        });
+      </script>
+
+
     @endsection
