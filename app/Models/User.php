@@ -79,7 +79,7 @@ class User extends Authenticatable
 
 	public function professeur()
 	{
-		return $this->belongsTo(Professeur::class, 'idUtilisateur');
+		return $this->hasOne(Professeur::class, 'idUtilisateur');
 	}
 
     public function hasRole(string $role)

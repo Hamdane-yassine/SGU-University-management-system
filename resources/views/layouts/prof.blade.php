@@ -123,8 +123,22 @@
                             etudiants</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="index.html">Génie Logiciel - GL1</a></li>
-                        <li><a href="index2.html">Administrateur Réseaux</a></li>
+                        @php
+                            $filieres=array();
+                            if(!empty(auth()->user()->professeur->matieres))
+                            {
+                                foreach (auth()->user()->professeur->matieres as $matiere)
+                                {
+                                    array_push($filieres, $matiere->module->semestre->filiere->nom.' '.$matiere->module->semestre->filiere->niveau);
+                                }
+                                $filieres = array_unique($filieres);
+                            }
+                        @endphp
+                        @foreach ($filieres as $filiere)
+                             <li><a href="index.html">{{ $filiere }}</a></li>
+                        @endforeach
+                        {{-- <li><a href="index.html">Génie Logiciel - GL1</a></li>
+                        <li><a href="index2.html">Administrateur Réseaux</a></li> --}}
                     </ul>
                 </li>
 
@@ -133,8 +147,11 @@
                         <span class="micon fa fa-bar-chart" style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Notes</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="Notes.html">PL SQL</a></li>
-                        <li><a href="Notes.html">SQL SOUS ORACLE</a></li>
+                        @if (!empty(auth()->user()->professeur->matieres))
+                            @foreach (auth()->user()->professeur->matieres as $matiere)
+                            <li><a href="Notes.html">{{ $matiere->nom }}</a></li>
+                            @endforeach 
+                        @endif
                     </ul>
                 </li>
 
