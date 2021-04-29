@@ -38,6 +38,7 @@ class Matiere extends Model
 		'idProf' => 'int',
 		'idMatier' => 'int',
 		'idModule' => 'int',
+		'nom' => 'string',
 		'vh' => 'int',
 		'coeff' => 'int'
 	];
