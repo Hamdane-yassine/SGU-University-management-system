@@ -29,3 +29,9 @@ Route::post('addRatt',[ProfesseurController::class, 'addRatt']);
 Route::get('/absences',[ProfesseurController::class, 'index']);
 
 Route::get('/AbsencesList',[ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
+
+Route::middleware(['prof'])->group(function () {
+    Route::get('/hah',function(){
+        return dd("Hello");
+    });
+});

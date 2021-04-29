@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+
         // Truncate all tables, except migrations
         // +++++++++++ START +++++++++++++
         Schema::disableForeignKeyConstraints();
@@ -26,6 +28,11 @@ class DatabaseSeeder extends Seeder
                 DB::table($table->Tables_in_pfe)->truncate();
         }
         // +++++++++++ END +++++++++++++++=
+
+        \App\Models\User::factory()->create([
+            'email'=>"fbed1af31d-199be7@inbox.mailtrap.io",
+            'password'=>bcrypt('secret')
+        ]);
 
         \App\Models\Anneescolaire::factory(1)->create();
         \App\Models\Personne::factory(10)->create();

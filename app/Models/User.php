@@ -81,4 +81,9 @@ class User extends Authenticatable
 	{
 		return $this->belongsTo(Professeur::class, 'idUtilisateur');
 	}
+
+    public function hasRole(string $role)
+    {
+        return $this->role == $role ? true : false;
+    }
 }
