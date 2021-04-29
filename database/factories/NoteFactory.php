@@ -27,10 +27,10 @@ class NoteFactory extends Factory
                     return $this->faker->randomElement(\App\Models\Etudiant::pluck('idEtudiant'));
                 return \App\Models\Etudiant::factory()->create()->get()[0]['idEtudiant'];
             },
-            'idMatier'=>function(){
+            'idMatiere'=>function(){
                 if(\App\Models\Matiere::count())
-                    return $this->faker->randomElement(\App\Models\Matiere::pluck('idMatier'));
-                return \App\Models\Matiere::factory()->create()->get()[0]['idMatier'];
+                    return $this->faker->randomElement(\App\Models\Matiere::pluck('idMatiere'));
+                return \App\Models\Matiere::factory()->create()->get()[0]['idMatiere'];
             },
             'controle' => $this->faker->randomFloat,
             'exam' => $this->faker->randomFloat,

@@ -31,7 +31,7 @@
                         <p class="mb-26"></p>
                     </div>
                     <div class="wizard-content">
-                        
+
                         <form class="tab-wizard wizard-circle wizard" method='POST' action='/addRatt'>
                             @csrf
                             <section>
@@ -40,13 +40,13 @@
                                         <div class="form-group">
                                             <label>Matiére :</label>
                                             <select class="custom-select2 form-control" name="matiere" style="width: 100%; height: 38px;" required>
-                                                    @foreach ($MatiersList as $matier)
-                                                        <option value= {{ $matier->id }}>{{ $matier->nomMatier }}</option> 
+                                                    @foreach ($MatiersList as $matiere)
+                                                        <option value= {{ $matiere->id }}>{{ $matiere->nomMatier }}</option>
                                                     @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">      
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date d'absence :</label>
                                             <input class="form-control datetimepicker" name="dateAbsence" placeholder="Date d'absence :" type="text" autocomplete="off" required>
@@ -108,9 +108,9 @@
                   {data: 'etat', name: 'etat'}
               ]
           });
-          
+
         });
       </script>
 
-    
+
     @endsection

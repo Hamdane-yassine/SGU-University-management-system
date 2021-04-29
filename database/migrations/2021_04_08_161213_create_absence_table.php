@@ -17,7 +17,7 @@ class CreateAbsenceTable extends Migration {
 		{
 			$table->id('IdAbsence');
 			$table->bigInteger('idProf')->unsigned();
-			$table->bigInteger('idMatier')->unsigned();
+			$table->bigInteger('idMatiere')->unsigned();
 			$table->dateTime('dateAbsence');
 			$table->string('dateRattrapage');
 			$table->enum('etat', ['rattrapée','en attendant']);

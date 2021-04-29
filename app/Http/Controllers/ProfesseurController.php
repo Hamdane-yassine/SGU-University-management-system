@@ -16,16 +16,16 @@ class ProfesseurController extends Controller
         $matiers = $this->getMatiers();  //fill matiers drop down menue
         return view('prof.absences', ['MatiersList' => $matiers]);
     }
-    
+
     public function getAbsences(Request $request)  //an ajax function to retrieve tha data
     {
         $absences = Absence::where('absence.idProf',Auth::id())  //first inint a user id
-        ->join('matiere','absence.idMatier','=','matiere.idMatier') //retrieved matiere
+        ->join('matiere','absence.idMatiere','=','matiere.idMatiere') //retrieved matiere
         ->join('semestre','matiere.idModule','=','semestre.idModule')
         ->join('filiere','semestre.idFiliere','=','filiere.idFiliere')
         ->select('IdAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','dateAbsence','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
-        //return $absences; 
+        //return $absences;
          if ($request->ajax()) {
             return Datatables::of($absences)
             ->editColumn('dateAbsence', function ($request) {
@@ -34,23 +34,23 @@ class ProfesseurController extends Controller
             ->make(true);
         }
     }
-    
+
     public function getMatiers()
     {
-        $matiers = Matiere::where('idProf',Auth::id())->select('idMatier as id','nom as nomMatier')->get();
+        $matiers = Matiere::where('idProf',Auth::id())->select('idMatiere as id','nom as nomMatier')->get();
         return $matiers;
     }
 
     public function addRatt()
     {
         //all of String datatype
-        $idMatier = request('matiere');
+        $idMatiere = request('matiere');
         $dateAbsence = request('dateAbsence');
         $dateRatt = request('dateRatt');
         $informerEtudiants = request('informerEtudiants');
 
         //parsing data
-        if($idMatier == NULL)
+        if($idMatiere == NULL)
         {
             return redirect('/absences');
         }
@@ -58,7 +58,7 @@ class ProfesseurController extends Controller
         {
             $absence = Absence::create([
                 'idProf' => Auth::id(),
-                'idMatier' => $idMatier,
+                'idMatiere' => $idMatiere,
                 'dateAbsence' => $dateAbsence,
                 'dateRattrapage' => str_replace('-',' ',$dateRatt),
                 'etat' => 'en attendant',

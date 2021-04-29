@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * Class Matiere
  *
  * @property int|null $idProf
- * @property int $idMatier
+ * @property int $idMatiere
  * @property int|null $idModule
  * @property string|null $nom
  * @property int|null $vh
@@ -30,13 +30,13 @@ class Matiere extends Model
 {
     use HasFactory;
 	protected $table = 'matiere';
-	protected $primaryKey = 'idMatier';
+	protected $primaryKey = 'idMatiere';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'idProf' => 'int',
-		'idMatier' => 'int',
+		'idMatiere' => 'int',
 		'idModule' => 'int',
 		'nom' => 'string',
 		'vh' => 'int',
@@ -63,11 +63,11 @@ class Matiere extends Model
 
 	public function absences()
 	{
-		return $this->hasMany(Absence::class, 'idMatier');
+		return $this->hasMany(Absence::class, 'idMatiere');
 	}
 
 	public function note()
 	{
-		return $this->hasOne(Note::class, 'idMatier');
+		return $this->hasOne(Note::class, 'idMatiere');
 	}
 }

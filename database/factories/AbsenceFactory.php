@@ -27,10 +27,10 @@ class AbsenceFactory extends Factory
                     return $this->faker->randomElement(\App\Models\Professeur::pluck('idProf'));
                 return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
             },
-            'idMatier' => function (){
+            'idMatiere' => function (){
                 if(\App\Models\Matiere::count())
-                    return $this->faker->randomElement(\App\Models\Matiere::pluck('idMatier'));
-                return \App\Models\Matiere::factory()->create()->get()[0]['idMatier'];
+                    return $this->faker->randomElement(\App\Models\Matiere::pluck('idMatiere'));
+                return \App\Models\Matiere::factory()->create()->get()[0]['idMatiere'];
             },
             'dateAbsence'=>$this->faker->date(),
             'dateRattrapage'=>$this->faker->date(),
