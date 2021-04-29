@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CheckProf
+class CheckAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,7 +17,7 @@ class CheckProf
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        if ($user->hasRole('prof') || $user->hasRole('admin')) {
+        if ($user->hasRole('admin')) {
             return $next($request);
         }
         return redirect('home');

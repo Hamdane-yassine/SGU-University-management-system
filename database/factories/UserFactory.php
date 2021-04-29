@@ -33,7 +33,7 @@ class UserFactory extends Factory
                     return $this->faker->randomElement(\App\Models\Personne::pluck('idPersonne'));
                 return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
             },
-            'role' => $this->faker->randomElement(['etudiant','teacher']),
+            'role' => $this->faker->randomElement(['admin','prof','chefdep']),
         ];
     }
 }
