@@ -132,7 +132,7 @@
                             {
                                 foreach (auth()->user()->professeur->matieres as $matiere)
                                 {
-                                    array_push($filieres, $matiere->module->semestre->filiere);
+                                    array_push($filieres, $matiere->module->filiere);
                                 }
                                 $filieres = array_unique($filieres);
                             }
