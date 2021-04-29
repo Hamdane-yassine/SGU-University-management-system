@@ -29,9 +29,11 @@ class UserFactory extends Factory
             'password' => bcrypt('secret'),
             'remember_token' => Str::random(10),
             'idPersonne' =>function(){
-                return \App\Models\Personne::factory()->create()->get()[0]["idPersonne"];
+                if(\App\Models\Personne::count())
+                    return $this->faker->randomElement(\App\Models\Personne::pluck('idPersonne'));
+                return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
             },
-            'role' => 'etudiant',
+            'role' => $this->faker->randomElement(['etudiant','teacher']),
         ];
     }
 }

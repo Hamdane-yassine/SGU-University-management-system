@@ -30,4 +30,12 @@ Route::get('/absences',[ProfesseurController::class, 'index']);
 
 Route::get('/AbsencesList',[ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
 
+<<<<<<< HEAD
 Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('Etudiants');
+=======
+Route::middleware(['auth','prof'])->group(function () {
+    Route::get('/hah',function(){
+        return dd("Hello");
+    });
+});
+>>>>>>> f92b94f264139f2d7926093b644af63066e11865

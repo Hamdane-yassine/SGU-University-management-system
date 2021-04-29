@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+
         // Truncate all tables, except migrations
         // +++++++++++ START +++++++++++++
         Schema::disableForeignKeyConstraints();
@@ -27,34 +29,27 @@ class DatabaseSeeder extends Seeder
         }
         // +++++++++++ END +++++++++++++++=
 
-        \App\Models\User::factory()->create();
-        // \App\Models\User::factory()->create([
-            //         'email' => 'fbed1af31d-199be7@inbox.mailtrap.io'
-            // ]);
+        \App\Models\User::factory()->create([
+            'email'=>"fbed1af31d-199be7@inbox.mailtrap.io",
+            'password'=>bcrypt('secret')
+        ]);
 
-
-        // $deparements = (\App\Models\Departement::factory(2)->create()]->get();
-        // $profs = (\App\Models\Professeur::factory(2)->create()]->get();
-        // $profs = (\App\Models\Professeur::factory(2)->create()]->get();
-
-        // $chef1 = \App\Models\Chefdep::factory()->for($deparements[0])->create();
-        // $chef1 = \App\Models\Chefdep::factory()->for($deparements[0]->get()[1])->create();
-
-
-
-
-        // $filieres1 = \App\Models\Filiere::factory(3)->create([
-        //     'idDepartement'=>$deparements[0]->get()->idDepartement,
-        // ]);
-
-        // $filieres2 = \App\Models\Filiere::factory(3)->create([
-        //     'idDepartement'=>$deparements[0]->get()->idDepartement')[1],
-        // ]);
-
-
-
-
-
+        \App\Models\Anneescolaire::factory(1)->create();
+        \App\Models\Personne::factory(10)->create();
+        \App\Models\User::factory(10)->create();
+        \App\Models\Departement::factory(10)->create();
+        \App\Models\Professeur::factory(10)->create();
+        \App\Models\Chefdep::factory(10)->create();
+        \App\Models\Filiere::factory(10)->create();
+        \App\Models\Etudiant::factory(10)->create();
+        \App\Models\Module::factory(10)->create();
+        \App\Models\Matiere::factory(10)->create();
+        \App\Models\Note::factory(10)->create();
+        \App\Models\Notification::factory(10)->create();
+        \App\Models\Semestre::factory(10)->create();
+        \App\Models\Emploi::factory(10)->create();
+        \App\Models\Evenemnt::factory(10)->create();
+        \App\Models\Absence::factory(10)->create();
 
 
         // =======================================

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property int|null $idEtudiant
  * @property int $idNote
- * @property int|null $idMatier
+ * @property int|null $idMatiere
  * @property float|null $controle
  * @property float|null $exam
  * @property float|null $noteGeneral
@@ -34,7 +34,7 @@ class Note extends Model
 	protected $casts = [
 		'idEtudiant' => 'int',
 		'idNote' => 'int',
-		'idMatier' => 'int',
+		'idMatiere' => 'int',
 		'controle' => 'float',
 		'exam' => 'float',
 		'noteGeneral' => 'float'
@@ -42,7 +42,7 @@ class Note extends Model
 
 	protected $fillable = [
 		'idEtudiant',
-		'idMatier',
+		'idMatiere',
 		'controle',
 		'exam',
 		'noteGeneral'
@@ -51,10 +51,10 @@ class Note extends Model
 	public function etudiant()
 	{
 		return $this->belongsTo(Etudiant::class, 'idEtudiant');
-	} 
+	}
 
 	public function matiere()
 	{
-		return $this->belongsTo(Matiere::class, 'idMatier');
+		return $this->belongsTo(Matiere::class, 'idMatiere');
 	}
 }

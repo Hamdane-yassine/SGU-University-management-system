@@ -23,10 +23,14 @@ class MatiereFactory extends Factory
     {
         return [
             'idProf' => function(){
+                if(\App\Models\Professeur::count())
+                    return $this->faker->randomElement(\App\Models\Professeur::pluck('idProf'));
                 return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
             },
             'idModule' => function(){
-              return \App\Models\Module::factory()->create()->get()[0]['idModule'];
+                if(\App\Models\Module::count())
+                    return $this->faker->randomElement(\App\Models\Module::pluck('idModule'));
+                return \App\Models\Module::factory()->create()->get()[0]['idModule'];
             },
             'nom'=> $this->faker->name(),
             'vh'=> $this->faker->randomNumber(),

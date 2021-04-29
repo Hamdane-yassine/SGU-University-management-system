@@ -23,9 +23,15 @@ class ChefdepFactory extends Factory
     {
         return [
             'idProf' => function (){
+                if(\App\Models\Professeur::count())
+                    return $this->faker->randomElement(\App\Models\Professeur::pluck('idProf'));
                 return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
+
             },
+           
             'idDepartement' => function (){
+                if(\App\Models\Departement::count())
+                    return $this->faker->randomElement(\App\Models\Departement::pluck('idDepartement'));
                 return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
             }
         ];

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property int|null $idProf
  * @property int $IdAbsence
- * @property int|null $idMatier
+ * @property int|null $idMatiere
  * @property Carbon|null $dateAbsencee
  * @property Carbon|null $dateRattrapage
  * @property bool|null $etat
@@ -36,7 +36,7 @@ class Absence extends Model
 	protected $casts = [
 		'idProf' => 'int',
 		'IdAbsence' => 'int',
-		'idMatier' => 'int',
+		'idMatiere' => 'int',
 		'dateAbsence' => 'date'
 	];
 
@@ -47,7 +47,7 @@ class Absence extends Model
 	protected $fillable = [
 		'IdAbsence',
 		'idProf',
-		'idMatier',
+		'idMatiere',
 		'dateAbsence',
 		'dateRattrapage',
 		'etat'
@@ -60,6 +60,6 @@ class Absence extends Model
 
 	public function matiere()
 	{
-		return $this->belongsTo(Matiere::class, 'idMatier');
+		return $this->belongsTo(Matiere::class, 'idMatiere');
 	}
 }

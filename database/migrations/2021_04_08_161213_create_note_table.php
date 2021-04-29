@@ -17,7 +17,7 @@ class CreateNoteTable extends Migration {
 		{
 			$table->id('idNote');
 			$table->bigInteger('idEtudiant')->unsigned();
-			$table->bigInteger('idMatier')->unsigned();
+			$table->bigInteger('idMatiere')->unsigned();
 			$table->float('controle', 10, 0)->nullable();
 			$table->float('exam', 10, 0)->nullable();
 			$table->float('noteGeneral', 10, 0)->nullable();

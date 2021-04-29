@@ -23,7 +23,9 @@ class EmploiFactory extends Factory
     {
         return [
             'idProf' => function() {
-                return \App\Models\Professeur::factory()->creeate()->get()[0]['idProf'];
+                if(\App\Models\Professeur::count())
+                    return $this->faker->randomElement(\App\Models\Professeur::pluck('idProf'));
+                return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
             },
         ];
     }
