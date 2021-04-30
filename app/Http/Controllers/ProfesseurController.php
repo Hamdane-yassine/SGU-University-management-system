@@ -113,6 +113,7 @@ class ProfesseurController extends Controller
         //formatted as : {current year / past year}
         $annee = date("Y")."/".(date("Y")-1);
 
+
         return view('prof.TableBoard');
     }
 }

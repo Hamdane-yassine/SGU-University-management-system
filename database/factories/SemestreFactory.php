@@ -27,7 +27,7 @@ class SemestreFactory extends Factory
                     return $this->faker->randomElement(\App\Models\Anneescolaire::pluck('idAnnee'));
                 return \App\Models\Anneescolaire::factory()->create()->get()[0]['idAnnee'];
             },
-            'nom'=> $this->faker->name(),
+            'nom'=> $this->faker->randomElement(['S1','S2','S3','S4','S5','S6']),
 
         ];
     }
