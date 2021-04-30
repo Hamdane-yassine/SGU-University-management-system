@@ -36,17 +36,19 @@ Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::c
 
 Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList');
 
-Route::get('/Dashboard',[App\Http\Controllers\ProfesseurController::class, 'FetchDashBoardData']); 
+Route::get('/Etudiant/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiant'])->name('getEtudiant');
+
+Route::get('/Dashboard',[App\Http\Controllers\ProfesseurController::class, 'FetchDashBoardData']);
 
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 
 //Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'HomeController@myformAjax'));
 
 Route::middleware(['auth','prof'])->group(function () {
-    Route::get('/hah',function(){
-        return dd("Hello");
-    });
+
 });
 
-
+Route::get('/h', function () {
+    return view('profile.profile');
+});
 

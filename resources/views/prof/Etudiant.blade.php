@@ -37,58 +37,58 @@
                         <div class="modal-body" id="modall">
                             <dl class="row" style="padding-left: 20px;">
                                 <dt class="col-sm-4">Nom</dt>
-                                <dd class="col-sm-8">HAMDANE</dd>
+                                <dd class="col-sm-8" id="nom"></dd>
 
                                 <dt class="col-sm-4">Prénom</dt>
-                                <dd class="col-sm-8">YASSINE</dd>
+                                <dd class="col-sm-8" id="prenom"></dd>
 
                                 <dt class="col-sm-4">Code Apogée</dt>
-                                <dd class="col-sm-8">19020547</dd>
+                                <dd class="col-sm-8" id="apogee"></dd>
 
                                 <dt class="col-sm-4">CNE / Code Massar</dt>
-                                <dd class="col-sm-8">J136461372</dd>
+                                <dd class="col-sm-8" id="cne"></dd>
 
                                 <dt class="col-sm-4">Genre</dt>
-                                <dd class="col-sm-8">Masculin</dd>
+                                <dd class="col-sm-8" id="genre"></dd>
 
                                 <dt class="col-sm-4">Date de naissance</dt>
-                                <dd class="col-sm-8">16/02/2001</dd>
+                                <dd class="col-sm-8" id="datenais"></dd>
 
                                 <dt class="col-sm-4">Situation familiale</dt>
-                                <dd class="col-sm-8">Célibataire</dd>
+                                <dd class="col-sm-8" id="situation"></dd>
 
                                 <dt class="col-sm-4">Nationalité</dt>
-                                <dd class="col-sm-8">MAROCAIN(E)</dd>
+                                <dd class="col-sm-8" id="nationalite"></dd>
 
                                 <dt class="col-sm-4">Lieu de naissance</dt>
-                                <dd class="col-sm-8">RABAT</dd>
+                                <dd class="col-sm-8" id="LieuNaissance"></dd>
 
                                 <dt class="col-sm-4">N° C.N.I.E</dt>
-                                <dd class="col-sm-8">AE293178</dd>
+                                <dd class="col-sm-8" id="cin"></dd>
 
                                 <dt class="col-sm-4">N° C.N.I.E du père</dt>
-                                <dd class="col-sm-8">E322801</dd>
+                                <dd class="col-sm-8" id="cinpere"></dd>
 
                                 <dt class="col-sm-4">N° C.N.I.E de la mère</dt>
-                                <dd class="col-sm-8">AB306235</dd>
+                                <dd class="col-sm-8" id="cinmere"></dd>
 
                                 <dt class="col-sm-4">Adresse </dt>
-                                <dd class="col-sm-8">RES ELBOUSTANE IMM G11 APT 33 LOT SAID HAJJI SALE</dd>
+                                <dd class="col-sm-8" id="adresse"></dd>
 
                                 <dt class="col-sm-4">Téléphone</dt>
-                                <dd class="col-sm-8">0672387235</dd>
+                                <dd class="col-sm-8" id="tel"></dd>
 
                                 <dt class="col-sm-4">E-mail personnel</dt>
-                                <dd class="col-sm-8">amirnet001@gmail.com</dd>
+                                <dd class="col-sm-8" id="email"></dd>
 
                                 <dt class="col-sm-4">E-mail institutionnel</dt>
-                                <dd class="col-sm-8">yassine_hamdane@um5.ac.ma</dd>
+                                <dd class="col-sm-8" id="emailins"></dd>
 
                                 <dt class="col-sm-4">Année du BAC</dt>
-                                <dd class="col-sm-8">2019</dd>
+                                <dd class="col-sm-8" id="annebac"></dd>
 
                                 <dt class="col-sm-4">Couverture médicale</dt>
-                                <dd class="col-sm-8">Aucune couverture</dd>
+                                <dd class="col-sm-8" id="couv"></dd>
 
                             </dl>
                         </div>
@@ -120,8 +120,6 @@
     <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-    <!-- Datatable Setting js -->
-    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
     <script>
         var table1 = $('.data-table-export').DataTable({
             processing: true,
@@ -136,7 +134,7 @@
                 {data: 'tel', name: 'tel'},
                 {
                   data: 'idEtudiant', 
-                  render:function(data,type,full,meta){ return ' <a class="dropdown-item setmodel" data-id='+data+' style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>' },
+                  render:function(data,type,full,meta){ return ' <a class="dropdown-item" href="" style="background-color:transparent;" id="link" data-id="'+data+'" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>' },
                 },
             ],
             scrollCollapse: true,
@@ -171,6 +169,35 @@
             }
             ]
         });
-    </script>
 
+        $('body').on('click', '#link', function (event) {
+            event.preventDefault();
+            var id = $(this).data('id');
+            $.ajax({
+                    type: 'GET',
+                    url: "/Etudiant/"+id,
+                    data:{},
+                    success: function(data) {
+                        document.getElementById("nom").innerHTML = data.data[0].nom;
+                        document.getElementById("prenom").innerHTML = data.data[0].prenom;
+                        document.getElementById("apogee").innerHTML = data.data[0].apogee;
+                        document.getElementById("cne").innerHTML = data.data[0].cne;
+                        document.getElementById("genre").innerHTML = data.data[0].genre;
+                        document.getElementById("datenais").innerHTML = data.data[0].dateNaissance;
+                        document.getElementById("situation").innerHTML = data.data[0].situationFamiliale;
+                        document.getElementById("nationalite").innerHTML = data.data[0].nationalite;
+                        document.getElementById("LieuNaissance").innerHTML = data.data[0].lieuNaissance;
+                        document.getElementById("cin").innerHTML = data.data[0].cin;
+                        document.getElementById("cinpere").innerHTML = data.data[0].cinPere;
+                        document.getElementById("cinmere").innerHTML = data.data[0].cinMere;
+                        document.getElementById("adresse").innerHTML = data.data[0].adressePersonnele;
+                        document.getElementById("tel").innerHTML = data.data[0].tel;
+                        document.getElementById("email").innerHTML = data.data[0].email;
+                        document.getElementById("emailins").innerHTML = data.data[0].emailInstitutionne;
+                        document.getElementById("annebac").innerHTML = data.data[0].anneeDuBaccalaureat;
+                        document.getElementById("couv").innerHTML = data.data[0].regimeDeCovertureMedicale;
+                    }
+                })               
+            });
+    </script>
     @endsection

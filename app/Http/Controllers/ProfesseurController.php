@@ -108,10 +108,23 @@ class ProfesseurController extends Controller
         }
     }
 
+    public function getEtudiant(Request $request,Etudiant $etudiant)  //an ajax function to retrieve tha data
+    {
+
+       $etudiant = Etudiant::where('idEtudiant',$etudiant->idEtudiant)  //first inint a user id
+       ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
+       ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale')
+       ->get();
+       if ($request->ajax()) {
+            return Datatables::of($etudiant)
+            ->make(true);
+        }
+    }
     public function FetchDashBoardData(Request $request)
     {
         //formatted as : {current year / past year}
         $annee = date("Y")."/".(date("Y")-1);
+<<<<<<< HEAD
         $date = date("j/n/Y");
         //get all students of the curent prof
         $filieres=array();
@@ -136,5 +149,7 @@ class ProfesseurController extends Controller
 
         echo $EtudiantCount." ".$FiliereCount." ".$AbsenceCount." ".$MatiereCount;
             return view('prof.TableBoard');
+=======
+        return view('prof.TableBoard');
     }
 }
