@@ -135,6 +135,6 @@ class ProfesseurController extends Controller
         $MatiereCount = count(auth()->user()->professeur->matieres);
 
         echo $EtudiantCount." ".$FiliereCount." ".$AbsenceCount." ".$MatiereCount;
-        return view('prof.TableBoard');
+            return view('prof.TableBoard');
     }
 }
