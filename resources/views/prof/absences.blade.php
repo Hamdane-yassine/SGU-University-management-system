@@ -41,7 +41,6 @@
                                         <div class="form-group">
                                             <label>Filiere :</label>
                                             <select class="custom-select2 form-control" name="filiere" id="filiere" style="width: 100%; height: 38px;" >
-                                                    <!--filiere shit goes down right here nigga-->
                                                     <option>--select a filiere--    </option>
                                                     @foreach ($filieresList as $filiere)
                                                         <option value= {{ $filiere->idFiliere }}>{{ $filiere->nom }}</option>

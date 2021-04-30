@@ -63,12 +63,12 @@ class ProfesseurController extends Controller
     public function addRatt()
     {
         //all of String datatype
-        $idMatiere = request('matiere');
+        $idMatiere = request('matiere'); 
         $dateAbsence = request('dateAbsence');
         $dateRatt = request('dateRatt');
         $informerEtudiants = request('informerEtudiants');
 
-        echo Auth::user()->professeur->idProf.'<br>'.$idMatiere.'<br>'.$dateAbsence.'<br>'.$dateRatt.'<br>'.$informerEtudiants; 
+        //echo Auth::user()->professeur->idProf.'<br>'.$idMatiere.'<br>'.$dateAbsence.'<br>'.$dateRatt.'<br>'.$informerEtudiants; 
        
         $id = Auth::user()->professeur->idProf; 
         //parsing data
@@ -85,9 +85,8 @@ class ProfesseurController extends Controller
                 'dateRattrapage' => str_replace('-',' ',$dateRatt),
                 'etat' => 'en attendant',
             ]);
+            return redirect('/absences');
         }
-      
-
         //send mails if informerEtudiants=on
 
     }
