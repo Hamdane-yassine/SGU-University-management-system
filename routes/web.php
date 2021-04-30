@@ -30,9 +30,13 @@ Route::get('/absences',[ProfesseurController::class, 'index']);
 
 Route::get('/AbsencesList',[ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
 
+Route::get('/absences/getMatiere/{idFiliere}',[ProfesseurController::class, 'getMatiere']);
+
 Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'Etudiants'])->name('Etudiants');
 
 Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList');
+
+Route::get('/Dashboard',[App\Http\Controllers\ProfesseurController::class, 'FetchDashBoardData']); 
 
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 
@@ -45,4 +49,4 @@ Route::middleware(['auth','prof'])->group(function () {
 });
 
 
-Route::get('/absences/getMatiere/{idFiliere}',[ProfesseurController::class, 'getMatiere']);//->name('MatiersListRoute');
+
