@@ -88,17 +88,10 @@ class ProfesseurController extends Controller
 
        $etudiants = Etudiant::where('etudiant.idFiliere',$filiere->idFiliere)  //first inint a user id
        ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
-       ->select('apogee','nom','prenom','cne','email','tel')
+       ->select('apogee','nom','prenom','cne','email','tel','idEtudiant')
        ->get(); 
        if ($request->ajax()) {
             return Datatables::of($etudiants)
-            ->addColumn('a', function($row){
-                $actionBtn = '<a class="dropdown-item" style="background-color:transparent;" href="#"
-                data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                    class="dw dw-eye"></i></a>';
-                return $actionBtn;
-            })
-            ->rawColumns(['a'])
             ->make(true);
         }
     }

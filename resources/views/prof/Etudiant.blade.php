@@ -10,7 +10,7 @@
                     </div>
                     <div class="pb-20">
 
-                        <table class="table hover multiple-select-row data-table-export nowrap yajra-datatable">
+                        <table class="table hover multiple-select-row data-table-export nowrap ">
                             <thead>
                                 <tr>
                                     <th>N° Apogée</th>
@@ -122,31 +122,55 @@
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
     <!-- Datatable Setting js -->
     <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
-    <script type="text/javascript">
-        $(function () {
-          var table = $('.yajra-datatable').DataTable({
-              processing: true,
-              serverSide: true,
-
-              ajax: "{{ route('getEtudiantsList',['filiere' => $filiere]) }}",
-              columns: [
-                  {data: 'apogee', name: 'apogee'},
-                  {data: 'nom', name: 'nom'},
-                  {data: 'prenom', name: 'prenom'},
-                  {data: 'cne', name: 'cne'},
-                  {data: 'email', name: 'email'},
-                  {data: 'tel', name: 'tel'},
-                  {
-                    data: 'a', 
-                    name: 'a', 
-                    orderable: true, 
-                    searchable: true
-                  },
-              ]
-          });
-
+    <script>
+        var table1 = $('.data-table-export').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('getEtudiantsList',['filiere' => $filiere]) }}",
+            columns: [
+                {data: 'apogee', name: 'apogee'},
+                {data: 'nom', name: 'nom'},
+                {data: 'prenom', name: 'prenom'},
+                {data: 'cne', name: 'cne'},
+                {data: 'email', name: 'email'},
+                {data: 'tel', name: 'tel'},
+                {
+                  data: 'idEtudiant', 
+                  render:function(data,type,full,meta){ return ' <a class="dropdown-item setmodel" data-id='+data+' style="background-color:transparent;" href="#" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>' },
+                },
+            ],
+            scrollCollapse: true,
+            autoWidth: false,
+            responsive: true,
+            columnDefs: [{
+                targets: "datatable-nosort",
+                orderable: false,
+            }],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                "emptyTable": "Aucune donnée disponible dans le tableau",
+                "lengthMenu": "Afficher _MENU_ éléments",
+                "zeroRecords": "Aucun élément correspondant trouvé",
+                "processing": "Traitement...",
+                "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                "loadingRecords": "Chargement...",
+                "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                search: "Rechercher:",
+                searchPlaceholder: "Rechercher",
+                paginate: {
+                    next: '<i class="ion-chevron-right"></i>',
+                    previous: '<i class="ion-chevron-left"></i>'  
+                }
+            },
+            dom: '<"top"<"left-col"B><"right-col"f>>rtip',
+            buttons: [
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
+            }
+            ]
         });
-      </script>
-
+    </script>
 
     @endsection

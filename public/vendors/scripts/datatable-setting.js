@@ -18,46 +18,6 @@ $('document').ready(function(){
 		},
 	});
 
-	var table1 = $('.data-table-export').DataTable({
-		scrollCollapse: true,
-		autoWidth: false,
-		responsive: true,
-		columnDefs: [{
-			targets: "datatable-nosort",
-			orderable: false,
-		}],
-		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-		"language": {
-			"info": "_START_ à _END_ sur _TOTAL_ éléments",
-			"zeroRecords": "Aucun élément correspondant trouvé",
-			search: "Rechercher:",
-			searchPlaceholder: "Rechercher",
-			paginate: {
-				next: '<i class="ion-chevron-right"></i>',
-				previous: '<i class="ion-chevron-left"></i>'  
-			}
-		},
-		dom: '<"top"<"left-col"B><"right-col"f>>rtip',
-		buttons: [
-		  {
-			extend: 'print',
-			text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
-		  }
-		]
-		
-	});
-
-	var table = $('.select-row').DataTable();
-	$('.select-row tbody').on('click', 'tr', function () {
-		if ($(this).hasClass('selected')) {
-			$(this).removeClass('selected');
-		}
-		else {
-			table.$('tr.selected').removeClass('selected');
-			$(this).addClass('selected');
-		}
-	});
-
 	var multipletable = $('.multiple-select-row').DataTable();
 	$('.multiple-select-row tbody').on('click', 'tr', function () {
 		$(this).toggleClass('selected');
