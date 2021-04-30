@@ -10,7 +10,7 @@
                         <h4 class="text-blue h4">Table d'absence</h4>
                         <p class="mb-26"></p>
                     </div>
-                    <table class=" table  yajra-datatable">
+                    <table class="data-table table stripe hover nowrap">
                         <thead>
                             <tr>
                                 <th>N°</th>
@@ -104,7 +104,6 @@
     <!-- js -->
     @endsection
     @section('SpecialScripts')
-    <script src="{{ asset('src/plugins/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
@@ -113,21 +112,42 @@
     <script src="{{ asset('src/plugins/jquery-steps/jquery.steps.js') }}"></script>
     <script src="{{ asset('vendors/scripts/steps-setting.js') }}"></script>
     <script type="text/javascript">
-        $(function () {
-          var table = $('.yajra-datatable').DataTable({
-              processing: true,
-              serverSide: true,
-              ajax: "{{ route('getAbsencesList') }}",
-              columns: [
-                  {data: 'IdAbsence', name: 'IdAbsence'},
-                  {data: 'nomMatiere', name: 'nomMatiere'},
-                  {data: 'nomFiliere', name: 'nomFiliere'},
-                  {data: 'dateAbsence', name: 'dateAbsence'},
-                  {data: 'etat', name: 'etat'}
-              ]
-          });
-
-        });
+        $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('getAbsencesList') }}",
+                columns: [
+                    {data: 'IdAbsence', name: 'IdAbsence'},
+                    {data: 'nomMatiere', name: 'nomMatiere'},
+                    {data: 'nomFiliere', name: 'nomFiliere'},
+                    {data: 'dateAbsence', name: 'dateAbsence'},
+                    {data: 'etat', name: 'etat'}
+                ],
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "zeroRecords": "Aucun élément correspondant trouvé",
+                    "processing": "Traitement...",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                    "loadingRecords": "Chargement...",
+                    "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                    search: "Rechercher:",
+                    searchPlaceholder: "Rechercher",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'  
+                    }
+                },
+            });
     </script>
     <script type="text/javascript">
         jQuery(document).ready(function ()
@@ -156,6 +176,6 @@
                    }
                 });
         });
-        </script>
+    </script>
 
     @endsection

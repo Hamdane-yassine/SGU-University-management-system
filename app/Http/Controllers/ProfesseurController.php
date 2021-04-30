@@ -109,4 +109,17 @@ class ProfesseurController extends Controller
             ->make(true);
         }
     }
+
+    public function getEtudiant(Request $request,Etudiant $etudiant)  //an ajax function to retrieve tha data
+    {
+
+       $etudiant = Etudiant::where('idEtudiant',$etudiant->idEtudiant)  //first inint a user id
+       ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
+       ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale')
+       ->get();
+       if ($request->ajax()) {
+            return Datatables::of($etudiant)
+            ->make(true);
+        }
+    }
 }
