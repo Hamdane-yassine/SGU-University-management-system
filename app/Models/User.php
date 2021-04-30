@@ -77,6 +77,11 @@ class User extends Authenticatable
 		return $this->hasOne(Professeur::class, 'idUtilisateur');
 	}
 
+    public function notifications()
+	{
+		return $this->hasMany(Notification::class, 'idUtilisateur');
+	}
+
     public function hasRole(string $role)
     {
         return $this->role == $role ? true : false;
