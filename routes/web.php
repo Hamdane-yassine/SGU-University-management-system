@@ -36,11 +36,9 @@ Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::c
 
 Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList');
 
-<<<<<<< HEAD
 Route::get('/Etudiant/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiant'])->name('getEtudiant');
-=======
+
 Route::get('/Dashboard',[App\Http\Controllers\ProfesseurController::class, 'FetchDashBoardData']);
->>>>>>> db74830ac00838a0aac879f002dc2ee80e48e3d6
 
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 
