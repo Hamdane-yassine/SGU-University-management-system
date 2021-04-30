@@ -33,7 +33,7 @@ class Anneescolaire extends Model
 		'idAnnee' => 'int'
 	];
 
-	protected $dates = [
+	protected $year = [
 		'annee'
 	];
 
