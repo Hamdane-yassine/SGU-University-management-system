@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Absence;
+use App\Models\Etudiant;
 use App\Models\Filiere;
 use App\Models\Matiere;
 use App\Models\Module;
@@ -91,8 +92,28 @@ class ProfesseurController extends Controller
 
     }
     
-    public function getEtudiants(Filiere $filiere)
+    public function Etudiants(Filiere $filiere)
     {
         return view('prof.Etudiant', ['filiere' => $filiere]);
+    }
+
+    public function getEtudiants(Request $request,Filiere $filiere)  //an ajax function to retrieve tha data
+    {
+
+       $etudiants = Etudiant::where('etudiant.idFiliere',$filiere->idFiliere)  //first inint a user id
+       ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
+       ->select('apogee','nom','prenom','cne','email','tel')
+       ->get(); 
+       if ($request->ajax()) {
+            return Datatables::of($etudiants)
+            ->addColumn('a', function($row){
+                $actionBtn = '<a class="dropdown-item" style="background-color:transparent;" href="#"
+                data-toggle="modal" data-target="#bd-example-modal-lg"><i
+                    class="dw dw-eye"></i></a>';
+                return $actionBtn;
+            })
+            ->rawColumns(['a'])
+            ->make(true);
+        }
     }
 }

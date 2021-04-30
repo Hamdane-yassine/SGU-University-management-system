@@ -119,7 +119,7 @@
               serverSide: true,
               ajax: "{{ route('getAbsencesList') }}",
               columns: [
-                  {data: 'IdAbsence', name: 'IdAbsence',},
+                  {data: 'IdAbsence', name: 'IdAbsence'},
                   {data: 'nomMatiere', name: 'nomMatiere'},
                   {data: 'nomFiliere', name: 'nomFiliere'},
                   {data: 'dateAbsence', name: 'dateAbsence'},
