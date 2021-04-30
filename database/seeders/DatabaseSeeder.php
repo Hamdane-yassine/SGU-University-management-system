@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Module::factory(50)->create();
         \App\Models\Matiere::factory(50)->create();
         \App\Models\Note::factory(50)->create();
-        \App\Models\Notification::factory(50)->create();
+        // \App\Models\Notification::factory(50)->create();
         \App\Models\Emploi::factory(50)->create();
         \App\Models\Evenemnt::factory(50)->create();
         \App\Models\Absence::factory(50)->create();
