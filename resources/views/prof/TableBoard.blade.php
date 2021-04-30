@@ -62,7 +62,7 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">ouvert</div>
+								<div class="weight-700 font-24 text-dark">{{ $insertionNotes }}</div>
 								<div class="font-14 text-secondary weight-500">Insértion des notes</div>
 							</div>
 							<div class="widget-icon">
