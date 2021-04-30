@@ -124,7 +124,6 @@ class ProfesseurController extends Controller
     {
         //formatted as : {current year / past year}
         $annee = date("Y")."/".(date("Y")-1);
-<<<<<<< HEAD
         $date = date("j/n/Y");
         //get all students of the curent prof
         $filieres=array();
@@ -148,8 +147,6 @@ class ProfesseurController extends Controller
         $MatiereCount = count(auth()->user()->professeur->matieres);
 
         echo $EtudiantCount." ".$FiliereCount." ".$AbsenceCount." ".$MatiereCount;
-            return view('prof.TableBoard');
-=======
         return view('prof.TableBoard');
     }
 }
