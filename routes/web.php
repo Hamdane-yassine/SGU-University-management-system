@@ -30,21 +30,27 @@ Route::get('/absences',[ProfesseurController::class, 'index']);
 
 Route::get('/AbsencesList',[ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
 
+Route::get('/absences/getMatiere/{idFiliere}',[ProfesseurController::class, 'getMatiere']);
+
 Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'Etudiants'])->name('Etudiants');
 
 Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList');
 
+<<<<<<< HEAD
 Route::get('/Etudiant/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiant'])->name('getEtudiant');
+=======
+Route::get('/Dashboard',[App\Http\Controllers\ProfesseurController::class, 'FetchDashBoardData']);
+>>>>>>> db74830ac00838a0aac879f002dc2ee80e48e3d6
 
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 
 //Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'HomeController@myformAjax'));
 
 Route::middleware(['auth','prof'])->group(function () {
-    Route::get('/hah',function(){
-        return dd("Hello");
-    });
+
 });
 
+Route::get('/h', function () {
+    return view('profile.profile');
+});
 
-Route::get('/absences/getMatiere/{idFiliere}',[ProfesseurController::class, 'getMatiere']);//->name('MatiersListRoute');

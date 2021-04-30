@@ -76,6 +76,10 @@ class User extends Authenticatable
 	{
 		return $this->hasOne(Professeur::class, 'idUtilisateur');
 	}
+    public function profile()
+    {
+        return $this->hasOne(\App\Models\Profile::class);
+    }
 
     public function hasRole(string $role)
     {

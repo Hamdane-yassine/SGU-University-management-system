@@ -35,21 +35,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Anneescolaire::factory(1)->create();
-        \App\Models\Personne::factory(10)->create();
-        \App\Models\User::factory(10)->create();
-        \App\Models\Departement::factory(10)->create();
-        \App\Models\Professeur::factory(10)->create();
-        \App\Models\Chefdep::factory(10)->create();
-        \App\Models\Filiere::factory(10)->create();
-        \App\Models\Etudiant::factory(10)->create();
+        \App\Models\Personne::factory(50)->create();
+        \App\Models\User::factory(50)->create();
+        \App\Models\Departement::factory(50)->create();
+        \App\Models\Professeur::factory(50)->create();
+        \App\Models\Chefdep::factory(50)->create();
+        \App\Models\Filiere::factory(50)->create();
+        \App\Models\Etudiant::factory(50)->create();
         \App\Models\Semestre::factory(8)->create();
-        \App\Models\Module::factory(10)->create();
-        \App\Models\Matiere::factory(10)->create();
-        \App\Models\Note::factory(10)->create();
-        \App\Models\Notification::factory(10)->create();
-        \App\Models\Emploi::factory(10)->create();
-        \App\Models\Evenemnt::factory(10)->create();
-        \App\Models\Absence::factory(10)->create();
+        \App\Models\Module::factory(50)->create();
+        \App\Models\Matiere::factory(50)->create();
+        \App\Models\Note::factory(50)->create();
+        // \App\Models\Notification::factory(50)->create();
+        \App\Models\Emploi::factory(50)->create();
+        \App\Models\Evenemnt::factory(50)->create();
+        \App\Models\Absence::factory(50)->create();
 
 
         // =======================================

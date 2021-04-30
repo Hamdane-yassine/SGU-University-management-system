@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Anneescolaire;
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AnneescolaireFactory extends Factory
+class ProfileFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Anneescolaire::class;
+    protected $model = Profile::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class AnneescolaireFactory extends Factory
     public function definition()
     {
         return [
-            'annee'=> $this->faker->year(),
+            //
         ];
     }
 }

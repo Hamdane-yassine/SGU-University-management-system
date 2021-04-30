@@ -17,7 +17,7 @@ class ProfesseurController extends Controller
 {
     public function index()   //returns the page without the absence section (a non ajax request)
     {
-        
+
         $filieres=array();
         if(!empty(auth()->user()->professeur->matieres))
         {
@@ -55,8 +55,8 @@ class ProfesseurController extends Controller
         ->where('matiere.idProf',Auth::user()->professeur->idProf)
         ->join('module','filiere.idFiliere','=','module.idFiliere')
         ->join('matiere','module.idModule','=','matiere.idModule')
-        ->select('matiere.idMatiere as idMatiere','matiere.nom as nomMatiere')->get(); 
-        //echo $MatieresList; 
+        ->select('matiere.idMatiere as idMatiere','matiere.nom as nomMatiere')->get();
+        //echo $MatieresList;
         return json_encode($MatieresList);
     }
 
@@ -68,9 +68,9 @@ class ProfesseurController extends Controller
         $dateRatt = request('dateRatt');
         $informerEtudiants = request('informerEtudiants');
 
-        echo Auth::user()->professeur->idProf.'<br>'.$idMatiere.'<br>'.$dateAbsence.'<br>'.$dateRatt.'<br>'.$informerEtudiants; 
-       
-        $id = Auth::user()->professeur->idProf; 
+        //echo Auth::user()->professeur->idProf.'<br>'.$idMatiere.'<br>'.$dateAbsence.'<br>'.$dateRatt.'<br>'.$informerEtudiants;
+
+        $id = Auth::user()->professeur->idProf;
         //parsing data
         if($idMatiere == NULL)
         {
@@ -85,13 +85,11 @@ class ProfesseurController extends Controller
                 'dateRattrapage' => str_replace('-',' ',$dateRatt),
                 'etat' => 'en attendant',
             ]);
+            return redirect('/absences');
         }
-      
-
         //send mails if informerEtudiants=on
-
     }
-    
+
     public function Etudiants(Filiere $filiere)
     {
         return view('prof.Etudiant', ['filiere' => $filiere]);
@@ -103,13 +101,14 @@ class ProfesseurController extends Controller
        $etudiants = Etudiant::where('etudiant.idFiliere',$filiere->idFiliere)  //first inint a user id
        ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
        ->select('apogee','nom','prenom','cne','email','tel','idEtudiant')
-       ->get(); 
+       ->get();
        if ($request->ajax()) {
             return Datatables::of($etudiants)
             ->make(true);
         }
     }
 
+<<<<<<< HEAD
     public function getEtudiant(Request $request,Etudiant $etudiant)  //an ajax function to retrieve tha data
     {
 
@@ -121,5 +120,14 @@ class ProfesseurController extends Controller
             return Datatables::of($etudiant)
             ->make(true);
         }
+=======
+    public function FetchDashBoardData(Request $request)
+    {
+        //formatted as : {current year / past year}
+        $annee = date("Y")."/".(date("Y")-1);
+
+
+        return view('prof.TableBoard');
+>>>>>>> db74830ac00838a0aac879f002dc2ee80e48e3d6
     }
 }
