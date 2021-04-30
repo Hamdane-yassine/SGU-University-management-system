@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class InsertionNotes extends Migration
+class CreateInsertionNotes extends Migration
 {
     /**
      * Run the migrations.
@@ -16,6 +16,7 @@ class InsertionNotes extends Migration
         Schema::create('insertionNotes', function (Blueprint $table) {
             $table->id('id');
             $table->bigInteger('idFiliere')->unsigned();
+            $table->enum('value',['ouvert','fermé']);
             $table->timestamps();
         });
     }
