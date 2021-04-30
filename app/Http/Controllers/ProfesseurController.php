@@ -146,7 +146,9 @@ class ProfesseurController extends Controller
         $AbsenceCount = Absence::where('idProf',Auth::user()->professeur->idProf)->count();
         $MatiereCount = count(auth()->user()->professeur->matieres);
 
-        echo $EtudiantCount." ".$FiliereCount." ".$AbsenceCount." ".$MatiereCount;
-        return view('prof.TableBoard');
+        //echo $EtudiantCount." ".$FiliereCount." ".$AbsenceCount." ".$MatiereCount;
+        return view('prof.TableBoard',['annee' => $annee,'date' => $date ,
+        'EtudiantCount' => $EtudiantCount , 'FiliereCount' => $FiliereCount ,
+        'AbsenceCount' => $AbsenceCount , 'MatiereCount' => $MatiereCount]);
     }
 }
