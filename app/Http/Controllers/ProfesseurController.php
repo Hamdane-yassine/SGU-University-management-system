@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Absence;
 use App\Models\Filiere;
 use App\Models\Matiere;
+use App\Models\Module;
 use App\Models\Professeur;
 use phpDocumentor\Reflection\Types\This;
 use DataTables;
@@ -15,8 +16,17 @@ class ProfesseurController extends Controller
 {
     public function index()   //returns the page without the absence section (a non ajax request)
     {
-        $matiers = $this->getMatiers();  //fill matiers drop down menue
-        return view('prof.absences', ['MatiersList' => $matiers]);
+        
+        $filieres=array();
+        if(!empty(auth()->user()->professeur->matieres))
+        {
+            foreach (auth()->user()->professeur->matieres as $matiere)
+            {
+                array_push($filieres, $matiere->module->filiere);
+            }
+            $filieres = array_unique($filieres);
+        }
+        return view('prof.absences', ['filieresList' => $filieres]);
     }
 
     public function getAbsences(Request $request)  //an ajax function to retrieve tha data
@@ -38,11 +48,15 @@ class ProfesseurController extends Controller
         }
     }
 
-    public function getMatiers()
+    public function getMatiere($idFiliere) //get Matiere based on idFiliere
     {
-        $id = Auth::user()->professeur->idProf; 
-        $matiers = Matiere::where('idProf',$id)->select('idMatiere as id','nom as nomMatiere')->get();
-        return $matiers;
+        $MatieresList = Filiere::where('filiere.idFiliere',$idFiliere)
+        ->where('matiere.idProf',Auth::user()->professeur->idProf)
+        ->join('module','filiere.idFiliere','=','module.idFiliere')
+        ->join('matiere','module.idModule','=','matiere.idModule')
+        ->select('matiere.idMatiere as idMatiere','matiere.nom as nomMatiere')->get(); 
+        //echo $MatieresList; 
+        return json_encode($MatieresList);
     }
 
     public function addRatt()

@@ -32,10 +32,15 @@ Route::get('/AbsencesList',[ProfesseurController::class, 'getAbsences'])->name('
 
 Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('Etudiants');
 
+//Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
+
+//Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'HomeController@myformAjax'));
+
 Route::middleware(['auth','prof'])->group(function () {
     Route::get('/hah',function(){
         return dd("Hello");
     });
-    
 });
 
+
+Route::get('/absences/getMatiere/{idFiliere}',[ProfesseurController::class, 'getMatiere']);//->name('MatiersListRoute');
