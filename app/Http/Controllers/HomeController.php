@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Filiere;
 use Illuminate\Http\Request;
+use DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {

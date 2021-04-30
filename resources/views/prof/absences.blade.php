@@ -36,20 +36,25 @@
                             @csrf
                             <section>
                                 <div class="row">
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Matiére :</label>
-                                            <select class="custom-select2 form-control" name="matiere" style="width: 100%; height: 38px;" required>
-                                                    @foreach ($MatiersList as $matiere)
-                                                        <option value= {{ $matiere->id }}>{{ $matiere->nomMatiere }}</option>
+                                            <label>Filiere :</label>
+                                            <select class="custom-select2 form-control" name="filiere" id="filiere" style="width: 100%; height: 38px;" >
+                                                    <!--filiere shit goes down right here nigga-->
+                                                    <option>--select a filiere--    </option>
+                                                    @foreach ($filieresList as $filiere)
+                                                        <option value= {{ $filiere->idFiliere }}>{{ $filiere->nom }}</option>
                                                     @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Date d'absence :</label>
-                                            <input class="form-control datetimepicker" name="dateAbsence" placeholder="Date d'absence :" type="text" autocomplete="off" required>
+                                            <label>Matiére :</label>
+                                            <select class="custom-select2 form-control " name="matiere" id="matiere" style="width: 100%; height: 38px;" required>
+                                                    
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -59,19 +64,33 @@
                                             <label>Dates de rattrapage possible :</label>
                                             <input class="form-control datetimepicker-range datetimepicker" name="dateRatt" placeholder="Date de rattrapage :" type="text" autocomplete="off" required>
                                         </div>
-                                    </div>
+                                    </div>  
                                     <div class="col-md-6">
-                                        <div class="custom-control custom-checkbox mb-5" style="padding-top: 42px;">
+                                        <div class="form-group">
+                                            <label>Date d'absence :</label>
+                                            <input class="form-control datetimepicker" name="dateAbsence" placeholder="Date d'absence :" type="text" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            <div class="row form-inline">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox mb-5" style="padding-top: 10px;">
                                             <input type="checkbox" name="informerEtudiants"class="custom-control-input" id="customCheck1" >
-                                            <label class="custom-control-label" for="customCheck1">Informer les
-                                                étudiants pour l'absence</label>
+                                            <label class="custom-control-label" for="customCheck1">Informer les étudiants pour l'absence</label>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                            <div style="text-align: right;">
-                                <input class="btn btn-primary" type="submit" value="Confirmer">
+                                <div class="col-md-6">
+                                    <div style="text-align: right;">
+                                        <input class="btn btn-primary" type="submit" value="Confirmer">
+                                    </div>
+                                </div>
                             </div>
+
+                            </section>
+                            
                         </form>
                     </div>
                 </div>
@@ -109,7 +128,34 @@
           });
 
         });
-      </script>
-
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="filiere"]').on('change',function(){
+                   var idFiliere = jQuery(this).val();
+                   if(idFiliere)
+                   {
+                      jQuery.ajax({
+                         url : 'absences/getMatiere/' +idFiliere,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(data)
+                         {
+                            console.log(data);
+                            jQuery('select[name="matiere"]').empty();
+                            jQuery.each(data, function(key,value){
+                               $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nomMatiere +'</option>');
+                            });
+                         }
+                      });
+                   }
+                   else
+                   {
+                      $('select[name="matiere"]').empty();
+                   }
+                });
+        });
+        </script>
 
     @endsection
