@@ -108,7 +108,6 @@ class ProfesseurController extends Controller
         }
     }
 
-<<<<<<< HEAD
     public function getEtudiant(Request $request,Etudiant $etudiant)  //an ajax function to retrieve tha data
     {
 
@@ -120,14 +119,12 @@ class ProfesseurController extends Controller
             return Datatables::of($etudiant)
             ->make(true);
         }
-=======
+    }
     public function FetchDashBoardData(Request $request)
     {
         //formatted as : {current year / past year}
         $annee = date("Y")."/".(date("Y")-1);
-
-
         return view('prof.TableBoard');
->>>>>>> db74830ac00838a0aac879f002dc2ee80e48e3d6
+
     }
 }
