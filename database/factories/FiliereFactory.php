@@ -21,6 +21,7 @@ class FiliereFactory extends Factory
      */
     public function definition()
     {
+        static $i = 1;
         return [
             'idDepartement' => function (){
                 if(\App\Models\Departement::count())
@@ -29,6 +30,7 @@ class FiliereFactory extends Factory
             },
             'nom'=>$this->faker->word(),
             'niveau'=>$this->faker->randomNumber(),
+            'idEmploi'=> $i++
         ];
     }
 }

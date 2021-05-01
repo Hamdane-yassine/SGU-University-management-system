@@ -22,11 +22,8 @@ class EmploiFactory extends Factory
     public function definition()
     {
         return [
-            'idProf' => function() {
-                if(\App\Models\Professeur::count())
-                    return $this->faker->randomElement(\App\Models\Professeur::pluck('idProf'));
-                return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
-            },
+            'path'=>'/storage',
+            'created_at'=>$this->faker->date(),
         ];
     }
 }

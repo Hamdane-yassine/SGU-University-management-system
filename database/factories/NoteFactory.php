@@ -34,7 +34,7 @@ class NoteFactory extends Factory
             },
             'controle' => random_int(0,20),
             'exam' => random_int(0,20),
-            'noteGeneral'=>'',
+            'noteGeneral'=>random_int(0,20),
         ];
     }
 }

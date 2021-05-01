@@ -22,6 +22,7 @@ class ProfesseurFactory extends Factory
     public function definition()
     {
         static $i =1;
+        static $j =201;
         return [
             // 'idUtilisateur' => function (){
             //     if(\App\Models\User::count())
@@ -37,6 +38,7 @@ class ProfesseurFactory extends Factory
             },
             'specialite'=>$this->faker->word(),
             'echellon'=>$this->faker->word(),
+            'idEmploi' => $j
         ];
     }
 }
