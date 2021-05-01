@@ -34,9 +34,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Personne::factory(50)->create();
         \App\Models\Anneescolaire::factory(1)->create();
         \App\Models\User::factory(50)->create();
-        \App\Models\Departement::factory(50)->create();
+        \App\Models\Departement::factory(10)->create();
         \App\Models\Professeur::factory(50)->create();
-        \App\Models\Chefdep::factory(50)->create();
+        \App\Models\Chefdep::factory(10)->create();
         \App\Models\Filiere::factory(50)->create();
         \App\Models\Etudiant::factory(50)->create();
         \App\Models\Semestre::factory(8)->create();
