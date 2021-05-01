@@ -13,6 +13,7 @@ use App\Models\Professeur;
 use phpDocumentor\Reflection\Types\This;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfesseurController extends Controller
 {
@@ -173,7 +174,19 @@ class ProfesseurController extends Controller
         }
     }
 
-    
+    public function getMyEmploi()
+    {
+        //acess the personal folder and retrieve files (emploi/profs)
+        Storage::disk('local')->put('Emplo_ali_lasfar.txt', 'Contents');
+    }
+
+    public function getEmploiByFiliere($id)
+    {
+        echo $id;
+        //add some security code here to check weather the prof teaches that filiere or not
+    }
+
+
     public function getNote(Request $request, Note $note)  //an ajax function to retrieve tha data
     {
 
@@ -192,7 +205,7 @@ class ProfesseurController extends Controller
         $coefcontrol = request('coefcontrol');
         $coefexam = request('coefexam');
         $idNote = request('idNote');
-        $notegeneral = (($control*($coefcontrol/100))+($exam*($coefexam/100)));  
+        $notegeneral = (($control*($coefcontrol/100))+($exam*($coefexam/100)));
         $note = Note::find($idNote);
         $note->controle = $control;
         $note->exam = $exam;

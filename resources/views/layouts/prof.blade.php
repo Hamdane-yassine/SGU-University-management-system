@@ -164,7 +164,7 @@
                     <ul class="submenu">
                         @if (!empty(auth()->user()->professeur->matieres))
                             @foreach (auth()->user()->professeur->matieres as $matiere)
-                            <li><a href="/notes/{{ $matiere->idMatiere }}">{{ $matiere->nom }}</a></li>
+                                <li><a href="/notes/{{ $matiere->idMatiere }}">{{ $matiere->nom }}</a></li>
                             @endforeach
                         @endif
                     </ul>
@@ -177,7 +177,7 @@
                     </a>
                     <ul class="submenu">
                         @php
-                            $user_id = auth()->user()->professeur->idUtilisateur;
+
                             $filieres=array();
                             if(!empty(auth()->user()->professeur->matieres))
                             {
@@ -188,7 +188,7 @@
                                 $filieres = array_unique($filieres);
                             }
                         @endphp
-                        <li><a href="/emploi/my/{{ $user_id }}">Mon emploi du temps</a></li>
+                        <li><a href="/emploi/my">Mon emploi du temps</a></li>
                         @foreach ($filieres as $filiere)
                             <li><a href="/emploi/filiere/{{ $filiere->idFiliere }}">{{ $filiere->nom }} - {{ $filiere->niveau }} </a></li>
                         @endforeach
