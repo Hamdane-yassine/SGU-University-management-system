@@ -1,12 +1,12 @@
 @extends('layouts.prof')
-@section('title','PL SQL')
+@section('title',"$matiere->nom")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
                 <div class="card-box mb-30">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">PL SQL - GL2</h4>
+                        <h4 class="text-blue h4">{{ $matiere->nom }}</h4>
                     </div>
                     <div class="pb-20">
 
@@ -24,150 +24,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">8</td>
-                                    <td style="padding-left: 30px;">---</td>
-                                    <td>&nbsp;---</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                    <td>
-                                        <a href="#" data-color="#265ed7" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -230,6 +86,56 @@
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
     <!-- Datatable Setting js -->
-    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
     <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
+    <script>
+        var table1 = $('.data-table-export').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('getListNotes',['matiere' => $matiere]) }}",
+            columns: [
+                {data: 'apogee', name: 'apogee'},
+                {data: 'nom', name: 'nom'},
+                {data: 'prenom', name: 'prenom'},
+                {data: 'cne', name: 'cne'},
+                {data: 'controle', name: 'controle'},
+                {data: 'exam', name: 'exam'},
+                {data: 'noteGeneral', name: 'noteGeneral'},
+                {
+                  data: 'idNote', 
+                  render:function(data,type,full,meta){ return '<a href="#" data-color="#265ed7" data-id="'+data+'" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
+                },
+            ],
+            scrollCollapse: true,
+            autoWidth: false,
+            responsive: true,
+            columnDefs: [{
+                targets: "datatable-nosort",
+                orderable: false,
+            }],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                "emptyTable": "Aucune donnée disponible dans le tableau",
+                "lengthMenu": "Afficher _MENU_ éléments",
+                "zeroRecords": "Aucun élément correspondant trouvé",
+                "processing": "Traitement...",
+                "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                "loadingRecords": "Chargement...",
+                "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                search: "Rechercher:",
+                searchPlaceholder: "Rechercher",
+                paginate: {
+                    next: '<i class="ion-chevron-right"></i>',
+                    previous: '<i class="ion-chevron-left"></i>'  
+                }
+            },
+            dom: '<"top"<"left-col"B><"right-col"f>>rtip',
+            buttons: [
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
+            }
+            ]
+        });
+    </script>
     @endsection

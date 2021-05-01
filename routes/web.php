@@ -40,6 +40,11 @@ Route::get('/Etudiant/{etudiant}', [App\Http\Controllers\ProfesseurController::c
 
 Route::get('/Dashboard',[App\Http\Controllers\ProfesseurController::class, 'FetchDashBoardData']);
 
+Route::get('/notes/{matiere}',[App\Http\Controllers\ProfesseurController::class, 'getNotes'])->name('Matiere');
+
+Route::get('/NotesList/{matiere}', [App\Http\Controllers\ProfesseurController::class, 'getListNotes'])->name('getListNotes');
+
+
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 
 //Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'HomeController@myformAjax'));

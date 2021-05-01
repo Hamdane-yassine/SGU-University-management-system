@@ -127,4 +127,24 @@ class ProfesseurController extends Controller
         return view('prof.TableBoard');
 
     }
+
+    public function getNotes(Matiere $matiere)
+    {
+        return view('prof.Notes', ['matiere' => $matiere]);
+    }
+
+    public function getListNotes(Request $request,Matiere $matiere)  //an ajax function to retrieve tha data
+    {
+
+       $notes = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
+       ->join('note','note.idMatiere','=','matiere.idMatiere') //retrieved matiere
+       ->join('etudiant','note.idEtudiant','=','etudiant.idEtudiant')
+       ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
+       ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral','idNote')
+       ->get();
+       if ($request->ajax()) {
+            return Datatables::of($notes)
+            ->make(true);
+        }
+    }
 }

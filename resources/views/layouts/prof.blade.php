@@ -159,7 +159,7 @@
                     <ul class="submenu">
                         @if (!empty(auth()->user()->professeur->matieres))
                             @foreach (auth()->user()->professeur->matieres as $matiere)
-                            <li><a href="Notes.html">{{ $matiere->nom }}</a></li>
+                            <li><a href="/notes/{{ $matiere->idMatiere }}">{{ $matiere->nom }}</a></li>
                             @endforeach
                         @endif
                     </ul>
