@@ -44,6 +44,10 @@ Route::get('/notes/{matiere}',[App\Http\Controllers\ProfesseurController::class,
 
 Route::get('/NotesList/{matiere}', [App\Http\Controllers\ProfesseurController::class, 'getListNotes'])->name('getListNotes');
 
+Route::get('/emploi/my',[App\Http\Controllers\ProfesseurController::class, 'getMyEmploi']);
+
+Route::get('/emploi/filiere/{idFiliere}',[App\Http\Controllers\ProfesseurController::class, 'getEmploiByFiliere']);
+
 
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 

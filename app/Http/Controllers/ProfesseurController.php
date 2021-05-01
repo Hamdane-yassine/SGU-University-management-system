@@ -12,6 +12,7 @@ use App\Models\Professeur;
 use phpDocumentor\Reflection\Types\This;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfesseurController extends Controller
 {
@@ -172,4 +173,17 @@ class ProfesseurController extends Controller
             ->make(true);
         }
     }
+
+    public function getMyEmploi()
+    {
+        //acess the personal folder and retrieve files (emploi/profs)
+        Storage::disk('local')->put('Emplo_ali_lasfar.txt', 'Contents');
+    }
+
+    public function getEmploiByFiliere($id)
+    {
+        echo $id;
+        //add some security code here to check weather the prof teaches that filiere or not
+    }
+
 }
