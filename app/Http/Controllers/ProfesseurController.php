@@ -124,8 +124,33 @@ class ProfesseurController extends Controller
     {
         //formatted as : {current year / past year}
         $annee = date("Y")."/".(date("Y")-1);
-        return view('prof.TableBoard');
+        $date = date("j/n/Y");
+        //get all students of the curent prof
+        $filieres=array();
+        if(!empty(auth()->user()->professeur->matieres))
+        {
+            foreach (auth()->user()->professeur->matieres as $matiere)
+            {
+                array_push($filieres, $matiere->module->filiere);
+            }
+            $filieres = array_unique($filieres);
+        }
+        $idFilieres = array_column($filieres, 'idFiliere');
+        $etudiants = Etudiant::whereIn('etudiant.idFiliere',$idFilieres)  //first inint a user id
+        ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
+        ->select('idEtudiant')
+        ->get();
 
+        $EtudiantCount = count($etudiants);
+        $FiliereCount = count($filieres);
+        $AbsenceCount = Absence::where('idProf',Auth::user()->professeur->idProf)->count();
+        $MatiereCount = count(auth()->user()->professeur->matieres);
+        $insertionNotes = auth()->user()->professeur->departement->insertion_notes;
+
+        //echo auth()->user()->professeur->departement->idDepartement." ".$EtudiantCount." ".$FiliereCount." ".$AbsenceCount." ".$MatiereCount;
+        return view('prof.TableBoard',['annee' => $annee,'date' => $date ,
+        'EtudiantCount' => $EtudiantCount , 'FiliereCount' => $FiliereCount ,
+        'AbsenceCount' => $AbsenceCount , 'MatiereCount' => $MatiereCount, 'insertionNotes' => $insertionNotes]);
     }
 
     public function getNotes(Matiere $matiere)

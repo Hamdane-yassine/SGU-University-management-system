@@ -35,7 +35,8 @@ class Departement extends Model
 	];
 
 	protected $fillable = [
-		'nom'
+		'nom',
+        'insertion_notes'
 	];
 
 	public function chefdep()
