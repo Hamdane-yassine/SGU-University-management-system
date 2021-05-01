@@ -103,14 +103,37 @@
                 {data: 'cne', name: 'cne'},
                 {
                   data: 'controle',
-                  render:function(data,type,full,meta){ return '<span style="padding-left: 15px;">'+data+'</span>' },
-
+                  render:function(data,type,full,meta){
+                       if(data==null)
+                       {
+                        return '<span style="padding-left: 17px;">&nbsp;---</span>'
+                       }else{
+                        return '<span style="padding-left: 15px;">'+data+'</span>'
+                       }
+                     }
                 },
                 {
                   data: 'exam', 
-                  render:function(data,type,full,meta){ return '<span style="padding-left: 15px;">'+data+'</span>' },
+                  render:function(data,type,full,meta){
+                       if(data==null)
+                       {
+                        return '<span style="padding-left: 17px;">&nbsp;---</span>'
+                       }else{
+                        return '<span style="padding-left: 15px;">'+data+'</span>'
+                       }
+                     }
                 },
-                {data: 'noteGeneral', name: 'noteGeneral'},
+                {
+                    data: 'noteGeneral',
+                    render:function(data,type,full,meta){
+                       if(data==null)
+                       {
+                        return '<span>&nbsp;---</span>'
+                       }else{
+                        return '<span>'+data+'</span>'
+                       }
+                     }
+                },
                 {
                   data: 'idNote', 
                   render:function(data,type,full,meta){ return '<a href="" onclick="getnote('+data+')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
@@ -180,8 +203,6 @@
                     table1.ajax.reload();
                 }
                 });
-
         });
-
     </script>
     @endsection
