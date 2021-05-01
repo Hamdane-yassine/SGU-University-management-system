@@ -39,7 +39,7 @@ class EtudiantFactory extends Factory
             'anneeDuBaccalaureat'=>$this->faker->date(),
             'cinMere'=>$this->faker->randomDigit(),
             'cinPere'=>$this->faker->randomDigit(),
-            'regimeDeCovertureMedicale'=>'yes',
+            'regimeDeCovertureMedicale'=>'oui',
         ];
     }
 }
