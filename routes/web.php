@@ -50,6 +50,8 @@ Route::get('/emploi/filiere/{idFiliere}',[App\Http\Controllers\ProfesseurControl
 
 Route::get('/note/{note}', [App\Http\Controllers\ProfesseurController::class, 'getNote']);
 
+Route::get('/Nonote/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiantId']);
+
 Route::post('updateNote',[ProfesseurController::class, 'updateNote'])->name('updateNote');
 
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));

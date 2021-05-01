@@ -40,6 +40,8 @@
                             @csrf
                             <div class="modal-body">
                                 <input type="hidden" id="idNote" name="idNote" value="">
+                                <input type="hidden" id="idEtudiant" name="idEtudiant" value="">
+                                <input type="hidden" id="idMatiere" name="idMatiere" value="{{ $matiere->idMatiere }}">
                                 <div class="form-group row" style="padding-left: 5px;">
                                     <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Controle</label>
                                     <div class="col-sm-12 col-md-4">
@@ -136,7 +138,7 @@
                 },
                 {
                   data: 'idNote', 
-                  render:function(data,type,full,meta){ return '<a href="" onclick="getnote('+data+')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
+                  render:function(data,type,row){ return '<a href="" onclick="getnote('+data+','+row.idEtudiant+')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
                 },
             ],
             scrollCollapse: true,
@@ -172,11 +174,23 @@
             ]
         });
         
-       function getnote(id)
+       function getnote(idNote,idEtudiant)
        {  
-            $.ajax({
+            if(idNote==null)
+            {
+                $.ajax({
                     type: 'GET',
-                    url: "/note/"+id,
+                    url: "/Nonote/"+idEtudiant,
+                    dataType: 'JSON',
+                    data:{},
+                    success: function(response) {
+                        document.getElementById("idEtudiant").value = response;
+                    }
+                }) 
+            }else{
+                $.ajax({
+                    type: 'GET',
+                    url: "/note/"+idNote,
                     dataType: 'JSON',
                     data:{},
                     success: function(response) {
@@ -186,7 +200,9 @@
                         document.getElementById("coefcontrol").value = response[0].Coefcontrole;
                         document.getElementById("coefexam").value = response[0].Coefexam;
                     }
-                })               
+                }) 
+            }
+                         
         };
 
         $("#myform").submit(function(e) {

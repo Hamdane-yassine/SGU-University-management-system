@@ -164,10 +164,12 @@ class ProfesseurController extends Controller
     {
 
        $notes = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
-       ->join('note','note.idMatiere','=','matiere.idMatiere') //retrieved matiere
-       ->join('etudiant','note.idEtudiant','=','etudiant.idEtudiant')
+       ->join('module','module.idModule','=','matiere.idModule')
+       ->join('filiere','module.idFiliere','=','filiere.idFiliere')
+       ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
        ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
-       ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral','idNote')
+       ->leftJoin('note', 'matiere.idMatiere', '=', 'note.idMatiere')
+       ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral','idNote','etudiant.idEtudiant')
        ->get();
        if ($request->ajax()) {
             return Datatables::of($notes)
@@ -204,11 +206,18 @@ class ProfesseurController extends Controller
        $note = Note::where('idNote',$note->idNote)  //first inint a user id
        ->select('idNote','controle','exam','Coefcontrole','Coefexam')
        ->get();
+
        if ($request->ajax()) {
              echo json_encode($note);
         }
     }
 
+    public function getEtudiantId(Request $request, Etudiant $etudiant)
+    {
+        if ($request->ajax()) {
+            echo json_encode($etudiant->idEtudiant);
+       }
+    }
     public function updateNote(Request $request)
     {
         $control = request('control');
@@ -217,12 +226,28 @@ class ProfesseurController extends Controller
         $coefexam = request('coefexam');
         $idNote = request('idNote');
         $notegeneral = (($control*($coefcontrol/100))+($exam*($coefexam/100)));
-        $note = Note::find($idNote);
-        $note->controle = $control;
-        $note->exam = $exam;
-        $note->noteGeneral=$notegeneral;
-        $note->Coefcontrole= $coefcontrol;
-        $note->Coefexam=$coefexam;
-        $note->save();
+        if($idNote!=null)
+        {
+            $note = Note::find($idNote);
+            $note->controle = $control;
+            $note->exam = $exam;
+            $note->noteGeneral=$notegeneral;
+            $note->Coefcontrole= $coefcontrol;
+            $note->Coefexam=$coefexam;
+            $note->save();
+        }else{
+            $note = new Note;
+            $idEtudiant = request('idEtudiant');
+            $idMatiere = request('idMatiere');
+            $note->controle = $control;
+            $note->exam = $exam;
+            $note->noteGeneral=$notegeneral;
+            $note->Coefcontrole= $coefcontrol;
+            $note->Coefexam=$coefexam;
+            $note->idEtudiant=$idEtudiant;
+            $note->idMatiere=$idMatiere;
+            $note->save();
+        }
+        
     }
 }
