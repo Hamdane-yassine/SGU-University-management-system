@@ -64,3 +64,5 @@ Route::get('/h', function () {
     return view('profile.profile');
 });
 
+Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
+
