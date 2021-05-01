@@ -177,7 +177,6 @@
                     </a>
                     <ul class="submenu">
                         @php
-
                             $filieres=array();
                             if(!empty(auth()->user()->professeur->matieres))
                             {

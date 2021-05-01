@@ -14,6 +14,7 @@ use phpDocumentor\Reflection\Types\This;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProfesseurController extends Controller
 {
@@ -176,14 +177,24 @@ class ProfesseurController extends Controller
 
     public function getMyEmploi()
     {
-        //acess the personal folder and retrieve files (emploi/profs)
-        Storage::disk('local')->put('Emplo_ali_lasfar.txt', 'Contents');
+        $file_name = 'storage/emploi/prof/'.auth()->user()->professeur->idUtilisateur.'.pdf';
+        $path_to_file = asset($file_name);
+        if (Storage::exists('emploi/prof/'.auth()->user()->professeur->idUtilisateur.'.pdf'))
+        {
+            return view('prof.emploi',['path_to_file' => $path_to_file, 'Mine' => 'true']);
+        }
+        return view('prof.emploi',['path_to_file' => 'notFound', 'Mine' => 'true']);
     }
 
     public function getEmploiByFiliere($id)
     {
-        echo $id;
-        //add some security code here to check weather the prof teaches that filiere or not
+        $file_name = 'storage/emploi/filiere/'.$id.'.pdf';
+        $path_to_file = asset($file_name);
+        if (Storage::exists('emploi/filiere/'.$id.'.pdf'))
+        {
+            return view('prof.emploi',['path_to_file' => $path_to_file, 'Mine' => 'false']);
+        }
+        return view('prof.emploi',['path_to_file' => 'notFound', 'Mine' => 'false']);
     }
 
 
