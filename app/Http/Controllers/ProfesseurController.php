@@ -7,6 +7,7 @@ use App\Models\Absence;
 use App\Models\Etudiant;
 use App\Models\Filiere;
 use App\Models\Matiere;
+use App\Models\Note;
 use App\Models\Module;
 use App\Models\Professeur;
 use phpDocumentor\Reflection\Types\This;
@@ -116,8 +117,7 @@ class ProfesseurController extends Controller
        ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale')
        ->get();
        if ($request->ajax()) {
-            return Datatables::of($etudiant)
-            ->make(true);
+            echo json_encode($etudiant);
         }
     }
     public function FetchDashBoardData(Request $request)
@@ -171,5 +171,34 @@ class ProfesseurController extends Controller
             return Datatables::of($notes)
             ->make(true);
         }
+    }
+
+    
+    public function getNote(Request $request, Note $note)  //an ajax function to retrieve tha data
+    {
+
+       $note = Note::where('idNote',$note->idNote)  //first inint a user id
+       ->select('idNote','controle','exam','Coefcontrole','Coefexam')
+       ->get();
+       if ($request->ajax()) {
+             echo json_encode($note);
+        }
+    }
+
+    public function updateNote(Request $request)
+    {
+        $control = request('control');
+        $exam = request('exam');
+        $coefcontrol = request('coefcontrol');
+        $coefexam = request('coefexam');
+        $idNote = request('idNote');
+        $notegeneral = (($control*($coefcontrol/100))+($exam*($coefexam/100)));  
+        $note = Note::find($idNote);
+        $note->controle = $control;
+        $note->exam = $exam;
+        $note->noteGeneral=$notegeneral;
+        $note->Coefcontrole= $coefcontrol;
+        $note->Coefexam=$coefexam;
+        $note->save();
     }
 }
