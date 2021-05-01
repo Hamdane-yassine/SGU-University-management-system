@@ -23,19 +23,21 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        static $i = 1;
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->safeEmail,
             // 'email_verified_at' => $this->faker->dateTime(),
             'password' => bcrypt('secret'),
             'remember_token' => Str::random(10),
-            'idPersonne' =>function(){
-                if(\App\Models\Personne::count()){
-                    $arr = \App\Models\Personne::pluck('idPersonne')->toArray();
-                    return $this->faker->unique()->randomElement($arr);
-                }
-                return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
-            },
+            // 'idPersonne' =>function(){
+            //     if(\App\Models\Personne::count()){
+            //         $arr = \App\Models\Personne::pluck('idPersonne')->toArray();
+            //         return $this->faker->unique()->randomElement($arr);
+            //     }
+            //     return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
+            // },
+            'idPersonne' => $i++,
             'role' => $this->faker->randomElement(['admin','prof','chefdep']),
         ];
     }
