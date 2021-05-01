@@ -16,7 +16,8 @@ class CreateEmploiTable extends Migration {
 		Schema::create('emploi', function(Blueprint $table)
 		{
 			$table->id('idEmploi');
-			$table->bigInteger('idProf')->unsigned();
+			$table->string('path');
+            $table->timestamps();
 		});
 	}
 

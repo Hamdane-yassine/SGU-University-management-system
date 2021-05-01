@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * Class Filiere
  *
  * @property int|null $idDepartement
+ * @property int|null $idEmploi
  * @property int $idFiliere
  * @property string|null $nom
  * @property int|null $niveau
@@ -40,7 +41,8 @@ class Filiere extends Model
 	protected $fillable = [
 		'idDepartement',
 		'nom',
-		'niveau'
+		'niveau',
+        'idEmploi'
 	];
 
 	public function departement()
@@ -52,9 +54,14 @@ class Filiere extends Model
 	{
 		return $this->hasMany(Etudiant::class, 'idFiliere');
 	}
- 
+
 	public function modules()
 	{
 		return $this->hasMany(Module::class, 'idFiliere');
 	}
+
+    public function emploi()
+    {
+        return $this->hasOne(Emploi::class, 'idEmploi');
+    }
 }

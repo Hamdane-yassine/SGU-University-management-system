@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property int|null $idUtilisateur
  * @property int|null $idDepartement
+ * @property int|null $idEmploi
  * @property int $idProf
  * @property string|null $specialite
  * @property string|null $echellon
@@ -38,7 +39,8 @@ class Professeur extends Model
 	protected $casts = [
 		'idUtilisateur' => 'int',
 		'idDepartement' => 'int',
-		'idProf' => 'int'
+		'idProf' => 'int',
+		'idEmploi' => 'int'
 	];
 
 	protected $fillable = [
@@ -70,7 +72,7 @@ class Professeur extends Model
 
 	public function emploi()
 	{
-		return $this->hasOne(Emploi::class, 'idProf');
+		return $this->hasOne(Emploi::class, 'idEmploi');
 	}
 
 	public function matieres()

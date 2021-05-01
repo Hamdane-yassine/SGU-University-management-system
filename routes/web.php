@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\ProfesseurController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,8 @@ Route::post('updateNote',[ProfesseurController::class, 'updateNote'])->name('upd
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 
 //Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'HomeController@myformAjax'));
+
+Route::get('/chef/emploi',[ChefDepartementController::class, 'getEmploi']);
 
 Route::middleware(['auth','prof'])->group(function () {
 
