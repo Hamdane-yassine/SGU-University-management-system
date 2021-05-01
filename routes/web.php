@@ -44,6 +44,9 @@ Route::get('/notes/{matiere}',[App\Http\Controllers\ProfesseurController::class,
 
 Route::get('/NotesList/{matiere}', [App\Http\Controllers\ProfesseurController::class, 'getListNotes'])->name('getListNotes');
 
+Route::get('/note/{note}', [App\Http\Controllers\ProfesseurController::class, 'getNote']);
+
+Route::post('updateNote',[ProfesseurController::class, 'updateNote'])->name('updateNote');
 
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 

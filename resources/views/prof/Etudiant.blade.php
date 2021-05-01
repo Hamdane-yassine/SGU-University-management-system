@@ -131,10 +131,10 @@
                 {data: 'prenom', name: 'prenom'},
                 {data: 'cne', name: 'cne'},
                 {data: 'email', name: 'email'},
-                {data: 'tel', name: 'tel'},
+                {data: 'tel', name: 'tel'}, 
                 {
                   data: 'idEtudiant', 
-                  render:function(data,type,full,meta){ return ' <a class="dropdown-item" href="" style="background-color:transparent;" id="link" data-id="'+data+'" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>' },
+                  render:function(data,type,full,meta){ return ' <a class="dropdown-item" href="" style="background-color:transparent;" onclick="getEtudiantInfo('+data+')" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>' },
                 },
             ],
             scrollCollapse: true,
@@ -170,34 +170,34 @@
             ]
         });
 
-        $('body').on('click', '#link', function (event) {
-            event.preventDefault();
-            var id = $(this).data('id');
+        function getEtudiantInfo(id)
+        {
             $.ajax({
                     type: 'GET',
                     url: "/Etudiant/"+id,
+                    dataType: 'JSON',
                     data:{},
-                    success: function(data) {
-                        document.getElementById("nom").innerHTML = data.data[0].nom;
-                        document.getElementById("prenom").innerHTML = data.data[0].prenom;
-                        document.getElementById("apogee").innerHTML = data.data[0].apogee;
-                        document.getElementById("cne").innerHTML = data.data[0].cne;
-                        document.getElementById("genre").innerHTML = data.data[0].genre;
-                        document.getElementById("datenais").innerHTML = data.data[0].dateNaissance;
-                        document.getElementById("situation").innerHTML = data.data[0].situationFamiliale;
-                        document.getElementById("nationalite").innerHTML = data.data[0].nationalite;
-                        document.getElementById("LieuNaissance").innerHTML = data.data[0].lieuNaissance;
-                        document.getElementById("cin").innerHTML = data.data[0].cin;
-                        document.getElementById("cinpere").innerHTML = data.data[0].cinPere;
-                        document.getElementById("cinmere").innerHTML = data.data[0].cinMere;
-                        document.getElementById("adresse").innerHTML = data.data[0].adressePersonnele;
-                        document.getElementById("tel").innerHTML = data.data[0].tel;
-                        document.getElementById("email").innerHTML = data.data[0].email;
-                        document.getElementById("emailins").innerHTML = data.data[0].emailInstitutionne;
-                        document.getElementById("annebac").innerHTML = data.data[0].anneeDuBaccalaureat;
-                        document.getElementById("couv").innerHTML = data.data[0].regimeDeCovertureMedicale;
+                    success: function(response) {
+                        document.getElementById("nom").innerHTML = response[0].nom;
+                        document.getElementById("prenom").innerHTML = response[0].prenom;
+                        document.getElementById("apogee").innerHTML = response[0].apogee;
+                        document.getElementById("cne").innerHTML = response[0].cne;
+                        document.getElementById("genre").innerHTML = response[0].genre;
+                        document.getElementById("datenais").innerHTML = response[0].dateNaissance;
+                        document.getElementById("situation").innerHTML = response[0].situationFamiliale;
+                        document.getElementById("nationalite").innerHTML = response[0].nationalite;
+                        document.getElementById("LieuNaissance").innerHTML = response[0].lieuNaissance;
+                        document.getElementById("cin").innerHTML = response[0].cin;
+                        document.getElementById("cinpere").innerHTML = response[0].cinPere;
+                        document.getElementById("cinmere").innerHTML = response[0].cinMere;
+                        document.getElementById("adresse").innerHTML = response[0].adressePersonnele;
+                        document.getElementById("tel").innerHTML = response[0].tel;
+                        document.getElementById("email").innerHTML = response[0].email;
+                        document.getElementById("emailins").innerHTML = response[0].emailInstitutionne;
+                        document.getElementById("annebac").innerHTML = response[0].anneeDuBaccalaureat;
+                        document.getElementById("couv").innerHTML = response[0].regimeDeCovertureMedicale;
                     }
                 })               
-            });
+        };
     </script>
     @endsection

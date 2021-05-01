@@ -36,32 +36,36 @@
                             <h4 class="modal-title" id="myLargeModalLabel">Modifier Les notes</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        <div class="modal-body">
-                            <div class="form-group row" style="padding-left: 5px;">
-                                <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Controle</label>
-                                <div class="col-sm-12 col-md-4">
-                                    <input class="form-control" value="17.5" type="number">
+                        <form action="{{ route('updateNote') }}" method="POST" id="myform">
+                            @csrf
+                            <div class="modal-body">
+                                <input type="hidden" id="idNote" name="idNote" value="">
+                                <div class="form-group row" style="padding-left: 5px;">
+                                    <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Controle</label>
+                                    <div class="col-sm-12 col-md-4">
+                                        <input class="form-control" id="control" name="control" value="" step="0.01" type="number">
+                                    </div>
+                                    <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
+                                    <div class="col-sm-12 col-md-3">
+                                        <input class="form-control" id="coefcontrol" name="coefcontrol" value="25" step="25" max="100" min="0" type="number">
+                                    </div>
                                 </div>
-                                <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
-                                <div class="col-sm-12 col-md-3">
-                                    <input class="form-control" value="25" step="25" max="100" min="0" type="number">
+                                <div class="form-group row" style="padding-left: 5px;">
+                                    <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Examen</label>
+                                    <div class="col-sm-12 col-md-4">
+                                        <input class="form-control" id="exam" name="exam" value="" step="0.01" type="number">
+                                    </div>
+                                    <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
+                                    <div class="col-sm-12 col-md-3">
+                                        <input class="form-control" value="25" id="coefexam" name="coefexam" step="25" max="100" min="0" type="number">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row" style="padding-left: 5px;">
-                                <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Examen</label>
-                                <div class="col-sm-12 col-md-4">
-                                    <input class="form-control" value="17.5" type="number">
-                                </div>
-                                <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
-                                <div class="col-sm-12 col-md-3">
-                                    <input class="form-control" value="25" step="25" max="100" min="0" type="number">
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitter</button>
+                                <input type="submit" class="btn btn-primary" value="Enregistrer">
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitter</button>
-                            <button type="button" class="btn btn-primary">Enregistrer</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -97,12 +101,19 @@
                 {data: 'nom', name: 'nom'},
                 {data: 'prenom', name: 'prenom'},
                 {data: 'cne', name: 'cne'},
-                {data: 'controle', name: 'controle'},
-                {data: 'exam', name: 'exam'},
+                {
+                  data: 'controle',
+                  render:function(data,type,full,meta){ return '<span style="padding-left: 15px;">'+data+'</span>' },
+
+                },
+                {
+                  data: 'exam', 
+                  render:function(data,type,full,meta){ return '<span style="padding-left: 15px;">'+data+'</span>' },
+                },
                 {data: 'noteGeneral', name: 'noteGeneral'},
                 {
                   data: 'idNote', 
-                  render:function(data,type,full,meta){ return '<a href="#" data-color="#265ed7" data-id="'+data+'" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
+                  render:function(data,type,full,meta){ return '<a href="" onclick="getnote('+data+')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
                 },
             ],
             scrollCollapse: true,
@@ -137,5 +148,40 @@
             }
             ]
         });
+        
+       function getnote(id)
+       {  
+            $.ajax({
+                    type: 'GET',
+                    url: "/note/"+id,
+                    dataType: 'JSON',
+                    data:{},
+                    success: function(response) {
+                        document.getElementById("control").value = response[0].controle;
+                        document.getElementById("exam").value = response[0].exam;
+                        document.getElementById("idNote").value = response[0].idNote;
+                        document.getElementById("coefcontrol").value = response[0].Coefcontrole;
+                        document.getElementById("coefexam").value = response[0].Coefexam;
+                    }
+                })               
+        };
+
+        $("#myform").submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {   
+                    $('#Medium-modal').modal('hide');
+                    table1.ajax.reload();
+                }
+                });
+
+        });
+
     </script>
     @endsection
