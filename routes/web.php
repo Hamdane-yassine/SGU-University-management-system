@@ -48,6 +48,9 @@ Route::get('/emploi/my',[App\Http\Controllers\ProfesseurController::class, 'getM
 
 Route::get('/emploi/filiere/{idFiliere}',[App\Http\Controllers\ProfesseurController::class, 'getEmploiByFiliere']);
 
+Route::get('/note/{note}', [App\Http\Controllers\ProfesseurController::class, 'getNote']);
+
+Route::post('updateNote',[ProfesseurController::class, 'updateNote'])->name('updateNote');
 
 //Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
 

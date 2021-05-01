@@ -37,7 +37,9 @@ class Note extends Model
 		'idMatiere' => 'int',
 		'controle' => 'float',
 		'exam' => 'float',
-		'noteGeneral' => 'float'
+		'noteGeneral' => 'float',
+		'Coefcontrole' => 'int',
+		'Coefexam' => 'int'
 	];
 
 	protected $fillable = [
@@ -45,7 +47,9 @@ class Note extends Model
 		'idMatiere',
 		'controle',
 		'exam',
-		'noteGeneral'
+		'noteGeneral',
+		'Coefcontrole',
+		'Coefexam'
 	];
 
 	public function etudiant()
