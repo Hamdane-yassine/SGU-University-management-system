@@ -25,21 +25,18 @@ class DatabaseSeeder extends Seeder
         $tables = DB::select('SHOW TABLES');
         foreach ($tables as $table) {
             if ($table->Tables_in_pfe !== 'migrations')
-                DB::table($table->Tables_in_pfe)->truncate();
+            DB::table($table->Tables_in_pfe)->truncate();
         }
+        // Schema::enableForeignKeyConstraints();
         // +++++++++++ END +++++++++++++++=
 
-        \App\Models\User::factory()->create([
-            'email'=>"amirnet001@gmail.com",
-            'password'=>bcrypt('secret')
-        ]);
 
-        \App\Models\Anneescolaire::factory(1)->create();
         \App\Models\Personne::factory(50)->create();
+        \App\Models\Anneescolaire::factory(1)->create();
         \App\Models\User::factory(50)->create();
-        \App\Models\Departement::factory(50)->create();
+        \App\Models\Departement::factory(10)->create();
         \App\Models\Professeur::factory(50)->create();
-        \App\Models\Chefdep::factory(50)->create();
+        \App\Models\Chefdep::factory(10)->create();
         \App\Models\Filiere::factory(50)->create();
         \App\Models\Etudiant::factory(50)->create();
         \App\Models\Semestre::factory(8)->create();
@@ -51,10 +48,18 @@ class DatabaseSeeder extends Seeder
         \App\Models\Evenemnt::factory(50)->create();
         \App\Models\Absence::factory(50)->create();
 
+        \App\Models\User::factory()->create([
+            'email'=>"amirnet001@gmail.com",
+            'password'=>bcrypt('secret'),
+            'idPersonne'=> \App\Models\Personne::factory()->create([
+                'email'=>"amirnet001@gmail.com",
+                'idPersonne'=>51
+                ])->idPersonne
+        ]);
 
         // =======================================
 
-        }
+    }
 
 
 }

@@ -21,12 +21,15 @@ class ProfesseurFactory extends Factory
      */
     public function definition()
     {
+        static $i =1;
         return [
-            'idUtilisateur' => function (){
-                if(\App\Models\User::count())
-                    return $this->faker->randomElement(\App\Models\User::pluck('id'));
-                return \App\Models\User::factory()->create()->get()[0]['id'];
-            },
+            // 'idUtilisateur' => function (){
+            //     if(\App\Models\User::count())
+            //         // return $this->faker->randomElement(\App\Models\User::pluck('id'));
+            //         return $i++;
+            //     return \App\Models\User::factory()->create()->get()[0]['id'];
+            // },
+            'idUtilisateur' => $i++,
             'idDepartement' => function (){
                 if(\App\Models\Departement::count())
                     return $this->faker->randomElement(\App\Models\Departement::pluck('idDepartement'));

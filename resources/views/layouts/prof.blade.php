@@ -69,13 +69,18 @@
                                     <h3>John Doe</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
-                                @foreach (Auth::User()->notifications as $notification)
-                                <a href="#">
-                                    <img src="{{ asset('vendors/images/img.jpg') }}" alt="">
-                                    <h3>John Doe</h3>
-                                    <p>{{$notification->data}}</p>
-                                    </a>
-                                @endforeach
+                                @if(Auth::User()->notifications->count())
+                                    @foreach (Auth::User()->notifications as $notification)
+                                    <a href="#">
+                                        <img src="{{ asset('vendors/images/img.jpg') }}" alt="">
+                                        <h3>{{$notification->data['image']}}</h3>
+                                        {{-- <p>{{$notification->data}}</p> --}}
+                                        </a>
+                                    @endforeach
+                                    @else
+                                        empty
+                                @endif
+
                             </li>
                         </ul>
                     </div>
@@ -171,9 +176,22 @@
                             temps</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="index.html">Mon emploi du temps</a></li>
-                        <li><a href="index.html">Génie Logiciel - GL1</a></li>
-                        <li><a href="index2.html">Administrateur Réseaux</a></li>
+                        @php
+                            $user_id = auth()->user()->professeur->idUtilisateur;
+                            $filieres=array();
+                            if(!empty(auth()->user()->professeur->matieres))
+                            {
+                                foreach (auth()->user()->professeur->matieres as $matiere)
+                                {
+                                    array_push($filieres, $matiere->module->filiere);
+                                }
+                                $filieres = array_unique($filieres);
+                            }
+                        @endphp
+                        <li><a href="/emploi/my/{{ $user_id }}">Mon emploi du temps</a></li>
+                        @foreach ($filieres as $filiere)
+                            <li><a href="/emploi/filiere/{{ $filiere->idFiliere }}">{{ $filiere->nom }} - {{ $filiere->niveau }} </a></li>
+                        @endforeach
                     </ul>
                 </li>
 
