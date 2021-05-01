@@ -38,7 +38,7 @@ class ProfesseurFactory extends Factory
             },
             'specialite'=>$this->faker->word(),
             'echellon'=>$this->faker->word(),
-            'idEmploi' => $j
+            'idEmploi' => $j++
         ];
     }
 }
