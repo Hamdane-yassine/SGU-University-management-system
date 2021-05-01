@@ -46,13 +46,13 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        dd($user = $profile->user());
+        $user = $profile->user();
 
         $username = $user->name;
         $emailPerso = $user->email;
         $personne = $user->personne;
 
-        return view('profile.profile',compact('personne','username','emailPerso','personne'));
+        return view('profile.profile',compact('personne','username','emailPerso'));
     }
 
     /**
