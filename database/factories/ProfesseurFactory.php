@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Professeur;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 
 class ProfesseurFactory extends Factory
 {
@@ -22,14 +21,15 @@ class ProfesseurFactory extends Factory
      */
     public function definition()
     {
+        static $i =1;
         return [
-            'idUtilisateur' => function (){
-                if(\App\Models\User::count()){
-                    $arr = \App\Models\Personne::pluck('idPersonne')->toArray();
-                    return $this->faker->unique()->randomElement(range(1,50));
-                }
-                return \App\Models\User::factory()->create()->get()[0]['id'];
-            },
+            // 'idUtilisateur' => function (){
+            //     if(\App\Models\User::count())
+            //         // return $this->faker->randomElement(\App\Models\User::pluck('id'));
+            //         return $i++;
+            //     return \App\Models\User::factory()->create()->get()[0]['id'];
+            // },
+            'idUtilisateur' => $i++,
             'idDepartement' => function (){
                 if(\App\Models\Departement::count())
                     return $this->faker->randomElement(\App\Models\Departement::pluck('idDepartement'));
