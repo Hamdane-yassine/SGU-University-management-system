@@ -31,29 +31,29 @@ class DatabaseSeeder extends Seeder
         // +++++++++++ END +++++++++++++++=
 
 
-        \App\Models\Personne::factory(50)->create();
+        \App\Models\Personne::factory(200)->create();
         \App\Models\Anneescolaire::factory(1)->create();
-        \App\Models\User::factory(50)->create();
-        \App\Models\Departement::factory(10)->create();
-        \App\Models\Professeur::factory(50)->create();
-        \App\Models\Chefdep::factory(10)->create();
-        \App\Models\Filiere::factory(50)->create();
-        \App\Models\Etudiant::factory(50)->create();
+        \App\Models\User::factory(200)->create();
+        \App\Models\Departement::factory(50)->create();
+        \App\Models\Professeur::factory(200)->create();
+        \App\Models\Chefdep::factory(50)->create();
+        \App\Models\Filiere::factory(200)->create();
+        \App\Models\Etudiant::factory(200)->create();
         \App\Models\Semestre::factory(8)->create();
-        \App\Models\Module::factory(50)->create();
-        \App\Models\Matiere::factory(50)->create();
-        \App\Models\Note::factory(50)->create();
-        // \App\Models\Notification::factory(50)->create();
-        \App\Models\Emploi::factory(50)->create();
-        \App\Models\Evenemnt::factory(50)->create();
-        \App\Models\Absence::factory(50)->create();
+        \App\Models\Module::factory(200)->create();
+        \App\Models\Matiere::factory(200)->create();
+        \App\Models\Note::factory(200)->create();
+        // \App\Models\Notification::factory(200)->create();
+        \App\Models\Emploi::factory(200)->create();
+        \App\Models\Evenemnt::factory(200)->create();
+        \App\Models\Absence::factory(200)->create();
 
         \App\Models\User::factory()->create([
             'email'=>"amirnet001@gmail.com",
             'password'=>bcrypt('secret'),
             'idPersonne'=> \App\Models\Personne::factory()->create([
                 'email'=>"amirnet001@gmail.com",
-                'idPersonne'=>51
+                'idPersonne'=>300
                 ])->idPersonne
         ]);
 
