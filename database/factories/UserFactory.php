@@ -26,7 +26,7 @@ class UserFactory extends Factory
         static $i = 1;
         return [
             'name' => $this->faker->name,
-            'email' => $this->faker->safeEmail,
+            'email' => $this->faker->unique()->safeEmail,
             // 'email_verified_at' => $this->faker->dateTime(),
             'password' => bcrypt('secret'),
             'remember_token' => Str::random(10),

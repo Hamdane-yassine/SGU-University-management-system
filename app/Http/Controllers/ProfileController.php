@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -44,15 +45,14 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show(User $user)
     {
-        $user = $profile->user();
-
+        $profile = $user->profile()->get()[0];
         $username = $user->name;
         $emailPerso = $user->email;
         $personne = $user->personne;
 
-        return view('profile.profile',compact('personne','username','emailPerso'));
+        return view('profile.profile',compact('personne','username','emailPerso','profile'));
     }
 
     /**

@@ -23,7 +23,7 @@
 						<div class="pd-20 card-box height-100-p">
 							<div class="profile-photo">
 								<a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
-								<img src="{{ asset('vendors/images/photo1.jpg') }}" alt="" class="avatar-photo">
+								<img src="{{ $profile->image }}" alt="" class="avatar-photo">
 								<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
@@ -40,14 +40,21 @@
 									</div>
 								</div>
 							</div>
-							<h5 class="text-center h5 mb-0">Ross C. Lopez</h5>
+							<h5 class="text-center h5 mb-0">{{ $username }}</h5>
 							<p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p>
 							<div class="profile-info">
 								<h5 class="mb-20 h5 text-blue">Contact Information</h5>
 								<ul>
 									<li>
 										<span>Email Address:</span>
-										FerdinandMChilds@test.com
+                                        <ul>
+                                            <li>
+                                                {{ $personne->emailInstitutionne }}
+                                            </li>
+                                            <li>
+                                                {{ $personne->email }}
+                                            </li>
+                                        </ul>
 									</li>
 									<li>
 										<span>Phone Number:</span>
@@ -78,25 +85,6 @@
 									<li><a href="#" class="btn" data-bgcolor="#00aff0" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 175, 240);"><i class="fa fa-skype"></i></a></li>
 									<li><a href="#" class="btn" data-bgcolor="#00b489" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 180, 137);"><i class="fa fa-vine"></i></a></li>
 								</ul>
-							</div>
-							<div class="profile-skills">
-								<h5 class="mb-20 h5 text-blue">Key Skills</h5>
-								<h6 class="mb-5 font-14">HTML</h6>
-								<div class="progress mb-20" style="height: 6px;">
-									<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<h6 class="mb-5 font-14">Css</h6>
-								<div class="progress mb-20" style="height: 6px;">
-									<div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<h6 class="mb-5 font-14">jQuery</h6>
-								<div class="progress mb-20" style="height: 6px;">
-									<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<h6 class="mb-5 font-14">Bootstrap</h6>
-								<div class="progress mb-20" style="height: 6px;">
-									<div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
 							</div>
 						</div>
 					</div>

@@ -78,7 +78,7 @@ class User extends Authenticatable
 	}
     public function profile()
     {
-        return $this->hasOne(\App\Models\Profile::class);
+        return $this->hasOne(\App\Models\Profile::class,'idProfile');
     }
 
     public function hasRole(string $role)
