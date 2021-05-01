@@ -26,7 +26,7 @@ class PersonneFactory extends Factory
             'prenom' => $this->faker->name(),
             'adressePersonnele' => $this->faker->address,
             'cin' => $this->faker->name(),
-            'email' => $this->faker->safeEmail,
+            'email' => $this->faker->unique()->safeEmail,
             'tel' => $this->faker->phoneNumber,
             'dateNaissance' => now(),
             'nationalite' => $this->faker->colorName,

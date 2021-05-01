@@ -27,13 +27,14 @@ class DatabaseSeeder extends Seeder
             if ($table->Tables_in_pfe !== 'migrations')
             DB::table($table->Tables_in_pfe)->truncate();
         }
-        // Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
         // +++++++++++ END +++++++++++++++=
 
 
         \App\Models\Personne::factory(200)->create();
         \App\Models\Anneescolaire::factory(1)->create();
         \App\Models\User::factory(200)->create();
+        \App\Models\Profile::factory(200)->create();
         \App\Models\Departement::factory(50)->create();
         \App\Models\Professeur::factory(200)->create();
         \App\Models\Chefdep::factory(50)->create();
