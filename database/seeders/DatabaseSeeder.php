@@ -25,36 +25,47 @@ class DatabaseSeeder extends Seeder
         $tables = DB::select('SHOW TABLES');
         foreach ($tables as $table) {
             if ($table->Tables_in_pfe !== 'migrations')
-                DB::table($table->Tables_in_pfe)->truncate();
+            DB::table($table->Tables_in_pfe)->truncate();
         }
+        // Schema::enableForeignKeyConstraints();
         // +++++++++++ END +++++++++++++++=
 
-        \App\Models\User::factory()->create([
-            'email'=>"amirnet001@gmail.com",
-            'password'=>bcrypt('secret')
-        ]);
 
-        \App\Models\Anneescolaire::factory(1)->create();
         \App\Models\Personne::factory(50)->create();
+        \App\Models\Anneescolaire::factory(1)->create();
         \App\Models\User::factory(50)->create();
         \App\Models\Departement::factory(50)->create();
         \App\Models\Professeur::factory(50)->create();
-        \App\Models\Chefdep::factory(50)->create();
-        \App\Models\Filiere::factory(50)->create();
-        \App\Models\Etudiant::factory(50)->create();
-        \App\Models\Semestre::factory(8)->create();
-        \App\Models\Module::factory(50)->create();
-        \App\Models\Matiere::factory(50)->create();
-        \App\Models\Note::factory(50)->create();
-        // \App\Models\Notification::factory(50)->create();
-        \App\Models\Emploi::factory(50)->create();
-        \App\Models\Evenemnt::factory(50)->create();
-        \App\Models\Absence::factory(50)->create();
+        // \App\Models\Chefdep::factory(50)->create();
+        // \App\Models\Filiere::factory(50)->create();
+        // \App\Models\Etudiant::factory(50)->create();
+        // \App\Models\Semestre::factory(8)->create();
+        // \App\Models\Module::factory(50)->create();
+        // \App\Models\Matiere::factory(50)->create();
+        // \App\Models\Note::factory(50)->create();
+        // // \App\Models\Notification::factory(50)->create();
+        // \App\Models\Emploi::factory(50)->create();
+        // \App\Models\Evenemnt::factory(50)->create();
+        // \App\Models\Absence::factory(50)->create();
 
+        // \App\Models\Personne::factory()->create([
+        //     'email'=>"amirnet001@gmail.com",
+        //     'password'=>bcrypt('secret'),
+        //     'idPersonne'=>100
+        // ]);
+        // \App\Models\User::factory()->definition(function()
+        // {
+        //     return [
+        //     'idPersonne'=>100
+        //     ]
+        // })->state()->create([
+        //     'email'=>"amirnet001@gmail.com",
+        //     'password'=>bcrypt('secret'),
+        // ]);
 
         // =======================================
 
-        }
+    }
 
 
 }

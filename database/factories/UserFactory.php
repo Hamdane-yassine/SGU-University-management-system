@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class UserFactory extends Factory
 {
@@ -29,8 +30,10 @@ class UserFactory extends Factory
             'password' => bcrypt('secret'),
             'remember_token' => Str::random(10),
             'idPersonne' =>function(){
-                if(\App\Models\Personne::count())
-                    return $this->faker->randomElement(\App\Models\Personne::pluck('idPersonne'));
+                if(\App\Models\Personne::count()){
+                    $arr = \App\Models\Personne::pluck('idPersonne')->toArray();
+                    return $this->faker->unique()->randomElement($arr);
+                }
                 return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
             },
             'role' => $this->faker->randomElement(['admin','prof','chefdep']),

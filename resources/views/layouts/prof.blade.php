@@ -69,13 +69,18 @@
                                     <h3>John Doe</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
-                                @foreach (Auth::User()->notifications as $notification)
-                                <a href="#">
-                                    <img src="{{ asset('vendors/images/img.jpg') }}" alt="">
-                                    <h3>John Doe</h3>
-                                    <p>{{$notification->data}}</p>
-                                    </a>
-                                @endforeach
+                                @if(Auth::User()->notifications->count())
+                                    @foreach (Auth::User()->notifications as $notification)
+                                    <a href="#">
+                                        <img src="{{ asset('vendors/images/img.jpg') }}" alt="">
+                                        <h3>{{$notification->data['image']}}</h3>
+                                        {{-- <p>{{$notification->data}}</p> --}}
+                                        </a>
+                                    @endforeach
+                                    @else
+                                        empty
+                                @endif
+
                             </li>
                         </ul>
                     </div>
