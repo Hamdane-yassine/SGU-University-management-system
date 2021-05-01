@@ -8,17 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+
+    protected $table = 'profiles';
+    protected $primaryKey = 'idProfile';
+
+
+    protected $fillable = [
+        'imagePath','skype','facebook','linkedin'
+    ];
+
     public function profileImage()
     {
         $imagePath = ($this->image) ? $this->image : 'profile/JNiNHZYPax0bk1mZWBDuZbvKfghk7OsZRJjsTrXO.png';
         return '/storage/' . $imagePath;
     }
-    protected $fillable = [
-        'imagePath'
-    ];
 
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\User::class,'idUtilisateur');
     }
 }

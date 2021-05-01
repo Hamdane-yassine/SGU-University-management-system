@@ -21,8 +21,10 @@ class ProfileFactory extends Factory
      */
     public function definition()
     {
+        static $i = 1;
         return [
-            //
+            'idUtilisateur'=> $i++,
+            'image'=>asset('src/images/img1.jpg')
         ];
     }
 }
