@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property int|null $idProf
  * @property int $idEmploi
+ * @property string $path
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  *
  * @property Professeur|null $professeur
  *
@@ -28,16 +31,21 @@ class Emploi extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'idProf' => 'int',
-		'idEmploi' => 'int'
+		'idEmploi' => 'int',
+        'path' => 'string'
 	];
 
 	protected $fillable = [
-		'idProf'
+        'path',
 	];
 
 	public function professeur()
 	{
 		return $this->belongsTo(Professeur::class, 'idProf');
-	} 
+	}
+
+    public function filiere()
+    {
+        return $this->belongsTo(Filiere::class, 'idEmploi');
+    }
 }

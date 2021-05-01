@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(200)->create();
         \App\Models\Profile::factory(200)->create();
         \App\Models\Departement::factory(50)->create();
+        \App\Models\Emploi::factory(400)->create();
         \App\Models\Professeur::factory(200)->create();
         \App\Models\Chefdep::factory(50)->create();
         \App\Models\Filiere::factory(200)->create();
@@ -45,7 +46,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Matiere::factory(200)->create();
         \App\Models\Note::factory(200)->create();
         // \App\Models\Notification::factory(200)->create();
-        \App\Models\Emploi::factory(200)->create();
         \App\Models\Evenemnt::factory(200)->create();
         \App\Models\Absence::factory(200)->create();
 

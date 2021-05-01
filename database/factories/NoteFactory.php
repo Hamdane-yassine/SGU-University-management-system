@@ -32,9 +32,9 @@ class NoteFactory extends Factory
                     return $this->faker->randomElement(\App\Models\Matiere::pluck('idMatiere'));
                 return \App\Models\Matiere::factory()->create()->get()[0]['idMatiere'];
             },
-            'controle' => $this->faker->randomFloat,
-            'exam' => $this->faker->randomFloat,
-            'noteGeneral'=>$this->faker->randomFloat,
+            'controle' => random_int(0,20),
+            'exam' => random_int(0,20),
+            'noteGeneral'=>random_int(0,20),
         ];
     }
 }

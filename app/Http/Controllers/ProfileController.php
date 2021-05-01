@@ -51,7 +51,6 @@ class ProfileController extends Controller
         $username = $user->name;
         $emailPerso = $user->email;
         $personne = $user->personne;
-
         return view('profile.profile',compact('personne','username','emailPerso','profile'));
     }
 
