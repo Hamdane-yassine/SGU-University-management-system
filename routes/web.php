@@ -61,6 +61,8 @@ Route::post('updateNote',[ProfesseurController::class, 'updateNote'])->name('upd
 
 Route::get('/chef/emploi',[ChefDepartementController::class, 'getEmploi']);
 
+Route::get('/chef/etudiants/{filiere}',[ChefDepartementController::class, 'Etudiants']);
+
 Route::middleware(['auth','prof'])->group(function () {
 
 });
