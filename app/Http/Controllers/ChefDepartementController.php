@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Departement;
-use App\Models\Filiere;
-use App\Models\Professeur;
 use Illuminate\Support\Facades\Auth;
 use DataTables;
 
@@ -48,10 +46,6 @@ class ChefDepartementController extends Controller
         if ($request->ajax()) {
             return Datatables::of($emplois)->make(true);
         }
-    }
-        $idChef = Auth::user()->professeur->chefdep->idDepartement;
-        //
-        return view('chef.emploi');
     }
 
     public function Etudiants(Filiere $filiere)
