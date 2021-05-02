@@ -141,5 +141,3 @@
         </div>
     </div>
     @endsection
-    @section('SpecialScripts')
-    @endsection

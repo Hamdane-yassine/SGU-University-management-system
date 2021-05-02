@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/jquery-steps/jquery.steps.css') }}">
+    @yield('SpecialStyles')
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -228,8 +229,10 @@
                             etudiants</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="index.html">Génie Logiciel - GL1</a></li>
-                        <li><a href="index2.html">Administrateur Réseaux</a></li>
+                        @foreach (auth()->$user->professeur->chefdep->departement->filieres as $filiere)
+                              <li><a href="/chef/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom }}</a></li>
+                        @endforeach
+                      
                     </ul>
                 </li>
 
