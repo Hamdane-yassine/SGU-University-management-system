@@ -97,10 +97,11 @@ class ChefDepartementController extends Controller
     {
         $idEtudiant = request('idEtudiant');
         $etudiant = Etudiant::find($idEtudiant);
-        $idPersonne = $etudiant->idPersonne;
+      //  $idPersonne = $etudiant->idPersonne;
         $etudiant->delete();
         // $personne = Personne::find($idPersonne);
         // $personne->delete();
+    }
     public function deleteEmploi($idEmploi)
     {
         echo $idEmploi;
