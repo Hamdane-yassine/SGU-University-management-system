@@ -186,7 +186,7 @@
             <div class="min-height-200px">
                 <div class="card-box mb-30">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">les emplois du temps</h4>
+                        <h4 class="text-blue h4">les emplois du temps des professeurs : </h4>
                     </div>
                     <div class="pb-20">
                         <table class="data-table table hover nowrap">
@@ -223,81 +223,30 @@
                                             data-target="#confirmation-modal" type="button"><i
                                                 class="icon-copy dw dw-delete-3 pl-20"></i></a>
                                     </td>
-                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="card-box mb-30">
+                    <div class="pd-20">
+                        <h4 class="text-blue h4">les emplois du temps des professeurs : </h4>
+                    </div>
+                    <div class="pb-20">
+                        <table class="data-table table hover nowrap">
+                            <thead>
                                 <tr>
-                                    <td class="table-plus">3</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Abd ali lasfar</td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
+                                    <th>N°</th>
+                                    <th>Nom du fichier</th>
+                                    <th>Filière / professeur</th>
+                                    <th>Date de lancement </th>
+                                    <th class="datatable-nosort">&nbsp;Action</th>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 <tr>
-                                    <td class="table-plus">4</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>khadija bousdig </td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">5</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Hamdane yassine</td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">6</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>otman doda </td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">7</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>mehdi el gouat</td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">8</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Administrateur reseaux -ARI2</td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">9</td>
+                                    <td class="table-plus">1</td>
                                     <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
                                             class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
                                     <td>Génie Logiciel - GL2 </td>
@@ -309,29 +258,17 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="table-plus">10</td>
+                                    <td class="table-plus">2</td>
                                     <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
                                             class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Génie Logiciel - GL2 </td>
+                                    <td>Génie Logiciel - GL1 </td>
                                     <td style="padding-left: 40px;">29-03-2018</td>
                                     <td>
                                         <a href="#" data-color="#e95959" data-toggle="modal"
                                             data-target="#confirmation-modal" type="button"><i
                                                 class="icon-copy dw dw-delete-3 pl-20"></i></a>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">11</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Génie Logiciel - GL2 </td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
 

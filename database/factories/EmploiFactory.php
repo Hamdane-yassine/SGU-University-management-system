@@ -22,7 +22,7 @@ class EmploiFactory extends Factory
     public function definition()
     {
         return [
-            'path'=>'/storage',
+            'fileName'=>'filename',
             'created_at'=>$this->faker->date(),
         ];
     }

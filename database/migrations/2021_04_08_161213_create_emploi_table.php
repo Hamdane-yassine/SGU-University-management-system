@@ -16,7 +16,7 @@ class CreateEmploiTable extends Migration {
 		Schema::create('emploi', function(Blueprint $table)
 		{
 			$table->id('idEmploi');
-			$table->string('path');
+			$table->string('fileName');
             $table->timestamps();
 		});
 	}

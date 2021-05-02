@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property int|null $idProf
  * @property int $idEmploi
- * @property string $path
+ * @property string $fileName
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -32,11 +32,11 @@ class Emploi extends Model
 
 	protected $casts = [
 		'idEmploi' => 'int',
-        'path' => 'string'
+        'fileName' => 'string'
 	];
 
 	protected $fillable = [
-        'path',
+        'fileName',
 	];
 
 	public function professeur()
