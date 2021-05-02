@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="{{ asset('js/app.js') }}" ></script>
+
     <!-- Site favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('vendors/images/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('vendors/images/favicon-32x32.png') }}">
@@ -232,7 +235,7 @@
                         @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
                               <li><a href="/chef/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom }}</a></li>
                         @endforeach
-                      
+
                     </ul>
                 </li>
 
@@ -291,7 +294,7 @@
         </div>
     </div>
     @endif
-    
+
 </div>
 <div class="mobile-menu-overlay"></div>
 @yield('content')
