@@ -36,6 +36,7 @@
                                     <th>N°</th>
                                     <th>Nom du fichier</th>
                                     <th>Filière</th>
+                                    <th>Niveau</th>
                                     <th>date de création</th>
                                     <th>Action</th>
                                     <!--<th class="datatable-nosort">&nbsp;Action</th>-->
@@ -172,6 +173,7 @@
                     {data: 'idEmploi', name: 'idEmploi'},
                     {data: 'filename', name: 'filename'},
                     {data: 'nom', name: 'nom'},
+                    {data: 'niveau', name: 'niveau'},
                     {data: 'date', name: 'date'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],

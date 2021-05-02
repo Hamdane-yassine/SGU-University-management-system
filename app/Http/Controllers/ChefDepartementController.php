@@ -63,7 +63,7 @@ class ChefDepartementController extends Controller
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $emplois = Filiere::where('idDepartement',$idDepartement)
         ->join('emploi','emploi.idEmploi','=','filiere.idEmploi')
-        ->select('emploi.idEmploi as idEmploi','filename','filiere.nom as nom','emploi.created_at as date')->get();
+        ->select('emploi.idEmploi as idEmploi','filename','filiere.nom as nom','niveau','emploi.created_at as date')->get();
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
@@ -188,21 +188,21 @@ class ChefDepartementController extends Controller
         elseif($selection[0] == 'f') //means we're uploading emploi for a filiere
         {
             $idFiliere = substr($selection,1);
-            $filiere = Filiere::where('idFiliere',$idFiliere)->select('idFiliere','nom as name','idEmploi')->get()[0];
+            $filiere = Filiere::where('idFiliere',$idFiliere)->select('idFiliere','nom as name','niveau','idEmploi')->get()[0];
 
-            echo $idFiliere.'<br>';
-            echo $filiere->nom;
+            //echo $idFiliere.'<br>';
+            //echo $filiere->nom;
 
             //add or update entry in emploi and filiere table
             if(is_null($filiere->idEmploi)) //then creat a new entry
             {
                 $emploi = Emploi::create([
-                    'fileName' => $filiere->name.'.pdf'
+                    'fileName' => $filiere->name.$filiere->niveau.'.pdf'
                 ]);
 
-                $file->storeAs('emploi/filiere/', $filiere->name.'.pdf');  //store with the original name
+                $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
 
-                $emploi = Emploi::where('fileName',$filiere->name.'.pdf')->select('idEmploi')->get()[0];
+                $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
                 $filiere = Filiere::find($idFiliere);
                 $filiere->idEmploi = $emploi->idEmploi;
                 $filiere->save();
@@ -210,27 +210,25 @@ class ChefDepartementController extends Controller
             else //meaning the filiere has already an emploi
             {
                 //delete old file
-                Storage::delete('emploi/filiere/', $filiere->name.'.pdf');
+                Storage::delete('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');
                 //delete the old entry
                 $oldEmploi = Emploi::find($filiere->idEmploi);
                 $oldEmploi->delete();
 
                 //add new one
                 $emploi = Emploi::create([
-                    'fileName' => $filiere->name.'.pdf'
+                    'fileName' => $filiere->name.$filiere->niveau.'.pdf'
                 ]);
 
-                $file->storeAs('emploi/filiere/', $filiere->name.'.pdf');  //store with the original name
+                $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
 
-                $emploi = Emploi::where('fileName',$filiere->name.'.pdf')->select('idEmploi')->get()[0];
+                $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
                 $filiere = Filiere::find($idFiliere);
                 $filiere->idEmploi = $emploi->idEmploi;
                 $filiere->save();
             }
         }
-        else
-        {
             return redirect('/chef/emploi'); //just in case
-        }
+
     }
 }
