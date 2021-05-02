@@ -168,7 +168,7 @@ class ProfesseurController extends Controller
        ->join('filiere','module.idFiliere','=','filiere.idFiliere')
        ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
        ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
-       ->leftJoin('note', 'matiere.idMatiere', '=', 'note.idMatiere')
+       ->leftJoin('note', 'etudiant.idEtudiant', '=', 'note.idEtudiant')
        ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral','idNote','etudiant.idEtudiant')
        ->get();
        if ($request->ajax()) {

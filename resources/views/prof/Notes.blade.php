@@ -184,6 +184,11 @@
                     dataType: 'JSON',
                     data:{},
                     success: function(response) {
+                        document.getElementById("control").value = "";
+                        document.getElementById("exam").value = "";
+                        document.getElementById("idNote").value = null;
+                        document.getElementById("coefcontrol").value = 25;
+                        document.getElementById("coefexam").value = 75;
                         document.getElementById("idEtudiant").value = response;
                     }
                 }) 
