@@ -1,12 +1,12 @@
 @extends('layouts.prof')
-@section('title','Génie Logiciel - GL1')
+@section('title',"$filiere->nom $filiere->niveau")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
                 <div class="card-box mb-30">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">Génie Logiciel - GL1</h4>
+                        <h4 class="text-blue h4">{{ $filiere->nom.' '.$filiere->niveau }}</h4>
                     </div>
                     <div class="pb-20">
                         <table class="table hover multiple-select-row data-table-export nowrap">
