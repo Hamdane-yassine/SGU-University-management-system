@@ -123,6 +123,7 @@
             <i class="ion-close-round"></i>
         </div>
     </div>
+    @if (auth()->user()->role=='prof')
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
@@ -209,6 +210,85 @@
             </ul>
         </div>
     </div>
+    @elseif (auth()->user()->role=='chefdep')
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li>
+                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-dashboard"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau de
+                            board</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-graduation-cap"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Les
+                            etudiants</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="index.html">Génie Logiciel - GL1</a></li>
+                        <li><a href="index2.html">Administrateur Réseaux</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-bar-chart"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Notes</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="index.html">Génie Logiciel - GL1</a></li>
+                        <li><a href="index2.html">Administrateur Réseaux</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-calendar"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi du
+                            temps</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-user-o"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                            class="mtext">Gestion des Professeurs</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-calendar-check-o"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                            class="mtext">Absenses</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-calendar-minus-o"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                            class="mtext">Rattrapage</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-bell-o"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                            class="mtext">Notifications</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    @endif
+    
 </div>
 <div class="mobile-menu-overlay"></div>
 @yield('content')
