@@ -216,7 +216,6 @@
 <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
-<script src="{{ asset('js/app.js') }}" ></script>
 @yield('SpecialScripts')
 </body>
 </html>
