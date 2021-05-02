@@ -2,22 +2,27 @@
 
 namespace App\Notifications;
 
+use App\Models\Evenemnt;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Broadcasting\PrivateChannel;
 
-class NotifyEvent extends Notification
+class NotifyEvent extends Notification implements ShouldBroadcast
 {
     use Queueable;
+
+    public $event;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Evenemnt $Event)
     {
-        //
+
     }
 
     /**
@@ -58,5 +63,22 @@ class NotifyEvent extends Notification
             'link'=>'',
             'info'=>'',
         ];
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'msg'=> 'Hello'
+        ];
+    }
+
+    public function broadcastAs()
+    {
+        return 'Evt';
+    }
+
+    public function broadcastOn()
+    {
+        return new PrivateChannel('hello');
     }
 }

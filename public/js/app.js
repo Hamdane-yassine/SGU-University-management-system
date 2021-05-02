@@ -1912,44 +1912,15 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app' // created() {
-  //     Pusher.logToConsole = true;
-  //     var pusher = new Pusher('175b6522f4a3c21fa191', {
-  //         cluster: 'eu'
-  //     });
-  //     var channel = pusher.subscribe('hello');
-  //     channel.bind('pusher:subscription_succeeded', function(members) {
-  //         console.log('successfully subscribed!');
-  //     });
-  //     channel.bind('\\App\\Events\\Evt', function(data) {
-  //         console.log(data);
-  //     });
-  // }
-
-}); // import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: false
-// });
-// var pusher = new window.Pusher('175b6522f4a3c21fa191', {
-//     cluster: 'eu'
-// });
-// var channel = pusher.subscribe('hello');
-// channel.bind('pusher:subscription_succeeded', function(members) {
-//     // alert('successfully subscribed!');
-// });
-// channel.bind('\\App\\Events\\Evt', function(data) {
-//     console.log(data);
-// });
-
-window.Echo.channel('hello').listen('.Evt', function (e) {
+  el: '#app'
+});
+window.Echo["private"]('hello').listen('.Evt', function (e) {
   console.log(e);
 }).on('pusher:subscription_succeeded', function (member) {
   console.log('successfully subscribed!');
 });
+
+function AddNotification(params) {}
 
 /***/ }),
 

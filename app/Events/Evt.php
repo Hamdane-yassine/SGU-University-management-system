@@ -33,9 +33,8 @@ class Evt implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('hello');
+        return new PrivateChannel('hello');
     }
-
 
 
     public function broadcastWith()
