@@ -15,12 +15,21 @@ use App\Models\Note;
 use App\Models\Module;
 use App\Models\Professeur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ChefDepartementController extends Controller
 {
     public function index()
     {
-        return view('chef.emploi');
+        //return list of profs in this department
+        $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
+        $profs = Professeur::where('idDepartement',$idDepartement)
+        ->join('users','users.id','=','professeur.idUtilisateur')
+        ->select('idProf','users.name as nom')->get();
+
+        //return list of filiere in that departement
+        $filieres = Filiere::where('idDepartement',$idDepartement)->select('idFiliere','nom','niveau')->get();
+        return view('chef.emploi',['profs' => $profs , 'filieres' => $filieres]);
     }
 
     public function getListOfProfEmploi(Request $request)
@@ -33,13 +42,19 @@ class ChefDepartementController extends Controller
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
-            ->addColumn('action', function($row)
+            ->addColumn('filename', function($row)
             {
-                $btn = '<a href="emploi/delete/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</i></a>';
+                $link_to_file = asset('storage/emploi/prof/'.$row->filename);
+                $btn = '<a class="text-success" href="' .$link_to_file. '" target="_blank" >' .$row->filename. '</a>';
                 return $btn;
             })
-            ->rawColumns(['action'])
-             ->make(true);
+            ->addColumn('action', function($row)
+            {
+                $btn = '<a href="emploi/delete/prof/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</i></a>';
+                return $btn;
+            })
+            ->rawColumns(['action','filename'])
+            ->make(true);
         }
     }
 
@@ -52,12 +67,18 @@ class ChefDepartementController extends Controller
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
-            ->addColumn('action', function($row)
+            ->addColumn('filename', function($row)
             {
-                $btn = '<a href="emploi/delete/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</a>';
+                $link_to_file = asset('storage/emploi/filiere/'.$row->filename);
+                $btn = '<a class="text-success" href="' .$link_to_file. '" target="_blank" >' .$row->filename. '</a>';
                 return $btn;
             })
-            ->rawColumns(['action'])
+            ->addColumn('action', function($row)
+            {
+                $btn = '<a href="emploi/delete/filiere/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</a>';
+                return $btn;
+            })
+            ->rawColumns(['action','filename'])
              ->make(true);
         }
     }
@@ -92,12 +113,89 @@ class ChefDepartementController extends Controller
         }
     }
 
-    public function deleteEmploi($idEmploi)
+    public function deleteEmploiProf($idEmploi)
     {
         echo $idEmploi;
         $emploi = Emploi::find($idEmploi);
+        $filename = $emploi->fileName;
+        Storage::delete('emploi/prof/'.$filename);  //delete the physical file
         $emploi->delete();
         return redirect('/chef/emploi');
+    }
+
+    public function deleteEmploiFiliere($idEmploi)
+    {
+        echo $idEmploi;
+        $emploi = Emploi::find($idEmploi);
+        $filename = $emploi->fileName;
+        Storage::delete('emploi/filiere/'.$filename);  //delete the physical file
+        $emploi->delete();
+        return redirect('/chef/emploi');
+    }
+
+    public function uploadEmploi(Request $request)
+    {
+        $selection =  $request->ProfOrFiliere;
+        $file = $request->uploadedFile;
+
+        if($selection[0] == 'p') //means we're uploading emploi for a prof
+        {
+            //store the file
+            $idProf = substr($selection,1);
+            $prof = Professeur::where('idProf',$idProf)->join('users','professeur.idUtilisateur','=','users.id')
+            ->select('users.id','users.name as name','idEmploi','idProf')
+            ->get()[0];
+
+            echo $idProf.'<br>';
+            echo $prof->name;
+
+            //add or update entry in emploi and professeur table
+            if(is_null($prof->idEmploi)) //then creat a new entry
+            {
+                $emploi = Emploi::create([
+                    'fileName' => $prof->name.'.pdf'
+                ]);
+
+                $file->storeAs('emploi/prof/', $prof->name.'.pdf');  //store with the original name
+
+                $emploi = Emploi::where('fileName',$prof->name.'.pdf')->select('idEmploi')->get()[0];
+                $prof = Professeur::find($idProf);
+                $prof->idEmploi = $emploi->idEmploi;
+                $prof->save();
+            }
+            else //meaning the prof has already an emploi
+            {
+                //delete old file
+                Storage::delete('emploi/prof/', $prof->name.'.pdf');
+                //delete the old entry
+                $oldEmploi = Emploi::find($prof->idEmploi);
+                $oldEmploi->delete();
+
+                //add new one
+                $emploi = Emploi::create([
+                    'fileName' => $prof->name.'.pdf'
+                ]);
+
+                $file->storeAs('emploi/prof/', $prof->name.'.pdf');  //store with the original name
+
+                $emploi = Emploi::where('fileName',$prof->name.'.pdf')->select('idEmploi')->get()[0];
+                $prof = Professeur::find($idProf);
+                $prof->idEmploi = $emploi->idEmploi;
+                $prof->save();
+            }
+
+        }
+        elseif($selection[0] == 'f') //means we're uploading emploi for a filiere
+        {
+            //store the file
+            $idFiliere = substr($selection,1);
+            //store or update entry in emploi and filiere
+        }
+        else
+        {
+            return redirect('/chef/emploi'); //just in case
+        }
+
     }
 
 }
