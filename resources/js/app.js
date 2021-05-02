@@ -30,14 +30,3 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
-
-window.Echo.private('hello')
-    .listen('.Evt', (e) => {
-        console.log(e);
-    }).on('pusher:subscription_succeeded', (member) => {
-        console.log('successfully subscribed!');
-    });
-
-function AddNotification(params) {
-
-}

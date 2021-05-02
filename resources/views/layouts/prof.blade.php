@@ -302,6 +302,14 @@
 <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
+<script>
+    window.Echo.private('hello')
+    .listen('.Evt', (e) => {
+        console.log(e);
+    }).on('pusher:subscription_succeeded', (member) => {
+        console.log('successfully subscribed!');
+    });
+</script>
 @yield('SpecialScripts')
 </body>
 </html>
