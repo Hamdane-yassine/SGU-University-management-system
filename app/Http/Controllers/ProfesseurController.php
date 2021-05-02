@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Absence;
+use App\Models\Emploi;
 use App\Models\Etudiant;
 use App\Models\Filiere;
 use App\Models\Matiere;
@@ -179,9 +180,9 @@ class ProfesseurController extends Controller
 
     public function getMyEmploi()
     {
-        $file_name = 'storage/emploi/prof/'.auth()->user()->professeur->idUtilisateur.'.pdf';
-        $path_to_file = asset($file_name);
-        if (Storage::exists('emploi/prof/'.auth()->user()->professeur->idUtilisateur.'.pdf'))
+        echo $file_name = auth()->user()->professeur->emploi->fileName;
+        $path_to_file = asset('storage/emploi/prof/'.$file_name); // storage/emploi/prof/lasfar.pdf
+        if (Storage::exists('emploi/prof/'.$file_name))
         {
             return view('prof.emploi',['path_to_file' => $path_to_file, 'Mine' => 'true']);
         }
@@ -190,9 +191,12 @@ class ProfesseurController extends Controller
 
     public function getEmploiByFiliere($id)
     {
-        $file_name = 'storage/emploi/filiere/'.$id.'.pdf';
-        $path_to_file = asset($file_name);
-        if (Storage::exists('emploi/filiere/'.$id.'.pdf'))
+        echo $file_name = Filiere::where('filiere.idFiliere',$id)
+        ->join('emploi','emploi.idEmploi','=','filiere.idEmploi')
+        ->select('filename')->get()[0]->filename;
+
+        $path_to_file = asset('storage/emploi/filiere/'.$file_name);
+        if (Storage::exists('emploi/filiere/'.$file_name))
         {
             return view('prof.emploi',['path_to_file' => $path_to_file, 'Mine' => 'false']);
         }
@@ -248,6 +252,6 @@ class ProfesseurController extends Controller
             $note->idMatiere=$idMatiere;
             $note->save();
         }
-        
+
     }
 }
