@@ -9,41 +9,17 @@
                         <h4 class="text-blue h4">les emplois du temps des professeurs : </h4>
                     </div>
                     <div class="pb-20">
-                        <table class="data-table table hover nowrap">
+                        <table class="emploi_des_profs table hover nowrap">
                             <thead>
                                 <tr>
                                     <th>N°</th>
                                     <th>Nom du fichier</th>
-                                    <th>Filière / professeur</th>
-                                    <th>Date de lancement </th>
+                                    <th>Professeur</th>
+                                    <th>date de création</th>
                                     <th class="datatable-nosort">&nbsp;Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table-plus">1</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Génie Logiciel - GL2 </td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">2</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Génie Logiciel - GL1 </td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-
                             </tbody>
                         </table>
 
@@ -51,47 +27,22 @@
                 </div>
                 <div class="card-box mb-30">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">les emplois du temps des professeurs : </h4>
+                        <h4 class="text-blue h4">les emplois du temps des filieres : </h4>
                     </div>
                     <div class="pb-20">
-                        <table class="data-table table hover nowrap">
+                        <table class="emploi_des_filieres table hover nowrap">
                             <thead>
                                 <tr>
                                     <th>N°</th>
                                     <th>Nom du fichier</th>
-                                    <th>Filière / professeur</th>
-                                    <th>Date de lancement </th>
+                                    <th>Filière</th>
+                                    <th>date</th>
                                     <th class="datatable-nosort">&nbsp;Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table-plus">1</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Génie Logiciel - GL2 </td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">2</td>
-                                    <td><a href="EDT_GL_S4_REC_LE_3-3-21.pdf" target="_blank"
-                                            class="card-link text-primary">EDT_GL_S4_REC_LE_3-3-21.pdf</a></td>
-                                    <td>Génie Logiciel - GL1 </td>
-                                    <td style="padding-left: 40px;">29-03-2018</td>
-                                    <td>
-                                        <a href="#" data-color="#e95959" data-toggle="modal"
-                                            data-target="#confirmation-modal" type="button"><i
-                                                class="icon-copy dw dw-delete-3 pl-20"></i></a>
-                                    </td>
-
                             </tbody>
                         </table>
-
                     </div>
                 </div>
                 <div class="pd-20 card-box mb-30">
@@ -172,4 +123,90 @@
     <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
+
+    <script type="text/javascript">
+        $('.emploi_des_profs').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('getProfsEmploi') }}",
+                columns: [
+                    {data: 'idEmploi', name: 'idEmploi'},
+                    {data: 'filename', name: 'filename'},
+                    {data: 'nom', name: 'nom'},
+                    {data: 'date', name: 'date'},
+                ],
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    render: function(data, type, full, meta){
+                    if(type === 'display'){
+                        data = data + '<div class="links">' +
+                            '<a href="#">Edit</a> ' +
+                            '<a href="#">Quick Edit</a> ' +
+                            '<a href="#">Trash</a> ' +
+                            '<a href="#">View</a>' +
+                            '</div>';
+                    }
+                return data;
+       }
+        }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "zeroRecords": "Aucun élément correspondant trouvé",
+                    "processing": "Traitement...",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                    "loadingRecords": "Chargement...",
+                    "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                    search: "Rechercher:",
+                    searchPlaceholder: "Rechercher",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'
+                    }
+                },
+            });
+    </script>
+
+    <script type="text/javascript">
+        $('.emploi_des_filieres').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('getFilieresEmploi') }}",
+                columns: [
+                    {data: 'idEmploi', name: 'idEmploi'},
+                    {data: 'filename', name: 'filename'},
+                    {data: 'nom', name: 'nom'},
+                    {data: 'date', name: 'date'},
+                ],
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "zeroRecords": "Aucun élément correspondant trouvé",
+                    "processing": "Traitement...",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                    "loadingRecords": "Chargement...",
+                    "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                    search: "Rechercher:",
+                    searchPlaceholder: "Rechercher",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'
+                    }
+                },
+            });
+    </script>
     @endsection

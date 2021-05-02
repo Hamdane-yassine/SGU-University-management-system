@@ -55,11 +55,7 @@ Route::get('/Nonote/{etudiant}', [App\Http\Controllers\ProfesseurController::cla
 
 Route::post('updateNote',[ProfesseurController::class, 'updateNote'])->name('updateNote');
 
-//Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
-
-//Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'HomeController@myformAjax'));
-
-Route::get('/chef/emploi',[ChefDepartementController::class, 'getEmploi']);
+Route::get('/chef/emploi',[ChefDepartementController::class, 'index']);
 
 Route::middleware(['auth','prof'])->group(function () {
 
@@ -70,4 +66,8 @@ Route::get('/h', function () {
 });
 
 Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
+
+Route::get('chef/emploi/profs', [ChefDepartementController::class, 'getListOfProfEmploi'])->name('getProfsEmploi');
+
+Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
 
