@@ -17,7 +17,7 @@ class AddForeignKeysToProfesseurTable extends Migration {
 		{
 			$table->foreign('idUtilisateur','fk20')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 			$table->foreign('idDepartement','fk21')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idEmploi','fk210')->references('idEmploi')->on('emploi')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idEmploi','fk210')->references('idEmploi')->on('emploi')->onUpdate('RESTRICT')->onDelete('set null');
 		});
 	}
 
