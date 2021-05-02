@@ -65,6 +65,8 @@ Route::get('/chef/Etudiant/{etudiant}', [App\Http\Controllers\ChefDepartementCon
 
 Route::post('suppetudiant',[ChefDepartementController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiant');
 
+Route::post('updateetudiant',[ChefDepartementController::class, 'UpdateEtudiant'])->name('updateEtudiant');
+
 Route::middleware(['auth','prof'])->group(function () {
 
 });

@@ -86,7 +86,7 @@ class ChefDepartementController extends Controller
 
        $etudiant = Etudiant::where('idEtudiant',$etudiant->idEtudiant)  //first inint a user id
        ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
-       ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale')
+       ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale','etudiant.idEtudiant')
        ->get();
        if ($request->ajax()) {
             echo json_encode($etudiant);
@@ -97,10 +97,8 @@ class ChefDepartementController extends Controller
     {
         $idEtudiant = request('idEtudiant');
         $etudiant = Etudiant::find($idEtudiant);
-      //  $idPersonne = $etudiant->idPersonne;
+       // $etudiant->personne->delete();
         $etudiant->delete();
-        // $personne = Personne::find($idPersonne);
-        // $personne->delete();
     }
     public function deleteEmploi($idEmploi)
     {
@@ -108,6 +106,34 @@ class ChefDepartementController extends Controller
         $emploi = Emploi::find($idEmploi);
         $emploi->delete();
         return redirect('/chef/emploi');
+    }
+
+    public function UpdateEtudiant()
+    {
+        $idEtudiant=request('inIdEtudiant');
+        $etudiant = Etudiant::find($idEtudiant);
+        $idPersonne = $etudiant->idPersonne;
+        $personne = Personne::find($idPersonne);
+        $personne->nom=request('innom');
+        $personne->prenom=request('inprenom');
+        $personne->situationFamiliale=request('insituation');
+        $personne->genre=request('ingenre');
+        $personne->dateNaissance=request('indatenais');
+        $personne->nationalite=request('innationalite');
+        $personne->lieuNaissance=request('inLieuNaissance');
+        $personne->adressePersonnele=request('inadresse');
+        $personne->cin=request('incin');
+        $personne->tel=request('intel');
+        $personne->email=request('inemail');
+        $personne->emailInstitutionne=request('inemailins');
+        $etudiant->apogee=request('inapogee');
+        $etudiant->cne=request('incne');
+        $etudiant->cinPere=request('incinpere');
+        $etudiant->cinMere=request('incinmere');
+        $etudiant->anneeDuBaccalaureat=request('inannebac');
+        $etudiant->regimeDeCovertureMedicale=request('incouv');
+        $personne->save();
+        $etudiant->save();
     }
 
 }
