@@ -73,5 +73,9 @@ Route::get('chef/emploi/profs', [ChefDepartementController::class, 'getListOfPro
 
 Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
 
-Route::get('chef/emploi/delete/{idEmploi}', [ChefDepartementController::class, 'deleteEmploi'])->name('deleteEmploi');
+Route::get('chef/emploi/delete/prof/{idEmploi}', [ChefDepartementController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
+
+Route::get('chef/emploi/delete/filiere/{idEmploi}', [ChefDepartementController::class, 'deleteEmploiFiliere'])->name('deleteEmploiFiliere');
+
+Route::post('/chef/upload/',[ChefDepartementController::class, 'uploadEmploi'])->name('uploadEmploi');
 
