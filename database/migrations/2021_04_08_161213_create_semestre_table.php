@@ -17,9 +17,8 @@ class CreateSemestreTable extends Migration {
 		{
 			$table->id('idSemestre');
 			$table->bigInteger('idAnnee')->unsigned();
+			$table->bigInteger('idFiliere')->unsigned();
 			$table->string('nom', 254);
-
-			
 		});
 	}
 

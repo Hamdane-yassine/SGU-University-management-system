@@ -143,31 +143,31 @@
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Nom</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" type="text" id="innom" name="innom" placeholder="Nom" value="">
+                                            <input class="form-control" type="text" id="innom" name="innom" placeholder="Nom" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Prénom</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Prénom" id="inprenom" name="inprenom" type="text" value="">
+                                            <input class="form-control" placeholder="Prénom" id="inprenom" name="inprenom" type="text" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Code Apogée</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" id="inapogee" name="inapogee" type="number">
+                                            <input class="form-control" value="" id="inapogee" name="inapogee" type="number" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Code Massar</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" id="incne" name="incne" type="text">
+                                            <input class="form-control" value="" id="incne" name="incne" type="text" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Genre</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select class="custom-select col-12" id="ingenre" name="ingenre" >
+                                            <select class="custom-select col-12" id="ingenre" name="ingenre">
                                                 <option value="Masculin" selected>Masculin</option>
                                                 <option value="Féminin">Féminin</option>
                                             </select>
@@ -177,7 +177,7 @@
                                         <label class="col-sm-12 col-md-2 col-form-label">Naissance</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control date-picker" placeholder="Date de naissance"
-                                                type="text" id="indatenais" name="indatenais" value="">
+                                                type="text" id="indatenais" name="indatenais" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -195,67 +195,67 @@
                                         <label class="col-sm-12 col-md-2 col-form-label">Nationalité</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="Nationalité" type="text" id="innationalite" name="innationalite"
-                                                value="">
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Lieu de naissance</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="Lieu de naissance" type="text" id="inLieuNaissance" name="inLieuNaissance"
-                                                value="">
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="N° C.N.I.E" type="text" id="incin" name="incin"
-                                                value="">
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(père)</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="N° C.N.I.E du père" type="text" id="incinpere" name="incinpere"
-                                                value="">
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(mère)</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="N° C.N.I.E de la mère" type="text" id="incinmere" name="incinmere"
-                                                value="">
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Adresse</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="Adresse" type="text" id="inadresse" name="inadresse"
-                                                value="">
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Téléphone</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" type="tel" id="intel" name="intel">
+                                            <input class="form-control" value="" type="tel" id="intel" name="intel" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail personnel</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" type="email" id="inemail" name="inemail">
+                                            <input class="form-control" value="" type="email" id="inemail" name="inemail" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail
                                             institutionnel</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" id="inemailins" name="inemailins" type="email">
+                                            <input class="form-control" value="" id="inemailins" name="inemailins" type="email" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Année du BAC</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" type="number" id="inannebac" name="inannebac">
+                                            <input class="form-control" value="" type="number" min="2015" id="inannebac" name="inannebac" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -263,7 +263,7 @@
                                             médicale</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="Couverture médicale" type="text" id="incouv" name="incouv"
-                                                value="">
+                                                value="" required>
                                         </div>
                                     </div>
                                 </div>
