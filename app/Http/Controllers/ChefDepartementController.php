@@ -93,7 +93,6 @@ class ChefDepartementController extends Controller
         }
     }
 
-<<<<<<< HEAD
     public function SupprimerEtudiant()
     {
         $idEtudiant = request('idEtudiant');
@@ -102,14 +101,12 @@ class ChefDepartementController extends Controller
         $etudiant->delete();
         // $personne = Personne::find($idPersonne);
         // $personne->delete();
-=======
     public function deleteEmploi($idEmploi)
     {
         echo $idEmploi;
         $emploi = Emploi::find($idEmploi);
         $emploi->delete();
         return redirect('/chef/emploi');
->>>>>>> f6c28dc6779a35769c80cc3995d3716843bbaa57
     }
 
 }
