@@ -12,6 +12,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
+        "pusher/pusher-php-server": "^5.0",
         "reliese/laravel": "^1.1",
         "yajra/laravel-datatables-oracle": "^9.18"
     },

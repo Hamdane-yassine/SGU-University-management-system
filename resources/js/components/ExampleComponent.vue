@@ -1,23 +1,40 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <button @click="post()">Hello</button>
 </template>
 
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+            // Echo.channel(`hello`)
+            // .listen('Evt', (e) => {
+            //     console.log(e.msg);
+            // });
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('175b6522f4a3c21fa191', {
+                cluster: 'eu'
+            });
+
+            var channel = pusher.subscribe('hello');
+            channel.bind('pusher:subscription_succeeded', function(members) {
+                // alert('successfully subscribed!');
+            });
+            channel.bind('\\App\\Events\\Evt', function(data) {
+                    console.log(data);
+            });
+
+        },
+        methods:{
+            post(){
+                axios.get('/h')
+                        .then(response => {
+                            console.log(response);
+                        })
+                        .catch(errors => {
+                            console.log("error");
+                        });
+            }
         }
     }
 </script>

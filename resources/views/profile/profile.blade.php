@@ -532,10 +532,6 @@
 		</div>
 	</div>
 	<!-- js -->
-	<script src="{{ asset('vendors/scripts/core.js') }}"></script>
-	<script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
-	<script src="{{ asset('vendors/scripts/process.js') }}"></script>
-	<script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 	<script src="{{ asset('src/plugins/cropperjs/dist/cropper.js') }}"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function () {
