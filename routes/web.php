@@ -73,3 +73,5 @@ Route::get('chef/emploi/profs', [ChefDepartementController::class, 'getListOfPro
 
 Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
 
+Route::get('chef/emploi/delete/{idEmploi}', [ChefDepartementController::class, 'deleteEmploi'])->name('deleteEmploi');
+

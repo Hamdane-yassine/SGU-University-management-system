@@ -16,7 +16,7 @@
                                     <th>Nom du fichier</th>
                                     <th>Professeur</th>
                                     <th>date de création</th>
-                                    <th class="datatable-nosort">&nbsp;Action</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,8 +36,9 @@
                                     <th>N°</th>
                                     <th>Nom du fichier</th>
                                     <th>Filière</th>
-                                    <th>date</th>
-                                    <th class="datatable-nosort">&nbsp;Action</th>
+                                    <th>date de création</th>
+                                    <th>Action</th>
+                                    <!--<th class="datatable-nosort">&nbsp;Action</th>-->
                                 </tr>
                             </thead>
                             <tbody>
@@ -134,24 +135,15 @@
                     {data: 'filename', name: 'filename'},
                     {data: 'nom', name: 'nom'},
                     {data: 'date', name: 'date'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
                 scrollCollapse: true,
                 autoWidth: false,
                 responsive: true,
                 columnDefs: [{
                     targets: "datatable-nosort",
-                    render: function(data, type, full, meta){
-                    if(type === 'display'){
-                        data = data + '<div class="links">' +
-                            '<a href="#">Edit</a> ' +
-                            '<a href="#">Quick Edit</a> ' +
-                            '<a href="#">Trash</a> ' +
-                            '<a href="#">View</a>' +
-                            '</div>';
-                    }
-                return data;
-       }
-        }],
+                    orderable: false,
+                }],
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "language": {
                     "info": "_START_ à _END_ sur _TOTAL_ éléments",
@@ -182,6 +174,7 @@
                     {data: 'filename', name: 'filename'},
                     {data: 'nom', name: 'nom'},
                     {data: 'date', name: 'date'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
                 scrollCollapse: true,
                 autoWidth: false,

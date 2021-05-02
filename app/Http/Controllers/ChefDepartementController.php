@@ -20,7 +20,7 @@ class ChefDepartementController extends Controller
 {
     public function index()
     {
-        return view('Chef.emploi');
+        return view('chef.emploi');
     }
 
     public function getListOfProfEmploi(Request $request)
@@ -29,10 +29,17 @@ class ChefDepartementController extends Controller
         $emplois = Professeur::where('idDepartement',$idDepartement)
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('emploi','emploi.idEmploi','=','professeur.idEmploi')
-        ->select('emploi.idEmploi','filename','users.name as nom','emploi.created_at as date')->get();
+        ->select('emploi.idEmploi as idEmploi','filename','users.name as nom','emploi.created_at as date')->get();
 
         if ($request->ajax()) {
-            return Datatables::of($emplois)->make(true);
+            return Datatables::of($emplois)
+            ->addColumn('action', function($row)
+            {
+                $btn = '<a href="emploi/delete/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</i></a>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+             ->make(true);
         }
     }
 
@@ -41,10 +48,17 @@ class ChefDepartementController extends Controller
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $emplois = Filiere::where('idDepartement',$idDepartement)
         ->join('emploi','emploi.idEmploi','=','filiere.idEmploi')
-        ->select('emploi.idEmploi','filename','filiere.nom as nom','emploi.created_at as date')->get();
+        ->select('emploi.idEmploi as idEmploi','filename','filiere.nom as nom','emploi.created_at as date')->get();
 
         if ($request->ajax()) {
-            return Datatables::of($emplois)->make(true);
+            return Datatables::of($emplois)
+            ->addColumn('action', function($row)
+            {
+                $btn = '<a href="emploi/delete/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</a>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+             ->make(true);
         }
     }
 
@@ -76,6 +90,14 @@ class ChefDepartementController extends Controller
        if ($request->ajax()) {
             echo json_encode($etudiant);
         }
+    }
+
+    public function deleteEmploi($idEmploi)
+    {
+        echo $idEmploi;
+        $emploi = Emploi::find($idEmploi);
+        $emploi->delete();
+        return redirect('/chef/emploi');
     }
 
 }
