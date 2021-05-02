@@ -36,7 +36,7 @@
                             @csrf
                             <section>
                                 <div class="row">
-                                    
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Filiere :</label>
@@ -52,7 +52,7 @@
                                         <div class="form-group">
                                             <label>Matiére :</label>
                                             <select class="custom-select2 form-control " name="matiere" id="matiere" style="width: 100%; height: 38px;" required>
-                                                    
+
                                             </select>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                             <label>Dates de rattrapage possible :</label>
                                             <input class="form-control datetimepicker-range datetimepicker" name="dateRatt" placeholder="Date de rattrapage :" type="text" autocomplete="off" required>
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date d'absence :</label>
@@ -89,7 +89,7 @@
                             </div>
 
                             </section>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                     searchPlaceholder: "Rechercher",
                     paginate: {
                         next: '<i class="ion-chevron-right"></i>',
-                        previous: '<i class="ion-chevron-left"></i>'  
+                        previous: '<i class="ion-chevron-left"></i>'
                     }
                 },
             });

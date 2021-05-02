@@ -55,11 +55,15 @@ Route::get('/Nonote/{etudiant}', [App\Http\Controllers\ProfesseurController::cla
 
 Route::post('updateNote',[ProfesseurController::class, 'updateNote'])->name('updateNote');
 
-//Route::get('myform',array('as'=>'myform','uses'=>'HomeController@myform'));
+Route::get('/chef/emploi',[ChefDepartementController::class, 'index']);
 
-//Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'HomeController@myformAjax'));
+Route::get('/chef/etudiants/{filiere}',[ChefDepartementController::class, 'Etudiants']);
 
-Route::get('/chef/emploi',[ChefDepartementController::class, 'getEmploi']);
+Route::get('/chef/EtudiantsList/{filiere}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiants'])->name('EtudiantsListChef');
+
+Route::get('/chef/Etudiant/{etudiant}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiant']);
+
+Route::post('suppetudiant',[ChefDepartementController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiant');
 
 Route::middleware(['auth','prof'])->group(function () {
 
@@ -73,4 +77,10 @@ Route::get('/h', function () {
 });
 
 Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
+
+Route::get('chef/emploi/profs', [ChefDepartementController::class, 'getListOfProfEmploi'])->name('getProfsEmploi');
+
+Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
+
+Route::get('chef/emploi/delete/{idEmploi}', [ChefDepartementController::class, 'deleteEmploi'])->name('deleteEmploi');
 

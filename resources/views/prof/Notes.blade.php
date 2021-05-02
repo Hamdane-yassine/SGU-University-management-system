@@ -138,7 +138,7 @@
                 },
                 {
                   data: 'idNote', 
-                  render:function(data,type,row){ return '<a href="" onclick="getnote('+data+','+row.idEtudiant+')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
+                  render:function(data,type,row){ return '<a href="" style="color: #265ed7" onclick="getnote('+data+','+row.idEtudiant+')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
                 },
             ],
             scrollCollapse: true,
