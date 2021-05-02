@@ -187,15 +187,50 @@ class ChefDepartementController extends Controller
         }
         elseif($selection[0] == 'f') //means we're uploading emploi for a filiere
         {
-            //store the file
             $idFiliere = substr($selection,1);
-            //store or update entry in emploi and filiere
+            $filiere = Filiere::where('idFiliere',$idFiliere)->select('idFiliere','nom as name','idEmploi')->get()[0];
+
+            echo $idFiliere.'<br>';
+            echo $filiere->nom;
+
+            //add or update entry in emploi and filiere table
+            if(is_null($filiere->idEmploi)) //then creat a new entry
+            {
+                $emploi = Emploi::create([
+                    'fileName' => $filiere->name.'.pdf'
+                ]);
+
+                $file->storeAs('emploi/filiere/', $filiere->name.'.pdf');  //store with the original name
+
+                $emploi = Emploi::where('fileName',$filiere->name.'.pdf')->select('idEmploi')->get()[0];
+                $filiere = Filiere::find($idFiliere);
+                $filiere->idEmploi = $emploi->idEmploi;
+                $filiere->save();
+            }
+            else //meaning the filiere has already an emploi
+            {
+                //delete old file
+                Storage::delete('emploi/filiere/', $filiere->name.'.pdf');
+                //delete the old entry
+                $oldEmploi = Emploi::find($filiere->idEmploi);
+                $oldEmploi->delete();
+
+                //add new one
+                $emploi = Emploi::create([
+                    'fileName' => $filiere->name.'.pdf'
+                ]);
+
+                $file->storeAs('emploi/filiere/', $filiere->name.'.pdf');  //store with the original name
+
+                $emploi = Emploi::where('fileName',$filiere->name.'.pdf')->select('idEmploi')->get()[0];
+                $filiere = Filiere::find($idFiliere);
+                $filiere->idEmploi = $emploi->idEmploi;
+                $filiere->save();
+            }
         }
         else
         {
             return redirect('/chef/emploi'); //just in case
         }
-
     }
-
 }
