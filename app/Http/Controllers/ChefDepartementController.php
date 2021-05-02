@@ -13,6 +13,7 @@ use App\Models\Filiere;
 use App\Models\Matiere;
 use App\Models\Note;
 use App\Models\Module;
+use App\Models\Personne;
 use App\Models\Professeur;
 use Illuminate\Http\Request;
 
@@ -76,6 +77,16 @@ class ChefDepartementController extends Controller
        if ($request->ajax()) {
             echo json_encode($etudiant);
         }
+    }
+
+    public function SupprimerEtudiant()
+    {
+        $idEtudiant = request('idEtudiant');
+        $etudiant = Etudiant::find($idEtudiant);
+        $idPersonne = $etudiant->idPersonne;
+        $etudiant->delete();
+        // $personne = Personne::find($idPersonne);
+        // $personne->delete();
     }
 
 }

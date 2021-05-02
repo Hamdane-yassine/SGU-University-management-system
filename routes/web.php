@@ -59,6 +59,12 @@ Route::get('/chef/emploi',[ChefDepartementController::class, 'index']);
 
 Route::get('/chef/etudiants/{filiere}',[ChefDepartementController::class, 'Etudiants']);
 
+Route::get('/chef/EtudiantsList/{filiere}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiants'])->name('EtudiantsListChef');
+
+Route::get('/chef/Etudiant/{etudiant}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiant']);
+
+Route::post('suppetudiant',[ChefDepartementController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiant');
+
 Route::middleware(['auth','prof'])->group(function () {
 
 });
