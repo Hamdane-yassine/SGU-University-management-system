@@ -45,7 +45,7 @@ class Etudiant extends Model
 		'apogee' => 'int'
 	];
 
-	protected $dates = [
+	protected $year = [
 		'anneeDuBaccalaureat'
 	];
 

@@ -32,11 +32,13 @@ class Semestre extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'idAnnee' => 'int'
+		'idAnnee' => 'int',
+		'idFiliere' => 'int'
 	];
 
 	protected $fillable = [
 		'idAnnee',
+		'idFiliere',
 		'nom'
 	];
 
@@ -48,5 +50,10 @@ class Semestre extends Model
 	public function modules()
 	{
 		return $this->hasMany(Module::class, 'idSemestre');
+	}
+
+	public function filiere()
+	{
+		return $this->belongsTo(Filiere::class, 'idFiliere');
 	}
 }

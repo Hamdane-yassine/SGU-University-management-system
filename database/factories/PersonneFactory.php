@@ -28,9 +28,9 @@ class PersonneFactory extends Factory
             'cin' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail,
             'tel' => $this->faker->phoneNumber,
-            'dateNaissance' => now(),
+            'dateNaissance' =>  $this->faker->date(),
             'nationalite' => $this->faker->colorName,
-            'lieuNaissance' => now(),
+            'lieuNaissance' => $this->faker->name(),
             'emailInstitutionne' =>  $this->faker->safeEmail,
 
         ];

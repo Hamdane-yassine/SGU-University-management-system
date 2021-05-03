@@ -36,7 +36,7 @@ class EtudiantFactory extends Factory
             'idFiliere' => $i++,
             'cne'=>$this->faker->randomDigit(),
             'apogee'=>$this->faker->randomDigit(),
-            'anneeDuBaccalaureat'=>$this->faker->date(),
+            'anneeDuBaccalaureat'=>$this->faker->year(),
             'cinMere'=>$this->faker->randomDigit(),
             'cinPere'=>$this->faker->randomDigit(),
             'regimeDeCovertureMedicale'=>'oui',

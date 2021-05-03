@@ -1,5 +1,5 @@
 @extends('layouts.prof')
-@section('title','Génie Logiciel - GL1')
+@section('title',"$filiere->nom $filiere->niveau")
 @section('SpecialStyles')
 <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/switchery/switchery.min.css') }}">
 <!-- bootstrap-tagsinput css -->
@@ -14,7 +14,7 @@
                 <div class="card-box mb-30">
                     <div class="pd-20 row pt-30">
                         <div class="col-md-6 col-sm-12">
-                            <h4 class="text-blue h4">Génie Logiciel - GL1</h4>
+                            <h4 class="text-blue h4">{{ $filiere->nom . ' ' . $filiere->niveau }}</h4>
                         </div>
                         <div class="col-md-6 col-sm-12 text-right">
                             <div class="text-right font-14 text-secondary weight-500">Insértion des notes <input
@@ -34,170 +34,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td scope="row" rowspan="4">Semestre 1</td>
-                                    <td scope="row" class="text-center">M1</td>
-                                    <td scope="row">Langues et Techniques d’Expression</td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Français</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Anglais</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Motricité et Activité de Développement</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Techniques d’Expression et de Communication
-                                                    (TEC)</a></li>
-                                        </ul>
-                                    </td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li>25</li>
-                                            <li>25</li>
-                                            <li>20</li>
-                                            <li>30</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="text-center">M2</td>
-                                    <td scope="row">Mathématiques pour informatique</td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Analyse</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Algèbre</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Probabilités et Statistique</a></li>
-                                        </ul>
-                                    </td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li>40</li>
-                                            <li>30</li>
-                                            <li>20</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="text-center">M3</td>
-                                    <td scope="row">Architecture des Ordinateurs</td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Architecture d’ordinateur</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Electronique numérique</a></li>
-                                        </ul>
-                                    </td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li>40</li>
-                                            <li>40</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="text-center">M4</td>
-                                    <td scope="row">Algorithmique et Programmation</td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Algorithmique</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Programmation C</a></li>
-                                        </ul>
-                                    </td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li>44</li>
-                                            <li>46</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" rowspan="4">Semestre 2</td>
-                                    <td scope="row" class="text-center">M5</td>
-                                    <td scope="row">Programmation orientée objet</td>
-                                    <td scope="row">
-                                        <ul>
-
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Structures de données</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Pratique de la programmation JAVA</a></li>
-                                        </ul>
-                                    </td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li>44</li>
-                                            <li>46</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="text-center">M6</td>
-                                    <td scope="row">Systèmes d’Exploitation et Réseaux Informatique</td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Introduction au Système d’exploitation Unix</a>
-                                            </li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Introduction aux réseaux informatiques</a></li>
-                                        </ul>
-                                    </td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li>44</li>
-                                            <li>46</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="text-center">M7</td>
-                                    <td scope="row">Systèmes d’Information et Bases de Données</td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Analyse et Conception des Systèmes
-                                                    d’Information</a>
-                                            </li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Bases de données Relationnelles</a></li>
-                                        </ul>
-                                    </td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li>50</li>
-                                            <li>40</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="text-center">M8</td>
-                                    <td scope="row">Langues et Techniques Communication</td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Français</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Anglais</a></li>
-                                            <li> &#8594; <a href="Notes.html" class="card-link text-primary"
-                                                    target="_blank">Techniques d’Expression et de Communication
-                                                    (TEC)</a></li>
-                                        </ul>
-                                    </td>
-                                    <td scope="row">
-                                        <ul>
-                                            <li>30</li>
-                                            <li>30</li>
-                                            <li>30</li>
-                                        </ul>
-                                    </td>
-                                </tr>
+                                @foreach ($filiere->semestres as $semestre )
+                                    @php
+                                        $rowspanval = count($semestre->modules) + 1;
+                                        $NumMod = 0;
+                                    @endphp
+                                    <tr>
+                                        <td scope="row" rowspan="{{ $rowspanval }}" class="text-center">{{ $semestre->nom }}</td>
+                                    </tr>
+                                    @foreach ( $semestre->modules as $module)
+                                        @php
+                                            $NumMod++;
+                                        @endphp
+                                        <tr>
+                                            <td scope="row" class="text-center">M{{ $NumMod }}</td>
+                                            <td scope="row">{{ $module->nom }}</td>
+                                            <td scope="row">
+                                                <ul>
+                                                    @foreach ($module->matieres as $matiere)
+                                                        <li> &#8594; <a href="/chef/notes/{{ $matiere->idMatiere }}" class="card-link text-primary"
+                                                            target="_blank">{{ $matiere->nom }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td scope="row">
+                                                <ul>
+                                                    @foreach ($module->matieres as $matiere)
+                                                        <li>{{ $matiere->vh }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
                             </tbody>
                         </table>
 

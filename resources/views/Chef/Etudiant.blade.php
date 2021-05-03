@@ -119,7 +119,7 @@
                                         <input type="hidden" id="idEtudiant" name="idEtudiant" value="">
                                         <button type="submit"
                                             class="btn btn-primary border-radius-100 btn-block confirmation-btn"
-                                            data-dismiss="modal"><i class="fa fa-check"></i></button>
+                                            ><i class="fa fa-check"></i></button>
                                         OUI
                                     </form>
                                 </div>
@@ -132,7 +132,9 @@
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
-                        <form>
+                        <form action="{{ route('updateEtudiant') }}" method="POST" id="updEtud">
+                            @csrf
+                            <input type="hidden" id="inIdEtudiant" name="inIdEtudiant">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
@@ -141,33 +143,33 @@
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Nom</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" type="text" placeholder="Nom" value="HAMDANE">
+                                            <input class="form-control" type="text" id="innom" name="innom" placeholder="Nom" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Prénom</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Prénom" type="text" value="YASSINE">
+                                            <input class="form-control" placeholder="Prénom" id="inprenom" name="inprenom" type="text" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Code Apogée</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="19020547" type="number">
+                                            <input class="form-control" value="" id="inapogee" name="inapogee" type="number" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Code Massar</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="J136461372" type="text">
+                                            <input class="form-control" value="" id="incne" name="incne" type="text" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Genre</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select class="custom-select col-12">
-                                                <option value="1" selected>Masculin</option>
-                                                <option value="2">Féminin</option>
+                                            <select class="custom-select col-12" id="ingenre" name="ingenre">
+                                                <option value="Masculin" selected>Masculin</option>
+                                                <option value="Féminin">Féminin</option>
                                             </select>
                                         </div>
                                     </div>
@@ -175,93 +177,93 @@
                                         <label class="col-sm-12 col-md-2 col-form-label">Naissance</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control date-picker" placeholder="Date de naissance"
-                                                type="text" value="16/02/2001">
+                                                type="text" id="indatenais" name="indatenais" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Situation
                                             familiale</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select class="custom-select col-12">
-                                                <option value="1" selected>Célibataire</option>
-                                                <option value="2">Divorcé</option>
-                                                <option value="3">Marié</option>
+                                            <select class="custom-select col-12" id="insituation" name="insituation">
+                                                <option value="Célibataire" selected>Célibataire</option>
+                                                <option value="Divorcé">Divorcé</option>
+                                                <option value="Marié">Marié</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Nationalité</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Nationalité" type="text"
-                                                value="MAROCAIN(E)">
+                                            <input class="form-control" placeholder="Nationalité" type="text" id="innationalite" name="innationalite"
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Lieu de naissance</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Lieu de naissance" type="text"
-                                                value="RABAT">
+                                            <input class="form-control" placeholder="Lieu de naissance" type="text" id="inLieuNaissance" name="inLieuNaissance"
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="N° C.N.I.E" type="text"
-                                                value="AE293178">
+                                            <input class="form-control" placeholder="N° C.N.I.E" type="text" id="incin" name="incin"
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(père)</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="N° C.N.I.E du père" type="text"
-                                                value="E322801">
+                                            <input class="form-control" placeholder="N° C.N.I.E du père" type="text" id="incinpere" name="incinpere"
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(mère)</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="N° C.N.I.E de la mère" type="text"
-                                                value="AB306235">
+                                            <input class="form-control" placeholder="N° C.N.I.E de la mère" type="text" id="incinmere" name="incinmere"
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Adresse</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Adresse" type="text"
-                                                value="RES ELBOUSTANE IMM G11 APT 33 LOT SAID HAJJI SALE">
+                                            <input class="form-control" placeholder="Adresse" type="text" id="inadresse" name="inadresse"
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Téléphone</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="0672387235" type="tel">
+                                            <input class="form-control" value="" type="tel" id="intel" name="intel" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail personnel</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="amirnet001@gmail.com" type="email">
+                                            <input class="form-control" value="" type="email" id="inemail" name="inemail" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail
                                             institutionnel</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="yassine_hamdane@um5.ac.ma" type="email">
+                                            <input class="form-control" value="" id="inemailins" name="inemailins" type="email" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Année du BAC</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="2019" type="number">
+                                            <input class="form-control" value="" type="number" min="2015" id="inannebac" name="inannebac" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Couverture
                                             médicale</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Couverture médicale" type="text"
-                                                value="Aucune couverture">
+                                            <input class="form-control" placeholder="Couverture médicale" type="text" id="incouv" name="incouv"
+                                                value="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -331,7 +333,7 @@
                 {
                     data: 'idEtudiant',
                     render: function(data, type, full, meta) {
-                        return '<div class="table-actions pl-1"><a href="#" style="color: #265ed7" data-toggle="modal" data-target="#bd-edit-modal"><i class="icon-copy dw dw-edit2"></i></a> <a href="#" style="color : #e95959" onclick="setIdEtudiant(' +
+                        return '<div class="table-actions pl-1"><a href="#" style="color: #265ed7" onclick="getEtudiantIn('+data+')" data-toggle="modal" data-target="#bd-edit-modal"><i class="icon-copy dw dw-edit2"></i></a> <a href="#" style="color : #e95959" onclick="setIdEtudiant(' +
                             data +
                             ')" data-toggle="modal" data-target="#confirmation-modal" type="button"><i class="icon-copy dw dw-delete-3"></i></a></div>'
                     },
@@ -407,6 +409,36 @@
                 }
             })
         };
+        
+        function getEtudiantIn(id) {
+            $.ajax({
+                type: 'GET',
+                url: "/chef/Etudiant/" + id,
+                dataType: 'JSON',
+                data: {},
+                success: function(response) {
+                    document.getElementById("innom").value = response[0].nom;
+                    document.getElementById("inprenom").value = response[0].prenom;
+                    document.getElementById("inapogee").value = response[0].apogee;
+                    document.getElementById("incne").value = response[0].cne;
+                    document.getElementById("ingenre").value = response[0].genre;
+                    document.getElementById("indatenais").value = response[0].dateNaissance;
+                    document.getElementById("insituation").value = response[0].situationFamiliale;
+                    document.getElementById("innationalite").value = response[0].nationalite;
+                    document.getElementById("inLieuNaissance").value = response[0].lieuNaissance;
+                    document.getElementById("incin").value = response[0].cin;
+                    document.getElementById("incinpere").value = response[0].cinPere;
+                    document.getElementById("incinmere").value = response[0].cinMere;
+                    document.getElementById("inadresse").value = response[0].adressePersonnele;
+                    document.getElementById("intel").value = response[0].tel;
+                    document.getElementById("inemail").value = response[0].email;
+                    document.getElementById("inemailins").value = response[0].emailInstitutionne;
+                    document.getElementById("inannebac").value = response[0].anneeDuBaccalaureat;
+                    document.getElementById("incouv").value = response[0].regimeDeCovertureMedicale;
+                    document.getElementById("inIdEtudiant").value = response[0].idEtudiant;
+                }
+            })
+        };
 
         function setIdEtudiant(id) {
             document.getElementById("idEtudiant").value = id;
@@ -421,6 +453,21 @@
                 data: form.serialize(), // serializes the form's elements.
                 success: function(data) {
                     $('#confirmation-modal').modal('hide');
+                    table1.ajax.reload();
+                }
+            });
+        });
+
+        $("#updEtud").submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data) {
+                    $('#bd-edit-modal').modal('hide');
                     table1.ajax.reload();
                 }
             });

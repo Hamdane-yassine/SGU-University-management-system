@@ -22,12 +22,12 @@ class CreatePersonneTable extends Migration {
 			$table->string('cin', 254);
 			$table->string('email', 254);
 			$table->string('tel', 254);
-			$table->dateTime('dateNaissance');
+			$table->date('dateNaissance');
 			$table->string('nationalite', 254);
 			$table->String('lieuNaissance');
-			$table->enum('genre', ['mâle', 'femelle']);
+			$table->enum('genre', ['Masculin', 'Féminin']);
 			$table->string('emailInstitutionne', 254);
-			$table->string('situationFamiliale', 254)->nullable();
+			$table->enum('situationFamiliale', ['Célibataire', 'Divorcé','Marié']);
 		}); 
 	}
 
