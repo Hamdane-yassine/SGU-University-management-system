@@ -337,6 +337,47 @@ class ChefDepartementController extends Controller
         return view('chef.profs', ['departement' => $departement]);
     }
 
+    public function AbsencesIndex() //load abseces and return view for /chef/absence
+    {
+        return view('chef.absences');
+    }
+
+    public function getAbsencesForChef(Request $request)
+    {
+        $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
+        $profs = Professeur::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
+        $absences = Absence::whereIn('absence.idProf',$profs)
+        ->join('professeur','absence.idProf','=','professeur.idProf')
+        ->join('users','users.id','=','professeur.idUtilisateur')
+        ->join('matiere','matiere.idMatiere','=','absence.idMatiere')
+        ->join('module','module.idModule','matiere.idModule')
+        ->join('filiere','filiere.idFiliere','module.idFiliere')
+        ->select('Absence.idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','users.name as nomProf','Absence.dateAbsence as dateAbsence','Absence.etat')
+        ->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($absences)
+            ->editColumn('dateAbsence', function ($request) {
+                return $request->dateAbsence->toDayDateTimeString();
+            })
+            ->addColumn('etat', function($row)
+            {
+                $btn = ' ';
+                if($row->etat == 'rattrapée')
+                {
+                    $btn = '<span style="background-color: #33cc33;" class="badge badge-pill">Rattrapé</span>';
+                }
+                else
+                {
+                    $btn = '<span style="background-color: #ff4d4d;" class="badge badge-pill">En attend</span>';
+                }
+                return $btn;
+            })
+            ->rawColumns(['etat'])
+            ->make(true);
+        }
+    }
+
     // public function getProfesseurs(Request $request , Departement $departement)
     // {
     //     $professeurs = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
