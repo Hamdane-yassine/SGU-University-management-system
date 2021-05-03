@@ -130,8 +130,10 @@ class ChefDepartementController extends Controller
     {
         $idEtudiant = request('idEtudiant');
         $etudiant = Etudiant::find($idEtudiant);
-       // $etudiant->personne->delete();
+        $idPersonne = $etudiant->idPersonne;
+        $personne = Personne::find($idPersonne);
         $etudiant->delete();
+        $personne->delete();
     }
     public function deleteEmploi($idEmploi)
     {
@@ -257,6 +259,27 @@ class ChefDepartementController extends Controller
     }
     public function UpdateEtudiant()
     {
+        request()->validate([
+            'inIdEtudiant' => 'required',
+            'innom' => 'required',
+            'inprenom' => 'required',
+            'insituation' => 'required',
+            'ingenre' => 'required',
+            'indatenais' => ['required','date'],
+            'innationalite' => 'required',
+            'inLieuNaissance' => 'required',
+            'inadresse' => 'required',
+            'incin' => 'required',
+            'intel' => 'required',
+            'inemail' => ['required','email'],
+            'inemailins' => ['required','email'],
+            'inapogee' => 'required',
+            'incne' => 'required',
+            'incinpere' => 'required',
+            'incinmere' => 'required',
+            'inannebac' => 'required',
+            'incouv' => 'required'
+        ]);
         $idEtudiant=request('inIdEtudiant');
         $etudiant = Etudiant::find($idEtudiant);
         $idPersonne = $etudiant->idPersonne;
@@ -282,4 +305,32 @@ class ChefDepartementController extends Controller
         $personne->save();
         $etudiant->save();
     }
+
+    public function Matieres(Filiere $filiere)
+    {
+        return view('chef.matieres', ['filiere' => $filiere]);
+    }
+
+    public function getNotes(Matiere $matiere)
+    {
+        return view('chef.Notes', ['matiere' => $matiere]);
+    }
+
+    public function getListNotes(Request $request,Matiere $matiere)  //an ajax function to retrieve tha data
+    {
+
+       $notes = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
+       ->join('module','module.idModule','=','matiere.idModule')
+       ->join('filiere','module.idFiliere','=','filiere.idFiliere')
+       ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
+       ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
+       ->leftJoin('note', 'etudiant.idEtudiant', '=', 'note.idEtudiant')
+       ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral')
+       ->get();
+       if ($request->ajax()) {
+            return Datatables::of($notes)
+            ->make(true);
+        }
+    }
+
 }

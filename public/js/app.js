@@ -1914,13 +1914,6 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
-window.Echo["private"]('hello').listen('.Evt', function (e) {
-  console.log(e);
-}).on('pusher:subscription_succeeded', function (member) {
-  console.log('successfully subscribed!');
-});
-
-function AddNotification(params) {}
 
 /***/ }),
 

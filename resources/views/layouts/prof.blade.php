@@ -235,7 +235,6 @@
                         @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
                               <li><a href="/chef/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom }}</a></li>
                         @endforeach
-
                     </ul>
                 </li>
 
@@ -245,8 +244,9 @@
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Notes</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="index.html">Génie Logiciel - GL1</a></li>
-                        <li><a href="index2.html">Administrateur Réseaux</a></li>
+                        @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
+                              <li><a href="/chef/matieres/{{ $filiere->idFiliere }}">{{ $filiere->nom }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
 
@@ -302,6 +302,14 @@
 <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
+<script>
+    window.Echo.private('hello')
+    .listen('.Evt', (e) => {
+        console.log(e);
+    }).on('pusher:subscription_succeeded', (member) => {
+        console.log('successfully subscribed!');
+    });
+</script>
 @yield('SpecialScripts')
 </body>
 </html>

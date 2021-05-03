@@ -1,12 +1,12 @@
 @extends('layouts.prof')
-@section('title','Francais')
+@section('title',"$matiere->nom")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
                 <div class="card-box mb-30">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">Francais - GL1</h4>
+                        <h4 class="text-blue h4">{{ $matiere->nom }}</h4>
                     </div>
                     <div class="pb-20">
 
@@ -23,152 +23,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">8</td>
-                                    <td style="padding-left: 30px;">---</td>
-                                    <td>&nbsp;---</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">19020547</td>
-                                    <td>HAMDANE</td>
-                                    <td>YASSINE</td>
-                                    <td>&nbsp;J136461372</td>
-                                    <td style="padding-left: 30px;">17</td>
-                                    <td style="padding-left: 30px;">15</td>
-                                    <td>&nbsp;16,5</td>
-                                </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myLargeModalLabel">Modifier Les notes</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group row" style="padding-left: 5px;">
-                                <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Controle</label>
-                                <div class="col-sm-12 col-md-4">
-                                    <input class="form-control" value="17.5" type="number">
-                                </div>
-                                <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
-                                <div class="col-sm-12 col-md-3">
-                                    <input class="form-control" value="25" step="25" max="100" min="0" type="number">
-                                </div>
-                            </div>
-                            <div class="form-group row" style="padding-left: 5px;">
-                                <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Examen</label>
-                                <div class="col-sm-12 col-md-4">
-                                    <input class="form-control" value="17.5" type="number">
-                                </div>
-                                <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
-                                <div class="col-sm-12 col-md-3">
-                                    <input class="form-control" value="25" step="25" max="100" min="0" type="number">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitter</button>
-                            <button type="button" class="btn btn-primary">Enregistrer</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -194,5 +50,81 @@
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
     <!-- Datatable Setting js -->
-    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
+    <script>
+        var table1 = $('.data-table-export').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('ListNotesChef',['matiere' => $matiere]) }}",
+            columns: [
+                {data: 'apogee', name: 'apogee'},
+                {data: 'nom', name: 'nom'},
+                {data: 'prenom', name: 'prenom'},
+                {data: 'cne', name: 'cne'},
+                {
+                  data: 'controle',
+                  render:function(data,type,full,meta){
+                       if(data==null)
+                       {
+                        return '<span style="padding-left: 17px;">&nbsp;---</span>'
+                       }else{
+                        return '<span style="padding-left: 15px;">'+data+'</span>'
+                       }
+                     }
+                },
+                {
+                  data: 'exam', 
+                  render:function(data,type,full,meta){
+                       if(data==null)
+                       {
+                        return '<span style="padding-left: 17px;">&nbsp;---</span>'
+                       }else{
+                        return '<span style="padding-left: 15px;">'+data+'</span>'
+                       }
+                     }
+                },
+                {
+                    data: 'noteGeneral',
+                    render:function(data,type,full,meta){
+                       if(data==null)
+                       {
+                        return '<span>&nbsp;---</span>'
+                       }else{
+                        return '<span>'+data+'</span>'
+                       }
+                     }
+                },
+            ],
+            scrollCollapse: true,
+            autoWidth: false,
+            responsive: true,
+            columnDefs: [{
+                targets: "datatable-nosort",
+                orderable: false,
+            }],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                "emptyTable": "Aucune donnée disponible dans le tableau",
+                "lengthMenu": "Afficher _MENU_ éléments",
+                "zeroRecords": "Aucun élément correspondant trouvé",
+                "processing": "Traitement...",
+                "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                "loadingRecords": "Chargement...",
+                "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                search: "Rechercher:",
+                searchPlaceholder: "Rechercher",
+                paginate: {
+                    next: '<i class="ion-chevron-right"></i>',
+                    previous: '<i class="ion-chevron-left"></i>'  
+                }
+            },
+            dom: '<"top"<"left-col"B><"right-col"f>>rtip',
+            buttons: [
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
+            }
+            ]
+        });
+    </script>
     @endsection
