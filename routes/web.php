@@ -78,7 +78,7 @@ Route::middleware(['auth','prof'])->group(function () {
 });
 
 Route::get('/h', function () {
-    event(new \App\Events\Evt);
+    broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
     return json_decode('dispatched');
 

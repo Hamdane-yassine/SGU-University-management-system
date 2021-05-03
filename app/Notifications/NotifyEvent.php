@@ -2,7 +2,8 @@
 
 namespace App\Notifications;
 
-use App\Models\Evenemnt;
+use App\Models\Evenement;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -20,7 +21,7 @@ class NotifyEvent extends Notification implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Evenemnt $Event)
+    public function __construct()
     {
 
     }
@@ -33,7 +34,8 @@ class NotifyEvent extends Notification implements ShouldBroadcast
      */
     public function via($notifiable)
     {
-        return ['database'];
+        // return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -56,29 +58,40 @@ class NotifyEvent extends Notification implements ShouldBroadcast
      * @param  mixed  $notifiable
      * @return array
      */
+    // public function toBroadcast($notifiable)
+    // {
+    //     return [
+    //         'image'=>'Hello World',
+    //         'type'=>'ZOOOOO',
+    //         'info'=>'',
+    //     ];
+    // }
     public function toArray($notifiable)
     {
         return [
-            'image'=>$notifiable->name,
-            'link'=>'',
-            'info'=>'',
+            'image' =>'Hello WORLLLD'
         ];
     }
 
-    public function broadcastWith()
-    {
-        return [
-            'msg'=> 'Hello'
-        ];
-    }
-
+    // public function broadcastWith()
+    // {
+    //     return [
+    //         'msg'=> 'Hello'
+    //     ];
+    // }
     public function broadcastAs()
     {
         return 'Evt';
     }
 
+
     public function broadcastOn()
     {
-        return new PrivateChannel('hello');
+        return new Channel('hello');
     }
+
+    // public function broadcastType()
+    // {
+    // return 'broadcast.message';
+    // }
 }

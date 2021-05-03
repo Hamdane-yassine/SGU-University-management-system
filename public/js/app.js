@@ -1850,22 +1850,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log('Component mounted.'); // Echo.channel(`hello`)
+  mounted: function mounted() {// console.log('Component mounted.');
+    // Echo.channel(`hello`)
     // .listen('Evt', (e) => {
     //     console.log(e.msg);
     // });
-
-    Pusher.logToConsole = true;
-    var pusher = new Pusher('175b6522f4a3c21fa191', {
-      cluster: 'eu'
-    });
-    var channel = pusher.subscribe('hello');
-    channel.bind('pusher:subscription_succeeded', function (members) {// alert('successfully subscribed!');
-    });
-    channel.bind('\\App\\Events\\Evt', function (data) {
-      console.log(data);
-    });
+    // Pusher.logToConsole = true;
+    // var pusher = new Pusher('175b6522f4a3c21fa191', {
+    //     cluster: 'eu'
+    // });
+    // var channel = pusher.subscribe('hello');
+    // channel.bind('pusher:subscription_succeeded', function(members) {
+    //     // alert('successfully subscribed!');
+    // });
+    // channel.bind('.Evt', function(data) {
+    //         console.log(data);
+    // });
   },
   methods: {
     post: function post() {
