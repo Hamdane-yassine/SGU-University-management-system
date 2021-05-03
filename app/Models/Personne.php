@@ -54,7 +54,6 @@ class Personne extends Model
 		'prenom',
 		'adressePersonnele',
 		'cin',
-		'email',
 		'tel',
 		'dateNaissance',
 		'nationalite',
