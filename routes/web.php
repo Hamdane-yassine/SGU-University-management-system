@@ -96,3 +96,7 @@ Route::get('chef/emploi/delete/filiere/{idEmploi}', [ChefDepartementController::
 
 Route::post('/chef/upload/',[ChefDepartementController::class, 'uploadEmploi'])->name('uploadEmploi');
 
+Route::get('/chef/absences',[ChefDepartementController::class, 'AbsencesIndex']);
+
+Route::get('/chef/absencesDataTable',[ChefDepartementController::class, 'getAbsencesForChef'])->name('getAbsencesForChef');
+
