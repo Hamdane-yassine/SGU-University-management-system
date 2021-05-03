@@ -16,7 +16,7 @@
 
                             @if( $path_to_file != 'notFound')
                                 <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item" src={{ $path_to_file }}> </iframe> <!-- pdf reader -->
+                                    <iframe class="embed-responsive-item" src="{{ $path_to_file }}"> </iframe> <!-- pdf reader -->
                                 </div>
                             @else
                                 <p>Emploi non trouvé , peut-être qu'il n'y a pas encore d'entrées d'emploi pour cette filiere</p>

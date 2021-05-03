@@ -21,7 +21,6 @@ class ChefDepartementController extends Controller
 {
     public function index()
     {
-        /*
         //return list of profs in this department
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $profs = Professeur::where('idDepartement',$idDepartement)
@@ -30,11 +29,7 @@ class ChefDepartementController extends Controller
 
         //return list of filiere in that departement
         $filieres = Filiere::where('idDepartement',$idDepartement)->select('idFiliere','nom','niveau')->get();
-        return view('chef.emploi',['profs' => $profs , 'filieres' => $filieres]);*/
-        $emploi = new Emploi;
-        $emploi->filename = 'tt';
-        $emploi->save();
-        echo 'rrrrr';
+        return view('chef.emploi',['profs' => $profs , 'filieres' => $filieres]);
     }
 
     public function getListOfProfEmploi(Request $request)

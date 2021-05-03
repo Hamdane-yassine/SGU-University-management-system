@@ -180,7 +180,13 @@ class ProfesseurController extends Controller
 
     public function getMyEmploi()
     {
-        echo $file_name = auth()->user()->professeur->emploi->fileName;
+        $idEmploi = auth()->user()->professeur->idEmploi;
+        if(is_null($idEmploi))
+        {
+            return view('prof.emploi',['path_to_file' => 'notFound', 'Mine' => 'true']);
+        }
+        $emploi = Emploi::find($idEmploi);
+        $file_name = $emploi->fileName;
         $path_to_file = asset('storage/emploi/prof/'.$file_name); // storage/emploi/prof/lasfar.pdf
         if (Storage::exists('emploi/prof/'.$file_name))
         {
@@ -191,16 +197,18 @@ class ProfesseurController extends Controller
 
     public function getEmploiByFiliere($id)
     {
-        echo $file_name = Filiere::where('filiere.idFiliere',$id)
-        ->join('emploi','emploi.idEmploi','=','filiere.idEmploi')
-        ->select('filename')->get()[0]->filename;
-
+        $idEmploi = Filiere::find($id)->idEmploi;
+        if(is_null($idEmploi))
+        {
+            return view('prof.emploi',['path_to_file' => 'notFound', 'Mine' => 'false']);
+        }
+        echo $file_name = Emploi::find($idEmploi)->fileName;
         $path_to_file = asset('storage/emploi/filiere/'.$file_name);
         if (Storage::exists('emploi/filiere/'.$file_name))
-        {
+        {;
             return view('prof.emploi',['path_to_file' => $path_to_file, 'Mine' => 'false']);
         }
-        return view('prof.emploi',['path_to_file' => 'notFound', 'Mine' => 'false']);
+            return view('prof.emploi',['path_to_file' => 'notFound', 'Mine' => 'false']);
     }
 
 
