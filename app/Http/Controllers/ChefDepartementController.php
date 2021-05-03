@@ -13,6 +13,7 @@ use App\Models\Filiere;
 use App\Models\Matiere;
 use App\Models\Note;
 use App\Models\Module;
+use App\Models\Personne;
 use App\Models\Professeur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -106,14 +107,33 @@ class ChefDepartementController extends Controller
 
        $etudiant = Etudiant::where('idEtudiant',$etudiant->idEtudiant)  //first inint a user id
        ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
-       ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale')
+       ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale','etudiant.idEtudiant')
        ->get();
        if ($request->ajax()) {
             echo json_encode($etudiant);
         }
     }
 
-    public function deleteEmploiProf($idEmploi)
+
+   public function deleteEmploiProf($idEmploi)
+    {
+        echo $idEmploi;
+        $emploi = Emploi::find($idEmploi);
+        $filename = $emploi->fileName;
+        Storage::delete('emploi/prof/'.$filename);  //delete the physical file
+        $emploi->delete();
+        return redirect('/chef/emploi');
+    }
+
+
+    public function SupprimerEtudiant()
+    {
+        $idEtudiant = request('idEtudiant');
+        $etudiant = Etudiant::find($idEtudiant);
+       // $etudiant->personne->delete();
+        $etudiant->delete();
+    }
+    public function deleteEmploi($idEmploi)
     {
         echo $idEmploi;
         $emploi = Emploi::find($idEmploi);
@@ -234,5 +254,32 @@ class ChefDepartementController extends Controller
         }
             return redirect('/chef/emploi'); //just in case
 
+    }
+    public function UpdateEtudiant()
+    {
+        $idEtudiant=request('inIdEtudiant');
+        $etudiant = Etudiant::find($idEtudiant);
+        $idPersonne = $etudiant->idPersonne;
+        $personne = Personne::find($idPersonne);
+        $personne->nom=request('innom');
+        $personne->prenom=request('inprenom');
+        $personne->situationFamiliale=request('insituation');
+        $personne->genre=request('ingenre');
+        $personne->dateNaissance=request('indatenais');
+        $personne->nationalite=request('innationalite');
+        $personne->lieuNaissance=request('inLieuNaissance');
+        $personne->adressePersonnele=request('inadresse');
+        $personne->cin=request('incin');
+        $personne->tel=request('intel');
+        $personne->email=request('inemail');
+        $personne->emailInstitutionne=request('inemailins');
+        $etudiant->apogee=request('inapogee');
+        $etudiant->cne=request('incne');
+        $etudiant->cinPere=request('incinpere');
+        $etudiant->cinMere=request('incinmere');
+        $etudiant->anneeDuBaccalaureat=request('inannebac');
+        $etudiant->regimeDeCovertureMedicale=request('incouv');
+        $personne->save();
+        $etudiant->save();
     }
 }

@@ -47,7 +47,6 @@ class Personne extends Model
 
 	protected $dates = [
 		'dateNaissance',
-		'lieuNaissance'
 	];
 
 	protected $fillable = [
