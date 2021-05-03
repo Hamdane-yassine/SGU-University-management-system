@@ -2,7 +2,9 @@
 
 namespace App\Notifications;
 
-use App\Models\Evenemnt;
+use App\Models\Evenement;
+use App\Models\User;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -13,14 +15,21 @@ class NotifyEvent extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-    public $event;
+    public Evenement $event;
+    public User $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Evenemnt $Event)
+    // public function __construct(User $user, Evenement $evenement)
+    // {
+    //     $this->user = $user;
+    //     $this->event = $evenement;
+
+    // }
+    public function __construct()
     {
 
     }
@@ -33,7 +42,8 @@ class NotifyEvent extends Notification implements ShouldBroadcast
      */
     public function via($notifiable)
     {
-        return ['database'];
+        // return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -56,29 +66,43 @@ class NotifyEvent extends Notification implements ShouldBroadcast
      * @param  mixed  $notifiable
      * @return array
      */
+    // public function toBroadcast($notifiable)
+    // {
+    //     return [
+    //         'image'=>'Hello World',
+    //         'type'=>'ZOOOOO',
+    //         'info'=>'',
+    //     ];
+    // }
     public function toArray($notifiable)
     {
         return [
-            'image'=>$notifiable->name,
-            'link'=>'',
-            'info'=>'',
+            'image' =>'Hello WORLLLD',
+            // 'user'=>$this->user->email,
+            // 'event from '=>$this->event->chefdep,
         ];
     }
 
-    public function broadcastWith()
-    {
-        return [
-            'msg'=> 'Hello'
-        ];
-    }
 
-    public function broadcastAs()
-    {
-        return 'Evt';
-    }
+    // public function broadcastWith()
+    // {
+    //     return [
+    //         'msg'=> 'Hello'
+    //     ];
+    // }
+    // public function broadcastAs()
+    // {
+    //     return 'Evt';
+    // }
 
-    public function broadcastOn()
-    {
-        return new PrivateChannel('hello');
-    }
+
+    // public function broadcastOn()
+    // {
+    //     return new Channel('hello');
+    // }
+
+    // public function broadcastType()
+    // {
+    // return 'broadcast.message';
+    // }
 }

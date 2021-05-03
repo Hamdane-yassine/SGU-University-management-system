@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToEvenemntTable extends Migration {
+class AddForeignKeysToEvenementTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,7 +13,7 @@ class AddForeignKeysToEvenemntTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('evenemnt', function(Blueprint $table)
+		Schema::table('Evenement', function(Blueprint $table)
 		{
 			$table->foreign('ID_chef','fk12')->references('ID_chef')->on('chefdep')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
@@ -27,7 +27,7 @@ class AddForeignKeysToEvenemntTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('evenemnt', function(Blueprint $table)
+		Schema::table('Evenement', function(Blueprint $table)
 		{
 			$table->dropForeign('fk12');
 		});

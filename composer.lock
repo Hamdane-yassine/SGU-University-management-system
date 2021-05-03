@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "052fccd8436d935831459717f2a8b836",
+    "content-hash": "585a1c97bb6bf3d20d89cd3d2923b13a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2640,22 +2640,23 @@
         },
         {
             "name": "pusher/pusher-php-server",
-            "version": "5.0.3",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pusher/pusher-http-php.git",
-                "reference": "1024077ff60beebaf5706b4e0208a1e648d20cf4"
+                "reference": "8673f60458ceedb9531fad7a5747eb49de619a8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/1024077ff60beebaf5706b4e0208a1e648d20cf4",
-                "reference": "1024077ff60beebaf5706b4e0208a1e648d20cf4",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/8673f60458ceedb9531fad7a5747eb49de619a8a",
+                "reference": "8673f60458ceedb9531fad7a5747eb49de619a8a",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
+                "guzzlehttp/guzzle": "^7.2",
                 "paragonie/sodium_compat": "^1.6",
-                "php": "^7.1|^8.0",
+                "php": "^7.2.5|^8.0",
                 "psr/log": "^1.0"
             },
             "require-dev": {
@@ -2693,9 +2694,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pusher/pusher-http-php/issues",
-                "source": "https://github.com/pusher/pusher-http-php/tree/5.0.3"
+                "source": "https://github.com/pusher/pusher-http-php/tree/6.1.0"
             },
-            "time": "2021-03-15T09:17:01+00:00"
+            "time": "2021-03-24T08:23:36+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

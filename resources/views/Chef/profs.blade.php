@@ -22,162 +22,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table-plus">1</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">2</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">3</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">4</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">5</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">6</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">7</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">8</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">9</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">10</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">11</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-plus">12</td>
-                                    <td>Abd ali </td>
-                                    <td>Lasfer</td>
-                                    <td>&nbsp;Informatique</td>
-                                    <td>Lasfer@gmail.com</td>
-                                    <td>0672387235</td>
-                                    <td>
-                                        <a class="dropdown-item" style="background-color:transparent;" href="#"
-                                            data-toggle="modal" data-target="#bd-example-modal-lg"><i
-                                                class="dw dw-eye"></i></a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -371,9 +215,84 @@
     <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-    <!-- Datatable Setting js -->
-    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
-    <!-- add sweet alert js & css in footer -->
-    <script src="{{ asset('src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
-    <script src="{{ asset('src/plugins/sweetalert2/sweet-alert.init.js') }}"></script>
+    <script>
+            var table1 = $('.data-table-export').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('getListProfesseurs', ['departement' => $departement]) }}",
+            columns: [{
+                    data: 'apogee',
+                    name: 'apogee'
+                },
+                {
+                    data: 'nom',
+                    name: 'nom'
+                },
+                {
+                    data: 'prenom',
+                    name: 'prenom'
+                },
+                {
+                    data: 'cne',
+                    name: 'cne'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'tel',
+                    name: 'tel'
+                },
+                {
+                    data: 'idEtudiant',
+                    render: function(data, type, full, meta) {
+                        return '<div class="table-actions pl-1"><a href="#" style="color: #265ed7" onclick="getEtudiantIn('+data+')" data-toggle="modal" data-target="#bd-edit-modal"><i class="icon-copy dw dw-edit2"></i></a> <a href="#" style="color : #e95959" onclick="setIdEtudiant(' +
+                            data +
+                            ')" data-toggle="modal" data-target="#confirmation-modal" type="button"><i class="icon-copy dw dw-delete-3"></i></a></div>'
+                    },
+                },
+                {
+                    data: 'idEtudiant',
+                    render: function(data, type, full, meta) {
+                        return ' <a class="dropdown-item" href="" style="background-color:transparent;" onclick="getEtudiantInfo(' +
+                            data +
+                            ')" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>'
+                    },
+                }
+            ],
+            scrollCollapse: true,
+            autoWidth: false,
+            responsive: true,
+            columnDefs: [{
+                targets: "datatable-nosort",
+                orderable: false,
+            }],
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            "language": {
+                "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                "emptyTable": "Aucune donnée disponible dans le tableau",
+                "lengthMenu": "Afficher _MENU_ éléments",
+                "zeroRecords": "Aucun élément correspondant trouvé",
+                "processing": "Traitement...",
+                "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                "loadingRecords": "Chargement...",
+                "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                search: "Rechercher:",
+                searchPlaceholder: "Rechercher",
+                paginate: {
+                    next: '<i class="ion-chevron-right"></i>',
+                    previous: '<i class="ion-chevron-left"></i>'
+                }
+            },
+            dom: '<"top"<"left-col"B><"right-col"f>>rtip',
+            buttons: [{
+                extend: 'print',
+                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
+            }]
+        });
+    </script>
     @endsection

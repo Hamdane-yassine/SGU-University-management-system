@@ -259,7 +259,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/chef/professeurs/{{ auth()->user()->professeur->chefdep->departement->idDepartement }}" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-user-o"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span
                             class="mtext">Gestion des Professeurs</span>
@@ -303,8 +303,11 @@
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
-    window.Echo.private('hello')
+    // console.log("user id :{{ Auth::user()->id }}")
+    window.Echo.private("App.Models.User.{{ Auth::user()->id }}")
     .listen('.Evt', (e) => {
+        console.log(e);
+    }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (e) => {
         console.log(e);
     }).on('pusher:subscription_succeeded', (member) => {
         console.log('successfully subscribed!');

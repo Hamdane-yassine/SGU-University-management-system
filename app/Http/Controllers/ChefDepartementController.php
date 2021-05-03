@@ -294,10 +294,10 @@ class ChefDepartementController extends Controller
         $personne->adressePersonnele=request('inadresse');
         $personne->cin=request('incin');
         $personne->tel=request('intel');
-        $personne->email=request('inemail');
         $personne->emailInstitutionne=request('inemailins');
         $etudiant->apogee=request('inapogee');
         $etudiant->cne=request('incne');
+        $etudiant->email=request('inemail');
         $etudiant->cinPere=request('incinpere');
         $etudiant->cinMere=request('incinmere');
         $etudiant->anneeDuBaccalaureat=request('inannebac');
@@ -331,6 +331,10 @@ class ChefDepartementController extends Controller
             return Datatables::of($notes)
             ->make(true);
         }
+    }
+    public function Professeurs(Departement $departement)
+    {
+        return view('chef.profs', ['departement' => $departement]);
     }
 
     public function AbsencesIndex() //load abseces and return view for /chef/absence
@@ -374,4 +378,19 @@ class ChefDepartementController extends Controller
         }
     }
 
+    // public function getProfesseurs(Request $request , Departement $departement)
+    // {
+    //     $professeurs = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
+    //    ->join('module','module.idModule','=','matiere.idModule')
+    //    ->join('filiere','module.idFiliere','=','filiere.idFiliere')
+    //    ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
+    //    ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
+    //    ->leftJoin('note', 'etudiant.idEtudiant', '=', 'note.idEtudiant')
+    //    ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral')
+    //    ->get();
+    //    if ($request->ajax()) {
+    //         return Datatables::of($professeurs)
+    //         ->make(true);
+    //     }
+    // }
 }

@@ -20,7 +20,6 @@ class CreatePersonneTable extends Migration {
 			$table->string('prenom', 254);
 			$table->string('adressePersonnele', 254);
 			$table->string('cin', 254);
-			$table->string('email', 254);
 			$table->string('tel', 254);
 			$table->date('dateNaissance');
 			$table->string('nationalite', 254);

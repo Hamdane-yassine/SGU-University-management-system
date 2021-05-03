@@ -10,9 +10,9 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
- * Class Evenemnt
+ * Class Evenement
  *
- * @property int $idEvenemt
+ * @property int $idEvenement
  * @property int|null $ID_chef
  * @property Carbon|null $Date_even
  * @property string|null $message
@@ -21,16 +21,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @package App\Models
  */
-class Evenemnt extends Model
+class Evenement extends Model
 {
     use HasFactory;
-	protected $table = 'evenemnt';
-	protected $primaryKey = 'idEvenemt';
+	protected $table = 'Evenement';
+	protected $primaryKey = 'idEvenement';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'idEvenemt' => 'int',
+		'idEvenement' => 'int',
 		'ID_chef' => 'int'
 	];
 
@@ -44,8 +44,9 @@ class Evenemnt extends Model
 		'message'
 	];
 
+
 	public function chefdep()
 	{
 		return $this->belongsTo(Chefdep::class, 'ID_chef');
 	}
-} 
+}
