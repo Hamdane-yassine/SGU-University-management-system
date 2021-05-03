@@ -21,6 +21,7 @@ class ChefDepartementController extends Controller
 {
     public function index()
     {
+        /*
         //return list of profs in this department
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $profs = Professeur::where('idDepartement',$idDepartement)
@@ -29,7 +30,11 @@ class ChefDepartementController extends Controller
 
         //return list of filiere in that departement
         $filieres = Filiere::where('idDepartement',$idDepartement)->select('idFiliere','nom','niveau')->get();
-        return view('chef.emploi',['profs' => $profs , 'filieres' => $filieres]);
+        return view('chef.emploi',['profs' => $profs , 'filieres' => $filieres]);*/
+        $emploi = new Emploi;
+        $emploi->filename = 'tt';
+        $emploi->save();
+        echo 'rrrrr';
     }
 
     public function getListOfProfEmploi(Request $request)
@@ -153,7 +158,8 @@ class ChefDepartementController extends Controller
             if(is_null($prof->idEmploi)) //then creat a new entry
             {
                 $emploi = Emploi::create([
-                    'fileName' => $prof->name.'.pdf'
+                    'fileName' => $prof->name.'.pdf',
+                    'created_at' => '',
                 ]);
 
                 $file->storeAs('emploi/prof/', $prof->name.'.pdf');  //store with the original name
@@ -173,7 +179,8 @@ class ChefDepartementController extends Controller
 
                 //add new one
                 $emploi = Emploi::create([
-                    'fileName' => $prof->name.'.pdf'
+                    'fileName' => $prof->name.'.pdf',
+                    'created_at' => '',
                 ]);
 
                 $file->storeAs('emploi/prof/', $prof->name.'.pdf');  //store with the original name
@@ -197,7 +204,8 @@ class ChefDepartementController extends Controller
             if(is_null($filiere->idEmploi)) //then creat a new entry
             {
                 $emploi = Emploi::create([
-                    'fileName' => $filiere->name.$filiere->niveau.'.pdf'
+                    'fileName' => $filiere->name.$filiere->niveau.'.pdf',
+                    'created_at' => '',
                 ]);
 
                 $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
@@ -217,7 +225,8 @@ class ChefDepartementController extends Controller
 
                 //add new one
                 $emploi = Emploi::create([
-                    'fileName' => $filiere->name.$filiere->niveau.'.pdf'
+                    'fileName' => $filiere->name.$filiere->niveau.'.pdf',
+                    'created_at' => '',
                 ]);
 
                 $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
