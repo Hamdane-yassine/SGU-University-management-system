@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\ProfesseurController;
+use App\Models\Evenement;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,8 +86,12 @@ Route::middleware(['auth','prof'])->group(function () {
 });
 
 Route::get('/h', function () {
-    broadcast(new \App\Events\Evt())->toOthers();
+    // broadcast(new \App\Notifications\NotifyEvent(auth()->user, Evenement::find(100)))->toOthers();
+    // Notification::send(auth()->user, new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
+    // Evenement::factory()->create();
     // \App\Events\Evt::dispatch();
+    // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
+    \App\Models\Evenement::factory()->create();
     return json_decode('dispatched');
 
 });
