@@ -43,7 +43,7 @@
                                             <select class="custom-select2 form-control" name="filiere" id="filiere" style="width: 100%; height: 38px;" >
                                                     <option>--select a filiere--    </option>
                                                     @foreach ($filieresList as $filiere)
-                                                        <option value= {{ $filiere->idFiliere }}>{{ $filiere->nom }}</option>
+                                                        <option value= {{ $filiere->idFiliere }}>{{ $filiere->nom}} - {{$filiere->niveau}}</option>
                                                     @endforeach
                                             </select>
                                         </div>
