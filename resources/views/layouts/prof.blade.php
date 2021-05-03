@@ -259,7 +259,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/chef/professeurs/{{ auth()->user()->professeur->chefdep->departement->idDepartement }}" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-user-o"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span
                             class="mtext">Gestion des Professeurs</span>

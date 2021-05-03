@@ -20,6 +20,7 @@ class CreateEtudiantTable extends Migration {
 			$table->bigInteger('idFiliere')->unsigned();
 			$table->string('cne', 254);
 			$table->integer('apogee');
+			$table->string('email', 254);
 			$table->year('anneeDuBaccalaureat');
 			$table->string('cinMere', 254);
 			$table->string('cinPere', 254);

@@ -36,6 +36,7 @@
                                     <th>N°</th>
                                     <th>Nom du fichier</th>
                                     <th>Filière</th>
+                                    <th>Niveau</th>
                                     <th>date de création</th>
                                     <th>Action</th>
                                     <!--<th class="datatable-nosort">&nbsp;Action</th>-->
@@ -52,31 +53,30 @@
                             <h4 class="h4">Ajouter</h4>
                         </div>
                         <hr>
-                        <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
+                        <form class="tab-wizard wizard-circle wizard pl-20" method="POST" action="upload/" enctype="multipart/form-data">
+                            @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Filière / professeur :</label>
-                                            <select class="custom-select2 form-control" style="width: 100%; height: 38px;">
+                                            <select class="custom-select2 form-control" name="ProfOrFiliere" style="width: 100%; height: 38px;">
                                                 <optgroup label="professeurs">
-                                                    <option value="AK">Otman doda</option>
-                                                    <option value="HI">Abd ali lasfar</option>
-                                                    <option value="HI">Mehdi el gouat</option>
-                                                    <option value="HI">Hamdane Yassine</option>
+                                                    @foreach ($profs as $prof)
+                                                        <option value={{ 'p'.$prof->idProf }} > {{ $prof->nom }} </option>
+                                                    @endforeach
                                                 </optgroup>
                                                 <optgroup label="Filières">
-                                                    <option value="CA">Génie Logiciel - GL1</option>
-                                                    <option value="CA">Génie Logiciel - GL2</option>
-                                                    <option value="CA">Administrateur réseaux - ARI1</option>
-                                                    <option value="CA">Administrateur réseaux - ARI2</option>
+                                                    @foreach ($filieres as $filiere)
+                                                        <option value={{ 'f'.$filiere->idFiliere }} >{{ $filiere->nom }} {{ $filiere->niveau}} </option>
+                                                    @endforeach
                                                 </optgroup>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="custom-file" style="margin-top: 31px;">
-                                            <input type="file" class="custom-file-input" name="pdf" required>
+                                            <input type="file" class="custom-file-input" name="uploadedFile" accept="application/pdf" required>
                                             <label class="custom-file-label">Choisir une pdf</label>
                                         </div>
                                     </div>
@@ -173,6 +173,7 @@
                     {data: 'idEmploi', name: 'idEmploi'},
                     {data: 'filename', name: 'filename'},
                     {data: 'nom', name: 'nom'},
+                    {data: 'niveau', name: 'niveau'},
                     {data: 'date', name: 'date'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],

@@ -54,6 +54,7 @@ class Etudiant extends Model
 		'idFiliere',
 		'cne',
 		'apogee',
+		'email',
 		'anneeDuBaccalaureat',
 		'cinMere',
 		'cinPere',

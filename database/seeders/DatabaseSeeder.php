@@ -53,7 +53,6 @@ class DatabaseSeeder extends Seeder
             'email'=>"amirnet001@gmail.com",
             'password'=>bcrypt('secret'),
             'idPersonne'=> \App\Models\Personne::factory()->create([
-                'email'=>"amirnet001@gmail.com",
                 'idPersonne'=>300
                 ])->idPersonne
         ]);

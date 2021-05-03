@@ -71,7 +71,12 @@ Route::get('/chef/matieres/{filiere}',[ChefDepartementController::class, 'Matier
 
 Route::get('/chef/notes/{matiere}',[App\Http\Controllers\ChefDepartementController::class, 'getNotes']);
 
-Route::get('/chef/NotesList/{matiere}', [App\Http\Controllers\ProfesseurController::class, 'getListNotes'])->name('ListNotesChef');
+Route::get('/chef/NotesList/{matiere}', [App\Http\Controllers\ChefDepartementController::class, 'getListNotes'])->name('ListNotesChef');
+
+Route::get('/chef/professeurs/{departement}', [App\Http\Controllers\ChefDepartementController::class, 'Professeurs']);
+
+Route::get('/chef/professeurslist/{departement}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseurs'])->name('getListProfesseurs');
+
 
 Route::middleware(['auth','prof'])->group(function () {
 
@@ -90,5 +95,9 @@ Route::get('chef/emploi/profs', [ChefDepartementController::class, 'getListOfPro
 
 Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
 
-Route::get('chef/emploi/delete/{idEmploi}', [ChefDepartementController::class, 'deleteEmploi'])->name('deleteEmploi');
+Route::get('chef/emploi/delete/prof/{idEmploi}', [ChefDepartementController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
+
+Route::get('chef/emploi/delete/filiere/{idEmploi}', [ChefDepartementController::class, 'deleteEmploiFiliere'])->name('deleteEmploiFiliere');
+
+Route::post('/chef/upload/',[ChefDepartementController::class, 'uploadEmploi'])->name('uploadEmploi');
 
