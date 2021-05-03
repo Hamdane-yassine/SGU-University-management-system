@@ -303,14 +303,13 @@
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
-    // console.log("user id :{{ Auth::user()->id }}")
-    window.Echo.private("App.Models.User.{{ Auth::user()->id }}")
+    window.Echo.channel('hello')
     .listen('.Evt', (e) => {
         console.log(e);
     }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (e) => {
         console.log(e);
     }).on('pusher:subscription_succeeded', (member) => {
-        console.log('successfully subscribed!');
+        console.log('successfulddly subscribed!');
     });
 </script>
 @yield('SpecialScripts')

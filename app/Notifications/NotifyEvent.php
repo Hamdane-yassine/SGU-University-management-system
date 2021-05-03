@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use App\Models\Evenement;
-use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -15,20 +14,13 @@ class NotifyEvent extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-    public Evenement $event;
-    public User $user;
+    public $event;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    // public function __construct(User $user, Evenement $evenement)
-    // {
-    //     $this->user = $user;
-    //     $this->event = $evenement;
-
-    // }
     public function __construct()
     {
 
@@ -77,12 +69,9 @@ class NotifyEvent extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-            'image' =>'Hello WORLLLD',
-            // 'user'=>$this->user->email,
-            // 'event from '=>$this->event->chefdep,
+            'image' =>'Hello WORLLLD'
         ];
     }
-
 
     // public function broadcastWith()
     // {
@@ -90,16 +79,16 @@ class NotifyEvent extends Notification implements ShouldBroadcast
     //         'msg'=> 'Hello'
     //     ];
     // }
-    // public function broadcastAs()
-    // {
-    //     return 'Evt';
-    // }
+    public function broadcastAs()
+    {
+        return 'Evt';
+    }
 
 
-    // public function broadcastOn()
-    // {
-    //     return new Channel('hello');
-    // }
+    public function broadcastOn()
+    {
+        return new Channel('hello');
+    }
 
     // public function broadcastType()
     // {

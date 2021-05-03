@@ -44,7 +44,6 @@ class Evenement extends Model
 		'message'
 	];
 
-
 	public function chefdep()
 	{
 		return $this->belongsTo(Chefdep::class, 'ID_chef');
