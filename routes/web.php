@@ -105,3 +105,5 @@ Route::get('/chef/absences',[ChefDepartementController::class, 'AbsencesIndex'])
 
 Route::get('/chef/absencesDataTable',[ChefDepartementController::class, 'getAbsencesForChef'])->name('getAbsencesForChef');
 
+Route::get('/chef/dashboard' ,[ChefDepartementController::class, 'getChefDashboard']);
+

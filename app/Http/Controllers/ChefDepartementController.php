@@ -393,4 +393,26 @@ class ChefDepartementController extends Controller
     //         ->make(true);
     //     }
     // }
+
+    public function getChefDashboard()
+    {
+        $annee = date("Y")."/".(date("Y")-1);
+        $date = date("j/n/Y");
+        //get the count of students in the same departement
+        $Count_etudiants = Filiere::where('idDepartement',auth()->user()->professeur->idDepartement)
+        ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
+        ->count();
+
+        //filieres count
+        $Count_filieres = Filiere::where('idDepartement',auth()->user()->professeur->idDepartement)->count();
+
+        //get absences count (of profs within the same dep)
+        $profs = Professeur::where('idDepartement',auth()->user()->professeur->idDepartement)->select('idProf')->get()->toArray()   ;
+        $Count_absences = Absence::whereIn('idProf',$profs)->count();
+
+        echo $annee.'<br>'.$date.'<br>'.$Count_etudiants.'<br>'.$Count_filieres.'<br>'.$Count_absences;
+
+        return view('chef.TableBoard',['annee' => $annee,'date' => $date,'Count_etudiants' => $Count_etudiants ,
+          'Count_filieres' => $Count_filieres , 'Count_absences' => $Count_absences]);
+    }
 }
