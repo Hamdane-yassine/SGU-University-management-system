@@ -30,15 +30,9 @@ class EvenementObserver
         // $event = new Evenement($evt->getAttributes());
         $id = Auth::user()->id;
         $current = User::find($id);
-        $users = User::where('id','<>',$id)->limit(10)->get();
-
-        if(User::all()->count()>1){
-            Notification::send($users,new NotifyEvent($current, $evt));
-            // $users->each(function (User $u) use ($evt)
-            // {
-            //     $u->notify(new NotifyEvent(User::find(1),$evt));
-            // });
-        }
+        $users = User::where('id','<>',$id)->limit(2)->get();
+        if($users->count()>0)
+        Notification::send($users,new NotifyEvent($current, $evt));
         else echo "ur alone";
 
     }

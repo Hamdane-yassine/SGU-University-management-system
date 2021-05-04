@@ -4,6 +4,7 @@ use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\ProfesseurController;
 use App\Models\Evenement;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
@@ -80,19 +81,25 @@ Route::get('/chef/professeurs/{departement}', [App\Http\Controllers\ChefDepartem
 
 Route::get('/chef/professeurslist/{departement}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseurs'])->name('getListProfesseurs');
 
+Route::get('/chef/professeur/{professeur}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseur']);
+
+Route::get('/chef/professeur/getMatiere/{professeur}',[ChefDepartementController::class, 'getMatiere']);
+
+Route::post('/chef/affectermatiere',[ChefDepartementController::class, 'AffecterMatiere'])->name('AffecterMatiere');
+
+Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'DetacherMatiere'])->name('DetacherMatiere');
 
 Route::middleware(['auth','prof'])->group(function () {
 
 });
 
 Route::get('/h', function () {
-    // broadcast(new \App\Notifications\NotifyEvent(auth()->user, Evenement::find(100)))->toOthers();
-    // Notification::send(auth()->user, new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
-    // Evenement::factory()->create();
+    broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
     // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
-    \App\Models\Evenement::factory()->create();
-    return json_decode('dispatched');
+    \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
+    echo "yea";
+
 
 });
 
@@ -111,4 +118,8 @@ Route::post('/chef/upload/',[ChefDepartementController::class, 'uploadEmploi'])-
 Route::get('/chef/absences',[ChefDepartementController::class, 'AbsencesIndex']);
 
 Route::get('/chef/absencesDataTable',[ChefDepartementController::class, 'getAbsencesForChef'])->name('getAbsencesForChef');
+
+Route::get('/chef/dashboard' ,[ChefDepartementController::class, 'getChefDashboard']);
+
+Route::get('/chef/dashboard/Absencesdatatable', [ChefDepartementController::class, 'getAbsencesListForChefDashboard'])->name('getAbsencesListForChefDashboard');
 

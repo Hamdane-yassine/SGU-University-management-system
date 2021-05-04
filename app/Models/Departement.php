@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property int $idDepartement
  * @property string|null $nom
+ * @property string $insertion_notes
  *
  * @property Collection|Chefdep[] $chefdeps
  * @property Collection|Filiere[] $filieres
