@@ -92,16 +92,16 @@ class NotifyEvent extends Notification implements ShouldBroadcast
     //         'msg'=> 'Hello'
     //     ];
     // }
-    public function broadcastAs()
-    {
-        return 'Evt';
-    }
+    // public function broadcastAs()
+    // {
+    //     return 'Evt';
+    // }
 
 
-    public function broadcastOn()
-    {
-        return new Channel('hello');
-    }
+    // public function broadcastOn()
+    // {
+    //     return new Channel('App.Models.User.{$id}');
+    // }
 
     // public function broadcastType()
     // {

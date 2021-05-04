@@ -305,9 +305,9 @@
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
-    window.Echo.channel('hello')
+    window.Echo.private('App.Models.User.{{ Auth::user()->id }}')
     .listen('.Evt', (e) => {
-        // console.log(e);
+        console.log(e);
     }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
         console.log(notification)
         addToDropDown(notification);

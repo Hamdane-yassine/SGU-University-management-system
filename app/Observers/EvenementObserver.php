@@ -28,11 +28,12 @@ class EvenementObserver
         // echo 'Hello This is what i want  : '.$evenement;
         // Notification::send(User::find([1,2]),new NotifyEvent(User::find(1),$evt));
         // $event = new Evenement($evt->getAttributes());
+        // $id = Auth::user()->id;
         $id = Auth::user()->id;
         $current = User::find($id);
-        $users = User::where('id','<>',$id)->limit(2)->get();
+        $users = User::where('id','<>',$id)->limit(10)->get();
         if($users->count()>0)
-        Notification::send($users,new NotifyEvent($current, $evt));
+            Notification::send($users,new NotifyEvent($current, $evt));
         else echo "ur alone";
 
     }
