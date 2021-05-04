@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use DataTables;
 
 use App\Models\Absence;
+use App\Models\Chefdep;
 use App\Models\Emploi;
 use App\Models\Etudiant;
 use App\Models\Filiere;
@@ -458,21 +459,43 @@ class ChefDepartementController extends Controller
     {
         $annee = date("Y")."/".(date("Y")-1);
         $date = date("j/n/Y");
+        $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         //get the count of students in the same departement
-        $Count_etudiants = Filiere::where('idDepartement',auth()->user()->professeur->idDepartement)
+        $Count_etudiants = Filiere::where('idDepartement',$idDepartement)
         ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
         ->count();
 
         //filieres count
-        $Count_filieres = Filiere::where('idDepartement',auth()->user()->professeur->idDepartement)->count();
+        $Count_filieres = Filiere::where('idDepartement',$idDepartement)->count();
 
         //get absences count (of profs within the same dep)
-        $profs = Professeur::where('idDepartement',auth()->user()->professeur->idDepartement)->select('idProf')->get()->toArray()   ;
+        $profs = Professeur::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray()   ;
         $Count_absences = Absence::whereIn('idProf',$profs)->count();
 
-        echo $annee.'<br>'.$date.'<br>'.$Count_etudiants.'<br>'.$Count_filieres.'<br>'.$Count_absences;
+        $etat_notes = Departement::find($idDepartement)->insertion_notes;
+
+        //echo $annee.'<br>'.$date.'<br>'.$Count_etudiants.'<br>'.$Count_filieres.'<br>'.$Count_absences.'<br>'.$etat_notes;
 
         return view('chef.TableBoard',['annee' => $annee,'date' => $date,'Count_etudiants' => $Count_etudiants ,
-          'Count_filieres' => $Count_filieres , 'Count_absences' => $Count_absences]);
+          'Count_filieres' => $Count_filieres , 'Count_absences' => $Count_absences, 'etat_notes' => $etat_notes]);
+    }
+
+    public function getAbsencesListForChefDashboard(Request $request)
+    {
+        $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
+        $profs = Professeur::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
+        $absences = Absence::whereIn('absence.idProf',$profs)
+        ->join('professeur','absence.idProf','=','professeur.idProf')
+        ->join('users','users.id','=','professeur.idUtilisateur')
+        ->select('Absence.idAbsence as idAbsence','users.name as nomProf','Absence.dateAbsence as dateAbsence')
+        ->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($absences)
+            ->editColumn('dateAbsence', function ($request) {
+                return $request->dateAbsence->toDayDateTimeString();
+            })
+            ->make(true);
+        }
     }
 }
