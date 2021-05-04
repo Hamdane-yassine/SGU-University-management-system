@@ -77,6 +77,13 @@ Route::get('/chef/professeurs/{departement}', [App\Http\Controllers\ChefDepartem
 
 Route::get('/chef/professeurslist/{departement}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseurs'])->name('getListProfesseurs');
 
+Route::get('/chef/professeur/{professeur}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseur']);
+
+Route::get('/chef/professeur/getMatiere/{professeur}',[ChefDepartementController::class, 'getMatiere']);
+
+Route::post('/chef/affectermatiere',[ChefDepartementController::class, 'AffecterMatiere'])->name('AffecterMatiere');
+
+Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'DetacherMatiere'])->name('DetacherMatiere');
 
 Route::middleware(['auth','prof'])->group(function () {
 

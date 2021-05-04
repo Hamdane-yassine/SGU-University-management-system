@@ -233,7 +233,7 @@
                     </a>
                     <ul class="submenu">
                         @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
-                              <li><a href="/chef/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom }}</a></li>
+                              <li><a href="/chef/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom.' '.$filiere->niveau }}</a></li>
                         @endforeach
                     </ul>
                 </li>
@@ -245,7 +245,7 @@
                     </a>
                     <ul class="submenu">
                         @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
-                              <li><a href="/chef/matieres/{{ $filiere->idFiliere }}">{{ $filiere->nom }}</a></li>
+                              <li><a href="/chef/matieres/{{ $filiere->idFiliere }}">{{ $filiere->nom.' '.$filiere->niveau }}</a></li>
                         @endforeach
                     </ul>
                 </li>

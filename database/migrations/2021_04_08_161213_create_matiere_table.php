@@ -16,7 +16,7 @@ class CreateMatiereTable extends Migration {
 		Schema::create('matiere', function(Blueprint $table)
 		{
 			$table->id('idMatiere');
-			$table->bigInteger('idProf')->unsigned();
+			$table->bigInteger('idProf')->unsigned()->nullable();
 			$table->bigInteger('idModule')->unsigned();
 			$table->string('nom', 254);
 			$table->integer('vh');
