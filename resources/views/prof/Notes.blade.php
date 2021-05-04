@@ -45,21 +45,21 @@
                                 <div class="form-group row" style="padding-left: 5px;">
                                     <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Controle</label>
                                     <div class="col-sm-12 col-md-4">
-                                        <input class="form-control" id="control" name="control" value="" step="0.01" type="number">
+                                        <input class="form-control" id="control" name="control" value="" step="0.01" type="number" required>
                                     </div>
                                     <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
                                     <div class="col-sm-12 col-md-3">
-                                        <input class="form-control" id="coefcontrol" name="coefcontrol" value="25" step="25" max="100" min="0" type="number">
+                                        <input class="form-control" id="coefcontrol" name="coefcontrol" value="25" step="25" max="100" min="0" type="number" required>
                                     </div>
                                 </div>
                                 <div class="form-group row" style="padding-left: 5px;">
                                     <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Examen</label>
                                     <div class="col-sm-12 col-md-4">
-                                        <input class="form-control" id="exam" name="exam" value="" step="0.01" type="number">
+                                        <input class="form-control" id="exam" name="exam" value="" step="0.01" type="number" required>
                                     </div>
                                     <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
                                     <div class="col-sm-12 col-md-3">
-                                        <input class="form-control" value="25" id="coefexam" name="coefexam" step="25" max="100" min="0" type="number">
+                                        <input class="form-control" value="25" id="coefexam" name="coefexam" step="25" max="100" min="0" type="number" required>
                                     </div>
                                 </div>
                             </div>

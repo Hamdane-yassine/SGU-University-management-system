@@ -12,7 +12,7 @@
                         <table class="table hover multiple-select-row data-table-export nowrap">
                             <thead>
                                 <tr>
-                                    <th>N°</th>
+                                    <th>ID</th>
                                     <th>Nom</th>
                                     <th>Prénom</th>
                                     <th>Spécialité</th>
@@ -32,64 +32,35 @@
                             <h4 class="h4">Affecter une matière</h4>
                         </div>
                         <hr>
-                        <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('AffecterMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="affecter">
+                            @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>professeur :</label>
                                             <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                    <option value="AK">Otman doda</option>
-                                                    <option value="HI">Abd ali lasfar</option>
-                                                    <option value="HI">Mehdi el gouat</option>
-                                                    <option value="HI">Hamdane Yassine</option>
+                                                style="width: 100%; height: 38px;" name="prof" id="prof">
+                                                @foreach ($departement->professeurs as $professeur)
+                                                   <option value="{{ $professeur->idProf }}">{{ $professeur->user->personne->nom.' '.$professeur->user->personne->prenom }}</option>
+                                                @endforeach 
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Maitére :</label>
+                                            <label>Matière :</label>
                                             <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                <optgroup label="GL1">
-                                                    <option value="AK">SQL SOUS ORACLE</option>
-                                                    <option value="HI">PL SQL</option>
-                                                    <option value="HI">DBA</option>
-                                                    <option value="HI">XML</option>
-                                                    <option value="AK">SQL SOUS ORACLE</option>
-                                                    <option value="HI">PL SQL</option>
-                                                    <option value="HI">DBA</option>
-                                                    <option value="HI">XML</option>
-                                                </optgroup>
-                                                <optgroup label="GL2">
-                                                    <option value="AK">Matiere 1</option>
-                                                    <option value="AK">Matiere 2</option>
-                                                    <option value="AK">Matiere 3</option>
-                                                    <option value="AK">Matiere 4</option>
-                                                    <option value="AK">Matiere 5</option>
-                                                    <option value="AK">Matiere 6</option>
-                                                    <option value="AK">Matiere 7</option>
-                                                </optgroup>
-                                                <optgroup label="ARI1">
-                                                    <option value="AK">SQL SOUS ORACLE</option>
-                                                    <option value="HI">PL SQL</option>
-                                                    <option value="HI">DBA</option>
-                                                    <option value="HI">XML</option>
-                                                    <option value="AK">SQL SOUS ORACLE</option>
-                                                    <option value="HI">PL SQL</option>
-                                                    <option value="HI">DBA</option>
-                                                    <option value="HI">XML</option>
-                                                </optgroup>
-                                                <optgroup label="ARI2">
-                                                    <option value="AK">Matiere 1</option>
-                                                    <option value="AK">Matiere 2</option>
-                                                    <option value="AK">Matiere 3</option>
-                                                    <option value="AK">Matiere 4</option>
-                                                    <option value="AK">Matiere 5</option>
-                                                    <option value="AK">Matiere 6</option>
-                                                    <option value="AK">Matiere 7</option>
-                                                </optgroup>
+                                                style="width: 100%; height: 38px;" name="matiereafect" id="matiereafect">
+                                                @foreach ($departement->filieres as $filiere)
+                                                    <optgroup label="{{ $filiere->nom.' '.$filiere->niveau }}">
+                                                        @foreach ($filiere->modules as $module)
+                                                            @foreach ($module->matieres as $matiere)
+                                                                <option value="{{ $matiere->idMatiere }}">{{ $matiere->nom }}</option>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </optgroup>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -106,30 +77,28 @@
                             <h4 class="h4">Détacher une matiére</h4>
                         </div>
                         <hr>
-                        <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('DetacherMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="detacher">
+                            @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>professeur :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                    <option value="AK">Otman doda</option>
-                                                    <option value="HI">Abd ali lasfar</option>
-                                                    <option value="HI">Mehdi el gouat</option>
-                                                    <option value="HI">Hamdane Yassine</option>
+                                            <select class="custom-select2 form-control" name="profdet" id="profdet"
+                                                style="width: 100%; height: 38px;" required>
+                                                    @foreach ($departement->professeurs as $professeur)
+                                                        <option value="{{ $professeur->idProf }}">{{ $professeur->user->personne->nom.' '.$professeur->user->personne->prenom }}</option>
+                                                    @endforeach                                                 
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Maitére :</label>
-                                            <select class="custom-select1 form-control"
-                                                style="width: 100%; height: 45px;">
-                                                    <option selected>----</option>
-                                                    <option value="AK">SQL SOUS ORACLE</option>
-                                                    <option value="HI">PL SQL</option>
-                                                    <option value="HI">DBA</option>
+                                            <label>Matière :</label>
+                                            <select class="custom-select1 form-control" name="matiere" id="matiere" style="width: 100%; height: 45px;" required>
+                                                @foreach ($departement->professeurs[0]->matieres as $matiere)
+                                                     <option value="{{ $matiere->idMatiere }}">{{ $matiere->nom }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -151,45 +120,79 @@
                         <div class="modal-body" id="modall">
                             <dl class="row" style="padding-left: 20px;">
                                 <dt class="col-sm-4">Nom</dt>
-                                <dd class="col-sm-8">Abd ali</dd>
+                                <dd class="col-sm-8" id="nom"></dd>
 
                                 <dt class="col-sm-4">Prénom</dt>
-                                <dd class="col-sm-8">Lasfer</dd>
-
-                                <dt class="col-sm-4">Spécialité</dt>
-                                <dd class="col-sm-8">Informatique</dd>
+                                <dd class="col-sm-8" id="prenom"></dd>
 
                                 <dt class="col-sm-4">Genre</dt>
-                                <dd class="col-sm-8">Masculin</dd>
-
+                                <dd class="col-sm-8" id="genre"></dd>
+                         
                                 <dt class="col-sm-4">Nationalité</dt>
-                                <dd class="col-sm-8">MAROCAIN(E)</dd>
+                                <dd class="col-sm-8" id="nationalite"></dd>
+
+                                <dt class="col-sm-4">Lieu de naissance</dt>
+                                <dd class="col-sm-8" id="LieuNaissance"></dd>
+
+                                <dt class="col-sm-4">Date de naissance</dt>
+                                <dd class="col-sm-8" id="datenais"></dd>
+
+                                <dt class="col-sm-4">Situation familiale</dt>
+                                <dd class="col-sm-8" id="situation"></dd>
+
+                                <dt class="col-sm-4">N° C.N.I.E</dt>
+                                <dd class="col-sm-8" id="cin"></dd>
 
                                 <dt class="col-sm-4">Adresse</dt>
-                                <dd class="col-sm-8">RES ELBOUSTANE IMM G11 APT 33 LOT SAID HAJJI SALE</dd>
+                                <dd class="col-sm-8" id="adresse"></dd>
 
                                 <dt class="col-sm-4">Téléphone</dt>
-                                <dd class="col-sm-8">0672387235</dd>
+                                <dd class="col-sm-8" id="tel"></dd>
 
                                 <dt class="col-sm-4">E-mail personnel</dt>
-                                <dd class="col-sm-8">amirnet001@gmail.com</dd>
+                                <dd class="col-sm-8" id="email"></dd>
 
                                 <dt class="col-sm-4">E-mail institutionnel</dt>
-                                <dd class="col-sm-8">yassine_hamdane@um5.ac.ma</dd>
+                                <dd class="col-sm-8" id="emailins"></dd>
+
+                                <dt class="col-sm-4">Spécialité</dt>
+                                <dd class="col-sm-8" id="specialite"></dd>
 
                                 <dt class="col-sm-4">Maitéres</dt>
-                                <dd class="col-sm-8">
-                                    SQL Sous oracle - GL1 <br>
-                                    PL SQL - GL2 <br>
-                                    PHP MYSQL - ARI2 <br>
+                                <dd class="col-sm-8" id="matieres">
                                 </dd>
-
                             </dl>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary"
                                 onclick="printJS({printable: 'modall',type: 'html', targetStyles: ['*']})"><i
                                     class="fa fa-print"></i>&nbsp;&nbsp;Imprimer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="success-modal-aff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20 pt-5">Affectation terminer!</h3>
+                            <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminé</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="success-modal-det" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20 pt-5">Matiere est détacher!</h3>
+                            <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminé</button>
                         </div>
                     </div>
                 </div>
@@ -221,8 +224,8 @@
             serverSide: true,
             ajax: "{{ route('getListProfesseurs', ['departement' => $departement]) }}",
             columns: [{
-                    data: 'apogee',
-                    name: 'apogee'
+                    data: 'idProf',
+                    name: 'idProf'
                 },
                 {
                     data: 'nom',
@@ -233,8 +236,8 @@
                     name: 'prenom'
                 },
                 {
-                    data: 'cne',
-                    name: 'cne'
+                    data: 'specialite',
+                    name: 'specialite'
                 },
                 {
                     data: 'email',
@@ -245,19 +248,9 @@
                     name: 'tel'
                 },
                 {
-                    data: 'idEtudiant',
+                    data: 'idProf',
                     render: function(data, type, full, meta) {
-                        return '<div class="table-actions pl-1"><a href="#" style="color: #265ed7" onclick="getEtudiantIn('+data+')" data-toggle="modal" data-target="#bd-edit-modal"><i class="icon-copy dw dw-edit2"></i></a> <a href="#" style="color : #e95959" onclick="setIdEtudiant(' +
-                            data +
-                            ')" data-toggle="modal" data-target="#confirmation-modal" type="button"><i class="icon-copy dw dw-delete-3"></i></a></div>'
-                    },
-                },
-                {
-                    data: 'idEtudiant',
-                    render: function(data, type, full, meta) {
-                        return ' <a class="dropdown-item" href="" style="background-color:transparent;" onclick="getEtudiantInfo(' +
-                            data +
-                            ')" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>'
+                        return ' <a class="dropdown-item" href="" style="background-color:transparent;" onclick="getProfInfo('+data+')" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>'
                     },
                 }
             ],
@@ -294,5 +287,121 @@
                 text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
             }]
         });
+
+        function getProfInfo(id)
+        {
+            document.getElementById("matieres").innerHTML="";
+            $.ajax({
+                type: 'GET',
+                url: "/chef/professeur/" + id,
+                dataType: 'JSON',
+                data: {},
+                success: function(response) {
+                    console.log(response);
+                    document.getElementById("nom").innerHTML = response.prof[0].nom;
+                    document.getElementById("prenom").innerHTML = response.prof[0].prenom;
+                    document.getElementById("genre").innerHTML = response.prof[0].genre;
+                    document.getElementById("datenais").innerHTML = response.prof[0].dateNaissance;
+                    document.getElementById("situation").innerHTML = response.prof[0].situationFamiliale;
+                    document.getElementById("nationalite").innerHTML = response.prof[0].nationalite;
+                    document.getElementById("LieuNaissance").innerHTML = response.prof[0].lieuNaissance;
+                    document.getElementById("cin").innerHTML = response.prof[0].cin;
+                    document.getElementById("adresse").innerHTML = response.prof[0].adressePersonnele;
+                    document.getElementById("tel").innerHTML = response.prof[0].tel;
+                    document.getElementById("email").innerHTML = response.prof[0].email;
+                    document.getElementById("emailins").innerHTML = response.prof[0].emailInstitutionne;
+                    document.getElementById("specialite").innerHTML = response.prof[0].specialite;
+                    if(response.matieres.length > 0)
+                    {
+                        response.matieres.forEach(myFunction);
+                    }else{
+                        document.getElementById("matieres").innerHTML = "Aucune Matiere";
+                    }
+                    function myFunction(item, index) {
+                    document.getElementById("matieres").innerHTML += item.nom + "<br>";
+                    }
+                }
+            })
+        }
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="profdet"]').on('change',function(){
+                   var idProf = jQuery(this).val();
+                   if(idProf)
+                   {
+                      jQuery.ajax({
+                         url : '/chef/professeur/getMatiere/'+idProf,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(data)
+                         {
+                            console.log(data);
+                            jQuery('select[name="matiere"]').empty();
+                            jQuery.each(data, function(key,value){
+                               $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nom +'</option>');
+                            });
+                         }
+                      });
+                   }
+                   else
+                   {
+                      $('select[name="matiere"]').empty();
+                   }
+                });
+        });
+        $("#affecter").submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType : "json",
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data) {
+                    $('#success-modal-aff').modal('show');
+                    if(document.getElementById("profdet").value == data[0].idProf)
+                    {
+                        jQuery('select[name="matiere"]').empty();
+                        jQuery.each(data, function(key,value){
+                            $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nom +'</option>');
+                        });
+                    }else{
+                        jQuery.ajax({
+                         url : '/chef/professeur/getMatiere/'+document.getElementById("profdet").value,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(response)
+                         {
+                            console.log(response);
+                            jQuery('select[name="matiere"]').empty();
+                            jQuery.each(response, function(key,value){
+                               $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nom +'</option>');
+                            });
+                         }
+                      });
+                    }
+                }
+            });
+        });
+        $("#detacher").submit(function(e) {
+            e.preventDefault(); 
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType : "json",
+                data: form.serialize(),
+                success: function(data) {
+                    $('#success-modal-det').modal('show');
+                    jQuery('select[name="matiere"]').empty();
+                    jQuery.each(data, function(key,value){
+                        $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nom +'</option>');
+                    });
+                }
+            });
+        });
+
     </script>
     @endsection

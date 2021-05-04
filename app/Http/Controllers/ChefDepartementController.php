@@ -337,19 +337,64 @@ class ChefDepartementController extends Controller
         return view('chef.profs', ['departement' => $departement]);
     }
 
-    // public function getProfesseurs(Request $request , Departement $departement)
-    // {
-    //     $professeurs = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
-    //    ->join('module','module.idModule','=','matiere.idModule')
-    //    ->join('filiere','module.idFiliere','=','filiere.idFiliere')
-    //    ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
-    //    ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
-    //    ->leftJoin('note', 'etudiant.idEtudiant', '=', 'note.idEtudiant')
-    //    ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral')
-    //    ->get();
-    //    if ($request->ajax()) {
-    //         return Datatables::of($professeurs)
-    //         ->make(true);
-    //     }
-    // }
+    public function getProfesseurs(Request $request , Departement $departement)
+    {
+        $professeurs = Professeur::where('departement.idDepartement',$departement->idDepartement)  //first inint a user id
+       ->join('departement','professeur.idDepartement','=','departement.idDepartement')
+       ->join('users','professeur.idUtilisateur','=','users.id')
+       ->join('personne','users.idPersonne','=','personne.idPersonne')
+       ->select('professeur.idProf','personne.nom','personne.prenom','professeur.specialite','email','tel',)
+       ->get();
+       if ($request->ajax()) {
+            return Datatables::of($professeurs)
+            ->make(true);
+        }
+    }
+
+    public function getProfesseur(Request $request,Professeur $professeur)
+    {
+        $professeurs = Professeur::where('professeur.idProf',$professeur->idProf)  //first inint a user id
+       ->join('users','professeur.idUtilisateur','=','users.id')
+       ->join('personne','users.idPersonne','=','personne.idPersonne')
+       ->select('professeur.idProf','personne.nom','personne.prenom','professeur.specialite','email','tel','dateNaissance','nationalite','lieuNaissance','situationFamiliale','genre','cin','adressePersonnele','emailInstitutionne')
+       ->get();
+
+        $matieres = Matiere::where('idProf',$professeur->idProf)
+        ->select('nom')->get();
+
+        $data = array();
+        $data['prof'] = $professeurs;
+        $data['matieres'] = $matieres;
+        
+        if ($request->ajax()) {
+            echo json_encode($data);
+        }
+    }
+
+    public function getMatiere(Professeur $professeur) //get Matiere based on idFiliere
+    {
+        $MatieresList = $professeur->matieres;
+        return json_encode($MatieresList);
+    }
+    
+    public function AffecterMatiere()
+    {
+        $idProf = request('prof');
+        $idMatiere = request('matiereafect');
+        $matiere = Matiere::find($idMatiere);
+        $matiere->idProf=$idProf;
+        $matiere->save();
+        $professeur = Professeur::find($idProf);
+        echo json_encode($professeur->matieres);
+    }
+    public function DetacherMatiere()
+    {
+        $idMatiere = request('matiere');
+        $idProf = request('profdet');
+        $matiere = Matiere::find($idMatiere);
+        $matiere->idProf=null;
+        $matiere->save();
+        $professeur = Professeur::find($idProf);
+        echo json_encode($professeur->matieres);
+    }
 }
