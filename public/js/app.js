@@ -1866,19 +1866,6 @@ __webpack_require__.r(__webpack_exports__);
     // channel.bind('.Evt', function(data) {
     //         console.log(data);
     // });
-    // window.Echo.channel('hello')
-    // .listen('.Evt', (e) => {
-    //     console.log(e);
-    // // }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (e) => {
-    // }).listen('App\\Notifications\\NotifyEvent', (e) => {
-    //     console.log(e);
-    // }).on('pusher:subscription_succeeded', (member) => {
-    //     console.log('successfulddly subscribed!');
-    // });
-    // Echo.private(`private-App.Models.User.${window.Laravel.UserId}`)
-    // .notification((notification) => {
-    //     console.log(notification.type);
-    // });
   },
   methods: {
     post: function post() {
@@ -1970,9 +1957,9 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Pusher.logToConsole = true;
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
-  forceTLS: true
+  key: "175b6522f4a3c21fa191",
+  cluster: "eu",
+  forceTLS: false
 });
 
 /***/ }),
