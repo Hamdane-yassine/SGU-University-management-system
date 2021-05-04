@@ -90,7 +90,7 @@ Route::middleware(['auth','prof'])->group(function () {
 });
 
 Route::get('/h', function () {
-    event(new \App\Events\Evt);
+    broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
     return json_decode('dispatched');
 
@@ -107,4 +107,8 @@ Route::get('chef/emploi/delete/prof/{idEmploi}', [ChefDepartementController::cla
 Route::get('chef/emploi/delete/filiere/{idEmploi}', [ChefDepartementController::class, 'deleteEmploiFiliere'])->name('deleteEmploiFiliere');
 
 Route::post('/chef/upload/',[ChefDepartementController::class, 'uploadEmploi'])->name('uploadEmploi');
+
+Route::get('/chef/absences',[ChefDepartementController::class, 'AbsencesIndex']);
+
+Route::get('/chef/absencesDataTable',[ChefDepartementController::class, 'getAbsencesForChef'])->name('getAbsencesForChef');
 

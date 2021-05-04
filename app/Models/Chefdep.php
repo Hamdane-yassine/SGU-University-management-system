@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property Professeur|null $professeur
  * @property Departement|null $departement
- * @property Collection|Evenemnt[] $evenemnts
+ * @property Collection|Evenement[] $Evenements
  *
  * @package App\Models
  */
@@ -51,9 +51,9 @@ class Chefdep extends Model
 	{
 		return $this->belongsTo(Departement::class, 'idDepartement');
 	}
- 
-	public function evenemnts()
+
+	public function Evenements()
 	{
-		return $this->hasMany(Evenemnt::class, 'ID_chef');
+		return $this->hasMany(Evenement::class, 'ID_chef');
 	}
 }

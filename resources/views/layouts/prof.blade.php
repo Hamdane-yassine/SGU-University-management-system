@@ -303,11 +303,13 @@
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
-    window.Echo.private('hello')
+    window.Echo.channel('hello')
     .listen('.Evt', (e) => {
         console.log(e);
+    }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (e) => {
+        console.log(e);
     }).on('pusher:subscription_succeeded', (member) => {
-        console.log('successfully subscribed!');
+        console.log('successfulddly subscribed!');
     });
 </script>
 @yield('SpecialScripts')

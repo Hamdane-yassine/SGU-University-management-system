@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Evenemnt;
+use App\Models\Evenement;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EvenemntFactory extends Factory
+class EvenementFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Evenemnt::class;
+    protected $model = Evenement::class;
 
     /**
      * Define the model's default state.

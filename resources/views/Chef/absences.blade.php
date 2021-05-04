@@ -22,86 +22,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>PL SQL</td>
-                                <td>Génie logiciel 2</td>
-                                <td>Abd Ali lasfar</td>
-                                <td>27 April 2021 11:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5"
-                                        data-color="green">Rattrapé</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>SQL SOUS ORACLE</td>
-                                <td>Administration reseaux informatique 1</td>
-                                <td>Abd rahim qadi</td>
-                                <td>16 April 2021 08:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En
-                                        attend</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>JAVA AVANCE</td>
-                                <td>Génie logiciel 2</td>
-                                <td>Khadija bousdig</td>
-                                <td>30 April 2021 04:55 pm</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5"
-                                        data-color="green">Rattrapé</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>SQL SOUS ORACLE</td>
-                                <td>Administration reseaux informatique 1</td>
-                                <td>Abd Ali lasfar</td>
-                                <td>27 April 2021 11:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En
-                                        attend</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>PL SQL</td>
-                                <td>Génie logiciel 2</td>
-                                <td>Khadija bousdig</td>
-                                <td>16 April 2021 08:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5"
-                                        data-color="green">Rattrapé</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>PL SQL</td>
-                                <td>Génie logiciel 2</td>
-                                <td>Abd Ali lasfar</td>
-                                <td>16 April 2021 08:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5"
-                                        data-color="green">Rattrapé</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>JAVA AVANCE</td>
-                                <td>Génie logiciel 2</td>
-                                <td>Abd rahim qadi</td>
-                                <td>27 April 2021 11:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En
-                                        attend</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>PL SQL</td>
-                                <td>Génie logiciel 2</td>
-                                <td>Khadija bousdig</td>
-                                <td>16 April 2021 08:55 am</td>
-                                <td><span class="badge badge-pill" data-bgcolor="#e7ebf5" data-color="#c2a502">En
-                                        attend</span>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -113,7 +33,7 @@
         </div>
     </div>
     @endsection
-    @section('SpecialScripts')           
+    @section('SpecialScripts')
         <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -129,4 +49,41 @@
         <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
         <!-- Datatable Setting js -->
         <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
+
+        <script type="text/javascript">
+            $('.data-table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('getAbsencesForChef') }}",
+                    columns: [
+                        {data: 'idAbsence', name: 'idAbsence'},
+                        {data: 'nomMatiere', name: 'nomMatiere'},
+                        {data: 'nomFiliere', name: 'nomFiliere'},
+                        {data: 'nomProf', name: 'nomProf'},
+                        {data: 'dateAbsence', name: 'dateAbsence'},
+                        {data: 'etat', name: 'etat'}
+                    ],
+                    scrollCollapse: true,
+                    autoWidth: false,
+                    responsive: true,
+
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    "language": {
+                        "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                        "emptyTable": "Aucune donnée disponible dans le tableau",
+                        "lengthMenu": "Afficher _MENU_ éléments",
+                        "zeroRecords": "Aucun élément correspondant trouvé",
+                        "processing": "Traitement...",
+                        "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                        "loadingRecords": "Chargement...",
+                        "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                        search: "Rechercher:",
+                        searchPlaceholder: "Rechercher",
+                        paginate: {
+                            next: '<i class="ion-chevron-right"></i>',
+                            previous: '<i class="ion-chevron-left"></i>'
+                        }
+                    },
+                });
+        </script>
     @endsection

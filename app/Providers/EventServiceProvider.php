@@ -20,7 +20,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        Evt::class=>[EvtListener::class]
+        Evt::class=>[
+            EvtListener::class
+        ],
+        Illuminate\Notifications\Events\NotificationSent::class => [
+            App\Listeners\LogNotificationEvent::class,
+        ],
     ];
 
     /**

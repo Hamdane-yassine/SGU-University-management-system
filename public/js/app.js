@@ -1850,29 +1850,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log('Component mounted.'); // Echo.channel(`hello`)
+  mounted: function mounted() {// console.log('Component mounted.');
+    // Echo.channel(`hello`)
     // .listen('Evt', (e) => {
     //     console.log(e.msg);
     // });
-
-    Pusher.logToConsole = true;
-    var pusher = new Pusher('175b6522f4a3c21fa191', {
-      cluster: 'eu'
-    });
-    var channel = pusher.subscribe('hello');
-    channel.bind('pusher:subscription_succeeded', function (members) {// alert('successfully subscribed!');
-    });
-    channel.bind('\\App\\Events\\Evt', function (data) {
-      console.log(data);
-    });
+    // Pusher.logToConsole = true;
+    // var pusher = new Pusher('175b6522f4a3c21fa191', {
+    //     cluster: 'eu'
+    // });
+    // var channel = pusher.subscribe('hello');
+    // channel.bind('pusher:subscription_succeeded', function(members) {
+    //     // alert('successfully subscribed!');
+    // });
+    // channel.bind('.Evt', function(data) {
+    //         console.log(data);
+    // });
+    // window.Echo.channel('hello')
+    // .listen('.Evt', (e) => {
+    //     console.log(e);
+    // // }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (e) => {
+    // }).listen('App\\Notifications\\NotifyEvent', (e) => {
+    //     console.log(e);
+    // }).on('pusher:subscription_succeeded', (member) => {
+    //     console.log('successfulddly subscribed!');
+    // });
+    // Echo.private(`private-App.Models.User.${window.Laravel.UserId}`)
+    // .notification((notification) => {
+    //     console.log(notification.type);
+    // });
   },
   methods: {
     post: function post() {
       axios.get('/h').then(function (response) {
         console.log(response);
       })["catch"](function (errors) {
-        console.log("error");
+        console.log(errors);
       });
     }
   }
@@ -1957,8 +1970,8 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Pusher.logToConsole = true;
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
-  key: "175b6522f4a3c21fa191",
-  cluster: "eu",
+  key: "",
+  cluster: "mt1",
   forceTLS: true
 });
 
