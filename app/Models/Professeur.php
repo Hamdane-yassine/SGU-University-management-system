@@ -55,9 +55,9 @@ class Professeur extends Model
 		return $this->belongsTo(User::class, 'idUtilisateur');
 	}
 
-	public function departement()
+	public function prof_departements()
 	{
-		return $this->belongsTo(Departement::class, 'idDepartement');
+		return $this->hasMany(Prof_departement::class, 'idProf');
 	}
 
 	public function absences()

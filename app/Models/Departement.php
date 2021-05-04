@@ -50,8 +50,8 @@ class Departement extends Model
 		return $this->hasMany(Filiere::class, 'idDepartement');
 	}
 
-	public function professeurs()
+	public function prof_departements()
 	{
-		return $this->hasMany(Professeur::class, 'idDepartement');
+		return $this->hasMany(Prof_departement::class, 'idDepartement');
 	}
 }
