@@ -41,7 +41,8 @@ class ProfesseurController extends Controller
         ->join('matiere','absence.idMatiere','=','matiere.idMatiere') //retrieved matiere
         ->join('module','matiere.idModule','=','module.idModule')
         ->join('filiere','module.idFiliere','=','filiere.idFiliere')
-        ->select('IdAbsence','matiere.nom as nomMatiere',DB::raw("concat_ws(filiere.nom,' ', filiere.niveau) AS nomFiliere"),'dateAbsence','etat')
+        ->join('departement','filiere.idDepartement','=','departement.idDepartement')
+        ->select('IdAbsence','matiere.nom as nomMatiere','departement.nom as nomDepartement',DB::raw("concat_ws(filiere.nom,' ', filiere.niveau) AS nomFiliere"),'dateAbsence','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
         //return $absences;
          if ($request->ajax()) {
