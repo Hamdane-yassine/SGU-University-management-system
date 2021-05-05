@@ -74,7 +74,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            <h4 class="h4">Détacher une matiére</h4>
+                            <h4 class="h4">Retirer une matiére</h4>
                         </div>
                         <hr>
                         <form action="{{ route('DetacherMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="detacher">
@@ -105,7 +105,7 @@
                                 </div>
                             </section>
                             <div class="text-right"><input class="btn btn-primary" type="submit"
-                                    value="Détacher"></div>
+                                    value="Retirer"></div>
                         </form>
                     </div>
                 </div>
@@ -175,11 +175,11 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
-                            <h3 class="mb-20 pt-5">Affectation terminer!</h3>
+                            <h3 class="mb-20 pt-5">Affectation réussie!</h3>
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminé</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
                         </div>
                     </div>
                 </div>
@@ -188,11 +188,11 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
-                            <h3 class="mb-20 pt-5">Matiere est détacher!</h3>
+                            <h3 class="mb-20 pt-5">Retrait réussi‏!</h3>
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminé</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
                         </div>
                     </div>
                 </div>
