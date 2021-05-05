@@ -75,7 +75,7 @@
                             @if(Auth::User()->notifications->count())
                             @foreach (Auth::User()->UnreadNotifications as $notification)
                             <li>
-                                <a href="{{ $notification->data['lien'] }}">
+                                <a href="{{ '/events/'.$notification->data['idEvent'] }}">
                                     <img src="{{ $notification->data['image'] }}" alt="profile image">
                                     <h3>{{$notification->data['from']}}</h3>
                                     <p>{{$notification->data['brief']}}</p>
@@ -309,20 +309,21 @@
     .listen('.Evt', (e) => {
         console.log(e);
     }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
-        console.log(notification)
+        console.log(notification);
+        if($('#notifications').innerHTML = "Empty")
         addToDropDown(notification);
     }).on('pusher:subscription_succeeded', (member) => {
         console.log('successfulddly subscribed!');
     });
 
     function addToDropDown(notification) {
-        document.getElementById('notifications').prepend(format(notification));
+        $('#notifications').prepend(format(notification));
     };
 
     function format(data) {
-        const htmText = "<li><a href="+data.lien+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief+"</p></a></li>";
+        const htmText = "<li><a href="+data.idEvent+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief+"</p></a></li>";
         const parser = new DOMParser();
-        const node = parser.parseFromString(htmText,"text/html")
+        const node = parser.parseFromString(htmText,"text/html");
         return node.body;
     };
 </script>
