@@ -433,8 +433,11 @@ class ChefDepartementController extends Controller
 
     public function getAbsencesForChef(Request $request)
     {
+        //get the departement id of the current chef
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $profs = Professeur::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
+        $profs = Professeur::where(['idDepartement'=> $idDepartement],['filiere.idDepartement' => $idDepartement])
+        ->join('prof_departement','professeur.idProf','prof_departement.idProf')
+        ->select('professeur.idProf')->get()->toArray();
         $absences = Absence::whereIn('absence.idProf',$profs)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('users','users.id','=','professeur.idUtilisateur')
