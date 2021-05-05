@@ -41,4 +41,13 @@ class ProfesseurFactory extends Factory
             'idEmploi' => $j++
         ];
     }
+    public function configure()
+    {
+        return $this->afterCreating(function (Professeur $prof)
+        {
+            $prof->user->role = 'prof';
+            $prof->user->save();
+
+        });
+    }
 }
