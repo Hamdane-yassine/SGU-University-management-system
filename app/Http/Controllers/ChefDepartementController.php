@@ -15,6 +15,7 @@ use App\Models\Matiere;
 use App\Models\Note;
 use App\Models\Module;
 use App\Models\Personne;
+use App\Models\Prof_departement;
 use App\Models\Professeur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -351,7 +352,8 @@ class ChefDepartementController extends Controller
     {
         //get the departement id of the current chef
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $profs = Professeur::where(['idDepartement'=> $idDepartement],['filiere.idDepartement' => $idDepartement])
+        //get all profs within the same departement
+        $profs = Professeur::where(['prof_departement.idDepartement'=> $idDepartement],['filiere.idDepartement' => $idDepartement])
         ->join('prof_departement','professeur.idProf','prof_departement.idProf')
         ->select('professeur.idProf')->get()->toArray();
         $absences = Absence::whereIn('absence.idProf',$profs)
@@ -400,7 +402,8 @@ class ChefDepartementController extends Controller
         $Count_filieres = Filiere::where('idDepartement',$idDepartement)->count();
 
         //get absences count (of profs within the same dep)
-        $profs = Professeur::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray()   ;
+        $profs = Prof_departement::where('idDepartement',$idDepartement)
+        ->select('idProf')->get()->toArray();
         $Count_absences = Absence::whereIn('idProf',$profs)->count();
 
         $etat_notes = Departement::find($idDepartement)->insertion_notes;
@@ -414,7 +417,7 @@ class ChefDepartementController extends Controller
     public function getAbsencesListForChefDashboard(Request $request)
     {
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $profs = Professeur::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
+        $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
         $absences = Absence::whereIn('absence.idProf',$profs)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('users','users.id','=','professeur.idUtilisateur')
