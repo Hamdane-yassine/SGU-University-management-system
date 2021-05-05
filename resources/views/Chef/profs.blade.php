@@ -34,6 +34,7 @@
                         <hr>
                         <form action="{{ route('AffecterMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="affecter">
                             @csrf
+                            <input type="hidden" id="dep" name="dep" value="{{ $departement->idDepartement }}">
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -74,11 +75,12 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            <h4 class="h4">Détacher une matiére</h4>
+                            <h4 class="h4">Retirer une matiére</h4>
                         </div>
                         <hr>
                         <form action="{{ route('DetacherMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="detacher">
                             @csrf
+                            <input type="hidden" id="depD" name="depD" value="{{ $departement->idDepartement }}">
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -96,8 +98,16 @@
                                         <div class="form-group">
                                             <label>Matière :</label>
                                             <select class="custom-select1 form-control" name="matiere" id="matiere" style="width: 100%; height: 45px;" required>
-                                                @foreach ($departement->professeurs[0]->matieres as $matiere)
-                                                     <option value="{{ $matiere->idMatiere }}">{{ $matiere->nom }}</option>
+                                                @foreach ($departement->filieres as $filiere)
+                                                    <optgroup label="{{ $filiere->nom.' '.$filiere->niveau }}">
+                                                        @foreach ($filiere->modules as $module)
+                                                            @foreach ($module->matieres as $matiere)
+                                                                @if($matiere->professeur->idProf==$departement->professeurs[0]->idProf)
+                                                                <option value="{{ $matiere->idMatiere }}">{{ $matiere->nom }}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        @endforeach
+                                                    </optgroup>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -105,7 +115,7 @@
                                 </div>
                             </section>
                             <div class="text-right"><input class="btn btn-primary" type="submit"
-                                    value="Détacher"></div>
+                                    value="Retirer"></div>
                         </form>
                     </div>
                 </div>
@@ -175,11 +185,11 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
-                            <h3 class="mb-20 pt-5">Affectation terminer!</h3>
+                            <h3 class="mb-20 pt-5">Affectation réussie!</h3>
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminé</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
                         </div>
                     </div>
                 </div>
@@ -188,11 +198,11 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
-                            <h3 class="mb-20 pt-5">Matiere est détacher!</h3>
+                            <h3 class="mb-20 pt-5">Retrait réussi‏!</h3>
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminé</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
                         </div>
                     </div>
                 </div>
@@ -327,10 +337,11 @@
         {
                 jQuery('select[name="profdet"]').on('change',function(){
                    var idProf = jQuery(this).val();
+                   var idDep = document.getElementById("dep").value;
                    if(idProf)
                    {
                       jQuery.ajax({
-                         url : '/chef/professeur/getMatiere/'+idProf,
+                         url : '/chef/professeur/getMatiere/'+idProf+'/'+idDep,
                          type : "GET",
                          dataType : "json",
                          success:function(data)
@@ -368,7 +379,7 @@
                         });
                     }else{
                         jQuery.ajax({
-                         url : '/chef/professeur/getMatiere/'+document.getElementById("profdet").value,
+                         url : '/chef/professeur/getMatiere/'+document.getElementById("profdet").value+'/'+document.getElementById("dep").value,
                          type : "GET",
                          dataType : "json",
                          success:function(response)

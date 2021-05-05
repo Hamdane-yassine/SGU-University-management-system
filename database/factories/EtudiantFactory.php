@@ -28,12 +28,12 @@ class EtudiantFactory extends Factory
                     return $this->faker->unique->randomElement(\App\Models\Personne::pluck('idPersonne'));
                 return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
             },
-            // 'idFiliere' => function(){
-            //     if(\App\Models\Filiere::count())
-            //         return $this->faker->randomElement(\App\Models\Filiere::pluck('idFiliere'));
-            //     return \App\Models\Filiere::factory()->create()->get()[0]['idFiliere'];
-            // },
-            'idFiliere' => $i++,
+            'idFiliere' => function(){
+                if(\App\Models\Filiere::count())
+                    return $this->faker->randomElement(\App\Models\Filiere::pluck('idFiliere'));
+                return \App\Models\Filiere::factory()->create()->get()[0]['idFiliere'];
+            },
+            // 'idFiliere' => $i++,
             'cne'=>$this->faker->randomDigit(),
             'apogee'=>$this->faker->randomDigit(),
             'email' => $this->faker->unique()->safeEmail,

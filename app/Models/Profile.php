@@ -12,7 +12,6 @@ class Profile extends Model
     protected $table = 'profiles';
     protected $primaryKey = 'idProfile';
 
-
     protected $fillable = [
         'imagePath','skype','facebook','linkedin'
     ];

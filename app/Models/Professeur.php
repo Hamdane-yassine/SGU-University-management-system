@@ -38,14 +38,12 @@ class Professeur extends Model
 
 	protected $casts = [
 		'idUtilisateur' => 'int',
-		'idDepartement' => 'int',
 		'idProf' => 'int',
 		'idEmploi' => 'int'
 	];
 
 	protected $fillable = [
 		'idUtilisateur',
-		'idDepartement',
 		'specialite',
 		'echellon'
 	];

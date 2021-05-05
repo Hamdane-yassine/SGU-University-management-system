@@ -26,9 +26,10 @@ class UserFactory extends Factory
         static $i = 1;
         return [
             'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
+            // 'email' => $this->faker->unique()->safeEmail,
+            'email' => $i.'@1.com',
             // 'email_verified_at' => $this->faker->dateTime(),
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('1'),
             'remember_token' => Str::random(10),
             // 'idPersonne' =>function(){
             //     if(\App\Models\Personne::count()){

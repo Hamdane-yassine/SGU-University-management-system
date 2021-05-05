@@ -29,10 +29,10 @@
             post(){
                 axios.get('/h')
                         .then(response => {
-                            console.log(response);
+                            console.log("res : "+response);
                         })
                         .catch(errors => {
-                            console.log("error");
+                            console.log(errors);
                         });
             }
         }

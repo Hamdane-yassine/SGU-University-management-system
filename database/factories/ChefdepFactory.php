@@ -28,10 +28,10 @@ class ChefdepFactory extends Factory
                 return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
 
             },
-           
+
             'idDepartement' => function (){
                 if(\App\Models\Departement::count())
-                    return $this->faker->randomElement(\App\Models\Departement::pluck('idDepartement'));
+                    return $this->faker->unique()->randomElement(\App\Models\Departement::pluck('idDepartement'));
                 return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
             }
         ];

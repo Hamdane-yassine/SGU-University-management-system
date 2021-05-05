@@ -66,26 +66,28 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="notification-list mx-h-350 customscroll">
-                        <ul>
+                        <ul id="notifications">
+                            {{-- <a href="#">
+                                <img src="{{ asset('vendors/images/img.jpg') }}" alt="">
+                                <h3>John Doe</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                            </a> --}}
+                            @if(Auth::User()->notifications->count())
+                            @foreach (Auth::User()->UnreadNotifications as $notification)
                             <li>
-                                <a href="#">
-                                    <img src="{{ asset('vendors/images/img.jpg') }}" alt="">
-                                    <h3>John Doe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                <a href="{{ '/events/'.$notification->data['idEvent'] }}">
+                                    <img src="{{ $notification->data['image'] }}" alt="profile image">
+                                    <h3>{{$notification->data['from']}}</h3>
+                                    <p>{{$notification->data['brief']}}</p>
                                 </a>
-                                @if(Auth::User()->notifications->count())
-                                    @foreach (Auth::User()->notifications as $notification)
-                                    <a href="#">
-                                        <img src="{{ asset('vendors/images/img.jpg') }}" alt="">
-                                        <h3>{{$notification->data['image']}}</h3>
-                                        {{-- <p>{{$notification->data}}</p> --}}
-                                        </a>
-                                    @endforeach
-                                    @else
-                                        empty
-                                @endif
-
                             </li>
+                            @endforeach
+                            @else
+                            <li>
+                                <p>Empty</p>
+                            </li>
+                            @endif
+
                         </ul>
                     </div>
                 </div>
@@ -157,8 +159,6 @@
                         @foreach ($filieres as $filiere)
                              <li><a href="/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom.' '.$filiere->niveau }}</a></li>
                         @endforeach
-                        {{-- <li><a href="index.html">Génie Logiciel - GL1</a></li>
-                        <li><a href="index2.html">Administrateur Réseaux</a></li> --}}
                     </ul>
                 </li>
 
@@ -303,14 +303,27 @@
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
-    window.Echo.channel('hello')
+    window.Echo.private('App.Models.User.{{ Auth::user()->id }}')
     .listen('.Evt', (e) => {
         console.log(e);
-    }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (e) => {
-        console.log(e);
+    }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
+        console.log(notification);
+        if($('#notifications').innerHTML = "Empty")
+        addToDropDown(notification);
     }).on('pusher:subscription_succeeded', (member) => {
         console.log('successfulddly subscribed!');
     });
+
+    function addToDropDown(notification) {
+        $('#notifications').prepend(format(notification));
+    };
+
+    function format(data) {
+        const htmText = "<li><a href="+data.idEvent+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief+"</p></a></li>";
+        const parser = new DOMParser();
+        const node = parser.parseFromString(htmText,"text/html");
+        return node.body;
+    };
 </script>
 @yield('SpecialScripts')
 </body>

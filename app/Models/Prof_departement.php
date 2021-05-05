@@ -17,13 +17,17 @@ class Prof_departement extends Model
 {
     use HasFactory;
     protected $table = 'prof_departement';
-    protected $primaryKey = ['idProf', 'idDepartement'];
+    protected $primaryKey = 'idProf';
 
     protected $fillable = [
-		'idProf',
+        'idProf',
 		'idDepartement'
 	];
 
+    protected $casts =[
+        'idProf'=> 'int',
+        'idDepartement'=>'int',
+    ];
 
     public function professeur()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Chefdep;
 use App\Models\Evenement;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Bus\Queueable;
@@ -9,21 +10,26 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Str;
 
 class NotifyEvent extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-    public $event;
+    public string $user;
+    public string $event;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user, $event)
     {
-
+        $this->user = $user;
+        $this->event = $event;
+        // $this->delay(5);
     }
 
     /**
@@ -68,8 +74,15 @@ class NotifyEvent extends Notification implements ShouldBroadcast
     // }
     public function toArray($notifiable)
     {
+        $evt = new Evenement((array)json_decode($this->event));
+        // echo "evt in Noti".$evt;
+        // echo $chef = Chefdep::find($this->event[0]);
         return [
-            'image' =>'Hello WORLLLD'
+            // 'image' => $evt->chefdep->professeur->user->profile->imagePath,
+            'image' =>asset('/vendors/images/user.svg'),
+            'from'=>$evt->chefdep->professeur->user->personne->nom.' '.$evt->chefdep->professeur->user->personne->prenom,
+            'idEvent'=>Evenement::count(),
+            'brief'=>Str::substr($evt->message, 0, 30).'...',
         ];
     }
 
@@ -85,10 +98,10 @@ class NotifyEvent extends Notification implements ShouldBroadcast
     }
 
 
-    public function broadcastOn()
-    {
-        return new Channel('hello');
-    }
+    // public function broadcastOn()
+    // {
+    //     return new Channel('App.Models.User.{$id}');
+    // }
 
     // public function broadcastType()
     // {

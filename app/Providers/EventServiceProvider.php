@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Events\Evt;
 use \App\Listeners\EvtListener;
+use App\Models\Evenement;
+use App\Observers\EvenementObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -35,6 +37,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Evenement::observe(EvenementObserver::class);
     }
 }

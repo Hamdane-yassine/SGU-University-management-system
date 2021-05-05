@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\ProfesseurController;
+use App\Models\Evenement;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,7 +83,7 @@ Route::get('/chef/professeurslist/{departement}', [App\Http\Controllers\ChefDepa
 
 Route::get('/chef/professeur/{professeur}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseur']);
 
-Route::get('/chef/professeur/getMatiere/{professeur}',[ChefDepartementController::class, 'getMatiere']);
+Route::get('/chef/professeur/getMatiere/{professeur}/{departement}',[ChefDepartementController::class, 'getMatiere']);
 
 Route::post('/chef/affectermatiere',[ChefDepartementController::class, 'AffecterMatiere'])->name('AffecterMatiere');
 
@@ -88,15 +92,22 @@ Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'Detacher
 Route::middleware(['auth','prof'])->group(function () {
 
 });
-
+// ===============
 Route::get('/h', function () {
-    broadcast(new \App\Events\Evt())->toOthers();
+    // broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
-    return json_decode('dispatched');
+    // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
+    // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
+
+    return view('Chef.Notifications');
+
 
 });
-
+// Route::controller('/notifications', '\App\UserController');
 Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
+
+// ===============
+
 
 Route::get('chef/emploi/profs', [ChefDepartementController::class, 'getListOfProfEmploi'])->name('getProfsEmploi');
 
