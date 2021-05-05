@@ -39,7 +39,8 @@ class UserFactory extends Factory
             //     return \App\Models\Personne::factory()->create()->get()[0]['idPersonne'];
             // },
             'idPersonne' => $i++,
-            'role' => $this->faker->randomElement(['admin','prof','chefdep']),
+            // 'role' => $this->faker->randomElement(['admin','prof','chefdep']),
+            'role' => 'null',
         ];
     }
 }
