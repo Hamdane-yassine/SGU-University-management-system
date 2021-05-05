@@ -16,119 +16,23 @@
                                     <div class="chat-desc customscroll h-100">
                                         <ul>
                                             <li class="clearfix">
-                                                <div class="chat-body clearfix ml-3">
-                                                    <p>
-                                                        <span class="d-block text-secondary pb-1"><b><u>Yassine Hamdane</u> :</b></span>
-                                                        Essentially the brief is for you guys to build an iOS and android
-                                                        app. We will do backend and web app. We have a version one
-                                                        mockup of the UI, please see it attached. As mentioned before,
-                                                        we would simply hand you all the assets for the UI and you guys
-                                                        code. If you have any early questions please do send them on to
-                                                        myself. Ill be in touch in coming days when we have requirements
-                                                        prepared. Essentially the brief is for you guys to build an iOS
-                                                        and android app. We will do backend and web app. We have a
-                                                        version one mockup of the UI, please see it attached. As
-                                                        mentioned before, we would simply hand you all the assets for
-                                                        the UI and you guys code. If you have any early questions please
-                                                        do send them on to myself. Ill be in touch in coming days when
-                                                        we have.</p>
-                                                    <div class="chat_time float-right mb-10"> 16-02-2001 09:40PM</div>
-                                                </div>
-                                                <div class="chat-body clearfix ml-3">
-                                                    <p>
-                                                        <span class="d-block text-secondary pb-1"><b><u>Yassine Hamdane</u> :</b></span>
-                                                        Essentially the brief is for you guys to build an iOS and android
-                                                        app. We will do backend and web app. We have a version one
-                                                        mockup of the UI, please see it attached. As mentioned before,
-                                                        we would simply hand you all the assets for the UI and you guys
-                                                        code. If you have any early questions please do send them on to
-                                                        myself. Ill be in touch in coming days when we have requirements
-                                                        prepared. Essentially the brief is for you guys to build an iOS
-                                                        and android app. We will do backend and web app. We have a
-                                                        version one mockup of the UI, please see it attached. As
-                                                        mentioned before, we would simply hand you all the assets for
-                                                        the UI and you guys code. If you have any early questions please
-                                                        do send them on to myself. Ill be in touch in coming days when
-                                                        we have.</p>
-                                                    <div class="chat_time float-right mb-10"> 16-02-2001 09:40PM</div>
-                                                </div>
-                                                <div class="chat-body clearfix ml-3">
-                                                    <p>
-                                                        <span class="d-block text-secondary pb-1"><b><u>Yassine Hamdane</u> :</b></span>
-                                                        Essentially the brief is for you guys to build an iOS and android
-                                                        app. We will do backend and web app. We have a version one
-                                                        mockup of the UI, please see it attached. As mentioned before,
-                                                        we would simply hand you all the assets for the UI and you guys
-                                                        code. If you have any early questions please do send them on to
-                                                        myself. Ill be in touch in coming days when we have requirements
-                                                        prepared. Essentially the brief is for you guys to build an iOS
-                                                        and android app. We will do backend and web app. We have a
-                                                        version one mockup of the UI, please see it attached. As
-                                                        mentioned before, we would simply hand you all the assets for
-                                                        the UI and you guys code. If you have any early questions please
-                                                        do send them on to myself. Ill be in touch in coming days when
-                                                        we have.</p>
-                                                    <div class="chat_time float-right mb-10"> 16-02-2001 09:40PM</div>
-                                                </div>
-                                                <div class="chat-body clearfix ml-3">
-                                                    <p>
-                                                        <span class="d-block text-secondary pb-1"><b><u>Yassine Hamdane</u> :</b></span>
-                                                        Essentially the brief is for you guys to build an iOS and android
-                                                        app. We will do backend and web app. We have a version one
-                                                        mockup of the UI, please see it attached. As mentioned before,
-                                                        we would simply hand you all the assets for the UI and you guys
-                                                        code. If you have any early questions please do send them on to
-                                                        myself. Ill be in touch in coming days when we have requirements
-                                                        prepared. Essentially the brief is for you guys to build an iOS
-                                                        and android app. We will do backend and web app. We have a
-                                                        version one mockup of the UI, please see it attached. As
-                                                        mentioned before, we would simply hand you all the assets for
-                                                        the UI and you guys code. If you have any early questions please
-                                                        do send them on to myself. Ill be in touch in coming days when
-                                                        we have.</p>
-                                                    <div class="chat_time float-right mb-10"> 16-02-2001 09:40PM</div>
-                                                </div>
-                                                <div class="chat-body clearfix ml-3">
-                                                    <p>
-                                                        <span class="d-block text-secondary pb-1"><b><u>Yassine Hamdane</u> :</b></span>
-                                                        Essentially the brief is for you guys to build an iOS and android
-                                                        app. We will do backend and web app. We have a version one
-                                                        mockup of the UI, please see it attached. As mentioned before,
-                                                        we would simply hand you all the assets for the UI and you guys
-                                                        code. If you have any early questions please do send them on to
-                                                        myself. Ill be in touch in coming days when we have requirements
-                                                        prepared. Essentially the brief is for you guys to build an iOS
-                                                        and android app. We will do backend and web app. We have a
-                                                        version one mockup of the UI, please see it attached. As
-                                                        mentioned before, we would simply hand you all the assets for
-                                                        the UI and you guys code. If you have any early questions please
-                                                        do send them on to myself. Ill be in touch in coming days when
-                                                        we have.</p>
-                                                    <div class="chat_time float-right mb-10"> 16-02-2001 09:40PM</div>
-                                                </div>
-                                                <div class="chat-body clearfix ml-3">
-                                                    <p>
-                                                        <span class="d-block text-secondary pb-1"><b><u>Yassine Hamdane</u> :</b></span>
-                                                        Essentially the brief is for you guys to build an iOS and android
-                                                        app. We will do backend and web app. We have a version one
-                                                        mockup of the UI, please see it attached. As mentioned before,
-                                                        we would simply hand you all the assets for the UI and you guys
-                                                        code. If you have any early questions please do send them on to
-                                                        myself. Ill be in touch in coming days when we have requirements
-                                                        prepared. Essentially the brief is for you guys to build an iOS
-                                                        and android app. We will do backend and web app. We have a
-                                                        version one mockup of the UI, please see it attached. As
-                                                        mentioned before, we would simply hand you all the assets for
-                                                        the UI and you guys code. If you have any early questions please
-                                                        do send them on to myself. Ill be in touch in coming days when
-                                                        we have.</p>
-                                                    <div class="chat_time float-right mb-10"> 16-02-2001 09:40PM</div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                @if(Auth::user()->notifications->count())
+                                                    @foreach (Auth::user()->notifications as $notification)
+                                                        <div class="chat-body clearfix ml-3" id="{{ $notification->data['idEvent'] }}">
+                                                            <p>
+                                                            <span class="d-block text-secondary pb-1">
 
-                                </div>
+                                                                <b><u>{{ $notification->data['from'] }}</u> :</b>
+                                                            </span>{{ $notification->data['brief'] }}</p>
+                                                            <div class="chat_time float-right mb-10"> {{ $notification->created_at }}</div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
                             </div>
                         </div>
                     </div>

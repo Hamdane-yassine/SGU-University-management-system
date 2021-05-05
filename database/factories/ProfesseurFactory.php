@@ -22,7 +22,7 @@ class ProfesseurFactory extends Factory
     public function definition()
     {
         static $i =1;
-        static $j =201;
+        static $j =101;
         return [
             // 'idUtilisateur' => function (){
             //     if(\App\Models\User::count())
@@ -31,11 +31,11 @@ class ProfesseurFactory extends Factory
             //     return \App\Models\User::factory()->create()->get()[0]['id'];
             // },
             'idUtilisateur' => $i++,
-            'idDepartement' => function (){
-                if(\App\Models\Departement::count())
-                    return $this->faker->randomElement(\App\Models\Departement::pluck('idDepartement'));
-                return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
-            },
+            // 'idDepartement' => function (){
+            //     if(\App\Models\Departement::count())
+            //         return $this->faker->randomElement(\App\Models\Departement::pluck('idDepartement'));
+            //     return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
+            // },
             'specialite'=>$this->faker->word(),
             'echellon'=>$this->faker->word(),
             'idEmploi' => $j++

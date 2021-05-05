@@ -81,7 +81,7 @@ class NotifyEvent extends Notification implements ShouldBroadcast
             // 'image' => $evt->chefdep->professeur->user->profile->imagePath,
             'image' =>asset('/vendors/images/user.svg'),
             'from'=>$evt->chefdep->professeur->user->personne->nom.' '.$evt->chefdep->professeur->user->personne->prenom,
-            'lien'=>'/events/'.Evenement::count(),
+            'idEvent'=>Evenement::count(),
             'brief'=>Str::substr($evt->message, 0, 30).'...',
         ];
     }
