@@ -36,4 +36,12 @@ class ChefdepFactory extends Factory
             }
         ];
     }
+    public function configure()
+    {
+        return $this->afterCreating(function (Chefdep $chef)
+        {
+            $chef->professeur->user->role='chefdep';
+            $chef->professeur->user->save();
+        });
+    }
 }

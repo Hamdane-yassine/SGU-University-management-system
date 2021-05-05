@@ -340,7 +340,7 @@ class ChefDepartementController extends Controller
 
     public function getProfesseurs(Request $request , Departement $departement)
     {
-        $professeurs = Professeur::where('departement.idDepartement',$departement->idDepartement)  //first inint a user id
+        $professeurs = Departement::where('departement.idDepartement',$departement->idDepartement)  //first inint a user id
        ->join('prof_departement','departement.idDepartement','=','prof_departement.idDepartement')
        ->join('professeur','prof_departement.idProf','=','professeur.idProf')
        ->join('users','professeur.idUtilisateur','=','users.id')
@@ -390,39 +390,41 @@ class ChefDepartementController extends Controller
     {
         $idProf = request('prof');
         $idMatiere = request('matiereafect');
-        $departement = request('dep');
+        $idDepartement = request('depA');
         $matiere = Matiere::find($idMatiere);
         $matiere->idProf=$idProf;
         $matiere->save();
         $professeur = Professeur::find($idProf);
         $MatieresList = array();
-        foreach($professeur->matieres as $matiere)
+        $departement = Departement::find($idDepartement);
+        foreach($professeur->matieres as $mat)
         {
-            if($matiere->module->filiere->departement->idDepartement == $departement->idDepartement)
+            if($mat->module->filiere->departement->idDepartement == $departement->idDepartement)
             {
-                array_push($MatieresList,$matiere);
+                array_push($MatieresList,$mat);
             }
         }
-        echo json_encode($MatieresList);
+        return json_encode($MatieresList);
     }
     public function DetacherMatiere()
     {
         $idMatiere = request('matiere');
         $idProf = request('profdet');
-        $departement = request('depD');
+        $idDepartement = request('depD');
         $matiere = Matiere::find($idMatiere);
         $matiere->idProf=null;
         $matiere->save();
         $professeur = Professeur::find($idProf);
         $MatieresList = array();
-        foreach($professeur->matieres as $matiere)
+        $departement = Departement::find($idDepartement);
+        foreach($professeur->matieres as $mat)
         {
-            if($matiere->module->filiere->departement->idDepartement == $departement->idDepartement)
+            if($mat->module->filiere->departement->idDepartement == $departement->idDepartement)
             {
-                array_push($MatieresList,$matiere);
+                array_push($MatieresList,$mat);
             }
         }
-        echo json_encode($MatieresList);
+        return json_encode($MatieresList);
     }
     public function AbsencesIndex() //load abseces and return view for /chef/absence
     {
