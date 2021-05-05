@@ -34,7 +34,7 @@
                         <hr>
                         <form action="{{ route('AffecterMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="affecter">
                             @csrf
-                            <input type="hidden" id="dep" name="dep" value="{{ $departement->idDepartement }}">
+                            <input type="hidden" id="depA" name="depA" value="{{ $departement->idDepartement }}">
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -42,8 +42,8 @@
                                             <label>professeur :</label>
                                             <select class="custom-select2 form-control"
                                                 style="width: 100%; height: 38px;" name="prof" id="prof">
-                                                @foreach ($departement->professeurs as $professeur)
-                                                   <option value="{{ $professeur->idProf }}">{{ $professeur->user->personne->nom.' '.$professeur->user->personne->prenom }}</option>
+                                                @foreach ($departement->prof_departements as $prof_departement)
+                                                   <option value="{{ $prof_departement->professeur->idProf }}">{{$prof_departement->professeur->user->personne->nom.' '.$prof_departement->professeur->user->personne->prenom }}</option>
                                                 @endforeach 
                                             </select>
                                         </div>
@@ -88,9 +88,10 @@
                                             <label>professeur :</label>
                                             <select class="custom-select2 form-control" name="profdet" id="profdet"
                                                 style="width: 100%; height: 38px;" required>
-                                                    @foreach ($departement->professeurs as $professeur)
-                                                        <option value="{{ $professeur->idProf }}">{{ $professeur->user->personne->nom.' '.$professeur->user->personne->prenom }}</option>
-                                                    @endforeach                                                 
+                                                <option value="">---Selectioné un professeur---</option>
+                                                @foreach ($departement->prof_departements as $prof_departement)
+                                                   <option value="{{ $prof_departement->professeur->idProf }}">{{$prof_departement->professeur->user->personne->nom.' '.$prof_departement->professeur->user->personne->prenom }}</option>
+                                                @endforeach                                                 
                                             </select>
                                         </div>
                                     </div>
@@ -98,17 +99,7 @@
                                         <div class="form-group">
                                             <label>Matière :</label>
                                             <select class="custom-select1 form-control" name="matiere" id="matiere" style="width: 100%; height: 45px;" required>
-                                                @foreach ($departement->filieres as $filiere)
-                                                    <optgroup label="{{ $filiere->nom.' '.$filiere->niveau }}">
-                                                        @foreach ($filiere->modules as $module)
-                                                            @foreach ($module->matieres as $matiere)
-                                                                @if($matiere->professeur->idProf==$departement->professeurs[0]->idProf)
-                                                                <option value="{{ $matiere->idMatiere }}">{{ $matiere->nom }}</option>
-                                                                @endif
-                                                            @endforeach
-                                                        @endforeach
-                                                    </optgroup>
-                                                @endforeach
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -337,7 +328,7 @@
         {
                 jQuery('select[name="profdet"]').on('change',function(){
                    var idProf = jQuery(this).val();
-                   var idDep = document.getElementById("dep").value;
+                   var idDep = document.getElementById("depA").value;
                    if(idProf)
                    {
                       jQuery.ajax({
@@ -367,7 +358,7 @@
             $.ajax({
                 type: "POST",
                 url: url,
-                dataType : "json",
+                dataType : "JSON",
                 data: form.serialize(), // serializes the form's elements.
                 success: function(data) {
                     $('#success-modal-aff').modal('show');
@@ -379,7 +370,7 @@
                         });
                     }else{
                         jQuery.ajax({
-                         url : '/chef/professeur/getMatiere/'+document.getElementById("profdet").value+'/'+document.getElementById("dep").value,
+                         url : '/chef/professeur/getMatiere/'+document.getElementById("profdet").value+'/'+document.getElementById("depA").value,
                          type : "GET",
                          dataType : "json",
                          success:function(response)
@@ -392,6 +383,25 @@
                          }
                       });
                     }
+                },
+                error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert(msg);
                 }
             });
         });
@@ -402,7 +412,7 @@
             $.ajax({
                 type: "POST",
                 url: url,
-                dataType : "json",
+                dataType : "JSON",
                 data: form.serialize(),
                 success: function(data) {
                     $('#success-modal-det').modal('show');
