@@ -149,12 +149,12 @@ class ProfesseurController extends Controller
         $FiliereCount = count($filieres);
         $AbsenceCount = Absence::where('idProf',Auth::user()->professeur->idProf)->count();
         $MatiereCount = count(auth()->user()->professeur->matieres);
-        $insertionNotes = auth()->user()->professeur->departement->insertion_notes;
+        //$insertionNotes = auth()->user()->professeur->departement->insertion_notes;
 
         //echo auth()->user()->professeur->departement->idDepartement." ".$EtudiantCount." ".$FiliereCount." ".$AbsenceCount." ".$MatiereCount;
         return view('prof.TableBoard',['annee' => $annee,'date' => $date ,
         'EtudiantCount' => $EtudiantCount , 'FiliereCount' => $FiliereCount ,
-        'AbsenceCount' => $AbsenceCount , 'MatiereCount' => $MatiereCount, 'insertionNotes' => $insertionNotes]);
+        'AbsenceCount' => $AbsenceCount , 'MatiereCount' => $MatiereCount]);
     }
 
     public function getNotes(Matiere $matiere)
