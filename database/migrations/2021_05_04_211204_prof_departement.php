@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class ProfDepartement extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,9 +15,11 @@ class ProfDepartement extends Migration
     public function up()
     {
         Schema::create('prof_departement', function (Blueprint $table) {
+            $table->id('idProfDep')->autoIncrement();
 			$table->bigInteger('idProf')->unsigned();
 			$table->bigInteger('idDepartement')->unsigned();
-            $table->primary(['idProf', 'idDepartement']);
+            // $table->primary(['idProf', 'idDepartement']);
+            $table->timestamps();
         });
     }
 
