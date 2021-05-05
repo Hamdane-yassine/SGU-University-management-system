@@ -341,7 +341,8 @@ class ChefDepartementController extends Controller
     public function getProfesseurs(Request $request , Departement $departement)
     {
         $professeurs = Professeur::where('departement.idDepartement',$departement->idDepartement)  //first inint a user id
-       ->join('departement','professeur.idDepartement','=','departement.idDepartement')
+       ->join('prof_departement','departement.idDepartement','=','prof_departement.idDepartement')
+       ->join('professeur','prof_departement.idProf','=','professeur.idProf')
        ->join('users','professeur.idUtilisateur','=','users.id')
        ->join('personne','users.idPersonne','=','personne.idPersonne')
        ->select('professeur.idProf','personne.nom','personne.prenom','professeur.specialite','email','tel',)
@@ -372,31 +373,56 @@ class ChefDepartementController extends Controller
         }
     }
 
-    public function getMatiere(Professeur $professeur) //get Matiere based on idFiliere
+    public function getMatiere(Professeur $professeur,Departement $departement) //get Matiere based on idFiliere
     {
-        $MatieresList = $professeur->matieres;
-        return json_encode($MatieresList);
+        $MatieresList = array();
+        foreach($professeur->matieres as $matiere)
+        {
+            if($matiere->module->filiere->departement->idDepartement == $departement->idDepartement)
+            {
+                array_push($MatieresList,$matiere);
+            }
+        }
+        echo json_encode($MatieresList);
     }
 
     public function AffecterMatiere()
     {
         $idProf = request('prof');
         $idMatiere = request('matiereafect');
+        $departement = request('dep');
         $matiere = Matiere::find($idMatiere);
         $matiere->idProf=$idProf;
         $matiere->save();
         $professeur = Professeur::find($idProf);
-        echo json_encode($professeur->matieres);
+        $MatieresList = array();
+        foreach($professeur->matieres as $matiere)
+        {
+            if($matiere->module->filiere->departement->idDepartement == $departement->idDepartement)
+            {
+                array_push($MatieresList,$matiere);
+            }
+        }
+        echo json_encode($MatieresList);
     }
     public function DetacherMatiere()
     {
         $idMatiere = request('matiere');
         $idProf = request('profdet');
+        $departement = request('depD');
         $matiere = Matiere::find($idMatiere);
         $matiere->idProf=null;
         $matiere->save();
         $professeur = Professeur::find($idProf);
-        echo json_encode($professeur->matieres);
+        $MatieresList = array();
+        foreach($professeur->matieres as $matiere)
+        {
+            if($matiere->module->filiere->departement->idDepartement == $departement->idDepartement)
+            {
+                array_push($MatieresList,$matiere);
+            }
+        }
+        echo json_encode($MatieresList);
     }
     public function AbsencesIndex() //load abseces and return view for /chef/absence
     {
@@ -438,22 +464,6 @@ class ChefDepartementController extends Controller
             ->make(true);
         }
     }
-
-    // public function getProfesseurs(Request $request , Departement $departement)
-    // {
-    //     $professeurs = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
-    //    ->join('module','module.idModule','=','matiere.idModule')
-    //    ->join('filiere','module.idFiliere','=','filiere.idFiliere')
-    //    ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
-    //    ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
-    //    ->leftJoin('note', 'etudiant.idEtudiant', '=', 'note.idEtudiant')
-    //    ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral')
-    //    ->get();
-    //    if ($request->ajax()) {
-    //         return Datatables::of($professeurs)
-    //         ->make(true);
-    //     }
-    // }
 
     public function getChefDashboard()
     {

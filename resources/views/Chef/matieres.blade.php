@@ -16,11 +16,6 @@
                         <div class="col-md-6 col-sm-12">
                             <h4 class="text-blue h4">{{ $filiere->nom . ' ' . $filiere->niveau }}</h4>
                         </div>
-                        <div class="col-md-6 col-sm-12 text-right">
-                            <div class="text-right font-14 text-secondary weight-500">Insértion des notes <input
-                                    type="checkbox" checked class="switch-btn" data-color="#0099ff" data-size="small">
-                            </div>
-                        </div>
                     </div>
                     <div class="pb-20">
                         <table class="table table-bordered">

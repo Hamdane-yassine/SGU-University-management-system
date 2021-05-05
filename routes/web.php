@@ -83,7 +83,7 @@ Route::get('/chef/professeurslist/{departement}', [App\Http\Controllers\ChefDepa
 
 Route::get('/chef/professeur/{professeur}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseur']);
 
-Route::get('/chef/professeur/getMatiere/{professeur}',[ChefDepartementController::class, 'getMatiere']);
+Route::get('/chef/professeur/getMatiere/{professeur}/{departement}',[ChefDepartementController::class, 'getMatiere']);
 
 Route::post('/chef/affectermatiere',[ChefDepartementController::class, 'AffecterMatiere'])->name('AffecterMatiere');
 

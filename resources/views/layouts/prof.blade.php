@@ -159,8 +159,6 @@
                         @foreach ($filieres as $filiere)
                              <li><a href="/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom.' '.$filiere->niveau }}</a></li>
                         @endforeach
-                        {{-- <li><a href="index.html">Génie Logiciel - GL1</a></li>
-                        <li><a href="index2.html">Administrateur Réseaux</a></li> --}}
                     </ul>
                 </li>
 

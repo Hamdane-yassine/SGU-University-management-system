@@ -34,6 +34,7 @@
                         <hr>
                         <form action="{{ route('AffecterMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="affecter">
                             @csrf
+                            <input type="hidden" id="dep" name="dep" value="{{ $departement->idDepartement }}">
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -79,6 +80,7 @@
                         <hr>
                         <form action="{{ route('DetacherMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="detacher">
                             @csrf
+                            <input type="hidden" id="depD" name="depD" value="{{ $departement->idDepartement }}">
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -96,8 +98,16 @@
                                         <div class="form-group">
                                             <label>Matière :</label>
                                             <select class="custom-select1 form-control" name="matiere" id="matiere" style="width: 100%; height: 45px;" required>
-                                                @foreach ($departement->professeurs[0]->matieres as $matiere)
-                                                     <option value="{{ $matiere->idMatiere }}">{{ $matiere->nom }}</option>
+                                                @foreach ($departement->filieres as $filiere)
+                                                    <optgroup label="{{ $filiere->nom.' '.$filiere->niveau }}">
+                                                        @foreach ($filiere->modules as $module)
+                                                            @foreach ($module->matieres as $matiere)
+                                                                @if($matiere->professeur->idProf==$departement->professeurs[0]->idProf)
+                                                                <option value="{{ $matiere->idMatiere }}">{{ $matiere->nom }}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        @endforeach
+                                                    </optgroup>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -327,10 +337,11 @@
         {
                 jQuery('select[name="profdet"]').on('change',function(){
                    var idProf = jQuery(this).val();
+                   var idDep = document.getElementById("dep").value;
                    if(idProf)
                    {
                       jQuery.ajax({
-                         url : '/chef/professeur/getMatiere/'+idProf,
+                         url : '/chef/professeur/getMatiere/'+idProf+'/'+idDep,
                          type : "GET",
                          dataType : "json",
                          success:function(data)
@@ -368,7 +379,7 @@
                         });
                     }else{
                         jQuery.ajax({
-                         url : '/chef/professeur/getMatiere/'+document.getElementById("profdet").value,
+                         url : '/chef/professeur/getMatiere/'+document.getElementById("profdet").value+'/'+document.getElementById("dep").value,
                          type : "GET",
                          dataType : "json",
                          success:function(response)
