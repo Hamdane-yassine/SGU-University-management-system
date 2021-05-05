@@ -25,11 +25,11 @@ class PersonneFactory extends Factory
             'nom' => $this->faker->name(),
             'prenom' => $this->faker->name(),
             'adressePersonnele' => $this->faker->address,
-            'cin' => $this->faker->name(),
+            'cin' => $this->faker->randomNumber(4),
             'tel' => $this->faker->phoneNumber,
             'dateNaissance' =>  $this->faker->date(),
             'nationalite' => $this->faker->colorName,
-            'lieuNaissance' => $this->faker->name(),
+            'lieuNaissance' => $this->faker->city,
             'emailInstitutionne' =>  $this->faker->safeEmail,
         ];
     }
