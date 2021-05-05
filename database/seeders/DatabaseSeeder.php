@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Departement;
+use App\Models\Evenement;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $tables = DB::select('SHOW TABLES');
         foreach ($tables as $table) {
             if ($table->Tables_in_pfe !== 'migrations')
-            DB::table($table->Tables_in_pfe)->truncate();
+                DB::table($table->Tables_in_pfe)->truncate();
         }
         Schema::enableForeignKeyConstraints();
         // +++++++++++ END +++++++++++++++=
@@ -46,16 +47,20 @@ class DatabaseSeeder extends Seeder
         \App\Models\Matiere::factory(200)->create();
         \App\Models\Note::factory(200)->create();
         // \App\Models\Notification::factory(200)->create();
-        \App\Models\Evenement::factory(200)->create();
-        \App\Models\Absence::factory(200)->create();
+        Evenement::withoutEvents(function ()
+        {
+            // \App\Models\Evenement::factory();
 
-        \App\Models\User::factory()->create([
-            'email'=>"amirnet001@gmail.com",
-            'password'=>bcrypt('secret'),
-            'idPersonne'=> \App\Models\Personne::factory()->create([
-                'idPersonne'=>300
-                ])->idPersonne
-        ]);
+        });
+        // \App\Models\Absence::factory(200)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'email'=>"amirnet001@gmail.com",
+        //     'password'=>bcrypt('secret'),
+        //     'idPersonne'=> \App\Models\Personne::factory()->create([
+        //         'idPersonne'=>300
+        //         ])->idPersonne
+        // ]);
 
         // =======================================
 

@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\ProfesseurController;
+use App\Models\Evenement;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,9 +94,12 @@ Route::middleware(['auth','prof'])->group(function () {
 });
 
 Route::get('/h', function () {
-    broadcast(new \App\Events\Evt())->toOthers();
+    // broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
-    return json_decode('dispatched');
+    // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
+    \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
+    echo "yea";
+
 
 });
 
@@ -111,4 +118,8 @@ Route::post('/chef/upload/',[ChefDepartementController::class, 'uploadEmploi'])-
 Route::get('/chef/absences',[ChefDepartementController::class, 'AbsencesIndex']);
 
 Route::get('/chef/absencesDataTable',[ChefDepartementController::class, 'getAbsencesForChef'])->name('getAbsencesForChef');
+
+Route::get('/chef/dashboard' ,[ChefDepartementController::class, 'getChefDashboard']);
+
+Route::get('/chef/dashboard/Absencesdatatable', [ChefDepartementController::class, 'getAbsencesListForChefDashboard'])->name('getAbsencesListForChefDashboard');
 

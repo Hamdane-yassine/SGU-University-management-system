@@ -35,10 +35,11 @@ class Evenement extends Model
 	];
 
 	protected $dates = [
-		'Date_even'
+        'Date_even'
 	];
 
 	protected $fillable = [
+        'idEvenement' => 'int',
 		'ID_chef',
 		'Date_even',
 		'message'

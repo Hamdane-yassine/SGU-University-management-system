@@ -7,13 +7,12 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-12">
 						<div class="title">
-							<h4>Année universitaire : 2021/2020</h4>
-							<span class="pl-2"><i class="icon-copy fi-arrow-right"></i> Semestre 4</span>
+							<h4>Année universitaire : {{ $annee }}</h4>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-12 text-right">
 						<div>
-							<span class="btn btn-primary">07/04/2021</span>
+							<span class="btn btn-primary">{{ $date }}</span>
 						</div>
 					</div>
 				</div>
@@ -23,7 +22,7 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">75</div>
+								<div class="weight-700 font-24 text-dark">{{ $Count_etudiants }}</div>
 								<div class="font-14 text-secondary weight-500">Etudiants</div>
 							</div>
 							<div class="widget-icon">
@@ -36,7 +35,7 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">2</div>
+								<div class="weight-700 font-24 text-dark">{{ $Count_filieres }}</div>
 								<div class="font-14 text-secondary weight-500">Filiéres</div>
 							</div>
 							<div class="widget-icon">
@@ -49,7 +48,7 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">4</div>
+								<div class="weight-700 font-24 text-dark">{{  $Count_absences }}</div>
 								<div class="font-14 text-secondary weight-500">Total des absences</div>
 							</div>
 							<div class="widget-icon">
@@ -62,7 +61,7 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">ouvert</div>
+								<div class="weight-700 font-24 text-dark">{{ $etat_notes }}</div>
 								<div class="font-14 text-secondary weight-500">Insértion des notes</div>
 							</div>
 							<div class="widget-icon">
@@ -88,31 +87,6 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Abd Ali lasfar</td>
-                          	        <td>27 April 2021 11:55 am</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Abd Ali lasfar</td>
-                          	        <td>27 April 2021 11:55 am</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Abd Ali lasfar</td>
-                          	        <td>27 April 2021 11:55 am</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>Abd Ali lasfar</td>
-                          	        <td>27 April 2021 11:55 am</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>Abd Ali lasfar</td>
-                          	        <td>27 April 2021 11:55 am</td>
-								</tr>	
 							</tbody>
 						</table>
 					</div>
@@ -180,10 +154,46 @@
 	</div>
 	@endsection
 	@section('SpecialScripts')
-	<script src="{{ asset('src/plugins/apexcharts/apexcharts.min.js') }}"></script>
+	<!--<script src="{{ asset('src/plugins/apexcharts/apexcharts.min.js') }}"></script> -->
 	<script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
 	<script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
 	<script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
 	<script src="{{ asset('vendors/scripts/dashboard3.js') }}"></script>
+    <script type="text/javascript">
+        $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('getAbsencesListForChefDashboard') }}",
+                columns: [
+                    {data: 'idAbsence', name: 'idAbsence'},
+                    {data: 'nomProf', name: 'nomProf'},
+                    {data: 'dateAbsence', name: 'dateAbsence'},
+                ],
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "zeroRecords": "Aucun élément correspondant trouvé",
+                    "processing": "Traitement...",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                    "loadingRecords": "Chargement...",
+                    "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                    search: "Rechercher:",
+                    searchPlaceholder: "Rechercher",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'
+                    }
+                },
+            });
+    </script>
 	@endsection
