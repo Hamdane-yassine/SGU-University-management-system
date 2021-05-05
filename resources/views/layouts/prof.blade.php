@@ -293,6 +293,20 @@
             </ul>
         </div>
     </div>
+    @elseif (auth()->user()->role=='admin')
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li>
+                    <a href="/admin/emploi" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-calendar"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi du
+                            temps</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
     @endif
 
 </div>
