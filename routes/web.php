@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\ProfesseurController;
 use App\Models\Evenement;
@@ -108,9 +109,6 @@ Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
 
 // ===============
 
-
-Route::get('chef/emploi/profs', [ChefDepartementController::class, 'getListOfProfEmploi'])->name('getProfsEmploi');
-
 Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
 
 Route::get('chef/emploi/delete/prof/{idEmploi}', [ChefDepartementController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
@@ -127,3 +125,8 @@ Route::get('/chef/dashboard' ,[ChefDepartementController::class, 'getChefDashboa
 
 Route::get('/chef/dashboard/Absencesdatatable', [ChefDepartementController::class, 'getAbsencesListForChefDashboard'])->name('getAbsencesListForChefDashboard');
 
+Route::get('admin/emploi', [AdminController::class, 'index']);
+
+Route::get('admin/emploi/profs', [AdminController::class, 'getListOfProfEmploi'])->name('getProfsEmploi'); //this one isn't used by the chefdep anymore , rather it will be reused in admin's UI
+
+Route::post('/upload/profEmploi',[AdminController::class, 'uploadEmploi'])->name('uploadEmploiprof');
