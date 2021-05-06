@@ -15,6 +15,7 @@ use App\Models\Matiere;
 use App\Models\Note;
 use App\Models\Module;
 use App\Models\Personne;
+use App\Models\Prof_departement;
 use App\Models\Professeur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,40 +26,16 @@ class ChefDepartementController extends Controller
     {
         //return list of profs in this department
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $profs = Professeur::where('idDepartement',$idDepartement)
+        /*$profs = Professeur::where('prof_departement.idDepartement',$idDepartement)
+        ->join('prof_departement','professeur.idProf','prof_departement.idProf')
         ->join('users','users.id','=','professeur.idUtilisateur')
-        ->select('idProf','users.name as nom')->get();
+        ->select('professeur.idProf','users.name as nom')->get();*/
 
         //return list of filiere in that departement
         $filieres = Filiere::where('idDepartement',$idDepartement)->select('idFiliere','nom','niveau')->get();
-        return view('chef.emploi',['profs' => $profs , 'filieres' => $filieres]);
+        return view('chef.emploi',['filieres' => $filieres]);
     }
 
-    public function getListOfProfEmploi(Request $request)
-    {
-        $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $emplois = Professeur::where('idDepartement',$idDepartement)
-        ->join('users','users.id','=','professeur.idUtilisateur')
-        ->join('emploi','emploi.idEmploi','=','professeur.idEmploi')
-        ->select('emploi.idEmploi as idEmploi','filename','users.name as nom','emploi.created_at as date')->get();
-
-        if ($request->ajax()) {
-            return Datatables::of($emplois)
-            ->addColumn('filename', function($row)
-            {
-                $link_to_file = asset('storage/emploi/prof/'.$row->filename);
-                $btn = '<a class="text-success" href="' .$link_to_file. '" target="_blank" >' .$row->filename. '</a>';
-                return $btn;
-            })
-            ->addColumn('action', function($row)
-            {
-                $btn = '<a href="emploi/delete/prof/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</i></a>';
-                return $btn;
-            })
-            ->rawColumns(['action','filename'])
-            ->make(true);
-        }
-    }
 
     public function getListOfFilieresEmploi(Request $request)
     {
@@ -158,105 +135,45 @@ class ChefDepartementController extends Controller
 
     public function uploadEmploi(Request $request)
     {
-        $selection =  $request->ProfOrFiliere;
+        $idFiliere =  $request->filiere;
         $file = $request->uploadedFile;
+        $filiere = Filiere::where('idFiliere',$idFiliere)->select('idFiliere','nom as name','niveau','idEmploi')->get()[0];
 
-        if($selection[0] == 'p') //means we're uploading emploi for a prof
+        //echo $idFiliere.'<br>';
+        //echo $filiere->nom;
+
+        //add or update entry in emploi and filiere table
+        if(is_null($filiere->idEmploi)) //then creat a new entry
         {
-            //store the file
-            $idProf = substr($selection,1);
-            $prof = Professeur::where('idProf',$idProf)->join('users','professeur.idUtilisateur','=','users.id')
-            ->select('users.id','users.name as name','idEmploi','idProf')
-            ->get()[0];
-
-            echo $idProf.'<br>';
-            echo $prof->name;
-
-            //add or update entry in emploi and professeur table
-            if(is_null($prof->idEmploi)) //then creat a new entry
-            {
-                $emploi = Emploi::create([
-                    'fileName' => $prof->name.'.pdf',
-                    'created_at' => '',
-                ]);
-
-                $file->storeAs('emploi/prof/', $prof->name.'.pdf');  //store with the original name
-
-                $emploi = Emploi::where('fileName',$prof->name.'.pdf')->select('idEmploi')->get()[0];
-                $prof = Professeur::find($idProf);
-                $prof->idEmploi = $emploi->idEmploi;
-                $prof->save();
-            }
-            else //meaning the prof has already an emploi
-            {
-                //delete old file
-                Storage::delete('emploi/prof/', $prof->name.'.pdf');
-                //delete the old entry
-                $oldEmploi = Emploi::find($prof->idEmploi);
-                $oldEmploi->delete();
-
-                //add new one
-                $emploi = Emploi::create([
-                    'fileName' => $prof->name.'.pdf',
-                    'created_at' => '',
-                ]);
-
-                $file->storeAs('emploi/prof/', $prof->name.'.pdf');  //store with the original name
-
-                $emploi = Emploi::where('fileName',$prof->name.'.pdf')->select('idEmploi')->get()[0];
-                $prof = Professeur::find($idProf);
-                $prof->idEmploi = $emploi->idEmploi;
-                $prof->save();
-            }
-
+            $emploi = Emploi::create([
+                'fileName' => $filiere->name.$filiere->niveau.'.pdf',
+                'created_at' => '',
+            ]);
+            $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
+            $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
+            $filiere = Filiere::find($idFiliere);
+            $filiere->idEmploi = $emploi->idEmploi;
+            $filiere->save();
         }
-        elseif($selection[0] == 'f') //means we're uploading emploi for a filiere
+        else //meaning the filiere has already an emploi
         {
-            $idFiliere = substr($selection,1);
-            $filiere = Filiere::where('idFiliere',$idFiliere)->select('idFiliere','nom as name','niveau','idEmploi')->get()[0];
-
-            //echo $idFiliere.'<br>';
-            //echo $filiere->nom;
-
-            //add or update entry in emploi and filiere table
-            if(is_null($filiere->idEmploi)) //then creat a new entry
-            {
-                $emploi = Emploi::create([
-                    'fileName' => $filiere->name.$filiere->niveau.'.pdf',
-                    'created_at' => '',
-                ]);
-
-                $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
-
-                $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
-                $filiere = Filiere::find($idFiliere);
-                $filiere->idEmploi = $emploi->idEmploi;
-                $filiere->save();
-            }
-            else //meaning the filiere has already an emploi
-            {
-                //delete old file
-                Storage::delete('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');
-                //delete the old entry
-                $oldEmploi = Emploi::find($filiere->idEmploi);
-                $oldEmploi->delete();
-
-                //add new one
-                $emploi = Emploi::create([
-                    'fileName' => $filiere->name.$filiere->niveau.'.pdf',
-                    'created_at' => '',
-                ]);
-
-                $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
-
-                $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
-                $filiere = Filiere::find($idFiliere);
-                $filiere->idEmploi = $emploi->idEmploi;
-                $filiere->save();
-            }
+            //delete old file
+            Storage::delete('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');
+            //delete the old entry
+            $oldEmploi = Emploi::find($filiere->idEmploi);
+            $oldEmploi->delete();
+            //add new one
+            $emploi = Emploi::create([
+                'fileName' => $filiere->name.$filiere->niveau.'.pdf',
+                'created_at' => '',
+            ]);
+            $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
+            $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
+            $filiere = Filiere::find($idFiliere);
+            $filiere->idEmploi = $emploi->idEmploi;
+            $filiere->save();
         }
-            return redirect('/chef/emploi'); //just in case
-
+        return redirect('/chef/emploi'); //just in case
     }
     public function UpdateEtudiant()
     {
@@ -435,7 +352,8 @@ class ChefDepartementController extends Controller
     {
         //get the departement id of the current chef
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $profs = Professeur::where(['idDepartement'=> $idDepartement],['filiere.idDepartement' => $idDepartement])
+        //get all profs within the same departement
+        $profs = Professeur::where(['prof_departement.idDepartement'=> $idDepartement],['filiere.idDepartement' => $idDepartement])
         ->join('prof_departement','professeur.idProf','prof_departement.idProf')
         ->select('professeur.idProf')->get()->toArray();
         $absences = Absence::whereIn('absence.idProf',$profs)
@@ -484,7 +402,8 @@ class ChefDepartementController extends Controller
         $Count_filieres = Filiere::where('idDepartement',$idDepartement)->count();
 
         //get absences count (of profs within the same dep)
-        $profs = Professeur::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray()   ;
+        $profs = Prof_departement::where('idDepartement',$idDepartement)
+        ->select('idProf')->get()->toArray();
         $Count_absences = Absence::whereIn('idProf',$profs)->count();
 
         $etat_notes = Departement::find($idDepartement)->insertion_notes;
@@ -498,7 +417,7 @@ class ChefDepartementController extends Controller
     public function getAbsencesListForChefDashboard(Request $request)
     {
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $profs = Professeur::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
+        $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
         $absences = Absence::whereIn('absence.idProf',$profs)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('users','users.id','=','professeur.idUtilisateur')

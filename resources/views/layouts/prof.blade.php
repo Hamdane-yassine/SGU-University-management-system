@@ -75,17 +75,17 @@
                             @if(Auth::User()->notifications->count())
                             @foreach (Auth::User()->UnreadNotifications as $notification)
                             <li>
-                                <a href="{{ '/events/'.$notification->data['idEvent'] }}">
+                                <a href="{{ url('/notifications?idNotif='.$notification->data['idNotif']) }}">
                                     <img src="{{ $notification->data['image'] }}" alt="profile image">
                                     <h3>{{$notification->data['from']}}</h3>
-                                    <p>{{$notification->data['brief']}}</p>
+                                    <p>{{Str::substr($notification->data['brief'], 0, 70) }}...</p>
                                 </a>
                             </li>
                             @endforeach
-                            @else
+                            {{-- @else
                             <li>
                                 <p>Empty</p>
-                            </li>
+                            </li> --}}
                             @endif
 
                         </ul>
@@ -134,7 +134,7 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/Dashboard" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-dashboard" style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau de
                             board</span>
                     </a>
@@ -200,7 +200,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/absences" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-calendar-check-o" style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Absenses</span>
                     </a>
                 </li>
@@ -219,7 +219,7 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/chef/dashboard" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-dashboard"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau de
                             board</span>
@@ -251,7 +251,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/chef/emploi" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-calendar"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi du
                             temps</span>
@@ -267,7 +267,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/chef/absences" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-calendar-check-o"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span
                             class="mtext">Absenses</span>
@@ -293,6 +293,20 @@
             </ul>
         </div>
     </div>
+    @elseif (auth()->user()->role=='admin')
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li>
+                    <a href="/admin/emploi" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-calendar"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi du
+                            temps</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
     @endif
 
 </div>
@@ -303,13 +317,24 @@
 <script src="{{ asset('vendors/scripts/process.js') }}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
+    const parser = new DOMParser();
+
+
+    if(document.getElementById('notifications').children.length == 0){
+            // node.append(' <li><p>Empty</p></li>');
+            $('.badge').css('display','none');
+
+            $('#notifications').append
+    };
+
     window.Echo.private('App.Models.User.{{ Auth::user()->id }}')
     .listen('.Evt', (e) => {
         console.log(e);
     }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
         console.log(notification);
-        if($('#notifications').innerHTML = "Empty")
+        // if($('#notifications').innerHTML = "Empty")
         addToDropDown(notification);
+        $('.badge').css('display','');
     }).on('pusher:subscription_succeeded', (member) => {
         console.log('successfulddly subscribed!');
     });
@@ -319,11 +344,27 @@
     };
 
     function format(data) {
-        const htmText = "<li><a href="+data.idEvent+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief+"</p></a></li>";
-        const parser = new DOMParser();
+        const htmText = "<li><a href=/notifications?idNotif="+data.idNotif+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief+"</p></a></li>";
         const node = parser.parseFromString(htmText,"text/html");
         return node.body;
     };
+
+    node =  document.createElement('li');
+    node.append()
+    $('.icon-copy').click(e=>{
+        let node = $('#notifications');
+        if(document.getElementById('notifications').children.length == 0){
+            $('.badge').css('display','none');
+            // html = '<li><p>pas de notification</p></li>';
+            // newNode = parser.parseFromString(html,'text/html');
+            // node.append(newNode.body);
+        }
+        else
+            $('.badge').css('display','');
+    });
+
+
+
 </script>
 @yield('SpecialScripts')
 </body>

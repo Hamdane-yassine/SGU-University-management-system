@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\ProfesseurController;
 use App\Models\Evenement;
@@ -7,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -97,19 +99,16 @@ Route::get('/h', function () {
     // broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
     // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
-    // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
+    \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
 
-    return view('Chef.Notifications');
+    // return view('Chef.Notifications');
 
 
 });
-// Route::controller('/notifications', '\App\UserController');
+Route::get('/notifications', '\App\Http\Controllers\UserController@markNotification');
 Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
 
 // ===============
-
-
-Route::get('chef/emploi/profs', [ChefDepartementController::class, 'getListOfProfEmploi'])->name('getProfsEmploi');
 
 Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
 
@@ -127,3 +126,8 @@ Route::get('/chef/dashboard' ,[ChefDepartementController::class, 'getChefDashboa
 
 Route::get('/chef/dashboard/Absencesdatatable', [ChefDepartementController::class, 'getAbsencesListForChefDashboard'])->name('getAbsencesListForChefDashboard');
 
+Route::get('admin/emploi', [AdminController::class, 'index']);
+
+Route::get('admin/emploi/profs', [AdminController::class, 'getListOfProfEmploi'])->name('getProfsEmploi'); //this one isn't used by the chefdep anymore , rather it will be reused in admin's UI
+
+Route::post('/upload/profEmploi',[AdminController::class, 'uploadEmploi'])->name('uploadEmploiprof');
