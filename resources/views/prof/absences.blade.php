@@ -16,6 +16,7 @@
                                 <th>N°</th>
                                 <th>Matiére</th>
                                 <th>Filière</th>
+                                <th>Departement</th>
                                 <th>Date d'absence</th>
                                 <th>État</th>
                             </tr>
@@ -119,6 +120,7 @@
                     {data: 'IdAbsence', name: 'IdAbsence'},
                     {data: 'nomMatiere', name: 'nomMatiere'},
                     {data: 'nomFiliere', name: 'nomFiliere'},
+                    {data: 'nomDepartement', name: 'nomDepartement'},
                     {data: 'dateAbsence', name: 'dateAbsence'},
                     {data: 'etat', name: 'etat'}
                 ],
