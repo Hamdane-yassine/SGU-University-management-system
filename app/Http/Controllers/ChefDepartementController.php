@@ -52,7 +52,12 @@ class ChefDepartementController extends Controller
                 $btn = '<a href="' .$link_to_file. '"  target="_blank" class="card-link text-primary" >' .$row->filename. '</a>';
                 return $btn;
             })
-            ->rawColumns(['action','filename'])
+            ->addColumn('date', function($row)
+            {
+                setlocale(LC_TIME, "fr_FR", "French");
+                return strftime("%A %d %B %G %R", strtotime($row->date));
+            })
+            ->rawColumns(['action','filename','date'])
              ->make(true);
         }
     }
@@ -344,14 +349,11 @@ class ChefDepartementController extends Controller
         ->join('matiere','matiere.idMatiere','=','absence.idMatiere')
         ->join('module','module.idModule','matiere.idModule')
         ->join('filiere','filiere.idFiliere','module.idFiliere')
-        ->select('Absence.idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','users.name as nomProf','Absence.dateAbsence as dateAbsence','Absence.etat')
+        ->select('Absence.idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','users.name as nomProf','Absence.dateAbsence as date','Absence.etat')
         ->get();
 
         if ($request->ajax()) {
             return Datatables::of($absences)
-            ->editColumn('dateAbsence', function ($request) {
-                return $request->dateAbsence->toDayDateTimeString();
-            })
             ->addColumn('etat', function($row)
             {
                 $btn = ' ';
@@ -365,7 +367,12 @@ class ChefDepartementController extends Controller
                 }
                 return $btn;
             })
-            ->rawColumns(['etat'])
+            ->addColumn('date', function($row)
+            {
+                setlocale(LC_TIME, "fr_FR", "French");
+                return strftime("%A %d %B %G %R", strtotime($row->date));
+            })
+            ->rawColumns(['etat','date'])
             ->make(true);
         }
     }

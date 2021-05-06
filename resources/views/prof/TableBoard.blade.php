@@ -169,7 +169,7 @@
                 ajax: "{{ route('getAbsencesList') }}",
                 columns: [
                     {data: 'nomMatiere', name: 'nomMatiere'},
-                    {data: 'dateAbsence', name: 'dateAbsence'},
+                    {data: 'date', name: 'date'},
                     {data: 'etat', name: 'etat'}
                 ],
                 scrollCollapse: true,

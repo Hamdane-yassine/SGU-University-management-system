@@ -134,3 +134,9 @@ Route::post('chef/emploi/delete/prof/', [AdminController::class, 'deleteEmploiPr
 
 Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
 
+Route::get('/admin/dashboard/datatable', [AdminController::class , 'adminDashboardTable'])->name('adminDashboardTable');
+
+Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFiliere']);
+
+Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
+

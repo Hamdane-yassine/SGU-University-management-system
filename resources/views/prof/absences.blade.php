@@ -121,7 +121,7 @@
                     {data: 'nomMatiere', name: 'nomMatiere'},
                     {data: 'nomFiliere', name: 'nomFiliere'},
                     {data: 'nomDepartement', name: 'nomDepartement'},
-                    {data: 'dateAbsence', name: 'dateAbsence'},
+                    {data: 'date', name: 'date'},
                     {data: 'etat', name: 'etat'}
                 ],
                 scrollCollapse: true,
