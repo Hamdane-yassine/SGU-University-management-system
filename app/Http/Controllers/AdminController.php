@@ -108,4 +108,22 @@ class AdminController extends Controller
         Storage::delete('emploi/prof/'.$filename);  //delete the physical file
         $emploi->delete();
     }
+
+    public function FetchDashboardData()
+    {
+        $annee = date("Y")."/".(date("Y")-1);
+        $date = date("j/n/Y");
+        echo $admin_id = auth()->user()->id;
+
+        //totla etudiants count
+
+        //total nbre dep
+
+        //totla nbre des filieres
+
+        //total nbre of profs without emploi
+
+
+        return view('admin.TableBoard');
+    }
 }

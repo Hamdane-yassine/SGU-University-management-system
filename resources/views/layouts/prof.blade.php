@@ -298,10 +298,15 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li>
+                    <a href="/admin/dashboard" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-dashboard"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau de bord</span>
+                    </a>
+                </li>
+                <li>
                     <a href="/admin/emploi" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-calendar"
-                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi du
-                            temps</span>
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi du temps</span>
                     </a>
                 </li>
             </ul>

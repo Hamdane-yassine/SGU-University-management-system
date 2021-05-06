@@ -132,3 +132,5 @@ Route::post('/upload/profEmploi',[AdminController::class, 'uploadEmploi'])->name
 
 Route::post('chef/emploi/delete/prof/', [AdminController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
 
+Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
+
