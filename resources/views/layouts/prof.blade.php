@@ -30,8 +30,8 @@
     @yield('SpecialStyles')
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
-    <script>
+    {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script> --}}
+    {{-- <script>
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
@@ -40,7 +40,7 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-119386393-1');
-    </script>
+    </script> --}}
 </head>
 
 <body>
@@ -62,7 +62,7 @@
             <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                     <i class="icon-copy dw dw-notification"></i>
-                    <span class="badge notification-active"></span>
+                    <span class="badge notification-active" style="display: none"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="notification-list mx-h-350 customscroll">
@@ -78,16 +78,14 @@
                                 <a href="{{ url('/notifications?idNotif='.$notification->data['idNotif']) }}">
                                     <img src="{{ $notification->data['image'] }}" alt="profile image">
                                     <h3>{{$notification->data['from']}}</h3>
-                                    <p>{{Str::substr($notification->data['brief'], 0, 70) }}...</p>
+                                    <p>{{Str::substr($notification->data['brief'], 0, 50) }}...</p>
                                 </a>
                             </li>
                             @endforeach
-                            {{-- @else
-                            <li>
-                                <p>Empty</p>
-                            </li> --}}
                             @endif
-
+                                <li id='info'>
+                                    <p>pas de nouvelles notifications</p>
+                                </li>
                         </ul>
                     </div>
                 </div>
@@ -206,11 +204,10 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="{{ url('/notifications') }}" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-bell-o" style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Notifications</span>
                     </a>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -323,8 +320,10 @@
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
     const parser = new DOMParser();
-
-
+    const html = "<li><h id='info'>pas de nouvelles notifications</h></li>";
+    const infoNode = parser.parseFromString(html,'text/html');
+    var infoNodeExists;
+    hello();
     if(document.getElementById('notifications').children.length == 0){
             // node.append(' <li><p>Empty</p></li>');
             $('.badge').css('display','none');
@@ -337,38 +336,38 @@
         console.log(e);
     }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
         console.log(notification);
-        // if($('#notifications').innerHTML = "Empty")
         addToDropDown(notification);
-        $('.badge').css('display','');
+
     }).on('pusher:subscription_succeeded', (member) => {
         console.log('successfulddly subscribed!');
     });
 
     function addToDropDown(notification) {
+        $('#info').hide();
+        $('.badge').css('display','');
         $('#notifications').prepend(format(notification));
     };
 
     function format(data) {
-        const htmText = "<li><a href=/notifications?idNotif="+data.idNotif+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief+"</p></a></li>";
+        const htmText = "<li><a href=/notifications?idNotif="+data.idNotif+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief.substr(0,70)+"...</p></a></li>";
         const node = parser.parseFromString(htmText,"text/html");
         return node.body;
     };
 
-    node =  document.createElement('li');
-    node.append()
-    $('.icon-copy').click(e=>{
-        let node = $('#notifications');
-        if(document.getElementById('notifications').children.length == 0){
+    $('.icon-copy').on('click',hello());
+
+    function hello() {
+        let unread = {{ Auth::user()->unreadNotifications->count() }};
+        // console.log(unread+' '+infoNodeExists);?
+        if( unread == 0){
             $('.badge').css('display','none');
-            // html = '<li><p>pas de notification</p></li>';
-            // newNode = parser.parseFromString(html,'text/html');
-            // node.append(newNode.body);
+            $('#info').show();
         }
-        else
+        else {
             $('.badge').css('display','');
-    });
-
-
+            $('#info').hide();
+        }
+    }
 
 </script>
 @yield('SpecialScripts')
