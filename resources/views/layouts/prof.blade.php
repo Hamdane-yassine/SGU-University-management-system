@@ -62,7 +62,7 @@
             <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                     <i class="icon-copy dw dw-notification"></i>
-                    <span class="badge notification-active" ></span>
+                    <span class="badge notification-active" style="display: none"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="notification-list mx-h-350 customscroll">
@@ -78,16 +78,14 @@
                                 <a href="{{ url('/notifications?idNotif='.$notification->data['idNotif']) }}">
                                     <img src="{{ $notification->data['image'] }}" alt="profile image">
                                     <h3>{{$notification->data['from']}}</h3>
-                                    <p>{{Str::substr($notification->data['brief'], 0, 70) }}...</p>
+                                    <p>{{Str::substr($notification->data['brief'], 0, 50) }}...</p>
                                 </a>
                             </li>
                             @endforeach
-                            {{-- @else
-                            <li>
-                                <p>Empty</p>
-                            </li> --}}
                             @endif
-
+                                <li id='info'>
+                                    <p>pas de nouvelles notifications</p>
+                                </li>
                         </ul>
                     </div>
                 </div>
@@ -320,7 +318,7 @@
     const html = "<li><h id='info'>pas de nouvelles notifications</h></li>";
     const infoNode = parser.parseFromString(html,'text/html');
     var infoNodeExists;
-
+    hello();
     if(document.getElementById('notifications').children.length == 0){
             // node.append(' <li><p>Empty</p></li>');
             $('.badge').css('display','none');
@@ -334,46 +332,37 @@
     }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
         console.log(notification);
         addToDropDown(notification);
+
     }).on('pusher:subscription_succeeded', (member) => {
         console.log('successfulddly subscribed!');
     });
 
     function addToDropDown(notification) {
-        infoNodeExists = document.getElementById('info') == null ? false : true;
-        rmv(infoNodeExists);
+        $('#info').hide();
+        $('.badge').css('display','');
         $('#notifications').prepend(format(notification));
     };
 
     function format(data) {
-        const htmText = "<li><a href=/notifications?idNotif="+data.idNotif+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief+"</p></a></li>";
+        const htmText = "<li><a href=/notifications?idNotif="+data.idNotif+"><img src='"+data.image+"'' alt='image'><h3>"+data.from+"</h3><p>"+data.brief.substr(0,70)+"...</p></a></li>";
         const node = parser.parseFromString(htmText,"text/html");
         return node.body;
     };
 
-    function rmv(infoNodeExists) {
-        $('.badge').css('display','');
-        if(infoNodeExists)
-            document.getElementById('info').remove();
-    }
-    node =  document.createElement('li');
-    node.append()
-    $('.icon-copy').click(e=>{
-        let node = $('#notifications');
-        let unread = {{ Auth::user()->unreadNotifications->count() }};
-        infoNodeExists = document.getElementById('info') == null ? false : true;
-        // console.log(unread+' '+infoNodeExists);?
-        if( unread == 0 ){
-            $('.badge').css('display','none');
-            if (!infoNodeExists){
-                node.append(infoNode.body);
-            }
-        }
-        if (unread > 0){
-            rmv(infoNodeExists);
-            $('.badge').css('display','');
-        }
+    $('.icon-copy').on('click',hello());
 
-    });
+    function hello() {
+        let unread = {{ Auth::user()->unreadNotifications->count() }};
+        // console.log(unread+' '+infoNodeExists);?
+        if( unread == 0){
+            $('.badge').css('display','none');
+            $('#info').show();
+        }
+        else {
+            $('.badge').css('display','');
+            $('#info').hide();
+        }
+    }
 
 </script>
 @yield('SpecialScripts')
