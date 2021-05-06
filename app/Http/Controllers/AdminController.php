@@ -40,15 +40,10 @@ class AdminController extends Controller
             ->addColumn('filename', function($row)
             {
                 $link_to_file = asset('storage/emploi/prof/'.$row->filename);
-                $btn = '<a class="text-success" href="' .$link_to_file. '" target="_blank" >' .$row->filename. '</a>';
+                $btn = '<a class="card-link text-primary" href="' .$link_to_file. '" target="_blank" >' .$row->filename. '</a>';
                 return $btn;
             })
-            ->addColumn('action', function($row)
-            {
-                $btn = '<a href="emploi/delete/prof/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</i></a>';
-                return $btn;
-            })
-            ->rawColumns(['action','filename'])
+            ->rawColumns(['filename'])
             ->make(true);
         }
     }
@@ -103,5 +98,14 @@ class AdminController extends Controller
             $prof->save();
         }
         return redirect('admin/emploi'); //just in case*/
+    }
+
+    public function deleteEmploiProf()
+    {
+        $idEmploi = request('idEmploi');
+        $emploi = Emploi::find($idEmploi);
+        $filename = $emploi->fileName;
+        Storage::delete('emploi/prof/'.$filename);  //delete the physical file
+        $emploi->delete();
     }
 }

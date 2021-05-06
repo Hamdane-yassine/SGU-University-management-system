@@ -16,7 +16,7 @@
                                     <th>Nom du fichier</th>
                                     <th>Professeur</th>
                                     <th>date de création</th>
-                                    <th>Action</th>
+                                    <th class="datatable-nosort"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,10 +73,14 @@
                                     NON
                                 </div>
                                 <div class="col-6">
-                                    <button type="button"
-                                        class="btn btn-primary border-radius-100 btn-block confirmation-btn"
-                                        data-dismiss="modal"><i class="fa fa-check"></i></button>
-                                    OUI
+                                    <form action="{{ route('deleteEmploiProf') }}" method="POST" id="delemploi">
+                                        @csrf
+                                        <input type="hidden" id="idEmploi" name="idEmploi" value="">
+                                        <button type="submit"
+                                            class="btn btn-primary border-radius-100 btn-block confirmation-btn"
+                                            ><i class="fa fa-check"></i></button>
+                                        OUI
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -97,9 +101,9 @@
     <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
-
-    <script type="text/javascript">
-        $('.emploi_des_profs').DataTable({
+    <script>
+        
+        var table1 = $('.emploi_des_profs').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('getProfsEmploi') }}",
@@ -108,7 +112,12 @@
                     {data: 'filename', name: 'filename'},
                     {data: 'nom', name: 'nom'},
                     {data: 'date', name: 'date'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                    {
+                        data: 'idEmploi',
+                        render: function(data, type, full, meta) {
+                        return '<a href="#" style="color : #e95959" onclick="setIdEmploi('+data+')" data-toggle="modal" data-target="#confirmation-modal" type="button"><i class="icon-copy dw dw-delete-3"></i></a></div>'
+                        },
+                    },
                 ],
                 scrollCollapse: true,
                 autoWidth: false,
@@ -135,5 +144,23 @@
                     }
                 },
             });
-    </script>
+            function setIdEmploi(id)
+            {
+                document.getElementById("idEmploi").value = id;
+            }
+            $("#delemploi").submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data) {
+                    $('#confirmation-modal').modal('hide');
+                    table1.ajax.reload();
+                }
+            });
+        });
+    </script>  
     @endsection

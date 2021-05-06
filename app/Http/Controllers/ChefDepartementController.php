@@ -49,12 +49,7 @@ class ChefDepartementController extends Controller
             ->addColumn('filename', function($row)
             {
                 $link_to_file = asset('storage/emploi/filiere/'.$row->filename);
-                $btn = '<a class="text-success" href="' .$link_to_file. '" target="_blank" >' .$row->filename. '</a>';
-                return $btn;
-            })
-            ->addColumn('action', function($row)
-            {
-                $btn = '<a href="emploi/delete/filiere/'.$row->idEmploi.'" class="edit btn btn-outline-danger btn-sm">Supprimer</a>';
+                $btn = '<a href="' .$link_to_file. '"  target="_blank" class="card-link text-primary" >' .$row->filename. '</a>';
                 return $btn;
             })
             ->rawColumns(['action','filename'])
@@ -92,18 +87,6 @@ class ChefDepartementController extends Controller
         }
     }
 
-
-   public function deleteEmploiProf($idEmploi)
-    {
-        echo $idEmploi;
-        $emploi = Emploi::find($idEmploi);
-        $filename = $emploi->fileName;
-        Storage::delete('emploi/prof/'.$filename);  //delete the physical file
-        $emploi->delete();
-        return redirect('/chef/emploi');
-    }
-
-
     public function SupprimerEtudiant()
     {
         $idEtudiant = request('idEtudiant');
@@ -123,14 +106,13 @@ class ChefDepartementController extends Controller
         return redirect('/chef/emploi');
     }
 
-    public function deleteEmploiFiliere($idEmploi)
+    public function deleteEmploiFiliere()
     {
-        echo $idEmploi;
+        $idEmploi = request('idEmploi');
         $emploi = Emploi::find($idEmploi);
         $filename = $emploi->fileName;
         Storage::delete('emploi/filiere/'.$filename);  //delete the physical file
         $emploi->delete();
-        return redirect('/chef/emploi');
     }
 
     public function uploadEmploi(Request $request)
