@@ -112,9 +112,7 @@ Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
 
 Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
 
-Route::get('chef/emploi/delete/prof/{idEmploi}', [ChefDepartementController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
-
-Route::get('chef/emploi/delete/filiere/{idEmploi}', [ChefDepartementController::class, 'deleteEmploiFiliere'])->name('deleteEmploiFiliere');
+Route::post('chef/emploi/delete/filiere', [ChefDepartementController::class, 'deleteEmploiFiliere'])->name('deleteEmploiFiliere');
 
 Route::post('/chef/upload/',[ChefDepartementController::class, 'uploadEmploi'])->name('uploadEmploi');
 
@@ -131,3 +129,6 @@ Route::get('admin/emploi', [AdminController::class, 'index']);
 Route::get('admin/emploi/profs', [AdminController::class, 'getListOfProfEmploi'])->name('getProfsEmploi'); //this one isn't used by the chefdep anymore , rather it will be reused in admin's UI
 
 Route::post('/upload/profEmploi',[AdminController::class, 'uploadEmploi'])->name('uploadEmploiprof');
+
+Route::post('chef/emploi/delete/prof/', [AdminController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
+
