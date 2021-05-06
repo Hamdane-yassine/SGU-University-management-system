@@ -18,7 +18,7 @@
                                             <li class="clearfix">
                                                 @if(Auth::user()->notifications->count())
                                                     @foreach (Auth::user()->notifications as $notification)
-                                                        <div class="chat-body clearfix ml-3" id="{{ $notification->data['idEvent'] }}">
+                                                        <div class="chat-body clearfix ml-3" id="notif-{{ $notification->id }}">
                                                             <p>
                                                             <span class="d-block text-secondary pb-1">
 

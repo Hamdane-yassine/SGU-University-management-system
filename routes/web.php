@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,13 +98,13 @@ Route::get('/h', function () {
     // broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
     // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
-    // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
+    \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
 
-    return view('Chef.Notifications');
+    // return view('Chef.Notifications');
 
 
 });
-// Route::controller('/notifications', '\App\UserController');
+Route::get('/notifications', '\App\Http\Controllers\UserController@markNotification');
 Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
 
 // ===============
