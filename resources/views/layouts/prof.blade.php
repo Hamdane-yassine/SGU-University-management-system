@@ -30,8 +30,8 @@
     @yield('SpecialStyles')
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
-    <script>
+    {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script> --}}
+    {{-- <script>
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
@@ -40,7 +40,7 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-119386393-1');
-    </script>
+    </script> --}}
 </head>
 
 <body>
@@ -210,7 +210,6 @@
                         <span class="micon fa fa-bell-o" style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Notifications</span>
                     </a>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -318,7 +317,9 @@
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
     const parser = new DOMParser();
-
+    const html = "<li><h id='info'>pas de nouvelles notifications</h></li>";
+    const infoNode = parser.parseFromString(html,'text/html');
+    var infoNodeExists;
 
     if(document.getElementById('notifications').children.length == 0){
             // node.append(' <li><p>Empty</p></li>');
@@ -332,14 +333,14 @@
         console.log(e);
     }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
         console.log(notification);
-        // if($('#notifications').innerHTML = "Empty")
         addToDropDown(notification);
-        $('.badge').css('display','');
     }).on('pusher:subscription_succeeded', (member) => {
         console.log('successfulddly subscribed!');
     });
 
     function addToDropDown(notification) {
+        infoNodeExists = document.getElementById('info') == null ? false : true;
+        rmv(infoNodeExists);
         $('#notifications').prepend(format(notification));
     };
 
@@ -349,21 +350,30 @@
         return node.body;
     };
 
+    function rmv(infoNodeExists) {
+        $('.badge').css('display','');
+        if(infoNodeExists)
+            document.getElementById('info').remove();
+    }
     node =  document.createElement('li');
     node.append()
     $('.icon-copy').click(e=>{
         let node = $('#notifications');
-        if(document.getElementById('notifications').children.length == 0){
+        let unread = {{ Auth::user()->unreadNotifications->count() }};
+        infoNodeExists = document.getElementById('info') == null ? false : true;
+        // console.log(unread+' '+infoNodeExists);?
+        if( unread == 0 ){
             $('.badge').css('display','none');
-            // html = '<li><p>pas de notification</p></li>';
-            // newNode = parser.parseFromString(html,'text/html');
-            // node.append(newNode.body);
+            if (!infoNodeExists){
+                node.append(infoNode.body);
+            }
         }
-        else
+        if (unread > 0){
+            rmv(infoNodeExists);
             $('.badge').css('display','');
+        }
+
     });
-
-
 
 </script>
 @yield('SpecialScripts')
