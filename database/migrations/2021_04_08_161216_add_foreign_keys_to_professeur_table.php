@@ -32,7 +32,7 @@ class AddForeignKeysToProfesseurTable extends Migration {
 		Schema::table('professeur', function(Blueprint $table)
 		{
 			$table->dropForeign('fk20');
-			$table->dropForeign('fk21');
+			//$table->dropForeign('fk21');
 			$table->dropForeign('fk210');
 		});
 	}

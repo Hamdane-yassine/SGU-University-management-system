@@ -42,13 +42,15 @@ class ProfesseurController extends Controller
         ->join('module','matiere.idModule','=','module.idModule')
         ->join('filiere','module.idFiliere','=','filiere.idFiliere')
         ->join('departement','filiere.idDepartement','=','departement.idDepartement')
-        ->select('IdAbsence','matiere.nom as nomMatiere','departement.nom as nomDepartement',DB::raw("concat_ws(filiere.nom,' ', filiere.niveau) AS nomFiliere"),'dateAbsence','etat')
+        ->select('IdAbsence','matiere.nom as nomMatiere','departement.nom as nomDepartement',DB::raw("concat_ws(filiere.nom,' ', filiere.niveau) AS nomFiliere"),'dateAbsence as date','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
         //return $absences;
          if ($request->ajax()) {
             return Datatables::of($absences)
-            ->editColumn('dateAbsence', function ($request) {
-                return $request->dateAbsence->toDayDateTimeString();
+            ->addColumn('date', function($row)
+            {
+                setlocale(LC_TIME, "fr_FR", "French");
+                return strftime("%A %d %B %G %R", strtotime($row->date));
             })
             ->make(true);
         }

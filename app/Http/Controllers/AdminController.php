@@ -33,7 +33,7 @@ class AdminController extends Controller
     {
         $emplois = Professeur::join('users','users.id','=','professeur.idUtilisateur')
         ->join('emploi','emploi.idEmploi','=','professeur.idEmploi')
-        ->select('emploi.idEmploi as idEmploi','filename','users.name as nom','emploi.created_at as date')->get();
+        ->select('emploi.idEmploi as idEmploi','filename','users.name as nom','emploi.updated_at as date')->get();
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
@@ -43,7 +43,12 @@ class AdminController extends Controller
                 $btn = '<a class="card-link text-primary" href="' .$link_to_file. '" target="_blank" >' .$row->filename. '</a>';
                 return $btn;
             })
-            ->rawColumns(['filename'])
+            ->addColumn('date', function($row)
+            {
+                setlocale(LC_TIME, "fr_FR", "French");
+                return strftime("%A %d %B %G %R", strtotime($row->date));
+            })
+            ->rawColumns(['filename','date'])
             ->make(true);
         }
     }
@@ -264,5 +269,66 @@ class AdminController extends Controller
         $etudiant->idFiliere=$idFiliere;
         $etudiant->idPersonne=$Personne->idPersonne;
         $etudiant->save();
+    }
+    public function FetchDashboardData()
+    {
+        $annee = date("Y")."/".(date("Y")-1);
+        $date = date("j/n/Y");
+
+        //totla etudiants count
+        $CountEtudiant = Etudiant::all()->count();
+
+        //total nbre dep
+        $CountDepartement = Departement::all()->count();
+
+        //totla nbre des filieres
+        $CountFiliere = Filiere::all()->count();
+
+        //total nbre of profs without emploi
+        $CountProf = Professeur::whereNull('idEmploi')->count();
+
+        return view('admin.TableBoard',['annee' => $annee , 'date' => $date , 'CountEtudiant' => $CountEtudiant ,
+        'CountDepartement' => $CountDepartement ,'CountFiliere' => $CountFiliere , 'CountProf' => $CountProf]);
+    }
+
+    public function adminDashboardTable(Request $request)
+    {
+        $profs = Professeur::whereNull('idEmploi')
+        ->join('users','professeur.idUtilisateur','users.id')
+        ->select('idProf','users.name as nomProf','specialite')
+        ->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($profs)
+            ->make(true);
+        }
+    }
+
+    public function indexEmploiFiliere()
+    {
+        return view('admin.emploiFiliere');
+    }
+
+    public function getAdminEmploiFiliereDatatable(Request $request)
+    {
+        $emplois = Filiere::join('emploi','emploi.idEmploi','filiere.idEmploi')
+        ->select('emploi.idEmploi as idEmploi','filename','filiere.nom as nom','niveau','emploi.updated_at as date')->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($emplois)
+            ->addColumn('filename', function($row)
+            {
+                $link_to_file = asset('storage/emploi/filiere/'.$row->filename);
+                $btn = '<a href="' .$link_to_file. '"  target="_blank" class="card-link text-primary" >' .$row->filename. '</a>';
+                return $btn;
+            })
+            ->addColumn('date', function($row)
+            {
+                setlocale(LC_TIME, "fr_FR", "French");
+                return strftime("%A %d %B %G %R", strtotime($row->date));
+            })
+            ->rawColumns(['filename','date'])
+            ->make(true);
+        }
     }
 }

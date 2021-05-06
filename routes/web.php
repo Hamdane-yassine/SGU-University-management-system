@@ -141,3 +141,11 @@ Route::get('admin/Etudiant/{etudiant}', [App\Http\Controllers\AdminController::c
 Route::post('suppetudiant',[AdminController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiantAdmin');
 Route::post('updateetudiant',[AdminController::class, 'UpdateEtudiant'])->name('updateEtudiantAdmin');
 Route::post('ajouteetudiant',[AdminController::class, 'AjouterEtudiant'])->name('AjouterEtudiant');
+Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
+
+Route::get('/admin/dashboard/datatable', [AdminController::class , 'adminDashboardTable'])->name('adminDashboardTable');
+
+Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFiliere']);
+
+Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
+

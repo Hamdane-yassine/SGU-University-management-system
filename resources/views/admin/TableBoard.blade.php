@@ -13,7 +13,7 @@
 					</div>
 					<div class="col-md-6 col-sm-12 text-right">
 						<div>
-							<span class="btn btn-primary">{{ $date }}</span>
+							<span class="btn btn-primary">{{$date}}</span>
 						</div>
 					</div>
 				</div>
@@ -23,7 +23,7 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">{{ $EtudiantCount }}</div>
+								<div class="weight-700 font-24 text-dark">{{ $CountEtudiant }}</div>
 								<div class="font-14 text-secondary weight-500">Etudiants</div>
 							</div>
 							<div class="widget-icon">
@@ -36,7 +36,7 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">{{ $FiliereCount}}</div>
+								<div class="weight-700 font-24 text-dark">{{  $CountEtudiant }}</div>
 								<div class="font-14 text-secondary weight-500">Filiéres</div>
 							</div>
 							<div class="widget-icon">
@@ -49,11 +49,11 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">{{ $AbsenceCount }}</div>
-								<div class="font-14 text-secondary weight-500">Total des absences</div>
+								<div class="weight-700 font-24 text-dark">{{  $CountDepartement }}</div>
+								<div class="font-14 text-secondary weight-500">départements</div>
 							</div>
 							<div class="widget-icon">
-								<div class="icon"><i class="micon fa fa-calendar-check-o" aria-hidden="true"></i></div>
+								<div class="icon"><i class="micon fa fa-building" aria-hidden="true"></i></div>
 							</div>
 						</div>
 					</div>
@@ -63,11 +63,11 @@
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">{{ $MatiereCount }}</div>
-								<div class="font-14 text-secondary weight-500">Matieres</div>
+								<div class="weight-700 font-24 text-dark">{{  $CountProf }}</div>
+								<div class="font-14 text-secondary weight-500">Professeurs sans emploi</div>
 							</div>
 							<div class="widget-icon">
-								<div class="icon" data-color="#09cc06"><i class="icon-copy fi-check"
+								<div class="icon" data-color="red"><i class="icon-copy fi-calendar"
 										aria-hidden="true"></i></div>
 								<!-- <div class="icon" data-color="red"><i class="icon-copy fi-x" aria-hidden="true"></i></div> -->
 							</div>
@@ -79,14 +79,13 @@
 			<div class="row pb-10">
 				<div class="col-md-8 mb-20">
 					<div class="card-box height-100-p pd-20">
-						<div class="h5">Absences</div>
-
+						<div class="h5">Professeurs sans emploi : </div>
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr>
-									<th>Matiére</th>
-									<th>Date d'absence</th>
-									<th>État</th>
+									<th>N°</th>
+									<th>Professeur</th>
+									<th>Specialite</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -157,20 +156,22 @@
 	</div>
 	@endsection
 	@section('SpecialScripts')
-	<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-	<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-	<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-	<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-	<script src="vendors/scripts/dashboard3.js"></script>
+    <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/dashboard3.js') }}"></script>
+    <script src="{{ asset('src/plugins/jquery-steps/jquery.steps.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/steps-setting.js') }}"></script>
     <script type="text/javascript">
         $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('getAbsencesList') }}",
+                ajax: "{{ route('adminDashboardTable') }}",
                 columns: [
-                    {data: 'nomMatiere', name: 'nomMatiere'},
-                    {data: 'date', name: 'date'},
-                    {data: 'etat', name: 'etat'}
+                    {data: 'idProf', name: 'idProf'},
+                    {data: 'nomProf', name: 'nomProf'},
+                    {data: 'specialite', name: 'specialite'},
                 ],
                 scrollCollapse: true,
                 autoWidth: false,
