@@ -303,7 +303,13 @@
                 <li>
                     <a href="/admin/emploi" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-calendar"
-                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi du temps</span>
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi des professeurs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/emploi/filiere" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-calendar"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi des Filieres</span>
                     </a>
                 </li>
             </ul>
