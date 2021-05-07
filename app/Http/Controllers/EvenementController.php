@@ -35,14 +35,17 @@ class EvenementController extends Controller
      */
     public function store(Request $request)
     {
-        dd(count($request->input()));
+        // dd($request->all());
         $validatedData = $request->validate([
             'titre'=>'required',
             'resume'=>'required',
             'corps'=>'required',
-            'attachment'=>'mimes:png,jpg,pdf',
-        ]);
-        return redirect('/evenement/absences');
+            'attachment'=>'max:3|mimes:png,jpg,pdf',
+            ],
+            ['attachment.max'=>'vous avez uploder :attribute fichiers']
+        );
+
+        return redirect('/absences');
 
     }
 

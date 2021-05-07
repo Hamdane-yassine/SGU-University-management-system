@@ -94,7 +94,11 @@ Route::post('/chef/affectermatiere',[ChefDepartementController::class, 'Affecter
 
 Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'DetacherMatiere'])->name('DetacherMatiere');
 
-Route::middleware(['auth','prof'])->group(function () {
+Route::prefix('evenement')->group(function () {
+    Route::get('/create', [EvenementController::class,'create'])->name('evenement.create');
+    Route::post('/store', [EvenementController::class,'store'])->name('evenement.store');
+    Route::post('/show', [EvenementController::class,'show'])->name('evenement.show');
+    Route::post('/{evt}', [EvenementController::class,'show'])->name('evenement.show');
 
 });
 // ===============
@@ -105,15 +109,17 @@ Route::get('/h', function () {
     // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
 
     // return view('Chef.Notifications');
-    return view('evenements.html5-editor');
+    return view('evenements.event-detail');
 
 
 });
-Route::post('/evenement/create', [EvenementController::class,'create'])->name('evenement.create');
-Route::post('/evenement', [EvenementController::class,'store'])->name('evenement.store');
+
+Route::prefix('profile')->group(function () {
+    Route::get('/{user}', [ProfileController::class,'show'])->name('profile.show');
+    Route::post('/update/{user}', [ProfileController::class,'update'])->name('profile.update');
+});
 
 Route::get('/notifications', [UserController::class,'markNotification']);
-Route::get('profile/{user}', [ProfileController::class,'show']);
 
 // ===============
 

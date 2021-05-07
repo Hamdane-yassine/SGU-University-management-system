@@ -40,7 +40,7 @@
 							<p class="mb-30">All bootstrap element classies</p>
 						</div>
 					</div>
-					<form id="evtform" method="POST" action="/evenement" enctype="multipart/form-data">
+					<form id="evtform" method="POST" action="/evenement/store" enctype="multipart/form-data">
                         @csrf
 						<div id="titre" class="form-group">
 							<label>Titre</label>
@@ -73,7 +73,7 @@
                             <div class="custom-file">
                                 <label class="custom-file-label">ajouter des fichiers</label>
                                 <input id="attachment"
-                                       name="attachment"
+                                       name="attachment[]"
                                        type="file"
                                        class="custom-file-input @error('attachment') is-invalid @enderror "
                                        multiple >
@@ -121,7 +121,7 @@
                   alert("You are only allowed to upload a maximum of 3 files");
                }
             });
-         });
+        });
 </script>
 @endsection
 
