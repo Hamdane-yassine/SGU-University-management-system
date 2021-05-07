@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AbsenceMail;
 use Illuminate\Http\Request;
 use App\Models\Absence;
 use App\Models\Emploi;
@@ -16,6 +17,10 @@ use DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendEmailJob;
+use App\Models\Personne;
+use App\Models\User;
 
 class ProfesseurController extends Controller
 {
@@ -92,9 +97,30 @@ class ProfesseurController extends Controller
                 'dateRattrapage' => str_replace('-',' ',$dateRatt),
                 'etat' => 'en attendant',
             ]);
+            //send mails if informerEtudiants=on
+            if($informerEtudiants == 'on')
+            {
+                $profName = Auth::user()->personne->nom;
+                $dateAbsence;
+                $filiere = Matiere::where('idMatiere',$idMatiere)
+                ->join('module','matiere.idModule','module.idModule')
+                ->select('module.idFiliere as idFiliere','matiere.nom as nom')->get()[0];
+
+                $etudiants = Etudiant::where('idFiliere',$filiere->idFiliere)->get();
+
+                foreach($etudiants as $etudiant)
+                {
+                    $mailData = ['profName' => $profName, 'absenceDate' => $dateAbsence, 'userName' => $etudiant->personne->nom, 'matiereName' => $filiere->nom, 'mailTo' => $etudiant->email]; //
+                    SendEmailJob::dispatch($mailData);
+
+                    //Mail::to($mailData['mailTo'])->send(new AbsenceMail($mailData['profName'],$mailData['absenceDate'], $mailData['userName'],
+                    //$mailData['matiereName']));
+                }
+            }
             return redirect('/absences');
         }
-        //send mails if informerEtudiants=on
+
+
     }
 
     public function Etudiants(Filiere $filiere)
