@@ -23,7 +23,7 @@ class EmploiFactory extends Factory
     {
         return [
             'fileName'=>$this->faker->asciify('*****'),
-            'created_at'=>$this->faker->date(),
+            // 'created_at'=>$this->faker->time(),
         ];
     }
 }

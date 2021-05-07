@@ -94,8 +94,10 @@ Route::post('/chef/affectermatiere',[ChefDepartementController::class, 'Affecter
 
 Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'DetacherMatiere'])->name('DetacherMatiere');
 
-Route::middleware(['auth','prof'])->group(function () {
-
+Route::prefix('evenement')->group(function () {
+    Route::get('/create', [EvenementController::class,'create'])->name('evenement.create');
+    Route::post('/store', [EvenementController::class,'store'])->name('evenement.store');
+    Route::post('/{evt}', [EvenementController::class,'show'])->name('evenement.show');
 });
 // ===============
 Route::get('/h', function () {
@@ -109,11 +111,13 @@ Route::get('/h', function () {
 
 
 });
-Route::post('/evenement/create', [EvenementController::class,'create'])->name('evenement.create');
-Route::post('/evenement', [EvenementController::class,'store'])->name('evenement.store');
+
+Route::prefix('profile')->group(function () {
+    Route::get('/{user}', [ProfileController::class,'show'])->name('profile.show');
+    Route::post('/update/{user}', [ProfileController::class,'update'])->name('profile.update');
+});
 
 Route::get('/notifications', [UserController::class,'markNotification']);
-Route::get('profile/{user}', [ProfileController::class,'show']);
 
 // ===============
 
@@ -163,3 +167,4 @@ Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFilier
 
 Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
 
+Route::get('test-email', 'JobController@enqueue');
