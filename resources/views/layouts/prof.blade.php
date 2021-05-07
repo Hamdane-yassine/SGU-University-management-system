@@ -328,6 +328,17 @@
                         @endforeach
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-user-o"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Les professeurs</span>
+                    </a>
+                    <ul class="submenu">
+                        @foreach ($departements as $departement)
+                              <li><a href="/admin/professeurs/{{ $departement->idDepartement }}">{{ $departement->nom }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
                 
             </ul>
         </div>

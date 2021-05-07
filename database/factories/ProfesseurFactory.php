@@ -37,7 +37,6 @@ class ProfesseurFactory extends Factory
             //     return \App\Models\Departement::factory()->create()->get()[0]['idDepartement'];
             // },
             'specialite'=>$this->faker->word(),
-            'echellon'=>$this->faker->word(),
             'idEmploi' => $j++
         ];
     }

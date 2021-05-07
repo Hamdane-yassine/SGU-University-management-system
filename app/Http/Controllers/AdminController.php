@@ -11,14 +11,17 @@ use App\Models\Chefdep;
 use App\Models\Emploi;
 use App\Models\Etudiant;
 use App\Models\Filiere;
+use App\Models\User;
 use App\Models\Matiere;
 use App\Models\Note;
 use App\Models\Module;
 use App\Models\Personne;
+use App\Models\Prof_departement;
 use App\Models\Professeur;
+use Faker\Provider\ar_JO\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     public function index()
@@ -233,19 +236,7 @@ class AdminController extends Controller
         ]);
         $idFiliere=request('idFiliere');
         $etudiant = new Etudiant;
-        $personne = Personne::create([
-            'nom' => request('ajnom'),
-            'prenom' => request('ajprenom'),
-            'situationFamiliale' => request('ajsituation'),
-            'genre' => request('ajgenre'),
-            'dateNaissance' => request('ajdatenais'),
-            'nationalite' => request('ajnationalite'),
-            'lieuNaissance' => request('ajLieuNaissance'),
-            'adressePersonnele' => request('ajadresse'),
-            'cin' => request('ajcin'),
-            'tel' => request('ajtel'),
-            'emailInstitutionne' => request('ajemailins')
-        ]);
+        $personne = new Personne;
         $personne->nom=request('ajnom');
         $personne->prenom=request('ajprenom');
         $personne->situationFamiliale=request('ajsituation');
@@ -331,4 +322,175 @@ class AdminController extends Controller
             ->make(true);
         }
     }
+
+    public function Professeurs(Departement $departement)
+    {
+        return view('admin.profs', ['departement' => $departement]);
+    }
+
+    public function getProfesseurs(Request $request , Departement $departement)
+    {
+        $professeurs = Departement::where('departement.idDepartement',$departement->idDepartement)  //first inint a user id
+       ->join('prof_departement','departement.idDepartement','=','prof_departement.idDepartement')
+       ->join('professeur','prof_departement.idProf','=','professeur.idProf')
+       ->join('users','professeur.idUtilisateur','=','users.id')
+       ->join('personne','users.idPersonne','=','personne.idPersonne')
+       ->select('professeur.idProf','personne.nom','personne.prenom','professeur.specialite','email','tel',)
+       ->get();
+       if ($request->ajax()) {
+            return Datatables::of($professeurs)
+            ->make(true);
+        }
+    }
+
+    public function getProfesseur(Request $request,Professeur $professeur)
+    {
+        $professeurs = Professeur::where('professeur.idProf',$professeur->idProf)  //first inint a user id
+       ->join('users','professeur.idUtilisateur','=','users.id')
+       ->join('personne','users.idPersonne','=','personne.idPersonne')
+       ->select('professeur.idProf','personne.nom','personne.prenom','role','professeur.specialite','email','tel','dateNaissance','nationalite','lieuNaissance','situationFamiliale','genre','cin','adressePersonnele','emailInstitutionne')
+       ->get();
+
+        $matieres = Matiere::where('idProf',$professeur->idProf)
+        ->select('nom')->get();
+
+        $data = array();
+        $data['prof'] = $professeurs;
+        $data['matieres'] = $matieres;
+
+        if ($request->ajax()) {
+            echo json_encode($data);
+        }
+    }
+
+    public function SupprimerProfesseur()
+    {
+        $idProf = request('idProf');
+        $professeur = Professeur::find($idProf);
+        $iduser =$professeur->idUtilisateur;
+        $user = User::find($iduser);
+        $idPersonne = $user->idPersonne;
+        $personne = Personne::find($idPersonne);
+        $idEmploi = $professeur->idEmploi;
+        $emploi = Emploi::find($idEmploi);
+        DB::table('chefdep')->where('idProf', '=', $idProf)->delete();
+        DB::table('prof_departement')->where('idProf', '=', $idProf)->delete();
+        DB::table('profiles')->where('idUtilisateur', '=', $user->id)->delete();
+        $professeur->delete();
+        $user->delete();
+        $personne->delete();
+        $filename = $emploi->fileName;
+        Storage::delete('emploi/prof/'.$filename);
+        $emploi->delete();
+    }
+
+    public function UpdateProfesseur()
+    {
+        request()->validate([
+            'inidProf' => 'required',
+            'innom' => 'required',
+            'inprenom' => 'required',
+            'insituation' => 'required',
+            'ingenre' => 'required',
+            'indatenais' => ['required','date'],
+            'innationalite' => 'required',
+            'inLieuNaissance' => 'required',
+            'inadresse' => 'required',
+            'incin' => 'required',
+            'intel' => 'required',
+            'inemail' => ['required','email'],
+            'inemailins' => ['required','email'],
+            'inspecialite' => 'required',
+            'role' => 'required'
+        ]);
+        $idDep = request('idDepup');
+        $idProf=request('inidProf');
+        $professeur = Professeur::find($idProf);
+        $idUser = $professeur->idUtilisateur;
+        $user = User::find($idUser);
+        $idPersonne = $user->idPersonne;
+        $personne = Personne::find($idPersonne);
+        $personne->nom=request('innom');
+        $personne->prenom=request('inprenom');
+        $personne->situationFamiliale=request('insituation');
+        $personne->genre=request('ingenre');
+        $personne->dateNaissance=request('indatenais');
+        $personne->nationalite=request('innationalite');
+        $personne->lieuNaissance=request('inLieuNaissance');
+        $personne->adressePersonnele=request('inadresse');
+        $personne->cin=request('incin');
+        $personne->tel=request('intel');
+        $personne->emailInstitutionne=request('inemailins');
+        $professeur->specialite=request('inspecialite');
+        if(request('role')==1 && $user->role=="chefdep")
+        {
+            DB::table('chefdep')->where('idProf', '=', $idProf)->delete();
+            $user->role="prof";
+        }
+        elseif(request('role')==2 && $user->role=="prof")
+        {
+            $oldchefdata = Chefdep::where('idDepartement',$idDep)->select('idProf')->get();
+            if($oldchefdata->isEmpty())
+            {
+                $dep = new Chefdep;
+                $dep->idDepartement=$idDep;
+                $dep->idProf=$idProf;
+                $dep->save();
+            }else{
+                DB::table('chefdep')->where('idDepartement', '=', $idDep)->delete();
+                $oldchef = Professeur::find($oldchefdata[0]->idProf);
+                $oldchefuser = User::find($oldchef->idUtilisateur);
+                $oldchefuser->role="prof";
+                $oldchefuser->save();
+                $dep = new Chefdep;
+                $dep->idDepartement=$idDep;
+                $dep->idProf=$idProf;
+                $dep->save();
+            }    
+            $user->role="chefdep";
+        }
+        $personne->save();
+        $user->save();
+        $professeur->save();
+    }
+    
+    public function AjouterProfesseur()
+    {
+        request()->validate([
+            'idDepart' => 'required',
+            'ajnom' => 'required',
+            'ajprenom' => 'required',
+            'ajsituation' => 'required',
+            'ajgenre' => 'required',
+            'ajdatenais' => ['required','date'],
+            'ajnationalite' => 'required',
+            'ajLieuNaissance' => 'required',
+            'ajadresse' => 'required',
+            'ajcin' => 'required',
+            'ajtel' => 'required',
+            'ajemail' => ['required','email'],
+            'ajemailins' => ['required','email'],
+            'ajspecialite' => 'required',
+            'ajrole' => 'required'
+        ]);
+        $idDepart=request('idDepart');
+        $professeur = new Professeur;
+        $personne = new Personne;
+        $personne->nom=request('ajnom');
+        $personne->prenom=request('ajprenom');
+        $personne->situationFamiliale=request('ajsituation');
+        $personne->genre=request('ajgenre');
+        $personne->dateNaissance=request('ajdatenais');
+        $personne->nationalite=request('ajnationalite');
+        $personne->lieuNaissance=request('ajLieuNaissance');
+        $personne->adressePersonnele=request('ajadresse');
+        $personne->cin=request('ajcin');
+        $personne->tel=request('ajtel');
+        $personne->emailInstitutionne=request('ajemailins');
+        $personne->save();
+        $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->select('idPersonne')->get()[0];
+        
+    }
+
+
 }

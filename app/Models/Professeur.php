@@ -45,7 +45,6 @@ class Professeur extends Model
 	protected $fillable = [
 		'idUtilisateur',
 		'specialite',
-		'echellon'
 	];
 
 	public function user()

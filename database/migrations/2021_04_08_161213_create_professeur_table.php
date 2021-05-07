@@ -19,7 +19,6 @@ class CreateProfesseurTable extends Migration {
 			$table->bigInteger('idUtilisateur')->unsigned();
 			// $table->bigInteger('idDepartement')->unsigned();
 			$table->string('specialite', 254);
-			$table->string('echellon', 254);
             $table->bigInteger('idEmploi')->unsigned()->nullable();
 		});
 	}

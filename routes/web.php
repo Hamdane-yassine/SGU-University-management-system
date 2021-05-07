@@ -141,6 +141,13 @@ Route::get('admin/Etudiant/{etudiant}', [App\Http\Controllers\AdminController::c
 Route::post('suppetudiant',[AdminController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiantAdmin');
 Route::post('updateetudiant',[AdminController::class, 'UpdateEtudiant'])->name('updateEtudiantAdmin');
 Route::post('ajouteetudiant',[AdminController::class, 'AjouterEtudiant'])->name('AjouterEtudiant');
+Route::get('admin/professeurs/{departement}', [App\Http\Controllers\AdminController::class, 'Professeurs']);
+Route::get('admin/professeurslist/{departement}', [App\Http\Controllers\AdminController::class, 'getProfesseurs'])->name('getListProfesseursAdmin');
+Route::get('/admin/professeur/{professeur}', [App\Http\Controllers\AdminController::class, 'getProfesseur']);
+Route::post('suppprofesseur',[AdminController::class, 'SupprimerProfesseur'])->name('SupprimerProfesseur');
+Route::post('updateprofesseur',[AdminController::class, 'UpdateProfesseur'])->name('updateProfesseur');
+Route::post('ajouteprofesseur',[AdminController::class, 'AjouterProfesseur'])->name('AjouterProfesseur');
+
 Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
 
 Route::get('/admin/dashboard/datatable', [AdminController::class , 'adminDashboardTable'])->name('adminDashboardTable');

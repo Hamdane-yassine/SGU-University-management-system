@@ -584,7 +584,7 @@
         function getEtudiantIn(id) {
             $.ajax({
                 type: 'GET',
-                url: "/chef/Etudiant/" + id,
+                url: "/admin/Etudiant/" + id,
                 dataType: 'JSON',
                 data: {},
                 success: function(response) {
