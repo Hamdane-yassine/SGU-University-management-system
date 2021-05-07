@@ -19,13 +19,13 @@ class CreatePersonneTable extends Migration {
 			$table->string('nom', 254);
 			$table->string('prenom', 254);
 			$table->string('adressePersonnele', 254);
-			$table->string('cin', 254);
+			$table->string('cin', 254)->unique();
 			$table->string('tel', 254);
 			$table->date('dateNaissance');
 			$table->string('nationalite', 254);
 			$table->String('lieuNaissance');
 			$table->enum('genre', ['Masculin', 'Féminin']);
-			$table->string('emailInstitutionne', 254);
+			$table->string('emailInstitutionne', 254)->unique();
 			$table->enum('situationFamiliale', ['Célibataire', 'Divorcé','Marié']);
 		}); 
 	}
