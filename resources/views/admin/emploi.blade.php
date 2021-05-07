@@ -15,7 +15,7 @@
                                     <th>N°</th>
                                     <th>Nom du fichier</th>
                                     <th>Professeur</th>
-                                    <th>date de création</th>
+                                    <th>Date de dernière modification</th>
                                     <th class="datatable-nosort"></th>
                                 </tr>
                             </thead>
@@ -95,14 +95,12 @@
     </div>
     @endsection
     @section('SpecialScripts')
-    <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
     <script>
-        
+
         var table1 = $('.emploi_des_profs').DataTable({
                 processing: true,
                 serverSide: true,
@@ -162,5 +160,5 @@
                 }
             });
         });
-    </script>  
+    </script>
     @endsection

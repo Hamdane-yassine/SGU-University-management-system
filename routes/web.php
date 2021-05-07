@@ -133,3 +133,20 @@ Route::post('/upload/profEmploi',[AdminController::class, 'uploadEmploi'])->name
 
 Route::post('chef/emploi/delete/prof/', [AdminController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
 
+//==========
+
+Route::get('admin/filieres/{departement}', [AdminController::class, 'getFilieres']);
+Route::get('admin/etudiants/{filiere}', [App\Http\Controllers\AdminController::class, 'Etudiants']);
+Route::get('admin/EtudiantsList/{filiere}', [App\Http\Controllers\AdminController::class, 'getEtudiants'])->name('EtudiantsListAdmin');
+Route::get('admin/Etudiant/{etudiant}', [App\Http\Controllers\AdminController::class, 'getEtudiant']);
+Route::post('suppetudiant',[AdminController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiantAdmin');
+Route::post('updateetudiant',[AdminController::class, 'UpdateEtudiant'])->name('updateEtudiantAdmin');
+Route::post('ajouteetudiant',[AdminController::class, 'AjouterEtudiant'])->name('AjouterEtudiant');
+Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
+
+Route::get('/admin/dashboard/datatable', [AdminController::class , 'adminDashboardTable'])->name('adminDashboardTable');
+
+Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFiliere']);
+
+Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
+

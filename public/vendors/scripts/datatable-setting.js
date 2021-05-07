@@ -1,4 +1,25 @@
 $('document').ready(function(){
+	$('.data-table').DataTable({
+		scrollCollapse: true,
+		autoWidth: false,
+		responsive: true,
+		columnDefs: [{
+			targets: "datatable-nosort",
+			orderable: false,
+		}],
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+		"language": {
+			"info": "_START_ à _END_ sur _TOTAL_ éléments",
+			"zeroRecords": "Aucun élément correspondant trouvé",
+			"lengthMenu": "Afficher _MENU_ éléments",
+			search: "Rechercher:",
+			searchPlaceholder: "Rechercher",
+			paginate: {
+				next: '<i class="ion-chevron-right"></i>',
+				previous: '<i class="ion-chevron-left"></i>'
+			}
+		},
+	});
 	var multipletable = $('.multiple-select-row').DataTable();
 	$('.multiple-select-row tbody').on('click', 'tr', function () {
 		$(this).toggleClass('selected');
@@ -35,7 +56,32 @@ $('document').ready(function(){
 		}],
 		'order': [[1, 'asc']]
 	});
-
+	var table1 = $('.filieres').DataTable({
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_ à _END_ sur _TOTAL_ éléments",
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "zeroRecords": "Aucun élément correspondant trouvé",
+                    "processing": "Traitement...",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                    "loadingRecords": "Chargement...",
+                    "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+                    search: "Rechercher:",
+                    searchPlaceholder: "Rechercher",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'
+                    }
+                },
+            });
 	$('#example-select-all').on('click', function(){
 		var rows = table.rows({ 'search': 'applied' }).nodes();
 		$('input[type="checkbox"]', rows).prop('checked', this.checked);

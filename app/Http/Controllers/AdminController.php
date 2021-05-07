@@ -33,7 +33,7 @@ class AdminController extends Controller
     {
         $emplois = Professeur::join('users','users.id','=','professeur.idUtilisateur')
         ->join('emploi','emploi.idEmploi','=','professeur.idEmploi')
-        ->select('emploi.idEmploi as idEmploi','filename','users.name as nom','emploi.created_at as date')->get();
+        ->select('emploi.idEmploi as idEmploi','filename','users.name as nom','emploi.updated_at as date')->get();
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
@@ -43,7 +43,12 @@ class AdminController extends Controller
                 $btn = '<a class="card-link text-primary" href="' .$link_to_file. '" target="_blank" >' .$row->filename. '</a>';
                 return $btn;
             })
-            ->rawColumns(['filename'])
+            ->addColumn('date', function($row)
+            {
+                setlocale(LC_TIME, "fr_FR", "French");
+                return strftime("%A %d %B %G %R", strtotime($row->date));
+            })
+            ->rawColumns(['filename','date'])
             ->make(true);
         }
     }
@@ -107,5 +112,223 @@ class AdminController extends Controller
         $filename = $emploi->fileName;
         Storage::delete('emploi/prof/'.$filename);  //delete the physical file
         $emploi->delete();
+    }
+
+    public function getFilieres(Departement $departement)
+    {
+        return view('admin.filieres',['departement' => $departement]);
+    }
+    
+    public function Etudiants(Filiere $filiere)
+    {
+        return view('admin.Etudiant', ['filiere' => $filiere]);
+    }
+
+    public function getEtudiants(Request $request,Filiere $filiere)  //an ajax function to retrieve tha data
+    {
+
+       $etudiants = Etudiant::where('etudiant.idFiliere',$filiere->idFiliere)  //first inint a user id
+       ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
+       ->select('apogee','nom','prenom','cne','email','tel','idEtudiant')
+       ->get();
+       if ($request->ajax()) {
+            return Datatables::of($etudiants)
+            ->make(true);
+        }
+    }
+
+    public function getEtudiant(Request $request,Etudiant $etudiant)  //an ajax function to retrieve tha data
+    {
+
+       $etudiant = Etudiant::where('idEtudiant',$etudiant->idEtudiant)  //first inint a user id
+       ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
+       ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale','etudiant.idEtudiant')
+       ->get();
+       if ($request->ajax()) {
+            echo json_encode($etudiant);
+        }
+    }
+    
+    public function SupprimerEtudiant()
+    {
+        $idEtudiant = request('idEtudiant');
+        $etudiant = Etudiant::find($idEtudiant);
+        $idPersonne = $etudiant->idPersonne;
+        $personne = Personne::find($idPersonne);
+        $etudiant->delete();
+        $personne->delete();
+    }
+
+    public function UpdateEtudiant()
+    {
+        request()->validate([
+            'inIdEtudiant' => 'required',
+            'innom' => 'required',
+            'inprenom' => 'required',
+            'insituation' => 'required',
+            'ingenre' => 'required',
+            'indatenais' => ['required','date'],
+            'innationalite' => 'required',
+            'inLieuNaissance' => 'required',
+            'inadresse' => 'required',
+            'incin' => 'required',
+            'intel' => 'required',
+            'inemail' => ['required','email'],
+            'inemailins' => ['required','email'],
+            'inapogee' => 'required',
+            'incne' => 'required',
+            'incinpere' => 'required',
+            'incinmere' => 'required',
+            'inannebac' => 'required',
+            'incouv' => 'required'
+        ]);
+        $idEtudiant=request('inIdEtudiant');
+        $etudiant = Etudiant::find($idEtudiant);
+        $idPersonne = $etudiant->idPersonne;
+        $personne = Personne::find($idPersonne);
+        $personne->nom=request('innom');
+        $personne->prenom=request('inprenom');
+        $personne->situationFamiliale=request('insituation');
+        $personne->genre=request('ingenre');
+        $personne->dateNaissance=request('indatenais');
+        $personne->nationalite=request('innationalite');
+        $personne->lieuNaissance=request('inLieuNaissance');
+        $personne->adressePersonnele=request('inadresse');
+        $personne->cin=request('incin');
+        $personne->tel=request('intel');
+        $personne->emailInstitutionne=request('inemailins');
+        $etudiant->apogee=request('inapogee');
+        $etudiant->cne=request('incne');
+        $etudiant->email=request('inemail');
+        $etudiant->cinPere=request('incinpere');
+        $etudiant->cinMere=request('incinmere');
+        $etudiant->anneeDuBaccalaureat=request('inannebac');
+        $etudiant->regimeDeCovertureMedicale=request('incouv');
+        $personne->save();
+        $etudiant->save();
+    }
+
+    public function AjouterEtudiant()
+    {
+        request()->validate([
+            'idFiliere' => 'required',
+            'ajnom' => 'required',
+            'ajprenom' => 'required',
+            'ajsituation' => 'required',
+            'ajgenre' => 'required',
+            'ajdatenais' => ['required','date'],
+            'ajnationalite' => 'required',
+            'ajLieuNaissance' => 'required',
+            'ajadresse' => 'required',
+            'ajcin' => 'required',
+            'ajtel' => 'required',
+            'ajemail' => ['required','email'],
+            'ajemailins' => ['required','email'],
+            'ajapogee' => 'required',
+            'ajcne' => 'required',
+            'ajcinpere' => 'required',
+            'ajcinmere' => 'required',
+            'ajannebac' => 'required',
+            'ajcouv' => 'required'
+        ]);
+        $idFiliere=request('idFiliere');
+        $etudiant = new Etudiant;
+        $personne = Personne::create([
+            'nom' => request('ajnom'),
+            'prenom' => request('ajprenom'),
+            'situationFamiliale' => request('ajsituation'),
+            'genre' => request('ajgenre'),
+            'dateNaissance' => request('ajdatenais'),
+            'nationalite' => request('ajnationalite'),
+            'lieuNaissance' => request('ajLieuNaissance'),
+            'adressePersonnele' => request('ajadresse'),
+            'cin' => request('ajcin'),
+            'tel' => request('ajtel'),
+            'emailInstitutionne' => request('ajemailins')
+        ]);
+        $personne->nom=request('ajnom');
+        $personne->prenom=request('ajprenom');
+        $personne->situationFamiliale=request('ajsituation');
+        $personne->genre=request('ajgenre');
+        $personne->dateNaissance=request('ajdatenais');
+        $personne->nationalite=request('ajnationalite');
+        $personne->lieuNaissance=request('ajLieuNaissance');
+        $personne->adressePersonnele=request('ajadresse');
+        $personne->cin=request('ajcin');
+        $personne->tel=request('ajtel');
+        $personne->emailInstitutionne=request('ajemailins');
+        $personne->save();
+        $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->select('idPersonne')->get()[0];
+        $etudiant->apogee=request('ajapogee');
+        $etudiant->cne=request('ajcne');
+        $etudiant->email=request('ajemail');
+        $etudiant->cinPere=request('ajcinpere');
+        $etudiant->cinMere=request('ajcinmere');
+        $etudiant->anneeDuBaccalaureat=request('ajannebac');
+        $etudiant->regimeDeCovertureMedicale=request('ajcouv');
+        $etudiant->idFiliere=$idFiliere;
+        $etudiant->idPersonne=$Personne->idPersonne;
+        $etudiant->save();
+    }
+    public function FetchDashboardData()
+    {
+        $annee = date("Y")."/".(date("Y")-1);
+        $date = date("j/n/Y");
+
+        //totla etudiants count
+        $CountEtudiant = Etudiant::all()->count();
+
+        //total nbre dep
+        $CountDepartement = Departement::all()->count();
+
+        //totla nbre des filieres
+        $CountFiliere = Filiere::all()->count();
+
+        //total nbre of profs without emploi
+        $CountProf = Professeur::whereNull('idEmploi')->count();
+
+        return view('admin.TableBoard',['annee' => $annee , 'date' => $date , 'CountEtudiant' => $CountEtudiant ,
+        'CountDepartement' => $CountDepartement ,'CountFiliere' => $CountFiliere , 'CountProf' => $CountProf]);
+    }
+
+    public function adminDashboardTable(Request $request)
+    {
+        $profs = Professeur::whereNull('idEmploi')
+        ->join('users','professeur.idUtilisateur','users.id')
+        ->select('idProf','users.name as nomProf','specialite')
+        ->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($profs)
+            ->make(true);
+        }
+    }
+
+    public function indexEmploiFiliere()
+    {
+        return view('admin.emploiFiliere');
+    }
+
+    public function getAdminEmploiFiliereDatatable(Request $request)
+    {
+        $emplois = Filiere::join('emploi','emploi.idEmploi','filiere.idEmploi')
+        ->select('emploi.idEmploi as idEmploi','filename','filiere.nom as nom','niveau','emploi.updated_at as date')->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($emplois)
+            ->addColumn('filename', function($row)
+            {
+                $link_to_file = asset('storage/emploi/filiere/'.$row->filename);
+                $btn = '<a href="' .$link_to_file. '"  target="_blank" class="card-link text-primary" >' .$row->filename. '</a>';
+                return $btn;
+            })
+            ->addColumn('date', function($row)
+            {
+                setlocale(LC_TIME, "fr_FR", "French");
+                return strftime("%A %d %B %G %R", strtotime($row->date));
+            })
+            ->rawColumns(['filename','date'])
+            ->make(true);
+        }
     }
 }
