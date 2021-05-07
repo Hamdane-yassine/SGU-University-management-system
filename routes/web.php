@@ -97,9 +97,7 @@ Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'Detacher
 Route::prefix('evenement')->group(function () {
     Route::get('/create', [EvenementController::class,'create'])->name('evenement.create');
     Route::post('/store', [EvenementController::class,'store'])->name('evenement.store');
-    Route::post('/show', [EvenementController::class,'show'])->name('evenement.show');
     Route::post('/{evt}', [EvenementController::class,'show'])->name('evenement.show');
-
 });
 // ===============
 Route::get('/h', function () {
@@ -109,7 +107,7 @@ Route::get('/h', function () {
     // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
 
     // return view('Chef.Notifications');
-    return view('evenements.event-detail');
+    return view('evenements.html5-editor');
 
 
 });
