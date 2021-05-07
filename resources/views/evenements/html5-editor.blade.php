@@ -40,28 +40,62 @@
 							<p class="mb-30">All bootstrap element classies</p>
 						</div>
 					</div>
-					<form>
-						<div class="form-group">
+					<form id="evtform" method="POST" action="/evenement" enctype="multipart/form-data">
+                        @csrf
+						<div id="titre" class="form-group">
 							<label>Titre</label>
-							<input class="form-control" type="text" placeholder="Johnny Brown">
+							<input class="form-control @error('titre')  is-invalid @enderror"
+                                   type="text"
+                                   name="titre"
+                                   value="{{ old('titre') }}"
+                                   placeholder="Titre">
+                            @error('titre')
+                                    <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
+                                </span>
+                            @enderror
+
 						</div>
 						<div class="form-group">
 							<label>Resumé</label>
-							<textarea class="form-control"></textarea>
+							<textarea
+                                      class="form-control @error('resume') is-invalid @enderror "
+                                      name="resume"
+                                      form="evtform"
+                                      placeholder="{{ old('resume') }}"
+                            ></textarea>
+                            @error('resume')
+                                    <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
+                                </span>
+                            @enderror
 						</div>
                         <div class="form-group">
                             <label>Attachements</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" multiple >
                                 <label class="custom-file-label">ajouter des fichiers</label>
+                                <input id="attachment"
+                                       name="attachment"
+                                       type="file"
+                                       class="custom-file-input @error('attachment') is-invalid @enderror "
+                                       multiple >
                             </div>
+                            @error('attachment')
+                                    <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <div class="html-editor pd-20 card-box mb-30">
                                 <h4 class="h4 text-blue">Corps</h4>
                                 <p>Ajouter le corp d'évenement</p>
-                                <textarea class="textarea_editor form-control border-radius-0" placeholder="Enter le text ..."></textarea>
+                                <textarea name="corps"
+                                          class="textarea_editor form-control border-radius-0 @error('corps') is-invalid @enderror"
+                                          placeholder="{{ old('corps') }}"
+                                          form="evtform"></textarea>
                             </div>
+                            @error('htmlEditor')
+                                    <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <input class="btn btn-primary pull-right" type="submit" value="Valider ">
