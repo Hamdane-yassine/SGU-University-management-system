@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChefDepartementController;
+use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\ProfesseurController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Models\Evenement;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -106,8 +109,11 @@ Route::get('/h', function () {
 
 
 });
-Route::get('/notifications', '\App\Http\Controllers\UserController@markNotification');
-Route::get('profile/{user}','\App\Http\Controllers\ProfileController@show');
+Route::post('/evenement/create', [EvenementController::class,'create'])->name('evenement.create');
+Route::post('/evenement', [EvenementController::class,'store'])->name('evenement.store');
+
+Route::get('/notifications', [UserController::class,'markNotification']);
+Route::get('profile/{user}', [ProfileController::class,'show']);
 
 // ===============
 
