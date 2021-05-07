@@ -139,9 +139,9 @@ Route::get('admin/filieres/{departement}', [AdminController::class, 'getFilieres
 Route::get('admin/etudiants/{filiere}', [App\Http\Controllers\AdminController::class, 'Etudiants']);
 Route::get('admin/EtudiantsList/{filiere}', [App\Http\Controllers\AdminController::class, 'getEtudiants'])->name('EtudiantsListAdmin');
 Route::get('admin/Etudiant/{etudiant}', [App\Http\Controllers\AdminController::class, 'getEtudiant']);
-Route::post('suppetudiant',[AdminController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiantAdmin');
-Route::post('updateetudiant',[AdminController::class, 'UpdateEtudiant'])->name('updateEtudiantAdmin');
-Route::post('ajouteetudiant',[AdminController::class, 'AjouterEtudiant'])->name('AjouterEtudiant');
+Route::post('/admin/suppetudiant',[AdminController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiantAdmin');
+Route::post('/admin/updateetudiant',[AdminController::class, 'UpdateEtudiant'])->name('updateEtudiantAdmin');
+Route::post('/admin/ajouteetudiant',[AdminController::class, 'AjouterEtudiant'])->name('AjouterEtudiant');
 Route::get('admin/professeurs/{departement}', [App\Http\Controllers\AdminController::class, 'Professeurs']);
 Route::get('admin/professeurslist/{departement}', [App\Http\Controllers\AdminController::class, 'getProfesseurs'])->name('getListProfesseursAdmin');
 Route::get('/admin/professeur/{professeur}', [App\Http\Controllers\AdminController::class, 'getProfesseur']);
