@@ -127,18 +127,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Couverture
-                                    médicale</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="Couverture médicale" type="text" id="ajcouv"
-                                        name="ajcouv" value="" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Spécialité</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" value="" type="text" id="ajspecialite"
-                                        name="inspecialite" required>
+                                    <input class="form-control" value="" type="text" id="ajspecialite" placeholder="Spécialité"
+                                        name="ajspecialite" required>
                                 </div>
                             </div>
                             <div class="form-group row">

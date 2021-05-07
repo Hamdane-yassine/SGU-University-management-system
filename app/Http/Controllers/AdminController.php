@@ -249,7 +249,7 @@ class AdminController extends Controller
         $personne->tel=request('ajtel');
         $personne->emailInstitutionne=request('ajemailins');
         $personne->save();
-        $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->select('idPersonne')->get()[0];
+        $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->where('cin',request('ajcin'))->select('idPersonne')->get()[0];
         $etudiant->apogee=request('ajapogee');
         $etudiant->cne=request('ajcne');
         $etudiant->email=request('ajemail');
@@ -438,8 +438,10 @@ class AdminController extends Controller
                 $dep->save();
             }else{
                 DB::table('chefdep')->where('idDepartement', '=', $idDep)->delete();
-                $oldchef = Professeur::find($oldchefdata[0]->idProf);
-                $oldchefuser = User::find($oldchef->idUtilisateur);
+                $idProf=$oldchefdata[0]->idProf;
+                $oldchef = Professeur::find($idProf);
+                $idUser=$oldchef->idUtilisateur;
+                $oldchefuser = User::find($idUser);
                 $oldchefuser->role="prof";
                 $oldchefuser->save();
                 $dep = new Chefdep;
@@ -474,7 +476,6 @@ class AdminController extends Controller
             'ajrole' => 'required'
         ]);
         $idDepart=request('idDepart');
-        $professeur = new Professeur;
         $personne = new Personne;
         $personne->nom=request('ajnom');
         $personne->prenom=request('ajprenom');
@@ -488,8 +489,49 @@ class AdminController extends Controller
         $personne->tel=request('ajtel');
         $personne->emailInstitutionne=request('ajemailins');
         $personne->save();
-        $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->select('idPersonne')->get()[0];
-        
+        //user 
+        $user = new User;
+        $user->email=request('ajemail');
+        $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->where('cin',request('ajcin'))->select('idPersonne')->get()[0];
+        $user->idPersonne=$Personne->idPersonne;
+        if(request('ajrole')==2)$user->role="chefdep";
+        elseif(request('ajrole')==1)$user->role="prof";
+        $user->password=bcrypt('1');
+        $user->save();
+        //
+        $User = User::where('email',request('ajemail'))->select('id')->get()[0];
+        $professeur = new Professeur;
+        $professeur->idUtilisateur=$User->id;
+        $professeur->specialite=request('ajspecialite');
+        $professeur->save();
+        $Professeur = Professeur::where('idUtilisateur',$User->id)->select('idProf')->get()[0];
+        $prof_departement = new Prof_departement;
+        $prof_departement->idProf=$Professeur->idProf;
+        $prof_departement->idDepartement=$idDepart;
+        $prof_departement->save();
+        if(request('ajrole')==2)
+        {
+            $oldchefdata = Chefdep::where('idDepartement',$idDepart)->select('idProf')->get();
+            if($oldchefdata->isEmpty())
+            {
+                $dep = new Chefdep;
+                $dep->idDepartement=$idDepart;
+                $dep->idProf=$Professeur->idProf;
+                $dep->save();
+            }else{
+                DB::table('chefdep')->where('idDepartement', '=', $idDepart)->delete();
+                $idProf=$oldchefdata[0]->idProf;
+                $oldchef = Professeur::find($idProf);
+                $idUser=$oldchef->idUtilisateur;
+                $oldchefuser = User::find($idUser);
+                $oldchefuser->role="prof";
+                $oldchefuser->save();
+                $dep = new Chefdep;
+                $dep->idDepartement=$idDepart;
+                $dep->idProf=$Professeur->idProf;
+                $dep->save();
+            }    
+        }
     }
 
 
