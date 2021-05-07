@@ -379,9 +379,12 @@ class AdminController extends Controller
         $professeur->delete();
         $user->delete();
         $personne->delete();
-        $filename = $emploi->fileName;
-        Storage::delete('emploi/prof/'.$filename);
-        $emploi->delete();
+        if($emploi != null)
+        {
+            $filename = $emploi->fileName;
+            Storage::delete('emploi/prof/'.$filename);
+            $emploi->delete();
+        }
     }
 
     public function UpdateProfesseur()
