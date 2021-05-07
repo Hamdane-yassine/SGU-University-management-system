@@ -99,9 +99,10 @@ Route::get('/h', function () {
     // broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
     // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
-    \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
+    // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
 
     // return view('Chef.Notifications');
+    return view('evenements.html5-editor');
 
 
 });
@@ -131,6 +132,22 @@ Route::get('admin/emploi/profs', [AdminController::class, 'getListOfProfEmploi']
 Route::post('/upload/profEmploi',[AdminController::class, 'uploadEmploi'])->name('uploadEmploiprof');
 
 Route::post('chef/emploi/delete/prof/', [AdminController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
+
+//==========
+
+Route::get('admin/filieres/{departement}', [AdminController::class, 'getFilieres']);
+Route::get('admin/etudiants/{filiere}', [App\Http\Controllers\AdminController::class, 'Etudiants']);
+Route::get('admin/EtudiantsList/{filiere}', [App\Http\Controllers\AdminController::class, 'getEtudiants'])->name('EtudiantsListAdmin');
+Route::get('admin/Etudiant/{etudiant}', [App\Http\Controllers\AdminController::class, 'getEtudiant']);
+Route::post('suppetudiant',[AdminController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiantAdmin');
+Route::post('updateetudiant',[AdminController::class, 'UpdateEtudiant'])->name('updateEtudiantAdmin');
+Route::post('ajouteetudiant',[AdminController::class, 'AjouterEtudiant'])->name('AjouterEtudiant');
+Route::get('admin/professeurs/{departement}', [App\Http\Controllers\AdminController::class, 'Professeurs']);
+Route::get('admin/professeurslist/{departement}', [App\Http\Controllers\AdminController::class, 'getProfesseurs'])->name('getListProfesseursAdmin');
+Route::get('/admin/professeur/{professeur}', [App\Http\Controllers\AdminController::class, 'getProfesseur']);
+Route::post('suppprofesseur',[AdminController::class, 'SupprimerProfesseur'])->name('SupprimerProfesseur');
+Route::post('updateprofesseur',[AdminController::class, 'UpdateProfesseur'])->name('updateProfesseur');
+Route::post('ajouteprofesseur',[AdminController::class, 'AjouterProfesseur'])->name('AjouterProfesseur');
 
 Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
 

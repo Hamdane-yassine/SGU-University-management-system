@@ -17,7 +17,9 @@ class Prof_departement extends Model
 {
     use HasFactory;
     protected $table = 'prof_departement';
-    protected $primaryKey = 'idProf';
+	protected $primaryKey = 'idProfDep';
+    public $incrementing = false;
+	public $timestamps = false;
 
     protected $fillable = [
         'idProf',
@@ -25,6 +27,7 @@ class Prof_departement extends Model
 	];
 
     protected $casts =[
+        'idProfDep'=> 'int',
         'idProf'=> 'int',
         'idDepartement'=>'int',
     ];

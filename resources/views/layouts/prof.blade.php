@@ -294,6 +294,7 @@
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
+
                 <li>
                     <a href="/admin/dashboard" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-dashboard"
@@ -312,6 +313,33 @@
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi des Filieres</span>
                     </a>
                 </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-graduation-cap"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Les
+                            etudiants</span>
+                    </a>
+                    <ul class="submenu">
+                        @php
+                            $departements = App\Models\Departement::All();
+                        @endphp
+                        @foreach ($departements as $departement)
+                              <li><a href="/admin/filieres/{{ $departement->idDepartement }}">{{ $departement->nom }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-user-o"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Les professeurs</span>
+                    </a>
+                    <ul class="submenu">
+                        @foreach ($departements as $departement)
+                              <li><a href="/admin/professeurs/{{ $departement->idDepartement }}">{{ $departement->nom }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
+                
             </ul>
         </div>
     </div>
