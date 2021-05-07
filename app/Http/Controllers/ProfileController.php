@@ -51,7 +51,9 @@ class ProfileController extends Controller
         $username = $user->name;
         $emailPerso = $user->email;
         $personne = $user->personne;
-        return view('profile.profile',compact('personne','username','emailPerso','profile'));
+        $imagePath = $profile->imagePath;
+        $imageProps = $profile->imageProps;
+        return view('profile.profile',compact('personne','username','emailPerso','profile','imagePath','imageProps'));
     }
 
     /**

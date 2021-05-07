@@ -99,9 +99,10 @@ Route::get('/h', function () {
     // broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
     // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
-    \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
+    // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
 
     // return view('Chef.Notifications');
+    return view('evenements.html5-editor');
 
 
 });
