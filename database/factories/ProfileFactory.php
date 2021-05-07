@@ -24,7 +24,7 @@ class ProfileFactory extends Factory
         static $i = 1;
         return [
             'idUtilisateur'=> $i++,
-            'image'=>asset('src/images/img1.jpg')
+            'imagePath'=>'/vendors/images/user.svg'
         ];
     }
 }

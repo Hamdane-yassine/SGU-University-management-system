@@ -13,7 +13,7 @@ class Profile extends Model
     protected $primaryKey = 'idProfile';
 
     protected $fillable = [
-        'imagePath','skype','facebook','linkedin'
+        'imagePath','imageProps','skype','facebook','linkedin',
     ];
 
     public function profileImage()
