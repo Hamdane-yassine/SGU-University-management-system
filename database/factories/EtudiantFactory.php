@@ -34,12 +34,12 @@ class EtudiantFactory extends Factory
                 return \App\Models\Filiere::factory()->create()->get()[0]['idFiliere'];
             },
             // 'idFiliere' => $i++,
-            'cne'=>$this->faker->randomDigit(),
-            'apogee'=>$this->faker->randomDigit(),
+            'cne'=>$this->faker->unique()->randomNumber(5),
+            'apogee'=>$this->faker->unique()->randomDigit(10),
             'email' => $this->faker->unique()->safeEmail,
             'anneeDuBaccalaureat'=>$this->faker->year(),
-            'cinMere'=>$this->faker->randomDigit(),
-            'cinPere'=>$this->faker->randomDigit(),
+            'cinMere'=>$this->faker->unique()->randomDigit(),
+            'cinPere'=>$this->faker->unique()->randomDigit(),
             'regimeDeCovertureMedicale'=>'oui',
         ];
     }

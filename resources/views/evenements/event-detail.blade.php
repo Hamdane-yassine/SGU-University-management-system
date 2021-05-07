@@ -65,22 +65,7 @@
                                             <h4><a href="#">Ut enim ad minim veniam, quis nostrud exercitation ullamco</a></h4>
                                             <span>HTML</span>
                                         </li>
-                                        <li>
-                                            <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h4>
-                                            <span>Css</span>
-                                        </li>
-                                        <li>
-                                            <h4><a href="#">Ut enim ad minim veniam, quis nostrud exercitation ullamco</a></h4>
-                                            <span>jQuery</span>
-                                        </li>
-                                        <li>
-                                            <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h4>
-                                            <span>Bootstrap</span>
-                                        </li>
-                                        <li>
-                                            <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h4>
-                                            <span>Design</span>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>

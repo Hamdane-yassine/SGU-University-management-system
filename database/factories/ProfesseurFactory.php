@@ -42,11 +42,9 @@ class ProfesseurFactory extends Factory
     }
     public function configure()
     {
-        return $this->afterCreating(function (Professeur $prof)
-        {
+        return $this->afterCreating(function (Professeur $prof){
             $prof->user->role = 'prof';
             $prof->user->save();
-
         });
     }
 }
