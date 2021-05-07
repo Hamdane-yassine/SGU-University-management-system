@@ -18,12 +18,12 @@ class CreateEtudiantTable extends Migration {
 			$table->id('idEtudiant');
 			$table->bigInteger('idPersonne')->unsigned();
 			$table->bigInteger('idFiliere')->unsigned();
-			$table->string('cne', 254);
-			$table->integer('apogee');
-			$table->string('email', 254);
+			$table->string('cne', 254)->unique();
+			$table->integer('apogee')->unique();
+			$table->string('email', 254)->unique();
 			$table->year('anneeDuBaccalaureat');
-			$table->string('cinMere', 254);
-			$table->string('cinPere', 254);
+			$table->string('cinMere', 254)->unique();
+			$table->string('cinPere', 254)->unique();
 			$table->string('regimeDeCovertureMedicale', 254)->nullable();
 		});
 	}
