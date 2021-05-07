@@ -133,8 +133,7 @@ class ChefDepartementController extends Controller
         if(is_null($filiere->idEmploi)) //then creat a new entry
         {
             $emploi = Emploi::create([
-                'fileName' => $filiere->name.$filiere->niveau.'.pdf',
-                'created_at' => '',
+                'fileName' => $filiere->name.$filiere->niveau.'.pdf'
             ]);
             $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
             $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
@@ -151,8 +150,7 @@ class ChefDepartementController extends Controller
             $oldEmploi->delete();
             //add new one
             $emploi = Emploi::create([
-                'fileName' => $filiere->name.$filiere->niveau.'.pdf',
-                'created_at' => '',
+                'fileName' => $filiere->name.$filiere->niveau.'.pdf'
             ]);
             $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
             $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
@@ -343,13 +341,15 @@ class ChefDepartementController extends Controller
         $profs = Professeur::where(['prof_departement.idDepartement'=> $idDepartement],['filiere.idDepartement' => $idDepartement])
         ->join('prof_departement','professeur.idProf','prof_departement.idProf')
         ->select('professeur.idProf')->get()->toArray();
+
         $absences = Absence::whereIn('absence.idProf',$profs)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('users','users.id','=','professeur.idUtilisateur')
+        ->join('personne','personne.idPersonne','users.idPersonne')
         ->join('matiere','matiere.idMatiere','=','absence.idMatiere')
         ->join('module','module.idModule','matiere.idModule')
         ->join('filiere','filiere.idFiliere','module.idFiliere')
-        ->select('Absence.idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','users.name as nomProf','Absence.dateAbsence as date','Absence.etat')
+        ->select('idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','personne.nom as nomProf','Absence.dateAbsence as date','Absence.etat')
         ->get();
 
         if ($request->ajax()) {
@@ -410,7 +410,8 @@ class ChefDepartementController extends Controller
         $absences = Absence::whereIn('absence.idProf',$profs)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('users','users.id','=','professeur.idUtilisateur')
-        ->select('Absence.idAbsence as idAbsence','users.name as nomProf','Absence.dateAbsence as dateAbsence')
+        ->join('personne','personne.idPersonne','users.idPersonne')
+        ->select('Absence.idAbsence as idAbsence','personne.nom as nomProf','Absence.dateAbsence as dateAbsence')
         ->get();
 
         if ($request->ajax()) {

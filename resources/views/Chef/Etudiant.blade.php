@@ -409,7 +409,7 @@
                 }
             })
         };
-        
+
         function getEtudiantIn(id) {
             $.ajax({
                 type: 'GET',
