@@ -475,7 +475,7 @@ class AdminController extends Controller
             'ajadresse' => 'required',
             'ajcin' => 'required',
             'ajtel' => 'required',
-            'ajemail' => ['required','email'],
+            'ajemail' => ['required','email','unique:users,email'],
             'ajemailins' => ['required','email'],
             'ajspecialite' => 'required',
             'ajrole' => 'required'

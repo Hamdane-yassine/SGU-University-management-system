@@ -114,8 +114,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail personnel</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" value="" type="email" placeholder="Email" id="ajemail"
-                                        name="ajemail" required>
+                                    <input class="form-control @error('email') is-invalid @enderror" value="" type="email" placeholder="Email" id="ajemail"
+                                        name="ajemail" value="{{ old('ajemail') }}"  required>
+                                        @error('email')
+                                        <span class="invalid-feedback pl-2" role="alert">
+                                            <strong style="font-family: 'Inter',sans-serif; font-weight: 400;">{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
