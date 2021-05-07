@@ -16,7 +16,7 @@
                                     <th>Nom du fichier</th>
                                     <th>Filière</th>
                                     <th>Niveau</th>
-                                    <th>date de création</th>
+                                    <th>Dernière modification </th>
                                     <th class="datatable-nosort"></th>
                                 </tr>
                             </thead>
@@ -113,7 +113,7 @@
                     {data: 'filename', name: 'filename'},
                     {data: 'nom', name: 'nom'},
                     {data: 'niveau', name: 'niveau'},
-                    {data: 'date', name: 'date'},
+                    {data: 'UpdateDate', name: 'UpdateDate'},
                     {
                         data: 'idEmploi',
                         render: function(data, type, full, meta) {

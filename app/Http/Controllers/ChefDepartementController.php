@@ -42,7 +42,7 @@ class ChefDepartementController extends Controller
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $emplois = Filiere::where('idDepartement',$idDepartement)
         ->join('emploi','emploi.idEmploi','=','filiere.idEmploi')
-        ->select('emploi.idEmploi as idEmploi','filename','filiere.nom as nom','niveau','emploi.created_at as date')->get();
+        ->select('emploi.idEmploi as idEmploi','filename','filiere.nom as nom','niveau','emploi.updated_at as UpdateDate')->get();
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
@@ -52,12 +52,12 @@ class ChefDepartementController extends Controller
                 $btn = '<a href="' .$link_to_file. '"  target="_blank" class="card-link text-primary" >' .$row->filename. '</a>';
                 return $btn;
             })
-            ->addColumn('date', function($row)
+            ->editColumn('UpdateDate', function($row)
             {
                 setlocale(LC_TIME, "fr_FR", "French");
-                return strftime("%A %d %B %G %R", strtotime($row->date));
+                return strftime("%A %d %B %G %R", strtotime($row->UpdateDate));
             })
-            ->rawColumns(['action','filename','date'])
+            ->rawColumns(['action','filename'])
              ->make(true);
         }
     }
