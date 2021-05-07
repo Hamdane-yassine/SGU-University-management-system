@@ -69,7 +69,7 @@ Route::get('/chef/EtudiantsList/{filiere}', [App\Http\Controllers\ChefDepartemen
 
 Route::get('/chef/Etudiant/{etudiant}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiant']);
 
-Route::post('suppetudiant',[ChefDepartementController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiant');
+Route::post('/suppetudiant',[ChefDepartementController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiant');
 
 Route::post('updateetudiant',[ChefDepartementController::class, 'UpdateEtudiant'])->name('updateEtudiant');
 

@@ -48,7 +48,7 @@
         <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
         <!-- Datatable Setting js -->
-        <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
+
 
         <script type="text/javascript">
             $('.data-table').DataTable({

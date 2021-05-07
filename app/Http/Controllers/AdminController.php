@@ -27,7 +27,8 @@ class AdminController extends Controller
     public function index()
     {
         $profs = Professeur::join('users','users.id','=','professeur.idUtilisateur')
-        ->select('idProf','users.name as nom')->get();
+        ->join('personne','personne.idPersonne','users.idPersonne')
+        ->select('idProf','personne.nom as nom')->get();
 
         return view('admin.emploi',['profs' => $profs]);
     }
@@ -36,7 +37,8 @@ class AdminController extends Controller
     {
         $emplois = Professeur::join('users','users.id','=','professeur.idUtilisateur')
         ->join('emploi','emploi.idEmploi','=','professeur.idEmploi')
-        ->select('emploi.idEmploi as idEmploi','filename','users.name as nom','emploi.updated_at as date')->get();
+        ->join('personne','personne.idPersonne','users.idPersonne')
+        ->select('emploi.idEmploi as idEmploi','filename','personne.nom as nom','emploi.updated_at as date')->get();
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
@@ -63,7 +65,8 @@ class AdminController extends Controller
 
         $prof = Professeur::where('idProf',$idProf)
         ->join('users','professeur.idUtilisateur','=','users.id')
-        ->select('users.id','users.name as name','idEmploi','idProf')
+        ->join('personne','personne.idPersonne','users.idPersonne')
+        ->select('users.id','personne.nom as name','idEmploi','idProf')
         ->get()[0];
 
         //echo $idProf.'<br>';
@@ -73,8 +76,7 @@ class AdminController extends Controller
         if(is_null($prof->idEmploi)) //then creat a new entry
         {
             $emploi = Emploi::create([
-                'fileName' => $prof->name.'.pdf',
-                'created_at' => '',
+                'fileName' => $prof->name.'.pdf'
             ]);
 
             $file->storeAs('emploi/prof/', $prof->name.'.pdf');  //store with the original name
@@ -121,7 +123,7 @@ class AdminController extends Controller
     {
         return view('admin.filieres',['departement' => $departement]);
     }
-    
+
     public function Etudiants(Filiere $filiere)
     {
         return view('admin.Etudiant', ['filiere' => $filiere]);
@@ -151,7 +153,7 @@ class AdminController extends Controller
             echo json_encode($etudiant);
         }
     }
-    
+
     public function SupprimerEtudiant()
     {
         $idEtudiant = request('idEtudiant');
@@ -451,14 +453,14 @@ class AdminController extends Controller
                 $dep->idDepartement=$idDep;
                 $dep->idProf=$idProf;
                 $dep->save();
-            }    
+            }
             $user->role="chefdep";
         }
         $personne->save();
         $user->save();
         $professeur->save();
     }
-    
+
     public function AjouterProfesseur()
     {
         request()->validate([
@@ -492,7 +494,9 @@ class AdminController extends Controller
         $personne->tel=request('ajtel');
         $personne->emailInstitutionne=request('ajemailins');
         $personne->save();
-        //user 
+        $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->select('idPersonne')->get()[0];
+
+        //user
         $user = new User;
         $user->email=request('ajemail');
         $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->where('cin',request('ajcin'))->select('idPersonne')->get()[0];
@@ -533,9 +537,7 @@ class AdminController extends Controller
                 $dep->idDepartement=$idDepart;
                 $dep->idProf=$Professeur->idProf;
                 $dep->save();
-            }    
+            }
         }
     }
-
-
 }
