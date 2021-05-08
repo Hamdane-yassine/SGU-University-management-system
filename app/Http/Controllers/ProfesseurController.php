@@ -100,7 +100,7 @@ class ProfesseurController extends Controller
             //send mails if informerEtudiants=on
             if($informerEtudiants == 'on')
             {
-                $profName = Auth::user()->personne->nom;
+                $profName = Auth::user()->personne->nom.' '.Auth::user()->personne->prenom;
                 $dateAbsence;
                 $filiere = Matiere::where('idMatiere',$idMatiere)
                 ->join('module','matiere.idModule','module.idModule')
@@ -110,7 +110,12 @@ class ProfesseurController extends Controller
 
                 foreach($etudiants as $etudiant)
                 {
-                    $mailData = ['profName' => $profName, 'absenceDate' => $dateAbsence, 'userName' => $etudiant->personne->nom, 'matiereName' => $filiere->nom, 'mailTo' => $etudiant->email]; //
+                    setlocale(LC_TIME, "fr_FR", "French");
+                    $FrenchDate = strftime("%A %d %B %G %R", strtotime($dateAbsence));
+                    $username = strval($etudiant->personne->nom.' '.$etudiant->personne->prenom);
+
+                    $mailData = ['profName' => $profName, 'absenceDate' => $FrenchDate, 'userName' => $username, 'matiereName' => $filiere->nom,
+                                'mailTo' => $etudiant->email]; //
                     SendEmailJob::dispatch($mailData);
 
                     //Mail::to($mailData['mailTo'])->send(new AbsenceMail($mailData['profName'],$mailData['absenceDate'], $mailData['userName'],

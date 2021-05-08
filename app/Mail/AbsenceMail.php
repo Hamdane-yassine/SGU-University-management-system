@@ -16,7 +16,7 @@ class AbsenceMail extends Mailable
      *
      * @return void
      */
-    protected $userNam;
+    protected $userName;
     protected $matiereName;
     protected $profName;
     protected $absenceDate;
@@ -39,7 +39,7 @@ class AbsenceMail extends Mailable
         return $this
         ->subject('notification d\'absence')
         ->view('emails.absence')
-        ->with(['profName' => $this->profName, 'absenceDate' => $this->absenceDate, 'userName' => $this->userNam,
+        ->with(['profName' => $this->profName, 'absenceDate' => $this->absenceDate, 'userName' => $this->userName,
         'matiereName' => $this->matiereName]);
     }
 }
