@@ -95,6 +95,9 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" placeholder="N° C.N.I.E" type="text" id="ajcin" name="ajcin"
                                         value="" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrcin"></strong></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -114,32 +117,34 @@
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail personnel</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control @error('email') is-invalid @enderror" value="" type="email" placeholder="Email" id="ajemail"
-                                        name="ajemail" value="{{ old('ajemail') }}"  required>
-                                        @error('email')
-                                        <span class="invalid-feedback pl-2" role="alert">
-                                            <strong style="font-family: 'Inter',sans-serif; font-weight: 400;">{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                                    <input class="form-control" type="email" placeholder="Email" id="ajemail" name="ajemail"
+                                        value="" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrmail"></strong></span>
+
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail
                                     institutionnel</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" value="" id="ajemailins" placeholder="Email institutionnel"
-                                        name="ajemailins" type="email" required>
+                                    <input class="form-control" id="ajemailins" placeholder="Email institutionnel"
+                                        name="ajemailins" value="" type="email" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrmailins"></strong></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Spécialité</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" value="" type="text" id="ajspecialite" placeholder="Spécialité"
-                                        name="ajspecialite" required>
+                                    <input class="form-control" value="" type="text" id="ajspecialite"
+                                        placeholder="Spécialité" name="ajspecialite" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">role</label>
+                                <label class="col-sm-12 col-md-2 col-form-label">Rôle</label>
                                 <div class="col-sm-12 col-md-10">
                                     <select class="custom-select col-12" id="ajrole" name="ajrole">
                                         <option value="1" selected>Professeur</option>
@@ -148,8 +153,8 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button type="button" onclick="reset();$('html, body').animate({scrollTop:0}, 'fast');"
-                                    class="btn btn-secondary" style="text-decoration: none;">Annuler</button>
+                                <button type="button" onclick="reins();" class="btn btn-secondary"
+                                    style="text-decoration: none;">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Ajouter">
                             </div>
                         </form>
@@ -320,6 +325,9 @@
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="N° C.N.I.E" type="text" id="incin"
                                                 name="incin" value="" required>
+                                            <span class="invalid-feedback pl-2" role="alert"> <strong
+                                                    style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                    id="msgerrincin"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -341,6 +349,9 @@
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" value="" type="email" id="inemail" name="inemail"
                                                 required>
+                                                <span class="invalid-feedback pl-2" role="alert"> <strong
+                                                    style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                    id="msgerrinmail"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -349,6 +360,9 @@
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" value="" id="inemailins" name="inemailins"
                                                 type="email" required>
+                                            <span class="invalid-feedback pl-2" role="alert"> <strong
+                                                style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                id="msgerrinmainins"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -371,14 +385,15 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" data-dismiss="modal" class="btn btn-secondary"
-                                    style="text-decoration: none;">Annuler</button>
+                                    style="text-decoration: none;" onclick="reinsupd()">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Enregistrer">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
@@ -386,7 +401,8 @@
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" onclick="ren()" data-dismiss="modal">terminer</button>
+                            <button type="button" class="btn btn-primary" onclick="ren()"
+                                data-dismiss="modal">terminer</button>
                         </div>
                     </div>
                 </div>
@@ -551,23 +567,22 @@
                 }
             });
         });
-        function reset() {
-            document.getElementById("ajnom").value = "";
-            document.getElementById("ajprenom").value = "";
-            document.getElementById("ajgenre").value =  "Masculin";
-            document.getElementById("ajdatenais").value = "";
-            document.getElementById("ajsituation").value = "Célibataire";
-            document.getElementById("ajnationalite").value = "";
-            document.getElementById("ajLieuNaissance").value = "";
-            document.getElementById("ajcin").value = "";
-            document.getElementById("ajadresse").value = "";
-            document.getElementById("ajtel").value = "";
-            document.getElementById("ajemail").value = "";
-            document.getElementById("ajemailins").value = "";
-            document.getElementById("ajspecialite").value = "";
-            document.getElementById("ajrole").value = "1";
+
+        function reins() {
+            document.getElementById("ajoutprof").reset();
+            $('html, body').animate({
+                scrollTop: 0
+            }, 'fast');
+            document.getElementById('msgerrmailins').innerHTML = "";
+            document.getElementById("ajemailins").classList.remove("is-invalid");
+            document.getElementById('msgerrmail').innerHTML = "";
+            document.getElementById("ajemail").classList.remove("is-invalid");
+            document.getElementById('msgerrcin').innerHTML = "";
+            document.getElementById("ajcin").classList.remove("is-invalid");
         };
+
         function getProfesseurIn(id) {
+            reinsupd();
             $.ajax({
                 type: 'GET',
                 url: "/admin/professeur/" + id,
@@ -605,11 +620,39 @@
                 url: url,
                 data: form.serialize(), // serializes the form's elements.
                 success: function(data) {
-                    reset();
+                    reins();
                     $('#success-modal').modal('show');
+                },
+                error: function(err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                        $.each(err.responseJSON.errors, function(key, value) {
+                            if (key == "ajemailins") {
+                                document.getElementById('msgerrmailins').innerHTML = value;
+                                document.getElementById("ajemailins").classList.add("is-invalid");
+                            }
+                            if (key == "ajemail") {
+                                document.getElementById('msgerrmail').innerHTML = value;
+                                document.getElementById("ajemail").classList.add("is-invalid");
+                            }
+                            if (key == "ajcin") {
+                                document.getElementById('msgerrcin').innerHTML = value;
+                                document.getElementById("ajcin").classList.add("is-invalid");
+                            }
+
+                        });
+                    }
                 }
             });
         });
+        function reinsupd()
+        {
+            document.getElementById('msgerrinmainins').innerHTML = "";
+            document.getElementById("inemailins").classList.remove("is-invalid");
+            document.getElementById('msgerrinmail').innerHTML = "";
+            document.getElementById("inemail").classList.remove("is-invalid");
+            document.getElementById('msgerrincin').innerHTML = "";
+            document.getElementById("incin").classList.remove("is-invalid");
+        }
         $("#updProf").submit(function(e) {
             e.preventDefault(); // avoid to execute the actual submit of the form.
             var form = $(this);
@@ -620,14 +663,37 @@
                 data: form.serialize(), // serializes the form's elements.
                 success: function(data) {
                     $('#bd-edit-modal').modal('hide');
+                    reinsupd();
                     table1.ajax.reload();
+                },
+                error: function(err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                        $.each(err.responseJSON.errors, function(key, value) {
+                            if (key == "inemailins") {
+                                document.getElementById('msgerrinmainins').innerHTML = value;
+                                document.getElementById("inemailins").classList.add("is-invalid");
+                            }
+                            if (key == "inemail") {
+                                document.getElementById('msgerrinmail').innerHTML = value;
+                                document.getElementById("inemail").classList.add("is-invalid");
+                            }
+                            if (key == "incin") {
+                                document.getElementById('msgerrincin').innerHTML = value;
+                                document.getElementById("incin").classList.add("is-invalid");
+                            }
+
+                        });
+                    }
                 }
             });
         });
-        function ren()
-        {
+
+        function ren() {
             table1.ajax.reload();
-            $('html, body').animate({ scrollTop: 0 }, 'fast');
+            $('html, body').animate({
+                scrollTop: 0
+            }, 'fast');
         }
+
     </script>
 @endsection

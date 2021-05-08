@@ -143,25 +143,34 @@
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Nom</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" type="text" id="innom" name="innom" placeholder="Nom" value="" required>
+                                            <input class="form-control" type="text" id="innom" name="innom" placeholder="Nom"
+                                                value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Prénom</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Prénom" id="inprenom" name="inprenom" type="text" value="" required>
+                                            <input class="form-control" placeholder="Prénom" id="inprenom" name="inprenom"
+                                                type="text" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Code Apogée</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" id="inapogee" name="inapogee" type="number" required>
+                                            <input class="form-control" value="" id="inapogee" name="inapogee" type="number"
+                                                required>
+                                                <span class="invalid-feedback pl-2" role="alert"> <strong
+                                                    style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                    id="inmsgerrapog"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Code Massar</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" value="" id="incne" name="incne" type="text" required>
+                                            <span class="invalid-feedback pl-2" role="alert"> <strong
+                                                style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                id="inmsgerrcne"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -176,8 +185,8 @@
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Naissance</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control date-picker" placeholder="Date de naissance"
-                                                type="text" id="indatenais" name="indatenais" value="" required>
+                                            <input class="form-control date-picker" placeholder="Date de naissance" type="text"
+                                                id="indatenais" name="indatenais" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -194,15 +203,15 @@
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Nationalité</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Nationalité" type="text" id="innationalite" name="innationalite"
-                                                value="" required>
+                                            <input class="form-control" placeholder="Nationalité" type="text" id="innationalite"
+                                                name="innationalite" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Lieu de naissance</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Lieu de naissance" type="text" id="inLieuNaissance" name="inLieuNaissance"
-                                                value="" required>
+                                            <input class="form-control" placeholder="Lieu de naissance" type="text"
+                                                id="inLieuNaissance" name="inLieuNaissance" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -210,27 +219,30 @@
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="N° C.N.I.E" type="text" id="incin" name="incin"
                                                 value="" required>
+                                                <span class="invalid-feedback pl-2" role="alert"> <strong
+                                                    style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                    id="inmsgerrcin"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(père)</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="N° C.N.I.E du père" type="text" id="incinpere" name="incinpere"
-                                                value="" required>
+                                            <input class="form-control" placeholder="N° C.N.I.E du père" type="text" id="incinpere"
+                                                name="incinpere" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(mère)</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="N° C.N.I.E de la mère" type="text" id="incinmere" name="incinmere"
-                                                value="" required>
+                                            <input class="form-control" placeholder="N° C.N.I.E de la mère" type="text"
+                                                id="incinmere" name="incinmere" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Adresse</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Adresse" type="text" id="inadresse" name="inadresse"
-                                                value="" required>
+                                            <input class="form-control" placeholder="Adresse" type="text" id="inadresse"
+                                                name="inadresse" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -243,34 +255,42 @@
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail personnel</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" value="" type="email" id="inemail" name="inemail" required>
+                                            <span class="invalid-feedback pl-2" role="alert"> <strong
+                                                style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                id="inmsgerrmail"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail
                                             institutionnel</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" id="inemailins" name="inemailins" type="email" required>
+                                            <input class="form-control" value="" id="inemailins" name="inemailins" type="email"
+                                                required>
+                                                <span class="invalid-feedback pl-2" role="alert"> <strong
+                                                    style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                    id="inmsgerrmailins"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label">Année du BAC</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" type="number" min="2015" id="inannebac" name="inannebac" required>
+                                            <input class="form-control" value="" type="number" min="2015" id="inannebac"
+                                                name="inannebac" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-12 col-md-2 col-form-label pt-0">Couverture
                                             médicale</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Couverture médicale" type="text" id="incouv" name="incouv"
-                                                value="" required>
+                                            <input class="form-control" placeholder="Couverture médicale" type="text" id="incouv"
+                                                name="incouv" value="" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" data-dismiss="modal" class="btn btn-secondary"
-                                    style="text-decoration: none;">Annuler</button>
+                                    style="text-decoration: none;" onclick="reinsup()">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Enregistrer">
                             </div>
                         </form>
@@ -409,8 +429,20 @@
                 }
             })
         };
-
+        function reinsup() {
+            document.getElementById('inmsgerrmailins').innerHTML = "";
+            document.getElementById("inemailins").classList.remove("is-invalid");
+            document.getElementById('inmsgerrmail').innerHTML = "";
+            document.getElementById("inemail").classList.remove("is-invalid");
+            document.getElementById('inmsgerrcin').innerHTML = "";
+            document.getElementById("incin").classList.remove("is-invalid");
+            document.getElementById('inmsgerrcne').innerHTML = "";
+            document.getElementById("incne").classList.remove("is-invalid");
+            document.getElementById('inmsgerrapog').innerHTML = "";
+            document.getElementById("inapogee").classList.remove("is-invalid");
+        };
         function getEtudiantIn(id) {
+            reinsup();
             $.ajax({
                 type: 'GET',
                 url: "/chef/Etudiant/" + id,
@@ -468,7 +500,35 @@
                 data: form.serialize(), // serializes the form's elements.
                 success: function(data) {
                     $('#bd-edit-modal').modal('hide');
+                    reinsup();
                     table1.ajax.reload();
+                },
+                error: function(err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                        $.each(err.responseJSON.errors, function(key, value) {
+                            if (key == "inemailins") {
+                                document.getElementById('inmsgerrmailins').innerHTML = value;
+                                document.getElementById("inemailins").classList.add(
+                                    "is-invalid");
+                            }
+                            if (key == "inemail") {
+                                document.getElementById('inmsgerrmail').innerHTML = value;
+                                document.getElementById("inemail").classList.add("is-invalid");
+                            }
+                            if (key == "incin") {
+                                document.getElementById('inmsgerrcin').innerHTML = value;
+                                document.getElementById("incin").classList.add("is-invalid");
+                            }
+                            if (key == "incne") {
+                                document.getElementById('inmsgerrcne').innerHTML = value;
+                                document.getElementById("incne").classList.add("is-invalid");
+                            }
+                            if (key == "inapogee") {
+                                document.getElementById('inmsgerrapog').innerHTML = value;
+                                document.getElementById("inapogee").classList.add("is-invalid");
+                            }
+                        });
+                    }
                 }
             });
         });

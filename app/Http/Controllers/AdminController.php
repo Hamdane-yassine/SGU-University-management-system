@@ -166,6 +166,10 @@ class AdminController extends Controller
 
     public function UpdateEtudiant()
     {
+        $idEtudiant=request('inIdEtudiant');
+        $etudiant = Etudiant::find($idEtudiant);
+        $idPersonne = $etudiant->idPersonne;
+        $personne = Personne::find($idPersonne);
         request()->validate([
             'inIdEtudiant' => 'required',
             'innom' => 'required',
@@ -176,16 +180,25 @@ class AdminController extends Controller
             'innationalite' => 'required',
             'inLieuNaissance' => 'required',
             'inadresse' => 'required',
-            'incin' => 'required',
+            'incin' => ['required','unique:personne,cin,'.$personne->idPersonne.',idPersonne'],
             'intel' => 'required',
-            'inemail' => ['required','email'],
-            'inemailins' => ['required','email'],
-            'inapogee' => 'required',
-            'incne' => 'required',
+            'inemail' => ['required','email','unique:etudiant,email,'.$etudiant->idEtudiant.',idEtudiant'],
+            'inemailins' => ['required','email','unique:personne,emailInstitutionne,'.$personne->idPersonne.',idPersonne'],
+            'inapogee' => ['required','unique:etudiant,apogee,'.$etudiant->idEtudiant.',idEtudiant'],
+            'incne' => ['required','unique:etudiant,cne,'.$etudiant->idEtudiant.',idEtudiant'],
             'incinpere' => 'required',
             'incinmere' => 'required',
             'inannebac' => 'required',
             'incouv' => 'required'
+        ],
+        [
+            'incin.unique' => 'C.N.I.E est déjà existé.',
+            'inemail.unique' => 'Email est déjà utilisée.',
+            'inemailins.unique' => 'Email est déjà utilisée.',
+            'incne.unique' => 'CNE est déjà existé.',
+            'inapogee.unique' => 'Numéro apogée est déjà utilisée.',
+            'inemail.email' => 'Email invalide.',
+            'inemailins.email' => 'Email invalide.'
         ]);
         $idEtudiant=request('inIdEtudiant');
         $etudiant = Etudiant::find($idEtudiant);
@@ -225,16 +238,25 @@ class AdminController extends Controller
             'ajnationalite' => 'required',
             'ajLieuNaissance' => 'required',
             'ajadresse' => 'required',
-            'ajcin' => 'required',
+            'ajcin' => ['required','unique:personne,cin'],
             'ajtel' => 'required',
-            'ajemail' => ['required','email'],
-            'ajemailins' => ['required','email'],
-            'ajapogee' => 'required',
-            'ajcne' => 'required',
+            'ajemail' => ['required','email','unique:etudiant,email'],
+            'ajemailins' => ['required','email','unique:personne,emailInstitutionne'],
+            'ajapogee' => ['required','unique:etudiant,apogee'],
+            'ajcne' => ['required','unique:etudiant,cne'],
             'ajcinpere' => 'required',
             'ajcinmere' => 'required',
             'ajannebac' => 'required',
             'ajcouv' => 'required'
+        ],
+        [
+            'ajcin.unique' => 'C.N.I.E est déjà existé.',
+            'ajemail.unique' => 'Email est déjà utilisée.',
+            'ajemailins.unique' => 'Email est déjà utilisée.',
+            'ajcne.unique' => 'CNE est déjà existé.',
+            'ajapogee.unique' => 'Numéro apogée est déjà utilisée.',
+            'ajemail.email' => 'Email invalide.',
+            'ajemailins.email' => 'Email invalide.'
         ]);
         $idFiliere=request('idFiliere');
         $etudiant = new Etudiant;
@@ -391,6 +413,13 @@ class AdminController extends Controller
 
     public function UpdateProfesseur()
     {
+        $idDep = request('idDepup');
+        $idProf=request('inidProf');
+        $professeur = Professeur::find($idProf);
+        $idUser = $professeur->idUtilisateur;
+        $user = User::find($idUser);
+        $idPersonne = $user->idPersonne;
+        $personne = Personne::find($idPersonne);
         request()->validate([
             'inidProf' => 'required',
             'innom' => 'required',
@@ -401,20 +430,21 @@ class AdminController extends Controller
             'innationalite' => 'required',
             'inLieuNaissance' => 'required',
             'inadresse' => 'required',
-            'incin' => 'required',
+            'incin' => 'required|unique:personne,cin,'.$personne->idPersonne.',idPersonne',
             'intel' => 'required',
-            'inemail' => ['required','email'],
-            'inemailins' => ['required','email'],
+            'inemail' => 'required|email|unique:users,email,'.$user->id,
+            'inemailins' => 'required|email|unique:personne,emailInstitutionne,'.$personne->idPersonne.',idPersonne',
             'inspecialite' => 'required',
             'role' => 'required'
-        ]);
-        $idDep = request('idDepup');
-        $idProf=request('inidProf');
-        $professeur = Professeur::find($idProf);
-        $idUser = $professeur->idUtilisateur;
-        $user = User::find($idUser);
-        $idPersonne = $user->idPersonne;
-        $personne = Personne::find($idPersonne);
+        ],
+        [
+            'incin.unique' => 'C.N.I.E est déjà existé.',
+            'inemail.unique' => 'Email est déjà utilisée.',
+            'inemailins.unique' => 'Email est déjà utilisée.',
+            'inemail.email' => 'Email invalide.',
+            'inemailins.email' => 'Email invalide.'
+        ]
+        );
         $personne->nom=request('innom');
         $personne->prenom=request('inprenom');
         $personne->situationFamiliale=request('insituation');
@@ -456,6 +486,7 @@ class AdminController extends Controller
             }
             $user->role="chefdep";
         }
+        $user->email=request('inemail');
         $personne->save();
         $user->save();
         $professeur->save();
@@ -473,13 +504,21 @@ class AdminController extends Controller
             'ajnationalite' => 'required',
             'ajLieuNaissance' => 'required',
             'ajadresse' => 'required',
-            'ajcin' => 'required',
+            'ajcin' => ['required','unique:personne,cin'],
             'ajtel' => 'required',
             'ajemail' => ['required','email','unique:users,email'],
-            'ajemailins' => ['required','email'],
+            'ajemailins' => ['required','email','unique:personne,emailInstitutionne'],
             'ajspecialite' => 'required',
             'ajrole' => 'required'
-        ]);
+        ],
+        [
+            'ajcin.unique' => 'C.N.I.E est déjà existé.',
+            'ajemail.unique' => 'Email est déjà utilisée.',
+            'ajemailins.unique' => 'Email est déjà utilisée.',
+            'ajemail.email' => 'Email invalide.',
+            'ajemailins.email' => 'Email invalide.'
+        ]
+    );
         $idDepart=request('idDepart');
         $personne = new Personne;
         $personne->nom=request('ajnom');
