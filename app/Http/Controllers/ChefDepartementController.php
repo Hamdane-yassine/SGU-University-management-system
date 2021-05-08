@@ -162,12 +162,12 @@ class ChefDepartementController extends Controller
 
         //mail the emploi to all students of the same filiere
         $filiere_ = Filiere::find($idFiliere);
-        echo $filePath = 'emploi/filiere/'.$filiere_->nom.$filiere_->niveau.'.pdf';
+        $filePath = 'emploi/filiere/'.$filiere_->nom.$filiere_->niveau.'.pdf';
         $etudiants = Etudiant::where('idFiliere',$idFiliere)->get();
         foreach($etudiants as $etudiant)
         {
             $mailData = ['mailTo' => $etudiant->email,'userName' => strval($etudiant->personne->nom.' '.$etudiant->personne->prenom),
-                'nomfiliere' => $etudiant->filiere->nom ,'filePath' => $filePath];
+                'nomfiliere' => $etudiant->filiere->nom ,'filePath' => $filePath, 'niveau' => $filiere_->niveau];
             SendEmploiEmail::dispatch($mailData);
         }
         return redirect('/chef/emploi'); //just in case
