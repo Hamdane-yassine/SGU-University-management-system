@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Departement;
 use Illuminate\Support\Facades\Auth;
 use DataTables;
-
+use Illuminate\Support\Str;
+use App\Jobs\SendAccountEmail;
 use App\Models\Absence;
 use App\Models\Chefdep;
 use App\Models\Emploi;
@@ -534,7 +535,6 @@ class AdminController extends Controller
         $personne->emailInstitutionne=request('ajemailins');
         $personne->save();
         $Personne = Personne::where('emailInstitutionne',request('ajemailins'))->select('idPersonne')->get()[0];
-
         //user
         $user = new User;
         $user->email=request('ajemail');
@@ -542,7 +542,8 @@ class AdminController extends Controller
         $user->idPersonne=$Personne->idPersonne;
         if(request('ajrole')==2)$user->role="chefdep";
         elseif(request('ajrole')==1)$user->role="prof";
-        $user->password=bcrypt('1');
+        $RandPass = Str::random(10);
+        $user->password=bcrypt($RandPass);
         $user->save();
         //
         $User = User::where('email',request('ajemail'))->select('id')->get()[0];
@@ -578,5 +579,7 @@ class AdminController extends Controller
                 $dep->save();
             }
         }
+        $mailData = ['mailTo' =>request('ajemail'),'Username' => strval(request('ajnom').' '.request('ajprenom')),'email' => request('ajemail'),'password' => $RandPass];
+        SendAccountEmail::dispatch($mailData);
     }
 }
