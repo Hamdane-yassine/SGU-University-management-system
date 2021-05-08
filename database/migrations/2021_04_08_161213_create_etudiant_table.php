@@ -22,8 +22,8 @@ class CreateEtudiantTable extends Migration {
 			$table->integer('apogee')->unique();
 			$table->string('email', 254)->unique();
 			$table->year('anneeDuBaccalaureat');
-			$table->string('cinMere', 254)->unique();
-			$table->string('cinPere', 254)->unique();
+			$table->string('cinMere', 254);
+			$table->string('cinPere', 254);
 			$table->string('regimeDeCovertureMedicale', 254)->nullable();
 		});
 	}

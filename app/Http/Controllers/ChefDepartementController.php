@@ -162,6 +162,10 @@ class ChefDepartementController extends Controller
     }
     public function UpdateEtudiant()
     {
+        $idEtudiant=request('inIdEtudiant');
+        $etudiant = Etudiant::find($idEtudiant);
+        $idPersonne = $etudiant->idPersonne;
+        $personne = Personne::find($idPersonne);
         request()->validate([
             'inIdEtudiant' => 'required',
             'innom' => 'required',
@@ -172,21 +176,27 @@ class ChefDepartementController extends Controller
             'innationalite' => 'required',
             'inLieuNaissance' => 'required',
             'inadresse' => 'required',
-            'incin' => 'required',
+            'incin' => ['required','unique:personne,cin,'.$personne->idPersonne.',idPersonne'],
             'intel' => 'required',
-            'inemail' => ['required','email'],
-            'inemailins' => ['required','email'],
-            'inapogee' => 'required',
-            'incne' => 'required',
+            'inemail' => ['required','email','unique:etudiant,email,'.$etudiant->idEtudiant.',idEtudiant'],
+            'inemailins' => ['required','email','unique:personne,emailInstitutionne,'.$personne->idPersonne.',idPersonne'],
+            'inapogee' => ['required','unique:etudiant,apogee,'.$etudiant->idEtudiant.',idEtudiant'],
+            'incne' => ['required','unique:etudiant,cne,'.$etudiant->idEtudiant.',idEtudiant'],
             'incinpere' => 'required',
             'incinmere' => 'required',
             'inannebac' => 'required',
             'incouv' => 'required'
-        ]);
-        $idEtudiant=request('inIdEtudiant');
-        $etudiant = Etudiant::find($idEtudiant);
-        $idPersonne = $etudiant->idPersonne;
-        $personne = Personne::find($idPersonne);
+        ],
+        [
+            'incin.unique' => 'C.N.I.E est déjà existé.',
+            'inemail.unique' => 'Email est déjà utilisée.',
+            'inemailins.unique' => 'Email est déjà utilisée.',
+            'incne.unique' => 'CNE est déjà existé.',
+            'inapogee.unique' => 'Numéro apogée est déjà utilisée.',
+            'inemail.email' => 'Email invalide.',
+            'inemailins.email' => 'Email invalide.'
+        ]
+        );
         $personne->nom=request('innom');
         $personne->prenom=request('inprenom');
         $personne->situationFamiliale=request('insituation');
