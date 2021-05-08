@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmploiEmail;
 use App\Models\Departement;
 use Illuminate\Support\Facades\Auth;
 use DataTables;
@@ -144,7 +145,7 @@ class ChefDepartementController extends Controller
         else //meaning the filiere has already an emploi
         {
             //delete old file
-            Storage::delete('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');
+            Storage::delete('emploi/filiere/'.$filiere->name.$filiere->niveau.'.pdf');
             //delete the old entry
             $oldEmploi = Emploi::find($filiere->idEmploi);
             $oldEmploi->delete();
@@ -157,6 +158,17 @@ class ChefDepartementController extends Controller
             $filiere = Filiere::find($idFiliere);
             $filiere->idEmploi = $emploi->idEmploi;
             $filiere->save();
+        }
+
+        //mail the emploi to all students of the same filiere
+        $filiere_ = Filiere::find($idFiliere);
+        echo $filePath = 'emploi/filiere/'.$filiere_->nom.$filiere_->niveau.'.pdf';
+        $etudiants = Etudiant::where('idFiliere',$idFiliere)->get();
+        foreach($etudiants as $etudiant)
+        {
+            $mailData = ['mailTo' => $etudiant->email,'userName' => strval($etudiant->personne->nom.' '.$etudiant->personne->prenom),
+                'nomfiliere' => $etudiant->filiere->nom ,'filePath' => $filePath];
+            SendEmploiEmail::dispatch($mailData);
         }
         return redirect('/chef/emploi'); //just in case
     }
