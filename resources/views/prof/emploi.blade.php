@@ -19,7 +19,7 @@
                                     <iframe class="embed-responsive-item" src="{{ $path_to_file }}"> </iframe> <!-- pdf reader -->
                                 </div>
                             @else
-                                <p>Emploi non trouvé , peut-être qu'il n'y a pas encore d'entrées d'emploi pour cette filiere</p>
+                                <p>Emploi non trouvé , peut-être qu'il n'y a pas encore d'entrées d'emploi.</p>
                             @endif
 
                     </div>

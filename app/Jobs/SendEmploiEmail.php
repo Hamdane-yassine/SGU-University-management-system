@@ -33,7 +33,7 @@ class SendEmploiEmail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->mailData['mailTo'])->send(new EmploiMail($this->mailData['userName'],$this->mailData['nomfiliere'],
+        Mail::to($this->mailData['mailTo'])->send(new EmploiMail($this->mailData['userName'],$this->mailData['nomfiliere'],$this->mailData['niveau'],
         $this->mailData['filePath']));
     }
 }

@@ -348,8 +348,8 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Bonjour, Monsieur {{ $userName }} </p>
-                        <p>nous souhaitons vous informer que l'empoi de votre filiere {{$nomfiliere}} est le suivant:</p>
+                        <p>Bonjour, {{ $userName }} </p>
+                        <p>nous souhaitons vous informer que l'empoi de votre filiere {{$nomfiliere}}-{{ $niveau }} est le suivant:</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>

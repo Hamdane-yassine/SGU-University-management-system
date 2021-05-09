@@ -19,12 +19,13 @@ class EmploiMail extends Mailable
     protected $userName;
     protected $nomfiliere;
     protected $filePath;
-
-    public function __construct($userName, $nomfiliere, $filePath)
+    protected $niveau;
+    public function __construct($userName, $nomfiliere,$niveau,  $filePath)
     {
         $this->userName =$userName;
         $this->nomfiliere = $nomfiliere;
         $this->filePath = $filePath;
+        $this->niveau = $niveau;
     }
 
     /**
@@ -39,7 +40,8 @@ class EmploiMail extends Mailable
         ->view('emails.emploi')
         ->attachFromStorage($this->filePath)
         ->with(['userName' => $this->userName,
-                'nomfiliere' => $this->nomfiliere]);
+                'nomfiliere' => $this->nomfiliere,
+                'niveau' => $this->niveau]);
 
     }
 }
