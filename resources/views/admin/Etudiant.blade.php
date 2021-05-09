@@ -681,6 +681,7 @@
                 },
                 error: function(err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
+                        reinsup();
                         $.each(err.responseJSON.errors, function(key, value) {
                             if (key == "inemailins") {
                                 document.getElementById('inmsgerrmailins').innerHTML = value;
@@ -725,6 +726,19 @@
             document.getElementById('msgerrapog').innerHTML = "";
             document.getElementById("ajapogee").classList.remove("is-invalid");
         };
+        function reinscheck()
+        {
+            document.getElementById('msgerrmailins').innerHTML = "";
+            document.getElementById("ajemailins").classList.remove("is-invalid");
+            document.getElementById('msgerrmail').innerHTML = "";
+            document.getElementById("ajemail").classList.remove("is-invalid");
+            document.getElementById('msgerrcin').innerHTML = "";
+            document.getElementById("ajcin").classList.remove("is-invalid");
+            document.getElementById('msgerrcne').innerHTML = "";
+            document.getElementById("ajcne").classList.remove("is-invalid");
+            document.getElementById('msgerrapog').innerHTML = "";
+            document.getElementById("ajapogee").classList.remove("is-invalid");
+        }
         function reinsup() {
             document.getElementById('inmsgerrmailins').innerHTML = "";
             document.getElementById("inemailins").classList.remove("is-invalid");
@@ -751,6 +765,7 @@
                 },
                 error: function(err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
+                        reinscheck();
                         $.each(err.responseJSON.errors, function(key, value) {
                             if (key == "ajemailins") {
                                 document.getElementById('msgerrmailins').innerHTML = value;

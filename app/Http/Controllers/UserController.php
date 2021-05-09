@@ -83,10 +83,11 @@ class UserController extends Controller
         //
     }
 
-    public function markNotification(Request $request)
+    public function Notifs(Request $request)
     {
-        if($request->idNotif)
-            return redirect('/notifications#notif-'.$request->idNotif);
+        // dd('Hello');
+        // if($request->idNotif)
+        //     return redirect('/notifications#notif-'.$request->idNotif);
         return view('Chef.Notifications');
     }
 }
