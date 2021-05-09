@@ -37,14 +37,14 @@
                             <h4 class="h4">Ajouter</h4>
                         </div>
                         <hr>
-                        <form class="tab-wizard wizard-circle wizard pl-20" method="POST" action="" enctype="multipart/form-data">
+                        <form class="tab-wizard wizard-circle wizard pl-20" action="{{ route('ImportExcelfile') }}" method="POST" enctype="multipart/form-data" id="addexcel">
                             @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Filiere  :</label>
-                                            <select class="custom-select2 form-control" name="prof" style="width: 100%; height: 38px;">
+                                            <select class="custom-select2 form-control" name="filiere" id="filiere" style="width: 100%; height: 38px;">
                                                     @foreach ($departement->filieres as $filiere)
                                                          <option value="{{ $filiere->idFiliere }}" >{{ $filiere->nom.' '.$filiere->niveau }}</option>
                                                     @endforeach
@@ -53,8 +53,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="custom-file" style="margin-top: 31px;">
-                                            <input type="file" class="custom-file-input" name="uploadedFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
-                                            <label class="custom-file-label">Choisir une csv</label>
+                                            <input type="file" class="custom-file-input" name="uploadedFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
+                                            <label class="custom-file-label">Choisir un fichier excel</label>
                                         </div>
                                     </div>
                                 </div>
@@ -76,4 +76,24 @@
         <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
+        {{-- <script>
+            $("#addexcel").submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data) {
+                    
+                },
+                error: function(err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                       console.log(err.responseJSON.errors);
+                    }
+                }
+            });
+        });
+        </script> --}}
 @endsection

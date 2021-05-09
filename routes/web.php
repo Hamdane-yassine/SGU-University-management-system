@@ -171,6 +171,8 @@ Route::get('/admin/professeur/{professeur}', [App\Http\Controllers\AdminControll
 Route::post('suppprofesseur',[AdminController::class, 'SupprimerProfesseur'])->name('SupprimerProfesseur');
 Route::post('updateprofesseur',[AdminController::class, 'UpdateProfesseur'])->name('updateProfesseur');
 Route::post('ajouteprofesseur',[AdminController::class, 'AjouterProfesseur'])->name('AjouterProfesseur');
+Route::post('importexcelfile',[AdminController::class, 'ImportExcelfile'])->name('ImportExcelfile');
+
 
 Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
 
@@ -180,4 +182,3 @@ Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFilier
 
 Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
 
-Route::get('test-email', 'JobController@enqueue');

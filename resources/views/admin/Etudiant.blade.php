@@ -54,6 +54,9 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" value="" id="ajapogee" placeholder="Apogée" name="ajapogee"
                                         type="number" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrapog"></strong></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -61,7 +64,11 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" value="" id="ajcne" name="ajcne" placeholder="CNE"
                                         type="text" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrcne"></strong></span>
                                 </div>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Genre</label>
@@ -109,7 +116,11 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" placeholder="N° C.N.I.E" type="text" id="ajcin" name="ajcin"
                                         value="" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrcin"></strong></span>
                                 </div>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(père)</label>
@@ -117,6 +128,7 @@
                                     <input class="form-control" placeholder="N° C.N.I.E du père" type="text" id="ajcinpere"
                                         name="ajcinpere" value="" required>
                                 </div>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(mère)</label>
@@ -124,6 +136,7 @@
                                     <input class="form-control" placeholder="N° C.N.I.E de la mère" type="text"
                                         id="ajcinmere" name="ajcinmere" value="" required>
                                 </div>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label pt-0">Adresse</label>
@@ -144,7 +157,11 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" value="" type="email" placeholder="Email" id="ajemail"
                                         name="ajemail" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrmail"></strong></span>
                                 </div>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail
@@ -152,7 +169,11 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" value="" id="ajemailins" placeholder="Email institutionnel"
                                         name="ajemailins" type="email" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrmailins"></strong></span>
                                 </div>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Année du BAC</label>
@@ -170,7 +191,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button type="button" onclick="reset();$('html, body').animate({scrollTop:0}, 'fast');" class="btn btn-secondary"
+                                <button type="button" onclick="reins()" class="btn btn-secondary"
                                     style="text-decoration: none;">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Ajouter">
                             </div>
@@ -310,12 +331,18 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" value="" id="inapogee" name="inapogee" type="number"
                                         required>
+                                        <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="inmsgerrapog"></strong></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Code Massar</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" value="" id="incne" name="incne" type="text" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                        style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                        id="inmsgerrcne"></strong></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -364,6 +391,9 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" placeholder="N° C.N.I.E" type="text" id="incin" name="incin"
                                         value="" required>
+                                        <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="inmsgerrcin"></strong></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -397,6 +427,9 @@
                                 <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail personnel</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" value="" type="email" id="inemail" name="inemail" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                        style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                        id="inmsgerrmail"></strong></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -405,6 +438,9 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" value="" id="inemailins" name="inemailins" type="email"
                                         required>
+                                        <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="inmsgerrmailins"></strong></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -426,14 +462,15 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-secondary"
-                            style="text-decoration: none;">Annuler</button>
+                            style="text-decoration: none;" onclick="reinsup()">Annuler</button>
                         <input class="btn btn-primary" type="submit" value="Enregistrer">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body text-center font-18">
@@ -582,6 +619,7 @@
         };
 
         function getEtudiantIn(id) {
+            reinsup();
             $.ajax({
                 type: 'GET',
                 url: "/admin/Etudiant/" + id,
@@ -628,7 +666,6 @@
                 }
             });
         });
-
         $("#updEtud").submit(function(e) {
             e.preventDefault(); // avoid to execute the actual submit of the form.
             var form = $(this);
@@ -639,30 +676,66 @@
                 data: form.serialize(), // serializes the form's elements.
                 success: function(data) {
                     $('#bd-edit-modal').modal('hide');
+                    reinsup();
                     table1.ajax.reload();
+                },
+                error: function(err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                        $.each(err.responseJSON.errors, function(key, value) {
+                            if (key == "inemailins") {
+                                document.getElementById('inmsgerrmailins').innerHTML = value;
+                                document.getElementById("inemailins").classList.add(
+                                    "is-invalid");
+                            }
+                            if (key == "inemail") {
+                                document.getElementById('inmsgerrmail').innerHTML = value;
+                                document.getElementById("inemail").classList.add("is-invalid");
+                            }
+                            if (key == "incin") {
+                                document.getElementById('inmsgerrcin').innerHTML = value;
+                                document.getElementById("incin").classList.add("is-invalid");
+                            }
+                            if (key == "incne") {
+                                document.getElementById('inmsgerrcne').innerHTML = value;
+                                document.getElementById("incne").classList.add("is-invalid");
+                            }
+                            if (key == "inapogee") {
+                                document.getElementById('inmsgerrapog').innerHTML = value;
+                                document.getElementById("inapogee").classList.add("is-invalid");
+                            }
+                        });
+                    }
                 }
             });
         });
 
-        function reset() {
-            document.getElementById("ajnom").value = "";
-            document.getElementById("ajprenom").value = "";
-            document.getElementById("ajapogee").value =  "";
-            document.getElementById("ajcne").value =  "";
-            document.getElementById("ajgenre").value =  "Masculin";
-            document.getElementById("ajdatenais").value = "";
-            document.getElementById("ajsituation").value = "Célibataire";
-            document.getElementById("ajnationalite").value = "";
-            document.getElementById("ajLieuNaissance").value = "";
-            document.getElementById("ajcin").value = "";
-            document.getElementById("ajcinpere").value = "";
-            document.getElementById("ajcinmere").value = "";
-            document.getElementById("ajadresse").value = "";
-            document.getElementById("ajtel").value = "";
-            document.getElementById("ajemail").value = "";
-            document.getElementById("ajemailins").value = "";
-            document.getElementById("ajannebac").value = "";
-            document.getElementById("ajcouv").value = "";
+        function reins() {
+            document.getElementById("ajoutetud").reset();
+            $('html, body').animate({
+                scrollTop: 0
+            }, 'fast');
+            document.getElementById('msgerrmailins').innerHTML = "";
+            document.getElementById("ajemailins").classList.remove("is-invalid");
+            document.getElementById('msgerrmail').innerHTML = "";
+            document.getElementById("ajemail").classList.remove("is-invalid");
+            document.getElementById('msgerrcin').innerHTML = "";
+            document.getElementById("ajcin").classList.remove("is-invalid");
+            document.getElementById('msgerrcne').innerHTML = "";
+            document.getElementById("ajcne").classList.remove("is-invalid");
+            document.getElementById('msgerrapog').innerHTML = "";
+            document.getElementById("ajapogee").classList.remove("is-invalid");
+        };
+        function reinsup() {
+            document.getElementById('inmsgerrmailins').innerHTML = "";
+            document.getElementById("inemailins").classList.remove("is-invalid");
+            document.getElementById('inmsgerrmail').innerHTML = "";
+            document.getElementById("inemail").classList.remove("is-invalid");
+            document.getElementById('inmsgerrcin').innerHTML = "";
+            document.getElementById("incin").classList.remove("is-invalid");
+            document.getElementById('inmsgerrcne').innerHTML = "";
+            document.getElementById("incne").classList.remove("is-invalid");
+            document.getElementById('inmsgerrapog').innerHTML = "";
+            document.getElementById("inapogee").classList.remove("is-invalid");
         };
         $("#ajoutetud").submit(function(e) {
             e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -673,15 +746,45 @@
                 url: url,
                 data: form.serialize(), // serializes the form's elements.
                 success: function(data) {
-                    reset();
                     $('#success-modal').modal('show');
+                    reins();
+                },
+                error: function(err) {
+                    if (err.status == 422) { // when status code is 422, it's a validation issue
+                        $.each(err.responseJSON.errors, function(key, value) {
+                            if (key == "ajemailins") {
+                                document.getElementById('msgerrmailins').innerHTML = value;
+                                document.getElementById("ajemailins").classList.add(
+                                    "is-invalid");
+                            }
+                            if (key == "ajemail") {
+                                document.getElementById('msgerrmail').innerHTML = value;
+                                document.getElementById("ajemail").classList.add("is-invalid");
+                            }
+                            if (key == "ajcin") {
+                                document.getElementById('msgerrcin').innerHTML = value;
+                                document.getElementById("ajcin").classList.add("is-invalid");
+                            }
+                            if (key == "ajcne") {
+                                document.getElementById('msgerrcne').innerHTML = value;
+                                document.getElementById("ajcne").classList.add("is-invalid");
+                            }
+                            if (key == "ajapogee") {
+                                document.getElementById('msgerrapog').innerHTML = value;
+                                document.getElementById("ajapogee").classList.add("is-invalid");
+                            }
+                        });
+                    }
                 }
             });
         });
-        function ren()
-        {
+
+        function ren() {
             table1.ajax.reload();
-            $('html, body').animate({ scrollTop: 0 }, 'fast');
+            $('html, body').animate({
+                scrollTop: 0
+            }, 'fast');
         }
+
     </script>
 @endsection

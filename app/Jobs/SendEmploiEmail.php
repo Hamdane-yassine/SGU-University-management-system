@@ -2,23 +2,25 @@
 
 namespace App\Jobs;
 
-use App\Mail\AbsenceMail;
+use App\Mail\EmploiMail;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendEmailJob implements ShouldQueue
+class SendEmploiEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $mailData;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
+    protected $mailData;
     public function __construct($mailData)
     {
         $this->mailData = $mailData;
@@ -31,11 +33,7 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $email = new EmailForQueuing();
-        Mail::to($this->mailData['mailTo'])->send(new AbsenceMail($this->mailData['profName'],$this->mailData['absenceDate'],
-        $this->mailData['userName'],$this->mailData['matiereName']));
-
-
-        
+        Mail::to($this->mailData['mailTo'])->send(new EmploiMail($this->mailData['userName'],$this->mailData['nomfiliere'],$this->mailData['niveau'],
+        $this->mailData['filePath']));
     }
 }
