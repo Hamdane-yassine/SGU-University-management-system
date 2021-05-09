@@ -26,8 +26,8 @@ class Evenement extends Model
     use HasFactory;
 	protected $table = 'Evenement';
 	protected $primaryKey = 'idEvenement';
-	public $incrementing = false;
-	public $timestamps = false;
+	// public $incrementing = false;
+	// public $timestamps = false;
 
 	protected $casts = [
 		'idEvenement' => 'int',
@@ -35,14 +35,16 @@ class Evenement extends Model
 	];
 
 	protected $dates = [
-        'Date_even'
+        'date'
 	];
 
 	protected $fillable = [
-        'idEvenement' => 'int',
 		'ID_chef',
-		'Date_even',
-		'message'
+		'date',
+        'titre',
+		'html',
+        'resume',
+        'attachments'
 	];
 
 	public function chefdep()

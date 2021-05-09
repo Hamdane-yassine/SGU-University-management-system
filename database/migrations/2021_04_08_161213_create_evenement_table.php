@@ -16,9 +16,13 @@ class CreateEvenementTable extends Migration {
 		Schema::create('Evenement', function(Blueprint $table)
 		{
 			$table->id('idEvenement');
-			$table->bigInteger('ID_chef')->unsigned();
-			$table->dateTime('Date_even');
-			$table->string('message', 254)->nullable();
+			$table->unsignedBigInteger('ID_chef');
+			$table->date('date');
+			$table->string('html', 2048);
+			$table->string('titre', 100);
+			$table->string('attachments',256)->nullable();
+			$table->string('resume',256);
+            $table->timestamps();
 		});
 	}
 
