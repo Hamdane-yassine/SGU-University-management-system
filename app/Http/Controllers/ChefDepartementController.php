@@ -20,6 +20,7 @@ use App\Models\Prof_departement;
 use App\Models\Professeur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Constraint\IsNull;
 
 class ChefDepartementController extends Controller
 {
@@ -383,6 +384,10 @@ class ChefDepartementController extends Controller
                 {
                     $btn = '<span style="background-color: #33cc33;" class="badge badge-pill">Rattrapé</span>';
                 }
+                else if($row->etat == 'annulé')
+                {
+                    $btn = '<span style="background-color: #ff4d4d;" class="badge badge-pill">annulé</span>';
+                }
                 else
                 {
                     $btn = '<span style="background-color: #ff4d4d;" class="badge badge-pill">En attend</span>';
@@ -429,7 +434,7 @@ class ChefDepartementController extends Controller
     {
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
-        $absences = Absence::whereIn('absence.idProf',$profs)
+        $absences = Absence::whereIn('absence.idProf',$profs)->where('absence.etat','en attendant' )
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
@@ -463,13 +468,25 @@ class ChefDepartementController extends Controller
         return view('chef.rattrapage',['absences' => $absences]);
     }
 
-    public function AnnulerRatt()
+    public function AnnulerRatt(Request $request, $idAbsence)
     {
+        //get the old absence instance of absence and update it
+        $absence = Absence::find($idAbsence);
+        $absence->etat = 'annulé';
+        $absence->save();
 
+        return redirect('/chef/rattrapages');
     }
 
-    public function ValiderRatt()
+    public function ValiderRatt(Request $request, $idAbsence)
     {
+        $absence = Absence::find($idAbsence);
+        $absence->etat = 'rattrapée';  //validée
+        $absence->salle = $request->salle;
+        if(!is_null($request->dateRattOptionnel)) {$absence->dateRattrapage = $request->dateRattOptionnel;}
+        else {$absence->dateRattrapage = $request->datesRattPossibles;}
+        $absence->save();
 
+        return redirect('/chef/rattrapages');
     }
 }

@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property Carbon|null $dateAbsencee
  * @property Carbon|null $dateRattrapage
  * @property bool|null $etat
- *
+ * @property string $salle
  * @property Professeur|null $professeur
  * @property Matiere|null $matiere
  *

@@ -272,7 +272,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/chef/rattrapages" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-calendar-minus-o"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span
                             class="mtext">Rattrapage</span>
