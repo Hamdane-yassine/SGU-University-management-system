@@ -444,4 +444,32 @@ class ChefDepartementController extends Controller
             ->make(true);
         }
     }
+
+    public function RattrapagesIndex()
+    {
+        //get list of absences within the same departement
+        // (profName + absence_date + possible ratt dates + salle ) on condition etat = en attendant
+
+        //get all profs in the same departement
+        $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
+        $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
+        $absences = Absence::whereIn('absence.idProf',$profs)
+        ->where('absence.etat','en attendant')
+        ->join('professeur','absence.idProf','=','professeur.idProf')
+        ->join('users','users.id','=','professeur.idUtilisateur')
+        ->join('personne','personne.idPersonne','users.idPersonne')
+        ->get();
+
+        return view('chef.rattrapage',['absences' => $absences]);
+    }
+
+    public function AnnulerRatt()
+    {
+
+    }
+
+    public function ValiderRatt()
+    {
+
+    }
 }

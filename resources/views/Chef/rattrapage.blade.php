@@ -4,195 +4,55 @@
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
+                @foreach ($absences as $absence)
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            <h4 class="h4 d-inline">Abd Ali lasfer</h4>
+                            <h4 class="h4 d-inline">{{ $absence->professeur->user->personne->nom }} {{ $absence->professeur->user->personne->prenom }}</h4>
                             <small class="form-text text-muted pl-10 d-inline">
-                                &#8594; Absence : 13 April 2021 02:53 pm
+                                &#8594; Absence : @php setlocale(LC_TIME, "fr_FR", "French");echo strftime("%A %d %B %G %R", strtotime($absence->dateAbsence)); @endphp | Matiere : {{ $absence->matiere->nom }} | Filiere : {{ $absence->matiere->module->filiere->nom}}
                             </small>
                         </div>
                         <hr>
                         <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Dates de rattrapage possible :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                    <option value="AK">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
+                                            <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="datesRattPossibles">
+                                                @foreach ( explode(" - ", $absence->dateRattrapage) as $date)
+                                                    <option value="{{ $date }}" selected>{{ $date }}</option>
+                                                @endforeach
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Autre date (optionnel):</label>
+                                            <input class="form-control datetimepicker" name="dateRattOptionnel" placeholder="Date d'absence :" type="text" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Salle :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                    <option value="AK">Salle 1</option>
-                                                    <option value="AK">Salle 2</option>
-                                                    <option value="AK">Salle 3</option>
-                                                    <option value="AK">Salle 4</option>
-                                            </select>
+                                            <input class="form-control" type="text" name="salle"><br><br>
                                         </div>
                                     </div>
                                 </div>
                             </section>
                             <div class="text-right">
-                                <a href="#" class="btn btn-danger" data-toggle="modal"
-                                data-target="#confirmation-modal" >Annuler</a>
-                                <button type="submit" class="btn btn-success">Validé </button>
+                                <!--<a href="#" class="btn btn-danger" >Annuler</a>
+                                <a href="#" class="btn btn-success" >Valider</a>-->
+                                <button type="submit" class="btn btn-danger" formaction="{{ route('ValiderRatt') }}">Annuler</button>
+                                <button type="submit" class="btn btn-success" formaction="{{ route('')}}">Valider</button>
                             </div>
-                        
+
                         </form>
                     </div>
                 </div>
-                <div class="pd-20 card-box mb-30">
-                    <div class="wizard-content">
-                        <div>
-                            <h4 class="h4 d-inline">Abd Ali lasfer</h4>
-                            <small class="form-text text-muted pl-10 d-inline">
-                                &#8594; Absence : 13 April 2021 02:53 pm
-                            </small>
-                        </div>
-                        <hr>
-                        <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
-                            <section>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Dates de rattrapage possible :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                    <option value="AK">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Salle :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                    <option value="AK">Salle 1</option>
-                                                    <option value="AK">Salle 2</option>
-                                                    <option value="AK">Salle 3</option>
-                                                    <option value="AK">Salle 4</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <div class="text-right">
-                                <a href="#" class="btn btn-danger" data-toggle="modal"
-                                data-target="#confirmation-modal" >Annuler</a>
-                                <button type="submit" class="btn btn-success">Validé </button>
-                            </div>
-                        
-                        </form>
-                    </div>
-                </div>
-                <div class="pd-20 card-box mb-30">
-                    <div class="wizard-content">
-                        <div>
-                            <h4 class="h4 d-inline">Abd Ali lasfer</h4>
-                            <small class="form-text text-muted pl-10 d-inline">
-                                &#8594; Absence : 13 April 2021 02:53 pm
-                            </small>
-                        </div>
-                        <hr>
-                        <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
-                            <section>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Dates de rattrapage possible :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                    <option value="AK">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
-                                                    <option value="HI">13 April 2021 02:53 pm</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Salle :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;">
-                                                    <option value="AK">Salle 1</option>
-                                                    <option value="AK">Salle 2</option>
-                                                    <option value="AK">Salle 3</option>
-                                                    <option value="AK">Salle 4</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <div class="text-right">
-                                <a href="#" class="btn btn-danger" data-toggle="modal"
-                                data-target="#confirmation-modal" >Annuler</a>
-                                <button type="submit" class="btn btn-success">Validé </button>
-                            </div>
-                        
-                        </form>
-                    </div>
-                </div>
-            <div class="pd-20 card-box mb-30">
-                <div class="wizard-content">
-                    <div>
-                        <h4 class="h4 d-inline">Abd Ali lasfer</h4>
-                        <small class="form-text text-muted pl-10 d-inline">
-                            &#8594; Absence : 13 April 2021 02:53 pm
-                        </small>
-                    </div>
-                    <hr>
-                    <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
-                        <section>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Dates de rattrapage possible :</label>
-                                        <select class="custom-select2 form-control"
-                                            style="width: 100%; height: 38px;">
-                                                <option value="AK">13 April 2021 02:53 pm</option>
-                                                <option value="HI">13 April 2021 02:53 pm</option>
-                                                <option value="HI">13 April 2021 02:53 pm</option>
-                                                <option value="HI">13 April 2021 02:53 pm</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Salle :</label>
-                                        <select class="custom-select2 form-control"
-                                            style="width: 100%; height: 38px;">
-                                                <option value="AK">Salle 1</option>
-                                                <option value="AK">Salle 2</option>
-                                                <option value="AK">Salle 3</option>
-                                                <option value="AK">Salle 4</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <div class="text-right">
-                            <a href="#" class="btn btn-danger" data-toggle="modal"
-                            data-target="#confirmation-modal" >Annuler</a>
-                            <button type="submit" class="btn btn-success">Validé </button>
-                        </div>
-                    
-                    </form>
-                </div>
-            </div>
-            <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                @endforeach
+
+            <!--<div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
@@ -214,8 +74,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-           
+            </div>-->
+
         </div>
     </div>
 @endsection

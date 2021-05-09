@@ -94,7 +94,7 @@ class ProfesseurController extends Controller
                 'idProf' => $id,
                 'idMatiere' => $idMatiere,
                 'dateAbsence' => $dateAbsence,
-                'dateRattrapage' => str_replace('-',' ',$dateRatt),
+                'dateRattrapage' => $dateRatt,  //old one user streplace
                 'etat' => 'en attendant',
             ]);
             //send mails if informerEtudiants=on

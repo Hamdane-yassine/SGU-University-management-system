@@ -156,8 +156,15 @@ Route::post('/upload/profEmploi',[AdminController::class, 'uploadEmploi'])->name
 
 Route::post('chef/emploi/delete/prof/', [AdminController::class, 'deleteEmploiProf'])->name('deleteEmploiProf');
 
-//==========
+Route::get('/chef/rattrapages',[ChefDepartementController::class , 'RattrapagesIndex']);
 
+Route::post('/chef/rattrapages/valider/{idAbsence}', [ChefDepartementController::class ,'ValiderRatt'])->name('ValiderRatt');
+
+Route::post('/chef/rattrapages/annuler/{idAbsence}', [ChefDepartementController::class ,'AnnulerRatt'])->name('AnnulerRatt');
+
+
+
+//==========
 Route::get('admin/filieres/{departement}', [AdminController::class, 'getFilieres']);
 Route::get('admin/etudiants/{filiere}', [App\Http\Controllers\AdminController::class, 'Etudiants']);
 Route::get('admin/EtudiantsList/{filiere}', [App\Http\Controllers\AdminController::class, 'getEtudiants'])->name('EtudiantsListAdmin');

@@ -37,7 +37,7 @@ class Absence extends Model
 		'idProf' => 'int',
 		'IdAbsence' => 'int',
 		'idMatiere' => 'int',
-		'dateAbsence' => 'date'
+		'dateAbsence' => 'datetime'
 	];
 
 	protected $dates = [
