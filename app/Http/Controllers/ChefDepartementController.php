@@ -361,18 +361,17 @@ class ChefDepartementController extends Controller
         //get the departement id of the current chef
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         //get all profs within the same departement
-        $profs = Professeur::where(['prof_departement.idDepartement'=> $idDepartement],['filiere.idDepartement' => $idDepartement])
-        ->join('prof_departement','professeur.idProf','prof_departement.idProf')
-        ->select('professeur.idProf')->get()->toArray();
+        $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
 
         $absences = Absence::whereIn('absence.idProf',$profs)
+        ->where('filiere.idDepartement',$idDepartement)
         ->join('professeur','absence.idProf','=','professeur.idProf')
+        ->join('matiere','absence.idMatiere','matiere.idMatiere')
+        ->join('module','matiere.idModule','module.idModule')
+        ->join('filiere','module.idFiliere','filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
-        ->join('matiere','matiere.idMatiere','=','absence.idMatiere')
-        ->join('module','module.idModule','matiere.idModule')
-        ->join('filiere','filiere.idFiliere','module.idFiliere')
-        ->select('idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','personne.nom as nomProf','Absence.dateAbsence as date','Absence.etat')
+        ->select('idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','personne.nom as nomProf','absence.dateAbsence as date','absence.etat')
         ->get();
 
         if ($request->ajax()) {
@@ -420,7 +419,16 @@ class ChefDepartementController extends Controller
         //get absences count (of profs within the same dep)
         $profs = Prof_departement::where('idDepartement',$idDepartement)
         ->select('idProf')->get()->toArray();
-        $Count_absences = Absence::whereIn('idProf',$profs)->count();
+
+        $Count_absences = Absence::whereIn('absence.idProf',$profs)
+        ->where('filiere.idDepartement',$idDepartement)
+        ->join('professeur','absence.idProf','=','professeur.idProf')
+        ->join('matiere','absence.idMatiere','matiere.idMatiere')
+        ->join('module','matiere.idModule','module.idModule')
+        ->join('filiere','module.idFiliere','filiere.idFiliere')
+        ->join('users','users.id','=','professeur.idUtilisateur')
+        ->join('personne','personne.idPersonne','users.idPersonne')
+        ->count();
 
         $etat_notes = Departement::find($idDepartement)->insertion_notes;
 
@@ -434,8 +442,13 @@ class ChefDepartementController extends Controller
     {
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
-        $absences = Absence::whereIn('absence.idProf',$profs)->where('absence.etat','en attendant' )
+        $absences = Absence::whereIn('absence.idProf',$profs)
+        ->where('absence.etat','en attendant')
+        ->where('filiere.idDepartement',$idDepartement)
         ->join('professeur','absence.idProf','=','professeur.idProf')
+        ->join('matiere','absence.idMatiere','matiere.idMatiere')
+        ->join('module','matiere.idModule','module.idModule')
+        ->join('filiere','module.idFiliere','filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
         ->select('Absence.idAbsence as idAbsence','personne.nom as nomProf','Absence.dateAbsence as dateAbsence')
@@ -443,9 +456,12 @@ class ChefDepartementController extends Controller
 
         if ($request->ajax()) {
             return Datatables::of($absences)
-            ->editColumn('dateAbsence', function ($request) {
-                return $request->dateAbsence->toDayDateTimeString();
+            ->addColumn('dateAbsence', function($row)
+            {
+                setlocale(LC_TIME, "fr_FR", "French");
+                return strftime("%A %d %B %G %R", strtotime($row->dateAbsence));
             })
+            ->rawColumns(['dateAbsence'])
             ->make(true);
         }
     }
@@ -460,7 +476,11 @@ class ChefDepartementController extends Controller
         $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
         $absences = Absence::whereIn('absence.idProf',$profs)
         ->where('absence.etat','en attendant')
+        ->where('filiere.idDepartement',$idDepartement)
         ->join('professeur','absence.idProf','=','professeur.idProf')
+        ->join('matiere','absence.idMatiere','matiere.idMatiere')
+        ->join('module','matiere.idModule','module.idModule')
+        ->join('filiere','module.idFiliere','filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
         ->get();
