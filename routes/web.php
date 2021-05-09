@@ -97,18 +97,29 @@ Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'Detacher
 Route::prefix('evenement')->group(function () {
     Route::get('/create', [EvenementController::class,'create'])->name('evenement.create');
     Route::post('/store', [EvenementController::class,'store'])->name('evenement.store');
-    Route::post('/{evt}', [EvenementController::class,'show'])->name('evenement.show');
+    Route::get('/{evenement}', [EvenementController::class,'show'])->name('evenement.show');
 });
 // ===============
-Route::get('/h', function () {
+Route::get('/{nb}', function ($nb) {
     // broadcast(new \App\Events\Evt())->toOthers();
     // \App\Events\Evt::dispatch();
     // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
     // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
+    switch ($nb) {
+        case 1:
+            return view('evenements.event-detail');
+            break;
+        case 2:
+            return view('evenements.html5-editor');
+            break;
+        case 3:
+            return view('Chef.Notifications');
+            break;
 
-    // return view('Chef.Notifications');
-    return view('evenements.html5-editor');
-
+        // default:
+        //     return view('Chef.absences');
+        //     break;
+    }
 
 });
 
@@ -116,8 +127,10 @@ Route::prefix('profile')->group(function () {
     Route::get('/{user}', [ProfileController::class,'show'])->name('profile.show');
     Route::post('/update/{user}', [ProfileController::class,'update'])->name('profile.update');
 });
-
-Route::get('/notifications', [UserController::class,'markNotification']);
+Route::prefix('/notifications')->group(function () {
+    Route::get('/', [UserController::class,'Notifs']);
+    // Route::get('', [UserController::class,'Notifs']);
+});
 
 // ===============
 

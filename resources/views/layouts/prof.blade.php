@@ -83,9 +83,9 @@
                             </li>
                             @endforeach
                             @endif
-                                <li id='info'>
-                                    <p>pas de nouvelles notifications</p>
-                                </li>
+                            <li id='info'>
+                                <p>pas de nouvelles notifications</p>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -339,7 +339,7 @@
                         @endforeach
                     </ul>
                 </li>
-                
+
             </ul>
         </div>
     </div>
