@@ -24,7 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\ImportPersonnes;
+use App\Imports\ImportEtudiants;
 class AdminController extends Controller
 {
     public function index()
@@ -277,7 +277,7 @@ class AdminController extends Controller
         $personne->tel = request('ajtel');
         $personne->emailInstitutionne = request('ajemailins');
         $personne->save();
-        $Personne = Personne::where('emailInstitutionne', request('ajemailins'))->where('cin', request('ajcin'))->select('idPersonne')->get()[0];
+        $idPersonne = DB::getPdo()->lastInsertId();
         $etudiant->apogee = request('ajapogee');
         $etudiant->cne = request('ajcne');
         $etudiant->email = request('ajemail');
@@ -286,7 +286,7 @@ class AdminController extends Controller
         $etudiant->anneeDuBaccalaureat = request('ajannebac');
         $etudiant->regimeDeCovertureMedicale = request('ajcouv');
         $etudiant->idFiliere = $idFiliere;
-        $etudiant->idPersonne = $Personne->idPersonne;
+        $etudiant->idPersonne = $idPersonne;
         $etudiant->save();
     }
     public function FetchDashboardData()
@@ -534,26 +534,25 @@ class AdminController extends Controller
         $personne->tel = request('ajtel');
         $personne->emailInstitutionne = request('ajemailins');
         $personne->save();
-        $Personne = Personne::where('emailInstitutionne', request('ajemailins'))->select('idPersonne')->get()[0];
+        $idPersonne=DB::getPdo()->lastInsertId();
         //user
         $user = new User;
         $user->email = request('ajemail');
-        $Personne = Personne::where('emailInstitutionne', request('ajemailins'))->where('cin', request('ajcin'))->select('idPersonne')->get()[0];
-        $user->idPersonne = $Personne->idPersonne;
+        $user->idPersonne = $idPersonne;
         if (request('ajrole') == 2) $user->role = "chefdep";
         elseif (request('ajrole') == 1) $user->role = "prof";
         $RandPass = Str::random(10);
         $user->password = bcrypt($RandPass);
         $user->save();
         //
-        $User = User::where('email', request('ajemail'))->select('id')->get()[0];
+        $idUserLast = DB::getPdo()->lastInsertId();
         $professeur = new Professeur;
-        $professeur->idUtilisateur = $User->id;
+        $professeur->idUtilisateur = $idUserLast;
         $professeur->specialite = request('ajspecialite');
         $professeur->save();
-        $Professeur = Professeur::where('idUtilisateur', $User->id)->select('idProf')->get()[0];
+        $ProfesseurId = DB::getPdo()->lastInsertId();
         $prof_departement = new Prof_departement;
-        $prof_departement->idProf = $Professeur->idProf;
+        $prof_departement->idProf = $ProfesseurId;
         $prof_departement->idDepartement = $idDepart;
         $prof_departement->save();
         if (request('ajrole') == 2) {
@@ -561,7 +560,7 @@ class AdminController extends Controller
             if ($oldchefdata->isEmpty()) {
                 $dep = new Chefdep;
                 $dep->idDepartement = $idDepart;
-                $dep->idProf = $Professeur->idProf;
+                $dep->idProf = $ProfesseurId;
                 $dep->save();
             } else {
                 DB::table('chefdep')->where('idDepartement', '=', $idDepart)->delete();
@@ -573,7 +572,7 @@ class AdminController extends Controller
                 $oldchefuser->save();
                 $dep = new Chefdep;
                 $dep->idDepartement = $idDepart;
-                $dep->idProf = $Professeur->idProf;
+                $dep->idProf = $ProfesseurId;
                 $dep->save();
             }
         }
@@ -591,66 +590,8 @@ class AdminController extends Controller
                 'uploadedFile.mimes' => 'fichier invalid.',
             ]
         );
-
-        Excel::import(new ImportPersonnes, request()->file('uploadedFile'));
+        $idFiliere = request('filiere');
+        Excel::import(new ImportEtudiants($idFiliere), request()->file('uploadedFile'));
         return back();
-        // if ($data->count() > 0) {
-        //     foreach ($data->toArray() as $key => $value) {
-        //         foreach ($value as $row) {
-        //             $insert_data_etud[] = array(
-        //                 'apogee'  => $row['Apogee'],
-        //                 'cne'   => $row['CNE'],
-        //                 'email'    => $row['Email_personnel'],
-        //                 'anneeDuBaccalaureat'  => $row['Année_du_BAC'],
-        //                 'regimeDeCovertureMedicale'   => $row['Couverture_médicale'],
-        //                 'cinMere'  => $row['C.N.I.E(père)'],
-        //                 'cinPere'   => $row['C.N.I.E(mère)'],
-        //                 'idFiliere ' => $idFiliere
-        //             );
-        //             $insert_data_personne[] = array(
-        //                 'nom'  => $row['Nom'],
-        //                 'prenom'   => $row['Prénom'],
-        //                 'genre'   => $row['Genre'],
-        //                 'dateNaissance'    => $row['Date_Naissance'],
-        //                 'situationFamiliale'  => $row['Situation_familiale'],
-        //                 'nationalite'   => $row['Nationalité'],
-        //                 'cin'   => $row['C.N.I.E'],
-        //                 'adressePersonnele'   => $row['Adresse'],
-        //                 'tel'   => $row['Téléphone'],
-        //                 'emailInstitutionne'   => $row['Email_institutionnel'],
-        //                 'lieuNaissance'   => $row['Lieu_de_naissance']
-
-        //             );
-        //         }
-        //     }
-
-        //     foreach ($insert_data_personne as $index => $personnedata) {
-        //         $etudiant = new Etudiant;
-        //         $personne = new Personne;
-        //         $personne->nom = $personnedata->nom;
-        //         $personne->prenom = $personnedata->prenom;
-        //         $personne->situationFamiliale = $personnedata->situationFamiliale;
-        //         $personne->genre = $personnedata->genre;
-        //         $personne->dateNaissance = $personnedata->dateNaissance;
-        //         $personne->nationalite = $personnedata->nationalite;
-        //         $personne->lieuNaissance = $personnedata->lieuNaissance;
-        //         $personne->adressePersonnele = $personnedata->adressePersonnele;
-        //         $personne->cin = $personnedata->cin;
-        //         $personne->tel = $personnedata->tel;
-        //         $personne->emailInstitutionne = $personnedata->emailInstitutionne;
-        //         $personne->save();
-        //         $Personne = Personne::where('emailInstitutionne', $personnedata->emailInstitutionne)->where('cin',  $personnedata->cin)->select('idPersonne')->get()[0];
-        //         $etudiant->apogee = $insert_data_etud[$index]->apogee;
-        //         $etudiant->cne = $insert_data_etud[$index]->cne;
-        //         $etudiant->email = $insert_data_etud[$index]->email;
-        //         $etudiant->cinPere = $insert_data_etud[$index]->cinPere;
-        //         $etudiant->cinMere = $insert_data_etud[$index]->cinMere;
-        //         $etudiant->anneeDuBaccalaureat = $insert_data_etud[$index]->anneeDuBaccalaureat;
-        //         $etudiant->regimeDeCovertureMedicale = $insert_data_etud[$index]->regimeDeCovertureMedicale;
-        //         $etudiant->idFiliere = $insert_data_etud[$index]->idFiliere;
-        //         $etudiant->idPersonne = $Personne->idPersonne;
-        //         $etudiant->save();
-        //     }
-        // }
     }
 }
