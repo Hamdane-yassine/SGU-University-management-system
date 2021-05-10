@@ -593,13 +593,18 @@ class AdminController extends Controller
             ]
         );
         $idFiliere = request('filiere');        
-        try{
-            Excel::import(new ImportEtudiants($idFiliere), request()->file('uploadedFile'));
+        $import = new ImportEtudiants($idFiliere);
+        try {
+            $import->import(request()->file('uploadedFile'), 'local', \Maatwebsite\Excel\Excel::XLSX);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+             $failures = $e->failures();          
+             foreach ($failures as $failure) {
+                 echo $failure->row(); // row that went wrong
+                //  $failure->attribute(); // either heading key (if using heading row concern) or column index
+                //  $failure->errors(); // Actual error messages from Laravel validator
+                //  $failure->values(); // The values of the row that has failed.
+             }
         }
-        catch (\Exception $e){
-            Log::error($e->getMessage());
-            return redirect()->back()->with('error', 'no');
-        }
-        return redirect()->back()->with('success', 'yes');
+        //redirect()->back()->with('success', 'yes');
     }
 }
