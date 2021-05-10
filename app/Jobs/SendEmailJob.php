@@ -31,11 +31,7 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $email = new EmailForQueuing();
         Mail::to($this->mailData['mailTo'])->send(new AbsenceMail($this->mailData['profName'],$this->mailData['absenceDate'],
         $this->mailData['userName'],$this->mailData['matiereName']));
-
-
-        
     }
 }
