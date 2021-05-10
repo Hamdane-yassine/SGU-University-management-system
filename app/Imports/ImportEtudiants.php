@@ -7,10 +7,12 @@ use App\Models\Etudiant;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Illuminate\Support\Facades\DB;
 
-class ImportEtudiants implements ToCollection, WithStartRow
+class ImportEtudiants implements ToCollection, WithStartRow ,WithChunkReading,ShouldQueue
 {
     /**
      * @param array $row
@@ -23,7 +25,10 @@ class ImportEtudiants implements ToCollection, WithStartRow
     {
         $this->idFiliere = $idFiliere;
     }
-
+    public function chunkSize(): int
+    {
+        return 500;
+    }
     public function startRow(): int
     {
         return 2;

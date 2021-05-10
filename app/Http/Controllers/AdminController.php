@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
+use Illuminate\Support\Facades\Log;
+
 class AdminController extends Controller
 {
     public function index()
@@ -590,8 +592,14 @@ class AdminController extends Controller
                 'uploadedFile.mimes' => 'fichier invalid.',
             ]
         );
-        $idFiliere = request('filiere');
-        Excel::import(new ImportEtudiants($idFiliere), request()->file('uploadedFile'));
-        return back();
+        $idFiliere = request('filiere');        
+        try{
+            Excel::import(new ImportEtudiants($idFiliere), request()->file('uploadedFile'));
+        }
+        catch (\Exception $e){
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'no');
+        }
+        return redirect()->back()->with('success', 'yes');
     }
 }
