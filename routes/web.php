@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -188,4 +189,15 @@ Route::get('/admin/dashboard/datatable', [AdminController::class , 'adminDashboa
 Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFiliere']);
 
 Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
+
+
+
+Route::get('/master/filiere/{idDepartement}', [MasterController::class , 'indexFilieres']);
+
+Route::get('/master/filiere/{idDepartement}/datatable', [MasterController::class , 'getFilieresDatatable'])->name('MasterFiliereDatatable');
+
+Route::post('/updateFiliere/{idDepartement}', [MasterController::class , 'updateFiliere']);
+
+Route::post('/getM');
+
 
