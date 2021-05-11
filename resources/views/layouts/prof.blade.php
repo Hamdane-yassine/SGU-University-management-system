@@ -283,7 +283,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="{{ url('notifications') }}" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-bell-o"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span
                             class="mtext">Notifications</span>
