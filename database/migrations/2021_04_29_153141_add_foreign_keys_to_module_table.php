@@ -14,8 +14,8 @@ class AddForeignKeysToModuleTable extends Migration
     public function up()
     {
         Schema::table('module', function (Blueprint $table) {
-            $table->foreign('idFiliere','fk22')->references('idFiliere')->on('filiere')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idSemestre','fk23')->references('idSemestre')->on('semestre')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('idFiliere','fk22')->references('idFiliere')->on('filiere')->onUpdate('RESTRICT')->onDelete('CASCADE');
+			$table->foreign('idSemestre','fk23')->references('idSemestre')->on('semestre')->onUpdate('RESTRICT')->onDelete('CASCADE');
         });
     }
 

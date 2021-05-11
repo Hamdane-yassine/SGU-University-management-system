@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
+use Illuminate\Support\Facades\Log;
+
 class AdminController extends Controller
 {
     public function index()
@@ -590,8 +592,19 @@ class AdminController extends Controller
                 'uploadedFile.mimes' => 'fichier invalid.',
             ]
         );
-        $idFiliere = request('filiere');
-        Excel::import(new ImportEtudiants($idFiliere), request()->file('uploadedFile'));
-        return back();
+        $idFiliere = request('filiere');        
+        $import = new ImportEtudiants($idFiliere);
+        try {
+            $import->import(request()->file('uploadedFile'), 'local', \Maatwebsite\Excel\Excel::XLSX);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+             $failures = $e->failures();          
+             foreach ($failures as $failure) {
+                 echo $failure->row(); // row that went wrong
+                //  $failure->attribute(); // either heading key (if using heading row concern) or column index
+                //  $failure->errors(); // Actual error messages from Laravel validator
+                //  $failure->values(); // The values of the row that has failed.
+             }
+        }
+        //redirect()->back()->with('success', 'yes');
     }
 }

@@ -625,7 +625,9 @@
                 },
                 error: function(err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
+                        reinscheck();
                         $.each(err.responseJSON.errors, function(key, value) {
+
                             if (key == "ajemailins") {
                                 document.getElementById('msgerrmailins').innerHTML = value;
                                 document.getElementById("ajemailins").classList.add("is-invalid");
@@ -653,6 +655,15 @@
             document.getElementById('msgerrincin').innerHTML = "";
             document.getElementById("incin").classList.remove("is-invalid");
         }
+        function reinscheck()
+        {
+            document.getElementById('msgerrmailins').innerHTML = "";
+            document.getElementById("ajemailins").classList.remove("is-invalid");
+            document.getElementById('msgerrmail').innerHTML = "";
+            document.getElementById("ajemail").classList.remove("is-invalid");
+            document.getElementById('msgerrcin').innerHTML = "";
+            document.getElementById("ajcin").classList.remove("is-invalid");
+        }
         $("#updProf").submit(function(e) {
             e.preventDefault(); // avoid to execute the actual submit of the form.
             var form = $(this);
@@ -668,6 +679,7 @@
                 },
                 error: function(err) {
                     if (err.status == 422) { // when status code is 422, it's a validation issue
+                        reinsupd();
                         $.each(err.responseJSON.errors, function(key, value) {
                             if (key == "inemailins") {
                                 document.getElementById('msgerrinmainins').innerHTML = value;

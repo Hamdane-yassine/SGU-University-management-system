@@ -5,13 +5,23 @@ namespace App\Imports;
 use App\Models\Personne;
 use App\Models\Etudiant;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\Importable;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Illuminate\Support\Facades\DB;
 
-class ImportEtudiants implements ToCollection, WithStartRow
+class ImportEtudiants implements ToCollection, WithStartRow ,WithChunkReading,ShouldQueue,SkipsOnFailure,SkipsOnError
 {
+    use Importable,SkipsFailures,SkipsErrors;
+
     /**
      * @param array $row
      *
@@ -23,7 +33,10 @@ class ImportEtudiants implements ToCollection, WithStartRow
     {
         $this->idFiliere = $idFiliere;
     }
-
+    public function chunkSize(): int
+    {
+        return 500;
+    }
     public function startRow(): int
     {
         return 2;
@@ -31,6 +44,27 @@ class ImportEtudiants implements ToCollection, WithStartRow
 
     public function collection(Collection $rows)
     {
+        Validator::make($rows->toArray(), [
+            '*.0' => 'required|unique:etudiant,apogee',
+            '*.1' => 'required|unique:etudiant,cne',
+            '*.2' => 'required',
+            '*.3' => 'required',
+            '*.4' => 'required',
+            '*.5' => 'required',
+            '*.6' => 'required',
+            '*.7' => 'required',
+            '*.8' => 'required',
+            '*.9' => 'required|unique:personne,cin',
+            '*.10' => 'required',
+            '*.11' => 'required',
+            '*.12' => 'required',
+            '*.13' => 'required',
+            '*.14' => 'required|unique:etudiant,email',
+            '*.15' => 'required|unique:personne,emailInstitutionne',
+            '*.16' => 'required',
+            '*.17' => 'required',
+
+        ])->validate();
         foreach ($rows as $row) {
 
             Personne::create([

@@ -15,8 +15,8 @@ class AddForeignKeysToSemestreTable extends Migration {
 	{
 		Schema::table('semestre', function(Blueprint $table)
 		{
-			$table->foreign('idAnnee','fk24')->references('idAnnee')->on('anneescolaire')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idFiliere','fk25')->references('idFiliere')->on('filiere')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idAnnee','fk24')->references('idAnnee')->on('anneescolaire')->onUpdate('RESTRICT')->onDelete('set null');
+			$table->foreign('idFiliere','fk25')->references('idFiliere')->on('filiere')->onUpdate('RESTRICT')->onDelete('CASCADE');
 
 		});
 	}
@@ -31,7 +31,7 @@ class AddForeignKeysToSemestreTable extends Migration {
 	{
 		Schema::table('semestre', function(Blueprint $table)
 		{
-	
+
 			$table->dropForeign('fk24');
 			$table->dropForeign('fk25');
 		});

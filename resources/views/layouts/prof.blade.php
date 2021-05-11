@@ -275,7 +275,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="/chef/rattrapages" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-calendar-minus-o"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span
                             class="mtext">Rattrapage</span>
@@ -343,6 +343,19 @@
                     </ul>
                 </li>
 
+            </ul>
+        </div>
+    </div>
+    @elseif (auth()->user()->role=='master')
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li>
+                    <a href="/admin/dashboard" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-dashboard"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau de bord</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
