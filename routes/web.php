@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChefDepartementController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -189,3 +190,10 @@ Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFilier
 
 Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
 
+//========
+
+Route::get('/master/universite', [MasterController::class , 'Universite'])->name('GestionUniversite');
+
+Route::get('/master/departements', [MasterController::class , 'getDepartements'])->name('getDepartements');
+
+Route::post('/master/deletedepartement', [MasterController::class , 'SupprimerDepartement'])->name('SupprimerDepartement');
