@@ -193,6 +193,13 @@ Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFilier
 
 Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
 
+//========
+
+Route::get('/master/universite', [MasterController::class , 'Universite'])->name('GestionUniversite');
+
+Route::get('/master/departements', [MasterController::class , 'getDepartements'])->name('getDepartements');
+
+Route::post('/master/deletedepartement', [MasterController::class , 'SupprimerDepartement'])->name('SupprimerDepartement');
 
 
 Route::get('/master/filiere/{idDepartement}', [MasterController::class , 'indexFilieres']);
