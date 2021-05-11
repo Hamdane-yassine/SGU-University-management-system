@@ -16,7 +16,7 @@ class AddForeignKeysToMatiereTable extends Migration {
 		Schema::table('matiere', function(Blueprint $table)
 		{
 			$table->foreign('idProf','fk14')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('set null');
-			$table->foreign('idModule','fk15')->references('idModule')->on('module')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('idModule','fk15')->references('idModule')->on('module')->onUpdate('RESTRICT')->onDelete('CASCADE');
 		});
 	}
 

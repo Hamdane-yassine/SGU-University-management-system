@@ -14,8 +14,8 @@ class AddForeignKeysToProfDepartementTable extends Migration
     public function up()
     {
         Schema::table('prof_departement', function (Blueprint $table) {
-            $table->foreign('idProf','fk1000')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('idDepartement','fk1001')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('idProf','fk1000')->references('idProf')->on('professeur')->onUpdate('RESTRICT')->onDelete('CASCADE');
+            $table->foreign('idDepartement','fk1001')->references('idDepartement')->on('departement')->onUpdate('RESTRICT')->onDelete('CASCADE');
         });
     }
 

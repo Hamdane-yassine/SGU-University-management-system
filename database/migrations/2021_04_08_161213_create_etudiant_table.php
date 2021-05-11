@@ -17,7 +17,7 @@ class CreateEtudiantTable extends Migration {
 		{
 			$table->id('idEtudiant');
 			$table->bigInteger('idPersonne')->unsigned();
-			$table->bigInteger('idFiliere')->unsigned();
+			$table->bigInteger('idFiliere')->unsigned()->nullable();;
 			$table->string('cne', 254)->unique();
 			$table->integer('apogee')->unique();
 			$table->string('email', 254)->unique();

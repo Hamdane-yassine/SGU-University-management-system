@@ -197,3 +197,14 @@ Route::get('/master/universite', [MasterController::class , 'Universite'])->name
 Route::get('/master/departements', [MasterController::class , 'getDepartements'])->name('getDepartements');
 
 Route::post('/master/deletedepartement', [MasterController::class , 'SupprimerDepartement'])->name('SupprimerDepartement');
+
+
+Route::get('/master/filiere/{idDepartement}', [MasterController::class , 'indexFilieres']);
+
+Route::get('/master/filiere/{idDepartement}/datatable', [MasterController::class , 'getFilieresDatatable'])->name('MasterFiliereDatatable');
+
+Route::post('/updateFiliere/{idDepartement}', [MasterController::class , 'updateFiliere']);
+
+Route::post('/getM');
+
+
