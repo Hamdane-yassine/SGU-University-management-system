@@ -17,11 +17,11 @@
                     <div class="row">
                         <div class="col-md-8 col-sm-12">
                             <div class="blog-detail card-box overflow-hidden mb-30">
-                                {{-- @if($headingImg) --}}
-                                    {{-- @if($headingImg) --}}
+                                @if($headingImg)
+                                    @if($headingImg)
                                         <div class='blog-img'><img src="/storage/{{ $headingImg }}" alt=""></div>
-                                    {{-- @endif --}}
-                                {{-- @endif --}}
+                                    @endif
+                                @endif
                                 <div class="blog-caption card">
                                     <div class="blog-caption">
                                         {!! $evenement->html !!}
