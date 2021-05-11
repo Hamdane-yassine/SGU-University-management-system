@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label>attachments</label>
                             <div class="custom-file">
-                                <label class="custom-file-label">ajouter des fichiers (max 3)</label>
+                                <label class="custom-file-label" for="attachments">ajouter des fichiers (max 3)</label>
                                 <input id="attachments"
                                        name="attachments[]"
                                        type="file"
@@ -110,6 +110,10 @@
                                 </span>
                             @enderror
                         </div>
+                        {{-- <div class="form-group">
+                            <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                            <input class="form-control" type="file" id="formFileMultiple" multiple />
+                        </div> --}}
                         <div class="form-group">
                             <input class="btn btn-primary pull-right row-cols-xl-1" type="submit" value="Valider ">
                             <br>

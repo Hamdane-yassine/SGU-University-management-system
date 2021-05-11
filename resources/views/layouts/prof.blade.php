@@ -75,10 +75,13 @@
                             @if(Auth::User()->notifications->count())
                             @foreach (Auth::User()->UnreadNotifications as $notification)
                             <li>
-                                <a href="{{ url('/notifications?idNotif='.$notification->data['idNotif']) }}">
+                                @if($notification->type === 'App\Notifications\NotifyEvent' )
+                                <a href="{{ url('/evenements/'.$notification->data['idEvent']) }}">
+                                @else <a href="{{ url('/notifications?idNotif='.$notification->data['idNotif']) }}">
+                                @endif
                                     <img src="{{ $notification->data['image'] }}" alt="profile image">
                                     <h3>{{$notification->data['from']}}</h3>
-                                    <p>{{Str::substr($notification->data['brief'], 0, 50) }}...</p>
+                                    <p style="word-wrap: break-word">{{Str::substr($notification->data['brief'], 0, 50) }}...</p>
                                 </a>
                             </li>
                             @endforeach
@@ -280,7 +283,7 @@
                 </li>
 
                 <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
+                    <a href="{{ url('notifications') }}" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-bell-o"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span
                             class="mtext">Notifications</span>
@@ -367,14 +370,14 @@
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script>
     const parser = new DOMParser();
-    const html = "<li><h id='info'>pas de nouvelles notifications</h></li>";
-    const infoNode = parser.parseFromString(html,'text/html');
+    // const html = "<li><h id='info'>pas de nouvelles notifications</h></li>";
+    // const infoNode = parser.parseFromString(html,'text/html');
     var infoNodeExists;
+    var unread;
     hello();
     if(document.getElementById('notifications').children.length == 0){
             // node.append(' <li><p>Empty</p></li>');
             $('.badge').css('display','none');
-
             $('#notifications').append
     };
 
@@ -401,20 +404,24 @@
         return node.body;
     };
 
-    $('.icon-copy').on('click',hello());
+    $('.badge').css('display','none');
+    $('#info').show();
 
     function hello() {
-        let unread = {{ Auth::user()->unreadNotifications->count() }};
-        // console.log(unread+' '+infoNodeExists);?
-        if( unread == 0){
+        unread = {{ Auth::user()->unreadNotifications->count() }};
+        // console.log(unread+' '+infoNodeExists);
+        if( unread == 0 ){
             $('.badge').css('display','none');
             $('#info').show();
+            // console.log('Ha');
         }
         else {
             $('.badge').css('display','');
             $('#info').hide();
         }
     }
+    $('.icon-copy').click(hello());
+
 
 </script>
 @yield('SpecialScripts')

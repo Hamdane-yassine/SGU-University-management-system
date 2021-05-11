@@ -95,10 +95,13 @@ Route::post('/chef/affectermatiere',[ChefDepartementController::class, 'Affecter
 
 Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'DetacherMatiere'])->name('DetacherMatiere');
 
+Route::get('notifications', [UserController::class,'notifs']);
+
 Route::prefix('evenement')->group(function () {
-    Route::get('/create', [EvenementController::class,'create'])->name('evenement.create');
-    Route::post('/store', [EvenementController::class,'store'])->name('evenement.store');
-    Route::get('/{evenement}', [EvenementController::class,'show'])->name('evenement.show');
+    Route::get('create', [EvenementController::class,'create'])->name('evenement.create');
+    Route::post('store', [EvenementController::class,'store'])->name('evenement.store');
+    Route::get('{evenement}', [EvenementController::class,'show'])->name('evenement.show');
+    Route::get('download/{evenement}', [EvenementController::class,'downloadAttachements'])->name('evenement.download');
 });
 // ===============
 Route::get('/{nb}', function ($nb) {
@@ -124,13 +127,13 @@ Route::get('/{nb}', function ($nb) {
 
 });
 
+// Route::prefix('/notifications')->group(function () {
+//     // Route::get('', [UserController::class,'Notifs']);
+// });
+
 Route::prefix('profile')->group(function () {
     Route::get('/{user}', [ProfileController::class,'show'])->name('profile.show');
     Route::post('/update/{user}', [ProfileController::class,'update'])->name('profile.update');
-});
-Route::prefix('/notifications')->group(function () {
-    Route::get('/', [UserController::class,'Notifs']);
-    // Route::get('', [UserController::class,'Notifs']);
 });
 
 // ===============

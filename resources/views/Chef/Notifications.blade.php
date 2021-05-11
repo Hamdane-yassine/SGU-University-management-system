@@ -19,14 +19,16 @@
                                                 @if(Auth::user()->notifications->count())
                                                     @foreach (Auth::user()->notifications as $notification)
                                                         <div class="chat-body clearfix ml-3" id="notif-{{ $notification->id }}">
-                                                            <p>
-                                                            <span class="d-block text-secondary pb-1">
-
+                                                            <p style="word-wrap: break-word"><span class="d-block text-secondary pb-1">
                                                                 <b><u>{{ $notification->data['from'] }}</u> :</b>
+                                                                @if($notification->type === 'App\Notifications\NotifyEvent')
+                                                                    <a href="{{ url('evenement/'.$notification->data['idEvent']) }}">lien</a>
+                                                                @endif
                                                             </span>{{ $notification->data['brief'] }}</p>
                                                             <div class="chat_time float-right mb-10"> {{ $notification->created_at }}</div>
                                                         </div>
                                                     @endforeach
+                                                @else  <p>Aucun</p>
                                                 @endif
                                                 </li>
                                             </ul>
