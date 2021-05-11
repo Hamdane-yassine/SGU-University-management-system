@@ -9,6 +9,9 @@ use Illuminate\Http\UploadedFile as HttpUploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
+use ZipArchive;
+
+use function PHPSTORM_META\map;
 
 class EvenementController extends Controller
 {
@@ -59,21 +62,22 @@ class EvenementController extends Controller
             'html'=>$request->input('corps'),
             'resume'=>$request->input('resume'),
         ]);
-        if(count($request->file('attachments'))>1){
+        // dd($request->file('attachments'));
+        if(count($request->file('attachments')) > 1){
             $filePaths = array();
             foreach ($files as $file) {
                 // $filePaths .= array_push($file->store('attachments/'.$evenement->idEvenement));
-                array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'attachements/',$file->getClientOriginalName()));
+                array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
             }
             $evenement->attachments = $filePaths;
         }
         else if(count($request->file('attachments')) === 1){
-            $evenement->attachments = $request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'attachements/',$request->file('attachments')[0]->getClientOriginalName());
+            $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
         }
 
         $evenement->save();
         // $files->store('attachments/'.$evenement->idEvenement);
-        return view('evenements.event-detail',compact('evenement'));
+        return redirect('/evenement/'.$evenement->idEvenement);
     }
 
     /**
@@ -84,8 +88,23 @@ class EvenementController extends Controller
      */
     public function show(Evenement $evenement)
     {
-        // dd($evenement);
-        return view('evenements.event-detail', compact('evenement'));
+        $attachments = array();
+        $attArr = json_decode($evenement->attachments);
+        $headingImg = '';
+        if($attArr){
+
+            if(count($attArr) > 0){
+                foreach ($attArr as $key) {
+                    if(preg_match('/.(jpg|jpeg|png|csv|txt|zip|csv|excel|pdf)/i',$key)){
+                        if(preg_match('/(headingImg)/',$key))
+                            $headingImg = $key;
+                        else array_push($attachments, $key);
+                    }
+                }
+            }
+        }
+        // dd($attachments);
+        return view('evenements.event-detail', compact('evenement','attachments','headingImg'));
     }
 
     /**
@@ -120,5 +139,27 @@ class EvenementController extends Controller
     public function destroy(Evenement $evenement)
     {
         //
+    }
+
+    public function downloadAttachements(Evenement $evenement)
+    {
+        $files = File::files(public_path('storage/evenements/2/attachements'));
+
+        $zip = new ZipArchive;
+
+        $fileName = 'Example.zip';
+
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
+        {
+
+        foreach ($files as $key => $value) {
+            $file = basename($value);
+            $zip->addFile($value, $file);
+        }
+
+        $zip->close();
+        }
+
+        return response()->download(public_path($fileName));
     }
 }
