@@ -55,15 +55,30 @@ class MasterController extends Controller
             return Datatables::of($filieres)
             ->addColumn('action', function($row)
             {
-                //$btn = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')"><i class="fa fa-pencil"></button><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')"><i class="fa fa-pencil"></button>';
-                $btn = '<ul class="list-inline m-0">
+                $btn = '<span class="dtr-data">
+                                <div class="table-actions pl-1">
+                                    <a href="#" style="color: #265ed7" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')">
+                                        <i class="icon-copy dw dw-edit2"></i>
+                                    </a>
+                                    <a href="/master/filiere/delete/'.$row->idFiliere.'" style="color : #e95959" type="button">
+                                        <i class="icon-copy dw dw-delete-3"></i>
+                                    </a>
+                                </div>
+                            </span>';
+                /*$btn = '<div class="table-actions pl-1">
+                            <a href="#" style="color: #265ed7" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')><i class="icon-copy dw dw-edit2"></i></a>
+                            <a href="/master/filiere/delete/'.$row->idFiliere.'" style="color : #e95959" onclick="setDepId(10)" data-toggle="tooltip" >
+                                <i class="icon-copy dw dw-delete-3"></i>
+                            </a>
+                        </div>';*/
+                /*$btn = '<ul class="list-inline m-0">
                             <li class="list-inline-item">
                                 <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
                             </li>
                             <li class="list-inline-item">
                                 <a href="/master/filiere/delete/'.$row->idFiliere.'"><button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button></a>
                             </li>
-                    </ul>';
+                        </ul>';*/
 
                 return $btn;
             })
@@ -256,7 +271,7 @@ class MasterController extends Controller
     {
         //given a semester id , you retrieve a filiere , and find its modules
         $semester = Semestre::find($idSemester);
-        $Modules = Filiere::where('filiere.idFiliere',$semester->idFiliere)
+        $Modules = Filiere::where('filiere.idFiliere',$semester->idFiliere)->where('module.idSemestre',$semester->idSemestre)
         ->join('module','module.idFiliere','filiere.idFiliere')
         ->select('module.idModule as idModule','module.nom as name')->get()->toArray();
 
@@ -291,6 +306,7 @@ class MasterController extends Controller
         //return matiers of a module
         $matiers = Matiere::where('idModule',$idModule)
         ->select('idMatiere','nom as name')->get();
+
         return json_encode($matiers);
     }
 
