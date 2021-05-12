@@ -133,8 +133,9 @@ Route::get('/{nb}', function ($nb) {
 
 Route::prefix('profile')->group(function () {
     Route::get('/{user}', [ProfileController::class,'show'])->name('profile.show');
-    Route::post('/update/{user}', [ProfileController::class,'update'])->name('profile.update');
+    Route::post('/update/{profile}', [ProfileController::class,'update'])->name('profile.update');
     Route::post('/updateImage/', [ProfileController::class,'updateImage'])->name('profile.update.image');
+    Route::post('/updatePasswd/', [ProfileController::class,'updatePasswd'])->name('profile.update.passwd');
 });
 
 // ===============
