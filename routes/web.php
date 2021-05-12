@@ -95,10 +95,13 @@ Route::post('/chef/affectermatiere',[ChefDepartementController::class, 'Affecter
 
 Route::post('/chef/detachermatiere',[ChefDepartementController::class, 'DetacherMatiere'])->name('DetacherMatiere');
 
+Route::get('notifications', [UserController::class,'notifs']);
+
 Route::prefix('evenement')->group(function () {
-    Route::get('/create', [EvenementController::class,'create'])->name('evenement.create');
-    Route::post('/store', [EvenementController::class,'store'])->name('evenement.store');
-    Route::get('/{evenement}', [EvenementController::class,'show'])->name('evenement.show');
+    Route::get('create', [EvenementController::class,'create'])->name('evenement.create');
+    Route::post('store', [EvenementController::class,'store'])->name('evenement.store');
+    Route::get('{evenement}', [EvenementController::class,'show'])->name('evenement.show');
+    Route::get('download/{evenement}', [EvenementController::class,'downloadAttachements'])->name('evenement.download');
 });
 // ===============
 Route::get('/{nb}', function ($nb) {
@@ -124,13 +127,14 @@ Route::get('/{nb}', function ($nb) {
 
 });
 
+// Route::prefix('/notifications')->group(function () {
+//     // Route::get('', [UserController::class,'Notifs']);
+// });
+
 Route::prefix('profile')->group(function () {
     Route::get('/{user}', [ProfileController::class,'show'])->name('profile.show');
     Route::post('/update/{user}', [ProfileController::class,'update'])->name('profile.update');
-});
-Route::prefix('/notifications')->group(function () {
-    Route::get('/', [UserController::class,'Notifs']);
-    // Route::get('', [UserController::class,'Notifs']);
+    Route::post('/updateImage/', [ProfileController::class,'updateImage'])->name('profile.update.image');
 });
 
 // ===============
@@ -190,7 +194,37 @@ Route::get('/admin/emploi/filiere', [AdminController::class , 'indexEmploiFilier
 
 Route::get('/admin/emploi/filiere/datatable', [AdminController::class , 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
 
+//========
 
+Route::get('/master/universite', [MasterController::class , 'Universite'])->name('GestionUniversite');
+
+Route::get('/master/departements', [MasterController::class , 'getDepartements'])->name('getDepartements');
+
+Route::post('/master/deletedepartement', [MasterController::class , 'SupprimerDepartement'])->name('SupprimerDepartement');
+
+Route::post('/master/updatedepartement', [MasterController::class , 'UpdateDepartement'])->name('UpdateDepartement');
+
+Route::get('/master/departement/{departement}', [MasterController::class , 'getDepartement'])->name('getDepartement');
+
+Route::post('/master/ajoutedepartement', [MasterController::class , 'AjouterDepartement'])->name('AjouterDepartement');
+
+Route::post('/master/ajoutefiliere', [MasterController::class , 'AjouterFiliere'])->name('AjouterFiliere');
+
+Route::get('/master/getNewDepartements', [MasterController::class , 'getNewDepartements'])->name('getNewDepartements');
+
+Route::post('/master/affectersemester', [MasterController::class , 'AffecterSemesteres'])->name('AffecterSemesteres');
+
+Route::get('/master/getFilieresDep/{departement}', [MasterController::class , 'getFilieresDep'])->name('getFilieresDep');
+
+Route::post('/master/ajoutermodule', [MasterController::class , 'AjouterModule'])->name('AjouterModule');
+
+Route::get('/master/getSemestersFil/{filiere}', [MasterController::class , 'getSemestersFil'])->name('getSemestersFil');
+
+Route::post('/master/ajoutermatiere', [MasterController::class , 'AjouterMatiere'])->name('AjouteMatiere');
+
+Route::get('/master/getModulesSem/{semester}', [MasterController::class , 'getModulesSem'])->name('getModulesSem');
+
+//=====
 
 Route::get('/master/filiere/{idDepartement}', [MasterController::class , 'indexFilieres']);
 

@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /**
  * Created by Reliese Model.
@@ -32,20 +32,14 @@ class Semestre extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'idAnnee' => 'int',
 		'idFiliere' => 'int'
 	];
 
 	protected $fillable = [
-		'idAnnee',
 		'idFiliere',
-		'nom'
+		'nom',
+		'Annee_universaitaire'
 	];
-
-	public function anneescolaire()
-	{
-		return $this->belongsTo(Anneescolaire::class, 'idAnnee');
-	}
 
 	public function modules()
 	{

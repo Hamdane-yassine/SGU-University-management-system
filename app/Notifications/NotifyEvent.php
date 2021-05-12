@@ -77,11 +77,13 @@ class NotifyEvent extends Notification implements ShouldBroadcast
         $evt = new Evenement((array)json_decode($this->event));
         // echo "evt in Noti".$evt;
         // echo $chef = Chefdep::find($this->event[0]);
+
         return [
             // 'image' => $evt->chefdep->professeur->user->profile->imagePath,
             'image' =>asset('/vendors/images/user.svg'),
             'from'=>$evt->chefdep->professeur->user->personne->nom.' '.$evt->chefdep->professeur->user->personne->prenom,
             'idNotif'=>$this->id,
+            'idEvent'=>json_decode($this->event)->idEvenement,
             'brief'=>$evt->resume,
         ];
     }
