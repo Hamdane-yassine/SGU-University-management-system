@@ -100,7 +100,6 @@ class ChefDepartementController extends Controller
         $etudiant = Etudiant::find($idEtudiant);
         $idPersonne = $etudiant->idPersonne;
         $personne = Personne::find($idPersonne);
-        $etudiant->delete();
         $personne->delete();
     }
     public function deleteEmploi($idEmploi)

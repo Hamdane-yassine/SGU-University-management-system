@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Departement;
 use Illuminate\Support\Facades\Auth;
-use DataTables;
 use Illuminate\Support\Str;
 use App\Jobs\SendAccountEmail;
 use App\Models\Absence;
@@ -23,6 +22,8 @@ use Faker\Provider\ar_JO\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use DataTables;
+use Egulias\EmailValidator\Exception\UnclosedComment;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
 use App\Models\Semestre;
@@ -30,6 +31,62 @@ use Illuminate\Support\Facades\Log;
 
 class MasterController extends Controller
 {
+    public function indexFilieres($idDepartement)
+    {
+        //get list of filieres in that departement
+        $filieres = Filiere::where('idDepartement',$idDepartement)->get();
+
+        //get list of semesters
+        $Semestres = Semestre::where('filiere.idDepartement', $idDepartement)
+            ->join('filiere','filiere.idFiliere','semestre.idFiliere')
+            ->select('idSemestre as id','semestre.nom as name')->get();
+
+        return view('master.filiere',['idDepartement' => $idDepartement, 'filieres' => $filieres, 'Semestres' => $Semestres ]);
+    }
+
+    public function getFilieresDatatable(Request $request,$idDepartement)
+    {
+        $filieres = Filiere::where('filiere.idDepartement',$idDepartement)
+        ->leftJoin('etudiant','etudiant.idFiliere','filiere.idFiliere')
+        ->groupBy('filiere.idFiliere')
+        ->select('filiere.idFiliere as idFiliere','filiere.nom as nomFiliere','filiere.niveau as niveau',DB::raw('COUNT(*) as CountEtudiant'))->get();
+
+        if($request->ajax()) {
+            return Datatables::of($filieres)
+            ->addColumn('action', function($row)
+            {
+                $btn = '<span class="dtr-data">
+                                <div class="table-actions pl-1">
+                                    <a href="#" style="color: #265ed7" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')">
+                                        <i class="icon-copy dw dw-edit2"></i>
+                                    </a>
+                                    <a href="/master/filiere/delete/'.$row->idFiliere.'" style="color : #e95959" type="button">
+                                        <i class="icon-copy dw dw-delete-3"></i>
+                                    </a>
+                                </div>
+                            </span>';
+                /*$btn = '<div class="table-actions pl-1">
+                            <a href="#" style="color: #265ed7" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')><i class="icon-copy dw dw-edit2"></i></a>
+                            <a href="/master/filiere/delete/'.$row->idFiliere.'" style="color : #e95959" onclick="setDepId(10)" data-toggle="tooltip" >
+                                <i class="icon-copy dw dw-delete-3"></i>
+                            </a>
+                        </div>';*/
+                /*$btn = '<ul class="list-inline m-0">
+                            <li class="list-inline-item">
+                                <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="/master/filiere/delete/'.$row->idFiliere.'"><button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button></a>
+                            </li>
+                        </ul>';*/
+
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+      }
+   }
+
    public function Universite()
    {
       $departements = Departement::All();
@@ -67,7 +124,7 @@ class MasterController extends Controller
       }
       $departement->delete();
       foreach($personne as $idPersonne)
-      {   
+      {
          DB::table('personne')->where('idPersonne', '=', $idPersonne)->delete();
       }
       foreach($emploi as $idemploi)
@@ -78,15 +135,7 @@ class MasterController extends Controller
         $emploitodelete->delete();
       }
    }
-   public function getDepartement(Request $request,Departement $departement)
-   {
-      $departementinfo = Departement::where('departement.idDepartement',$departement->idDepartement)
-      ->select('idDepartement','nom','insertion_notes')
-      ->get();
-      if ($request->ajax()) {
-         echo json_encode($departementinfo);
-     }
-   }
+
    public function UpdateDepartement()
    {
       $idDepartement = request('upIdDep');
@@ -132,10 +181,12 @@ class MasterController extends Controller
       $departements=Departement::All()->toArray();
       echo json_encode($departements);
    }
+
    public function getFilieresDep(Departement $departement)
    {
       echo json_encode($departement->filieres);
    }
+
    public function AffecterSemesteres()
    {
       $idFiliere=request('semfil');
@@ -150,6 +201,7 @@ class MasterController extends Controller
          $semesterToInsert->save();
       }
    }
+
    public function getSemestersFil(Filiere $filiere)
    {
       echo json_encode($filiere->semestres);
@@ -165,10 +217,12 @@ class MasterController extends Controller
       $module->vh=request('modvh');
       $module->save();
    }
+
    public function getModulesSem(Semestre $semester)
    {
       echo json_encode($semester->modules);
    }
+
    public function AjouterMatiere()
    {
       $idModule = request('matmod');
@@ -177,32 +231,6 @@ class MasterController extends Controller
       $matiere->nom=request('matnom');
       $matiere->vh=request('matvh');
       $matiere->save();
-   }
-   public function indexFilieres($idDepartement)
-   {
-      //get list of filieres in that departement
-      $filieres = Filiere::where('idDepartement', $idDepartement)->get();
-
-      return view('master.filiere', ['idDepartement' => $idDepartement, 'filieres' => $filieres]);
-   }
-
-   public function getFilieresDatatable(Request $request, $idDepartement)
-   {
-      $filieres = Filiere::where('filiere.idDepartement', $idDepartement)
-         ->join('etudiant', 'etudiant.idFiliere', 'filiere.idFiliere')
-         ->groupBy('filiere.idFiliere')
-         ->select('filiere.idFiliere as idFiliere', 'filiere.nom as nomFiliere', 'filiere.niveau as niveau', DB::raw('COUNT(*) as CountEtudiant'))->get();
-
-      if ($request->ajax()) {
-         return Datatables::of($filieres)
-            ->addColumn('action', function ($row) {
-               $btn = '<a style="color: #265ed7" class="color-light-blue" data-toggle="modal" data-target="#exampleModal" onclick="initModal(' . $row->idFiliere . ')"><i class="icon-copy dw dw-edit2"></a>';
-
-               return $btn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-      }
    }
 
    public function updateFiliere(Request $request, $idDepartement)
@@ -219,4 +247,90 @@ class MasterController extends Controller
       return redirect('/master/filiere/' . $idDepartement);
    }
 
+    public function deleteFiliere(Request $request,$idFiliere)
+    {
+        Filiere::destroy($idFiliere);
+        return redirect()->back();
+    }
+
+
+    public function getSemestresOfFiliere($idFiliere)
+    {
+        $Semestres = Semestre::where('idFiliere',$idFiliere)->select('idSemestre as id','nom as name')->get()->toArray();
+        //echo $MatieresList;
+        return json_encode($Semestres);
+    }
+
+    public function deleteSemestreOfFiliere(Request $request)
+    {
+        Semestre::destroy($request->semestre1);
+        return redirect()->back();
+    }
+
+    public function getModuleOfSemester($idSemester)
+    {
+        //given a semester id , you retrieve a filiere , and find its modules
+        $semester = Semestre::find($idSemester);
+        $Modules = Filiere::where('filiere.idFiliere',$semester->idFiliere)->where('module.idSemestre',$semester->idSemestre)
+        ->join('module','module.idFiliere','filiere.idFiliere')
+        ->select('module.idModule as idModule','module.nom as name')->get()->toArray();
+
+        return json_encode($Modules);
+    }
+
+    public function saveModule(Request $request)
+    {
+        $idSemester = $request->semestre2;
+        $idModule = $request->module2;
+        $newName = $request->NomModule2;
+        $vh = $request->VH2;
+
+        if(is_null($newName) && is_null($vh)) return redirect()->back();
+
+        $module = Module::find($idModule);
+
+        if(!is_null($newName)) $module->nom = $newName;
+        if(!is_null($vh))      $module->vh = $vh;
+        $module->save();
+        return redirect()->back();
+    }
+
+    public function deleteModule(Request $request)
+    {
+        Module::destroy($request->module2);  //deleting a module leads to the deletion of all matiers included in it
+        return redirect()->back();
+    }
+
+    public function getMatieresOfModule($idModule)
+    {
+        //return matiers of a module
+        $matiers = Matiere::where('idModule',$idModule)
+        ->select('idMatiere','nom as name')->get();
+
+        return json_encode($matiers);
+    }
+
+    public function saveMatiere(Request $request)
+    {
+        $idMatiere = $request->matiere3;
+        $newNomMatiere = $request->nom3;
+        $newVH = $request->vh3;
+        $newCoeff = $request->coeff3;
+
+        $Matiere = Matiere::find($idMatiere);
+
+        if(!is_null($newNomMatiere)) $Matiere->nom = $newNomMatiere;
+        if(!is_null($newVH))         $Matiere->vh = $newVH;
+        if(!is_null($newCoeff))      $Matiere->coeff = $newCoeff;
+
+        $Matiere->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteMatiere(Request $request)
+    {
+        $matiere = Matiere::destroy($request->matiere3);
+        return redirect()->back();
+    }
 }

@@ -185,7 +185,10 @@ Route::post('suppprofesseur',[AdminController::class, 'SupprimerProfesseur'])->n
 Route::post('updateprofesseur',[AdminController::class, 'UpdateProfesseur'])->name('updateProfesseur');
 Route::post('ajouteprofesseur',[AdminController::class, 'AjouterProfesseur'])->name('AjouterProfesseur');
 Route::post('importexcelfile',[AdminController::class, 'ImportExcelfile'])->name('ImportExcelfile');
-
+Route::post('/admin/affecterprof',[AdminController::class, 'AffecterProfesseur'])->name('AffecterProfesseur');
+Route::post('/admin/retirerprof',[AdminController::class, 'RetirerProfesseur'])->name('RetirerProfesseur');
+Route::get('/admin/getAllProfs/{departement}', [App\Http\Controllers\AdminController::class, 'getAllProfesseur']);
+Route::get('/admin/getProfDep/{departement}', [App\Http\Controllers\AdminController::class, 'getProfDep']);
 
 Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
 
@@ -233,6 +236,20 @@ Route::get('/master/filiere/{idDepartement}/datatable', [MasterController::class
 
 Route::post('/updateFiliere/{idDepartement}', [MasterController::class , 'updateFiliere']);
 
-Route::post('/getM');
+Route::get('/master/filiere/delete/{idFiliere}', [MasterController::class , 'deleteFiliere']);
 
+Route::get('/master/getSemestresOfFiliere/{idFiliere}', [MasterController::class , 'getSemestresOfFiliere']);
 
+Route::post('/master/deleteSemestreOfFiliere', [MasterController::class ,'deleteSemestreOfFiliere'])->name('deleteSemestreOfFiliere');
+
+Route::get('/master/getModuleOfSemester/{idSemester}', [MasterController::class , 'getModuleOfSemester']);
+
+Route::post('/master/saveModule', [MasterController::class ,'saveModule']);
+
+Route::post('/master/saveMatiere', [MasterController::class , 'saveMatiere']);
+
+Route::post('/master/deleteModule', [MasterController::class ,'deleteModule']);
+
+Route::get('/master/getMatieresOfModule/{idModule}', [MasterController::class , 'getMatieresOfModule']);
+
+Route::post('/master/deleteMatiere', [MasterController::class , 'deleteMatiere']);

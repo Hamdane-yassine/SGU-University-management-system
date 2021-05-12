@@ -162,7 +162,6 @@ class AdminController extends Controller
         $etudiant = Etudiant::find($idEtudiant);
         $idPersonne = $etudiant->idPersonne;
         $personne = Personne::find($idPersonne);
-        $etudiant->delete();
         $personne->delete();
     }
 
@@ -355,7 +354,8 @@ class AdminController extends Controller
 
     public function Professeurs(Departement $departement)
     {
-        return view('admin.profs', ['departement' => $departement]);
+        $professeurs = Professeur::All();
+        return view('admin.profs', ['departement' => $departement, 'professeurs' => $professeurs]);
     }
 
     public function getProfesseurs(Request $request, Departement $departement)
@@ -403,11 +403,6 @@ class AdminController extends Controller
         $personne = Personne::find($idPersonne);
         $idEmploi = $professeur->idEmploi;
         $emploi = Emploi::find($idEmploi);
-        DB::table('chefdep')->where('idProf', '=', $idProf)->delete();
-        DB::table('prof_departement')->where('idProf', '=', $idProf)->delete();
-        DB::table('profiles')->where('idUtilisateur', '=', $user->id)->delete();
-        $professeur->delete();
-        $user->delete();
         $personne->delete();
         if ($emploi != null) {
             $filename = $emploi->fileName;
@@ -536,7 +531,7 @@ class AdminController extends Controller
         $personne->tel = request('ajtel');
         $personne->emailInstitutionne = request('ajemailins');
         $personne->save();
-        $idPersonne=DB::getPdo()->lastInsertId();
+        $idPersonne = DB::getPdo()->lastInsertId();
         //user
         $user = new User;
         $user->email = request('ajemail');
@@ -581,7 +576,54 @@ class AdminController extends Controller
         $mailData = ['mailTo' => request('ajemail'), 'Username' => strval(request('ajnom') . ' ' . request('ajprenom')), 'email' => request('ajemail'), 'password' => $RandPass];
         SendAccountEmail::dispatch($mailData);
     }
-
+    public function AffecterProfesseur()
+    {
+        $idDepart = request('depA');
+        $idProf = request('prof');
+        $prof_departement = new Prof_departement;
+        $prof_departement->idDepartement = $idDepart;
+        $prof_departement->idProf = $idProf;
+        $prof_departement->save();
+    }
+    public function RetirerProfesseur()
+    {
+        $idDepart = request('depD');
+        $idProf = request('profdet');
+        $profdep = Prof_departement::where('idDepartement', $idDepart)->where('idProf', $idProf)->select('idProfDep')->get()[0];
+        DB::table('prof_departement')->where('idProfDep', '=', $profdep->idProfDep)->delete();
+    }
+    public function getAllProfesseur(Departement $departement)
+    {
+        $professeurs = Professeur::join('users', 'professeur.idUtilisateur', '=', 'users.id')
+            ->join('personne', 'users.idPersonne', '=', 'personne.idPersonne')
+            ->select('professeur.idProf', 'personne.nom', 'personne.prenom')
+            ->get();
+        $profs = array();
+        foreach ($professeurs as $professeur) {
+            $check = 0;
+            foreach ($departement->prof_departements as $prof_departement) {
+                if ($prof_departement->professeur->idProf == $professeur->idProf) {
+                    $check++;
+                    break;
+                }
+            }
+            if ($check == 0) {
+                array_push($profs, $professeur);
+            }
+        }
+        echo json_encode($profs);
+    }
+    public function getProfDep(Departement $departement)
+    {
+        $professeurs = Departement::where('departement.idDepartement', $departement->idDepartement)  //first inint a user id
+            ->join('prof_departement', 'departement.idDepartement', '=', 'prof_departement.idDepartement')
+            ->join('professeur', 'prof_departement.idProf', '=', 'professeur.idProf')
+            ->join('users', 'professeur.idUtilisateur', '=', 'users.id')
+            ->join('personne', 'users.idPersonne', '=', 'personne.idPersonne')
+            ->select('professeur.idProf', 'personne.nom', 'personne.prenom', 'professeur.specialite', 'email', 'tel',)
+            ->get();
+        echo json_encode($professeurs);
+    }
     public function ImportExcelfile()
     {
         request()->validate(
@@ -592,18 +634,18 @@ class AdminController extends Controller
                 'uploadedFile.mimes' => 'fichier invalid.',
             ]
         );
-        $idFiliere = request('filiere');        
+        $idFiliere = request('filiere');
         $import = new ImportEtudiants($idFiliere);
         try {
             $import->import(request()->file('uploadedFile'), 'local', \Maatwebsite\Excel\Excel::XLSX);
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-             $failures = $e->failures();          
-             foreach ($failures as $failure) {
-                 echo $failure->row(); // row that went wrong
+            $failures = $e->failures();
+            foreach ($failures as $failure) {
+                echo $failure->row(); // row that went wrong
                 //  $failure->attribute(); // either heading key (if using heading row concern) or column index
                 //  $failure->errors(); // Actual error messages from Laravel validator
                 //  $failure->values(); // The values of the row that has failed.
-             }
+            }
         }
         //redirect()->back()->with('success', 'yes');
     }

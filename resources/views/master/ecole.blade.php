@@ -183,7 +183,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Departement :</label>
-                                            <select class="custom-select2 form-control" name="moddep" id="moddep" 
+                                            <select class="custom-select2 form-control" name="moddep" id="moddep"
                                                 style="width: 100%; height: 45px;" required>
                                                 <option disabled selected>---Sélectioné une département---</option>
                                                 @foreach ($departements as $departement)
@@ -316,43 +316,47 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade bs-example-modal-lg" id="bd-edit-modal" tabindex="-1" role="dialog"
-            aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <form action="{{ route('UpdateDepartement') }}" method="POST" id="updDep">
-                        @csrf
-                        <input type="hidden" id="upIdDep" name="upIdDep" value="">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body" id="modall-edit">
-                            <div class="pl-2 pr-2">
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">Nom</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control" type="text" id="upnom" name="upnom" placeholder="Nom"
-                                            required>
-                                    </div>
+        <div class="footer-wrap pd-20 mb-20 card-box">
+            DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
+                Hingarajiya</a>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" id="bd-edit-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <form action="{{ route('UpdateDepartement') }}" method="POST" id="updDep">
+                    @csrf
+                    <input type="hidden" id="upIdDep" name="upIdDep" value="">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body" id="modall-edit">
+                        <div class="pl-2 pr-2">
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Nom</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" type="text" id="upnom" name="upnom" placeholder="Nom"
+                                        required>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">Insértion<br> des notes</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <select class="custom-select col-12" id="etatnote" name="etatnote">
-                                            <option value="ouvert" selected>Ouvert</option>
-                                            <option value="fermé">Fermé</option>
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Insértion<br> des notes</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="custom-select col-12" id="etatnote" name="etatnote">
+                                        <option value="ouvert" selected>Ouvert</option>
+                                        <option value="fermé">Fermé</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-secondary"
-                                style="text-decoration: none;">Annuler</button>
-                            <input class="btn btn-primary" type="submit" value="Enregistrer">
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary"
+                            style="text-decoration: none;">Annuler</button>
+                        <input class="btn btn-primary" type="submit" value="Enregistrer">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -396,12 +400,6 @@
             </div>
         </div>
     </div>
-    <div class="footer-wrap pd-20 mb-20 card-box">
-        DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
-            Hingarajiya</a>
-    </div>
-    </div>
-    </div>
 @endsection
 @section('SpecialScripts')
     <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
@@ -417,328 +415,5 @@
     <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-    <script>
-        var table1 = $('.data-table-export').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('getDepartements') }}",
-            columns: [{
-                    data: 'idDepartement',
-                    name: 'idDepartement'
-                },
-                {
-                    data: 'nom',
-                    name: 'nom'
-                },
-                {
-                    data: 'insertion_notes',
-                    render: function(data, type, full, meta) {
-                        return '<span class="pl-5">' + data + '</span>'
-                    }
-                },
-                {
-                    data: 'NBfiliere',
-                    render: function(data, type, full, meta) {
-                        return '<span class="pl-5">' + data + '</span>'
-                    }
-                },
-                {
-                    data: 'NBprofesseurs',
-                    render: function(data, type, full, meta) {
-                        return '<span class="pl-5">' + data + '</span>'
-                    }
-                },
-                {
-                    data: 'idDepartement',
-                    render: function(data, type, full, meta) {
-                        return '<div class="table-actions pl-1"><a href="#" style="color: #265ed7" onclick="getDepInfo(' +
-                            data +
-                            ')" data-toggle="modal" data-target="#bd-edit-modal"><i class="icon-copy dw dw-edit2"></i></a> <a href="#" style="color : #e95959" onclick="setDepId(' +
-                            data +
-                            ')" data-toggle="modal" data-target="#confirmation-modal" type="button"><i class="icon-copy dw dw-delete-3"></i></a></div>'
-                    }
-                }
-            ],
-            scrollCollapse: true,
-            autoWidth: false,
-            responsive: true,
-            columnDefs: [{
-                targets: "datatable-nosort",
-                orderable: false,
-            }],
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            "language": {
-                "info": "_START_ à _END_ sur _TOTAL_ éléments",
-                "emptyTable": "Aucune donnée disponible dans le tableau",
-                "lengthMenu": "Afficher _MENU_ éléments",
-                "zeroRecords": "Aucun élément correspondant trouvé",
-                "processing": "Traitement...",
-                "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
-                "loadingRecords": "Chargement...",
-                "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
-                search: "Rechercher:",
-                searchPlaceholder: "Rechercher",
-                paginate: {
-                    next: '<i class="ion-chevron-right"></i>',
-                    previous: '<i class="ion-chevron-left"></i>'
-                }
-            },
-            dom: '<"top"<"left-col"B><"right-col"f>>rtip',
-            buttons: [{
-                extend: 'print',
-                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
-            }]
-        });
-        function setDepId(id) {
-            document.getElementById('idDep').value = id;
-        }
-        function ReloadSelects(id) {
-            jQuery.ajax({
-                url: "{{ route('getNewDepartements') }}",
-                type: "GET",
-                dataType: "json",
-                success: function(response) {
-                    console.log(response);
-                    jQuery('select[name="' + id + '"]').empty();
-                    if (id != 'ajfildep') {
-                        $('select[name="' + id + '"]').append(
-                            '<option disabled selected>---Sélectioné une département---</option>'
-                            );
-                    }
-                    jQuery.each(response, function(key, value) {
-                        $('select[name="' + id + '"]').append(
-                            '<option value="' + value.idDepartement +
-                            '">' + value.nom + '</option>');
-                    });
-                }
-            });
-        }
-
-        function ReloadAllSelects() {
-            ReloadSelects('ajfildep');
-            ReloadSelects('semdep');
-            ReloadSelects('moddep');
-            ReloadSelects('matdep');
-            jQuery('select[name="semfil"]').empty();
-            jQuery('select[name="modfil"]').empty();
-            $('select[name="modfil"]').append('<option disabled selected>---Sélectioné une filiére---</option>');
-            jQuery('select[name="modsem"]').empty();
-            jQuery('select[name="matfil"]').empty();
-            $('select[name="matfil"]').append('<option disabled selected>---Sélectioné une filiére---</option>');
-            jQuery('select[name="modsem"]').empty();
-            jQuery('select[name="matmod"]').empty();
-            jQuery('select[name="matsem"]').empty();
-            $('select[name="matsem"]').append('<option disabled selected>---Sélectioné une semester---</option>');
-        }
-        function LoadFilieres(depsel,filsel)
-        {
-            jQuery('select[name="'+depsel+'"]').on('change', function() {
-                var idDep = jQuery(this).val();
-                if (idDep) {
-                    jQuery.ajax({
-                        url: '/master/getFilieresDep/' + idDep,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            console.log(data);
-                            jQuery('select[name="'+filsel+'"]').empty();
-                            if(filsel=='modfil' || filsel=='matfil')
-                            {
-                            $('select[name="'+filsel+'"]').append('<option disabled selected>---Sélectioné une filiére---</option>');
-                            }
-                            jQuery.each(data, function(key, value) {
-                                $('select[name="'+filsel+'"]').append('<option value="' +
-                                    value.idFiliere + '">' + value.nom + ' ' + value
-                                    .niveau + '</option>'
-                                );
-                            });
-                        }
-                    });
-                } else {
-                    $('select[name="'+filsel+'"]').empty();
-                }
-            });
-        }
-        function LoadSemesters(filsel,semsel)
-        {
-            jQuery('select[name="'+filsel+'"]').on('change', function() {
-                var idFil = jQuery(this).val();
-                if (idFil) {
-                    jQuery.ajax({
-                        url: '/master/getSemestersFil/' + idFil,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            console.log(data);
-                            jQuery('select[name="'+semsel+'"]').empty();
-                            if(semsel=='matsem')
-                            {
-                                $('select[name="'+semsel+'"]').append('<option disabled selected>---Sélectioné une semester---</option>');
-                            }
-                            jQuery.each(data, function(key, value) {
-                                $('select[name="'+semsel+'"]').append('<option value="' +
-                                    value.idSemestre + '">' + value.nom +'</option>'
-                                );
-                            });
-                        }
-                    });
-                } else {
-                    $('select[name="'+semsel+'"]').empty();
-                }
-            });
-        }
-        function LoadModules(semsel,modsel)
-        {
-            jQuery('select[name="'+semsel+'"]').on('change', function() {
-                var idSem = jQuery(this).val();
-                if (idSem) {
-                    jQuery.ajax({
-                        url: '/master/getModulesSem/' + idSem,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            console.log(data);
-                            jQuery('select[name="'+modsel+'"]').empty();
-                            jQuery.each(data, function(key, value) {
-                                $('select[name="'+modsel+'"]').append('<option value="' +
-                                    value.idModule + '">' + value.nom +'</option>'
-                                );
-                            });
-                        }
-                    });
-                } else {
-                    $('select[name="'+modsel+'"]').empty();
-                }
-            });
-        }
-        function getDepInfo(id) {
-            $.ajax({
-                type: 'GET',
-                url: "/master/departement/" + id,
-                dataType: 'JSON',
-                data: {},
-                success: function(response) {
-                    console.log(response);
-                    document.getElementById("upnom").value = response[0].nom;
-                    document.getElementById("upIdDep").value = response[0].idDepartement;
-                    document.getElementById("etatnote").value = response[0].insertion_notes;
-
-                }
-            })
-        }
-        jQuery(document).ready(LoadFilieres('semdep','semfil'));
-        jQuery(document).ready(LoadFilieres('moddep','modfil'));
-        jQuery(document).ready(LoadSemesters('modfil','modsem'));
-        jQuery(document).ready(LoadFilieres('matdep','matfil'));
-        jQuery(document).ready(LoadSemesters('matfil','matsem'));
-        jQuery(document).ready(LoadModules('matsem','matmod'));
-        $("#suppdep").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    $('#confirmation-modal').modal('hide');
-                    table1.ajax.reload();
-                    ReloadAllSelects();
-                }
-            });
-        });
-        $("#updDep").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    $('#bd-edit-modal').modal('hide');
-                    table1.ajax.reload();
-                }
-            });
-        });
-        $("#ajdep").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    document.getElementById('msgsuccess').innerHTML = "Département Ajoutée!";
-                    document.getElementById("ajdep").reset();
-                    $('#success-modal').modal('show');
-                    table1.ajax.reload();
-                    ReloadAllSelects();
-                }
-            });
-        });
-        $("#ajfiliere").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    document.getElementById('msgsuccess').innerHTML = "Filière Ajoutée!";
-                    document.getElementById("ajfiliere").reset();
-                    $('#success-modal').modal('show');
-                }
-            });
-        });
-        $("#affsem").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    document.getElementById('msgsuccess').innerHTML = "Les semesteres sont Affecté!";
-                    $('#success-modal').modal('show');
-                }
-            });
-        });
-        $("#ajmodule").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    document.getElementById('msgsuccess').innerHTML = "Module ajoutée!";
-                    document.getElementById("ajmodule").reset();
-                    $('#success-modal').modal('show');
-                }
-            });
-        });
-        $("#ajmatiere").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    document.getElementById('msgsuccess').innerHTML = "Matiere ajoutée!";
-                    document.getElementById("ajmatiere").reset();
-                    $('#success-modal').modal('show');
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('vendors/scripts/univscript.js') }}"></script>
 @endsection

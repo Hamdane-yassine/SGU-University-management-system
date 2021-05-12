@@ -160,6 +160,81 @@
                         </form>
                     </div>
                 </div>
+                <div class="pd-20 card-box mb-30">
+                    <div class="wizard-content">
+                        <div>
+                            <h4 class="h4">Affecter un professeur</h4>
+                        </div>
+                        <hr>
+                        <form action="{{ route('AffecterProfesseur') }}" class="tab-wizard wizard-circle wizard pl-20"
+                            method="POST" id="affecter">
+                            @csrf
+                            <input type="hidden" id="depA" name="depA" value="{{ $departement->idDepartement }}">
+                            <section>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>professeur :</label>
+                                            <select class="custom-select2 form-control" style="width: 100%; height: 38px;"
+                                                name="prof" id="prof">
+                                                @foreach ($professeurs as $professeur)
+                                                    @php
+                                                        $check = 0;
+                                                    @endphp
+                                                    @foreach ($departement->prof_departements as $prof_departement)
+                                                        @if ($prof_departement->professeur->idProf == $professeur->idProf)
+                                                            @php
+                                                                $check++;
+                                                                break;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                    @if ($check == 0)
+                                                        <option value="{{ $professeur->idProf }}">
+                                                            {{ $professeur->user->personne->nom . ' ' . $professeur->user->personne->prenom }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="text-right"><input class="btn btn-primary" type="submit" value="Affecter"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="pd-20 card-box mb-30">
+                    <div class="wizard-content">
+                        <div>
+                            <h4 class="h4">Retirer un professeur</h4>
+                        </div>
+                        <hr>
+                        <form action="{{ route('RetirerProfesseur') }}" class="tab-wizard wizard-circle wizard pl-20"
+                            method="POST" id="retirer">
+                            @csrf
+                            <input type="hidden" id="depD" name="depD" value="{{ $departement->idDepartement }}">
+                            <section>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>professeur :</label>
+                                            <select class="custom-select2 form-control" name="profdet" id="profdet"
+                                                style="width: 100%; height: 38px;" required>
+                                                @foreach ($departement->prof_departements as $prof_departement)
+                                                    <option value="{{ $prof_departement->professeur->idProf }}">
+                                                        {{ $prof_departement->professeur->user->personne->nom . ' ' . $prof_departement->professeur->user->personne->prenom }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="text-right"><input class="btn btn-primary" type="submit" value="Retirer"></div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog"
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -349,7 +424,7 @@
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" value="" type="email" id="inemail" name="inemail"
                                                 required>
-                                                <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            <span class="invalid-feedback pl-2" role="alert"> <strong
                                                     style="font-family:'Inter',sans-serif; font-weight: 400;"
                                                     id="msgerrinmail"></strong></span>
                                         </div>
@@ -361,8 +436,8 @@
                                             <input class="form-control" value="" id="inemailins" name="inemailins"
                                                 type="email" required>
                                             <span class="invalid-feedback pl-2" role="alert"> <strong
-                                                style="font-family:'Inter',sans-serif; font-weight: 400;"
-                                                id="msgerrinmainins"></strong></span>
+                                                    style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                                    id="msgerrinmainins"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -397,7 +472,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
-                            <h3 class="mb-20 pt-5">Professeur est ajouté!</h3>
+                            <h3 class="mb-20 pt-5" id="msg"></h3>
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
@@ -510,6 +585,37 @@
             }]
         });
 
+        function LoadProfs(idDep) {
+            jQuery.ajax({
+                url: '/admin/getAllProfs/'+idDep,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    jQuery('select[name="prof"]').empty();
+                    jQuery.each(data, function(key, value) {
+                        $('select[name="prof"]').append('<option value="' +
+                            value.idProf + '">' + value.nom + ' ' + value
+                            .prenom + '</option>'
+                        );
+                    });
+                }
+            });
+            jQuery.ajax({
+                url: '/admin/getProfDep/'+idDep,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    jQuery('select[name="profdet"]').empty();
+                    jQuery.each(data, function(key, value) {
+                        $('select[name="profdet"]').append('<option value="' +
+                            value.idProf + '">' + value.nom + ' ' + value
+                            .prenom + '</option>'
+                        );
+                    });
+                }
+            });
+        }
+
         function setIdProfesseur(id) {
             document.getElementById("idProf").value = id;
         };
@@ -564,6 +670,48 @@
                 success: function(data) {
                     $('#confirmation-modal').modal('hide');
                     table1.ajax.reload();
+                    var iddep = document.getElementById('depA').value;
+                    LoadProfs(iddep);
+                }
+            });
+        });
+        $("#affecter").submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data) {
+                    document.getElementById('msg').innerHTML = "Professeur affecté!";
+                    $('#success-modal').modal('show');
+                    $('html, body').animate({
+                        scrollTop: 0
+                    }, 'fast');
+                    table1.ajax.reload();
+                    var iddep = document.getElementById('depA').value;
+                    LoadProfs(iddep);
+                }
+            });
+        });
+        $("#retirer").submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data) {
+                    document.getElementById('msg').innerHTML = "Professeur retirer";
+                    $('#success-modal').modal('show');
+                    $('html, body').animate({
+                        scrollTop: 0
+                    }, 'fast');
+                    table1.ajax.reload();
+                    var iddep = document.getElementById('depA').value;
+                    LoadProfs(iddep);
                 }
             });
         });
@@ -621,6 +769,7 @@
                 data: form.serialize(), // serializes the form's elements.
                 success: function(data) {
                     reins();
+                    document.getElementById('msg').innerHTML = "Professeur est ajouté!";
                     $('#success-modal').modal('show');
                 },
                 error: function(err) {
@@ -630,7 +779,8 @@
 
                             if (key == "ajemailins") {
                                 document.getElementById('msgerrmailins').innerHTML = value;
-                                document.getElementById("ajemailins").classList.add("is-invalid");
+                                document.getElementById("ajemailins").classList.add(
+                                    "is-invalid");
                             }
                             if (key == "ajemail") {
                                 document.getElementById('msgerrmail').innerHTML = value;
@@ -646,8 +796,8 @@
                 }
             });
         });
-        function reinsupd()
-        {
+
+        function reinsupd() {
             document.getElementById('msgerrinmainins').innerHTML = "";
             document.getElementById("inemailins").classList.remove("is-invalid");
             document.getElementById('msgerrinmail').innerHTML = "";
@@ -655,8 +805,8 @@
             document.getElementById('msgerrincin').innerHTML = "";
             document.getElementById("incin").classList.remove("is-invalid");
         }
-        function reinscheck()
-        {
+
+        function reinscheck() {
             document.getElementById('msgerrmailins').innerHTML = "";
             document.getElementById("ajemailins").classList.remove("is-invalid");
             document.getElementById('msgerrmail').innerHTML = "";
@@ -683,7 +833,8 @@
                         $.each(err.responseJSON.errors, function(key, value) {
                             if (key == "inemailins") {
                                 document.getElementById('msgerrinmainins').innerHTML = value;
-                                document.getElementById("inemailins").classList.add("is-invalid");
+                                document.getElementById("inemailins").classList.add(
+                                    "is-invalid");
                             }
                             if (key == "inemail") {
                                 document.getElementById('msgerrinmail').innerHTML = value;
