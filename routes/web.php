@@ -183,7 +183,10 @@ Route::post('suppprofesseur',[AdminController::class, 'SupprimerProfesseur'])->n
 Route::post('updateprofesseur',[AdminController::class, 'UpdateProfesseur'])->name('updateProfesseur');
 Route::post('ajouteprofesseur',[AdminController::class, 'AjouterProfesseur'])->name('AjouterProfesseur');
 Route::post('importexcelfile',[AdminController::class, 'ImportExcelfile'])->name('ImportExcelfile');
-
+Route::post('/admin/affecterprof',[AdminController::class, 'AffecterProfesseur'])->name('AffecterProfesseur');
+Route::post('/admin/retirerprof',[AdminController::class, 'RetirerProfesseur'])->name('RetirerProfesseur');
+Route::get('/admin/getAllProfs/{departement}', [App\Http\Controllers\AdminController::class, 'getAllProfesseur']);
+Route::get('/admin/getProfDep/{departement}', [App\Http\Controllers\AdminController::class, 'getProfDep']);
 
 Route::get('/admin/dashboard',[AdminController::class , 'FetchDashboardData']);
 
