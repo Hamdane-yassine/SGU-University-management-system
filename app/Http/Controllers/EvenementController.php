@@ -51,7 +51,6 @@ class EvenementController extends Controller
             'corps'=>'required',
             'attachments.*'=>'mimes:png,jpg,pdf|max:30000',
             'attachments'=>'max:3',
-
             ],
             ['attachments.max'=>'vous avez uploader plus que 3 fichiers']
         );

@@ -105,7 +105,7 @@
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
+                    <a class="dropdown-item" href="{{ url('profile/'.Auth::user()->id)}}"><i class="dw dw-user1"></i> Profile</a>
                     <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Aide</a>
                     <a class="dropdown-item"  href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="dw dw-logout"></i> Se déconnecter</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -214,7 +214,7 @@
             </ul>
         </div>
     </div>
-    @elseif (auth()->user()->role=='chefdep')
+    @elseif (auth()->user()->role == 'chefdep')
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
