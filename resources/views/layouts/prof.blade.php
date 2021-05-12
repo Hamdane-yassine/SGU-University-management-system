@@ -356,6 +356,12 @@
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau de bord</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('GestionUniversite') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-gears"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Gestion  d'université</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

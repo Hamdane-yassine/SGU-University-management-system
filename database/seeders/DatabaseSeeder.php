@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\Personne::factory(300)->create();
-        \App\Models\Anneescolaire::factory(1)->create();
         \App\Models\User::factory(100)->create();
         \App\Models\Profile::factory(100)->create();
         \App\Models\Departement::factory(20)->create();
