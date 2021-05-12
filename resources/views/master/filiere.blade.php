@@ -102,28 +102,33 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Semestre :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="semestre2">
-                                        <option>--select a semester--</option>
-                                        @foreach ($Semestres as $Semester)
-                                            <option value="{{ $Semester->id }}">{{ $Semester->name }}</option>
+                                    <label>Filiere :</label>
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="filiere2">
+                                        <option>--sélectionner une filiere--</option>
+                                        @foreach ($filieres as $filiere)
+                                            <option value="{{ $filiere->idFiliere }}">{{ $filiere->nom }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>Nom :</label>
-                                    <input class="form-control" name="NomModule"  type="text" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Module :</label>
                                     <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="module2" required>
                                     </select>
                                 </div>
-                                    <div class="form-group">
+                                <div class="form-group">
+                                    <label>Nom :</label>
+                                    <input class="form-control" name="NomModule2"  type="text" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Semestre :</label>
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="semestre2">
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label>Volume Horaire :</label>
-                                    <input class="form-control" type="number" name="VH" >
+                                    <input class="form-control" type="number" name="VH2" >
                                     </select>
                                 </div>
                             </div>
@@ -149,41 +154,49 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Semestre :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="semestre3">
-                                        <option>--select a semester--</option>
-                                        @foreach ($Semestres as $Semester)
-                                            <option value="{{ $Semester->id }}">{{ $Semester->name }}</option>
+                                    <label>Filiere :</label>
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="filiere3">
+                                        <option>--sélectionner une filiere--</option>
+                                        @foreach ($filieres as $filiere)
+                                            <option value="{{ $filiere->idFiliere }}">{{ $filiere->nom }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Matiere :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="matiere3">
+                                    <label>Module :</label>
+                                    <select class="custom-select2 form-control"  style="width: 100%; height: 38px;" name="module3">
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Nom :</label>
-                                    <input class="form-control datetimepicker" name="nom3" type="text" autocomplete="off">
+                                    <input class="form-control " name="nom3" type="text" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label>coefficient :</label>
+                                    <input class="form-control" type="number" name="coeff3" type="text" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Module :</label>
-                                    <select class="custom-select2 form-control"  style="width: 100%; height: 38px;" id="module3" name="module3">
+                                    <label>Semestre :</label>
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="semestre3">
                                     </select>
                                 </div>
-                                    <div class="form-group">
-                                    <label>Volume Horaire :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="vh3">
+                                <div class="form-group">
+                                    <label>Matiere :</label>
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="matiere3" required>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Volume Horaire :</label>
+                                    <input class="form-control"type="number" name="vh3">
                                 </div>
                             </div>
                         </div>
                     </section>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-danger" formaction="/chef/rattrapages/annuler/" formnovalidate>Supprimer</button>
-                        <button type="submit" class="btn btn-success" formaction="/chef/rattrapages/valider/">Valider</button>
+                        <button type="submit" class="btn btn-danger" formaction="/master/deleteMatiere" formnovalidate>Supprimer</button>
+                        <button type="submit" class="btn btn-success" formaction="/master/saveMatiere">Valider</button>
                     </div>
                 </form>
             </div>
@@ -273,6 +286,37 @@
                 });
         });
     </script>
+    <!--module-->
+    <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="filiere2"]').on('change',function(){
+                    jQuery('select[name="module2"]').empty();
+                   var idFiliere = jQuery(this).val();
+                   if(idFiliere)
+                   {
+                      jQuery.ajax({
+                         url : '/master/getSemestresOfFiliere/'+idFiliere,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(data)
+                         {
+                            console.log(data);
+                            jQuery('select[name="semestre2"]').empty();
+                            $('select[name="semestre2"]').append('<option value="" selected>--select Semestre--</option>');
+                            jQuery.each(data, function(key,value){
+                               $('select[name="semestre2"]').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+                            });
+                         }
+                      });
+                   }
+                   else
+                   {
+                      $('select[name="semestre2"]').empty();
+                   }
+                });
+        });
+    </script>
     <script type="text/javascript">
         jQuery(document).ready(function ()
         {
@@ -301,6 +345,65 @@
                 });
         });
     </script>
+    <!--third one-->
+    <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="filiere3"]').on('change',function(){
+                    jQuery('select[name="module3"]').empty();
+                   var idFiliere = jQuery(this).val();
+                   if(idFiliere)
+                   {
+                      jQuery.ajax({
+                         url : '/master/getSemestresOfFiliere/'+idFiliere,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(data)
+                         {
+                            console.log(data);
+                            jQuery('select[name="semestre3"]').empty();
+                            $('select[name="semestre3"]').append('<option value="" selected>--select Semestre--</option>');
+                            jQuery.each(data, function(key,value){
+                               $('select[name="semestre3"]').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+                            });
+                         }
+                      });
+                   }
+                   else
+                   {
+                      $('select[name="semestre3"]').empty();
+                   }
+                });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="semestre3"]').on('change',function(){
+                   var idSemester = jQuery(this).val();
+                   if(idSemester)
+                   {
+                      jQuery.ajax({
+                         url : '/master/getModuleOfSemester/' + idSemester,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(data)
+                         {
+                            console.log(data);
+                            jQuery('select[name="module3"]').empty();
+                            jQuery.each(data, function(key,value){
+                               $('select[name="module3"]').append('<option value="'+ value.idModule +'">'+ value.name +'</option>');
+                            });
+                         }
+                      });
+                   }
+                   else
+                   {
+                      $('select[name="module3"]').empty();
+                   }
+                });
+        });
+    </script>
     <script type="text/javascript">
         jQuery(document).ready(function ()
         {
@@ -320,7 +423,6 @@
                             jQuery.each(data, function(key,value){
                                $('select[name="module3"]').append('<option value="'+ value.idModule +'">'+ value.name +'</option>');
                             });
-
                          }
                       });
                    }
@@ -346,6 +448,7 @@
                          {
                             console.log(data);
                             jQuery('select[name="matiere3"]').empty();
+
                             jQuery.each(data, function(key,value){
                                $('select[name="matiere3"]').append('<option value="'+ value.idMatiere +'">'+ value.name +'</option>');
                             });
@@ -359,6 +462,7 @@
                 });
         });
     </script>
+
 
 
     @endsection

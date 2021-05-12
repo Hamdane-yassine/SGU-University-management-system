@@ -208,6 +208,10 @@ Route::get('/master/getModuleOfSemester/{idSemester}', [MasterController::class 
 
 Route::post('/master/saveModule', [MasterController::class ,'saveModule']);
 
+Route::post('/master/saveMatiere', [MasterController::class , 'saveMatiere']);
+
 Route::post('/master/deleteModule', [MasterController::class ,'deleteModule']);
 
 Route::get('/master/getMatieresOfModule/{idModule}', [MasterController::class , 'getMatieresOfModule']);
+
+Route::post('/master/deleteMatiere', [MasterController::class , 'deleteMatiere']);

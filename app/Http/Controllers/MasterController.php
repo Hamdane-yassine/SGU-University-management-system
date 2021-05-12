@@ -103,8 +103,8 @@ class MasterController extends Controller
     {
         $idSemester = $request->semestre2;
         $idModule = $request->module2;
-        $newName = $request->NomModule;
-        $vh = $request->VH;
+        $newName = $request->NomModule2;
+        $vh = $request->VH2;
 
         if(is_null($newName) && is_null($vh)) return redirect()->back();
 
@@ -118,7 +118,7 @@ class MasterController extends Controller
 
     public function deleteModule(Request $request)
     {
-        Module::destroy( $request->module2);  //deleting a module leads to the deletion of all matiers included in it
+        Module::destroy($request->module2);  //deleting a module leads to the deletion of all matiers included in it
         return redirect()->back();
     }
 
@@ -128,5 +128,29 @@ class MasterController extends Controller
         $matiers = Matiere::where('idModule',$idModule)
         ->select('idMatiere','nom as name')->get();
         return json_encode($matiers);
+    }
+
+    public function saveMatiere(Request $request)
+    {
+        $idMatiere = $request->matiere3;
+        $newNomMatiere = $request->nom3;
+        $newVH = $request->vh3;
+        $newCoeff = $request->coeff3;
+
+        $Matiere = Matiere::find($idMatiere);
+
+        if(!is_null($newNomMatiere)) $Matiere->nom = $newNomMatiere;
+        if(!is_null($newVH))         $Matiere->vh = $newVH;
+        if(!is_null($newCoeff))      $Matiere->coeff = $newCoeff;
+
+        $Matiere->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteMatiere(Request $request)
+    {
+        $matiere = Matiere::destroy($request->matiere3);
+        return redirect()->back();
     }
 }
