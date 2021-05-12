@@ -201,6 +201,29 @@ Route::get('/master/departements', [MasterController::class , 'getDepartements']
 
 Route::post('/master/deletedepartement', [MasterController::class , 'SupprimerDepartement'])->name('SupprimerDepartement');
 
+Route::post('/master/updatedepartement', [MasterController::class , 'UpdateDepartement'])->name('UpdateDepartement');
+
+Route::get('/master/departement/{departement}', [MasterController::class , 'getDepartement'])->name('getDepartement');
+
+Route::post('/master/ajoutedepartement', [MasterController::class , 'AjouterDepartement'])->name('AjouterDepartement');
+
+Route::post('/master/ajoutefiliere', [MasterController::class , 'AjouterFiliere'])->name('AjouterFiliere');
+
+Route::get('/master/getNewDepartements', [MasterController::class , 'getNewDepartements'])->name('getNewDepartements');
+
+Route::post('/master/affectersemester', [MasterController::class , 'AffecterSemesteres'])->name('AffecterSemesteres');
+
+Route::get('/master/getFilieresDep/{departement}', [MasterController::class , 'getFilieresDep'])->name('getFilieresDep');
+
+Route::post('/master/ajoutermodule', [MasterController::class , 'AjouterModule'])->name('AjouterModule');
+
+Route::get('/master/getSemestersFil/{filiere}', [MasterController::class , 'getSemestersFil'])->name('getSemestersFil');
+
+Route::post('/master/ajoutermatiere', [MasterController::class , 'AjouterMatiere'])->name('AjouteMatiere');
+
+Route::get('/master/getModulesSem/{semester}', [MasterController::class , 'getModulesSem'])->name('getModulesSem');
+
+//=====
 
 Route::get('/master/filiere/{idDepartement}', [MasterController::class , 'indexFilieres']);
 

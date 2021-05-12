@@ -16,7 +16,7 @@ class CreateDepartementTable extends Migration {
 		Schema::create('departement', function(Blueprint $table)
 		{
 			$table->id('idDepartement');
-            $table->enum('insertion_notes',['ouvert','fermé']);
+            $table->enum('insertion_notes',['ouvert','fermé'])->default('fermé');
 			$table->string('nom', 254);
 		});
 	}

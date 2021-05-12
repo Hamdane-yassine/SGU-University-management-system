@@ -25,19 +25,21 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
+use App\Models\Semestre;
 use Illuminate\Support\Facades\Log;
 
 class MasterController extends Controller
 {
    public function Universite()
    {
-      return view('master.ecole');
+      $departements = Departement::All();
+      return view('master.ecole',['departements' => $departements]);
    }
 
    public function getDepartements(Request $request)
    {
-      $departement = Departement::join('filiere', 'departement.idDepartement', '=', 'filiere.idDepartement') //retrieved matiere
-         ->join('prof_departement', 'departement.idDepartement', '=', 'prof_departement.idDepartement')
+      $departement = Departement::leftjoin('filiere', 'departement.idDepartement', '=', 'filiere.idDepartement') //retrieved matiere
+         ->leftjoin('prof_departement', 'departement.idDepartement', '=', 'prof_departement.idDepartement')
          ->select('departement.idDepartement', 'departement.nom', 'departement.insertion_notes', DB::raw('COUNT(DISTINCT filiere.idFiliere) as NBfiliere'), DB::raw('COUNT(DISTINCT prof_departement.idProfDep) as NBprofesseurs'))
          ->groupBy('departement.idDepartement', 'departement.nom', 'departement.insertion_notes')
          ->get();
@@ -50,35 +52,131 @@ class MasterController extends Controller
    public function SupprimerDepartement()
    {
       $departement = Departement::find(request('idDep'));
-      foreach ($departement->filieres as $filiere) {
-         foreach ($filiere->semestres as $semestre) {
-            foreach ($semestre->modules as $module) {
-               foreach ($module->matieres as $matiere) {
-                  DB::table('absence')->where('idMatiere', '=', $matiere->idMatiere)->delete();
-                  DB::table('note')->where('idMatiere', '=', $matiere->idMatiere)->delete();
-                  DB::table('matiere')->where('idMatiere', '=', $matiere->idMatiere)->delete();
-               }
-               DB::table('module')->where('idModule', '=', $module->idModule)->delete();
-            }
-            DB::table('semestre')->where('idSemestre', '=', $semestre->idSemestre)->delete();
+      $emploi = array();
+      $personne = array();
+      foreach($departement->filieres as $filiere)
+      {
+         if($filiere->idEmploi!=null)
+         {
+            array_push($emploi,$filiere->idEmploi);
          }
-         foreach ($filiere->etudiants as $etudiant) {
-            DB::table('note')->where('idEtudiant', '=', $etudiant->idEt)->delete();
-            $Idpersonne = $etudiant->personne->idPersonne;
-            DB::table('etudiant')->where('idEtudiant', '=', $etudiant->idEtudiant)->delete();
-            DB::table('personne')->where('idPersonne', '=', $Idpersonne)->delete();
+         foreach($filiere->etudiants as $etudiant)
+         {
+            array_push($personne,$etudiant->idPersonne);
          }
-         DB::table('filiere')->where('idFiliere', '=', $filiere->idFiliere)->delete();
       }
-      DB::table('prof_departement')->where('idDepartement', '=', $departement->idDepartement)->delete();
-      $idChef = $departement->chefdep->idProf;
-      DB::table('chefdep')->where('idDepartement', '=', $departement->idDepartement)->delete();
-      DB::table('departement')->where('idDepartement', '=', $departement->idDepartement)->delete();
-      $professeur = Professeur::find($idChef);
-      $idUtilisateur = $professeur->idUtilisateur;
-      $user = User::find($idUtilisateur);
-      $user->role = "prof";
-      $user->save();
+      $departement->delete();
+      foreach($personne as $idPersonne)
+      {   
+         DB::table('personne')->where('idPersonne', '=', $idPersonne)->delete();
+      }
+      foreach($emploi as $idemploi)
+      {
+        $emploitodelete = Emploi::find($idemploi);
+        $filename = $emploitodelete->fileName;
+        Storage::delete('emploi/filiere/'.$filename);  //delete the physical file
+        $emploitodelete->delete();
+      }
+   }
+   public function getDepartement(Request $request,Departement $departement)
+   {
+      $departementinfo = Departement::where('departement.idDepartement',$departement->idDepartement)
+      ->select('idDepartement','nom','insertion_notes')
+      ->get();
+      if ($request->ajax()) {
+         echo json_encode($departementinfo);
+     }
+   }
+   public function UpdateDepartement()
+   {
+      $idDepartement = request('upIdDep');
+      $departement = Departement::find($idDepartement);
+      $departement->nom=request('upnom');
+      $departement->insertion_notes=request('etatnote');
+      $departement->save();
+   }
+   public function AjouterDepartement()
+   {
+      $departement = new Departement;
+      $departement->nom=request('ajdepnom');
+      $departement->save();
+   }
+   public function AjouterFiliere()
+   {
+      $idDepartement = request('ajfildep');
+      $dip = request('diplome');
+      $nom = request('filnom');
+      if($dip == 1 || $dip == 3)
+      {
+         $filiere1 = new Filiere;
+         $filiere1->nom=$nom;
+         $filiere1->niveau=1;
+         $filiere1->idDepartement=$idDepartement;
+         $filiere2 = new Filiere;
+         $filiere2->nom=$nom;
+         $filiere2->niveau=2;
+         $filiere2->idDepartement=$idDepartement;
+         $filiere1->save();
+         $filiere2->save();
+      }else{
+         $filiere = new Filiere;
+         $filiere->nom=$nom;
+         $filiere->niveau=1;
+         $filiere->idDepartement=$idDepartement;
+         $filiere->save();
+      }
+   }
+
+   public function getNewDepartements()
+   {
+      $departements=Departement::All()->toArray();
+      echo json_encode($departements);
+   }
+   public function getFilieresDep(Departement $departement)
+   {
+      echo json_encode($departement->filieres);
+   }
+   public function AffecterSemesteres()
+   {
+      $idFiliere=request('semfil');
+      $semesteres = request('semester');
+      $annee = date("Y")."/".(date("Y")-1);
+      foreach($semesteres as $semester)
+      {
+         $semesterToInsert = new Semestre;
+         $semesterToInsert->nom=$semester;
+         $semesterToInsert->idFiliere=$idFiliere;
+         $semesterToInsert->Annee_universaitaire=$annee;
+         $semesterToInsert->save();
+      }
+   }
+   public function getSemestersFil(Filiere $filiere)
+   {
+      echo json_encode($filiere->semestres);
+   }
+   public function AjouterModule()
+   {
+      $idFiliere = request('modfil');
+      $idSemester = request('modsem');
+      $module = new Module;
+      $module->idFiliere=$idFiliere;
+      $module->idSemestre=$idSemester;
+      $module->nom=request('modnom');
+      $module->vh=request('modvh');
+      $module->save();
+   }
+   public function getModulesSem(Semestre $semester)
+   {
+      echo json_encode($semester->modules);
+   }
+   public function AjouterMatiere()
+   {
+      $idModule = request('matmod');
+      $matiere = new Matiere;
+      $matiere->idModule=$idModule;
+      $matiere->nom=request('matnom');
+      $matiere->vh=request('matvh');
+      $matiere->save();
    }
    public function indexFilieres($idDepartement)
    {
@@ -120,4 +218,5 @@ class MasterController extends Controller
 
       return redirect('/master/filiere/' . $idDepartement);
    }
+
 }

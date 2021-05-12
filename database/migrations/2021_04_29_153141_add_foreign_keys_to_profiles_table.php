@@ -14,7 +14,7 @@ class AddForeignKeysToProfilesTable extends Migration
     public function up()
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->foreign('idUtilisateur','fk100')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('idUtilisateur','fk100')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('CASCADE');
         });
     }
 
