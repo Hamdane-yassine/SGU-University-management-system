@@ -29,7 +29,7 @@
                     @endcan
                         <div class="pd-20 card-box height-100-p">
                             <div class="profile-photo">
-                                <img src="{{ url($imagePath) }}" style="" alt="" class="avatar-photo">
+                                <img src="{{ url($croppedImage) }}" style="" alt="" class="avatar-photo">
                                 @can('update',$profile)
                                     <a href="modal" style="r" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
                                     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -119,7 +119,7 @@
                                         <!-- Setting Tab start -->
                                         <div class="tab-pane active height-100-p" id="setting" role="tabpanel">
                                             <div class="profile-setting">
-                                                <form method="POST" action="{{ route('profile.update',$profile) }}">
+                                                <form method="POST" action="{{ route('profile.update', $profile) }}">
                                                     @csrf
                                                     <ul class="profile-edit-list row">
                                                         <li class="weight-500 col-md-6">
@@ -221,7 +221,8 @@
 															<h5>Changer votre mot de passe</h5>
 														</div>
 													</div>
-                                                    <form name="formPasswd" method="POST" action="{{ route('') }}">
+                                                    <form name="formPasswd" method="POST" action="{{ route('profile.update.passwd') }}">
+                                                        @csrf
                                                         <div class="profile-task-list pb-30">
                                                             <ul>
                                                                 <li class="weight-500 col-md-6">
@@ -231,6 +232,10 @@
                                                                     <input class="form-control form-control-lg @error('current')
                                                                     is-invalid
                                                                     @enderror" type="text" placeholder="Paste your link here" name="current">
+                                                                    @error('current')
+                                                                        {{ $message }}
+                                                                    @enderror
+                                                                    <span></span>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Nouveau mot de passe:</label>
@@ -304,30 +309,45 @@
                 cropper.destroy();
             });
 
-            $('input[value=Update]').click(e=>{
-                // var reader = new FileReader();
-                // console.log(cropper.getCropBoxData());
-                const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
-                $.ajax({
-                    type: 'POST',
-                    // url: "{{ route('profile.update.image',Auth::user()) }}",
-                    url: "/profile/updateImage",
-                    dataType: 'text',
-                    data: {
-                        img : file
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (response) {
-                        console.log("success");
-                        $('#')
-                    },
-                    error: function (error) {
-                        console.log("error");
-                    }
 
-                 })
+
+            $('input[value=Update]').click(e=>{
+                const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
+                var reader = new FileReader();
+                const newImage = document.getElementById('imgUpload').files[0];
+                reader.readAsDataURL(newImage);
+                reader.onerror = function (error) {
+                    console.log('Error: ', error);
+                };
+                reader.onload = function (error) {
+                    $.ajax({
+                        type: 'POST',
+                        // url: "{{ route('profile.update.image',Auth::user()) }}",
+                        url: "/profile/updateImage",
+                        dataType: 'json',
+                        // data: fdata,
+                        data: {
+                            'img' : file,
+                            'newImg': reader.result
+                        },
+                        // processData: false,
+                        // contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (response) {
+                            console.log("success");
+                            $('.avatar-photo').attr('src',file);
+                            $('#newImage').value = "";
+                            $('#modal-close').click();
+                        },
+                        error: function (error) {
+                            console.log("error");
+                        }
+                    });
+                };
+
+
                 // $('avatar-photo').css()
             });
             //  for custom file input
@@ -335,9 +355,13 @@
                 $('#imgUpload').click();
             });
 
-            $('#imgUpload').change(e=>{
+            $('#imgUpload').change(e => {
                 $('#formPhoto').submit();
             });
+            $('#modal-close').change(e => {
+                $('#newImage').value = "";
+            });
+
 
             $('#formPhoto').ajaxForm({
                 beforeSend: function() {
