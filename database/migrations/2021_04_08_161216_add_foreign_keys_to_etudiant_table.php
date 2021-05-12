@@ -15,8 +15,8 @@ class AddForeignKeysToEtudiantTable extends Migration {
 	{
 		Schema::table('etudiant', function(Blueprint $table)
 		{
-			$table->foreign('idPersonne','fk10')->references('idPersonne')->on('personne')->onUpdate('RESTRICT')->onDelete('cascade');
-			$table->foreign('idFiliere','fk11')->references('idFiliere')->on('filiere')->onDelete('set null');
+			$table->foreign('idPersonne','fk10')->references('idPersonne')->on('personne')->onUpdate('RESTRICT')->onDelete('CASCADE');
+			$table->foreign('idFiliere','fk11')->references('idFiliere')->on('filiere')->onDelete('CASCADE');
 		});
 	}
 

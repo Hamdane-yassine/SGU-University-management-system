@@ -198,6 +198,16 @@ Route::get('/master/filiere/{idDepartement}/datatable', [MasterController::class
 
 Route::post('/updateFiliere/{idDepartement}', [MasterController::class , 'updateFiliere']);
 
-Route::post('/getM');
+Route::get('/master/filiere/delete/{idFiliere}', [MasterController::class , 'deleteFiliere']);
 
+Route::get('/master/getSemestresOfFiliere/{idFiliere}', [MasterController::class , 'getSemestresOfFiliere']);
 
+Route::post('/master/deleteSemestreOfFiliere', [MasterController::class ,'deleteSemestreOfFiliere'])->name('deleteSemestreOfFiliere');
+
+Route::get('/master/getModuleOfSemester/{idSemester}', [MasterController::class , 'getModuleOfSemester']);
+
+Route::post('/master/saveModule', [MasterController::class ,'saveModule']);
+
+Route::post('/master/deleteModule', [MasterController::class ,'deleteModule']);
+
+Route::get('/master/getMatieresOfModule/{idModule}', [MasterController::class , 'getMatieresOfModule']);

@@ -59,16 +59,17 @@
                     <h4 class="h4 d-inline">Supprimer semestre : </h4>
                 </div>
                 <hr>
-                <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form class="tab-wizard wizard-circle wizard pl-20" method="POST" action="{{ route('deleteSemestreOfFiliere') }}">
+                @csrf
                     <section>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Filiere : </label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="filieres">
-                                        @foreach ($filieres as $filiere)
-                                            <option value="{{  $filiere->idFiliere }}">{{  $filiere->nom   }}</option>
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="filieres1" required>
+                                        <option>--select a filiere--</option>
+                                        @foreach ($filieres as $filiereX)
+                                            <option value="{{  $filiereX->idFiliere }}">{{  $filiereX->nom }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -76,10 +77,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Semestre :</label>
-                                    <input class="form-control" type="text" name="salle" ><br><br>
-                                    <div class="text-right">
-                                        <button type="submit" class="btn btn-danger" formaction="/chef/rattrapages/annuler/" formnovalidate>Supprimer</button>
-                                    </div>
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="semestre1" required>
+                                    </select>
+                                </div>
+                                <div class="text-right form-group">
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </div>
                             </div>
                         </div>
@@ -95,37 +97,41 @@
                 </div>
                 <hr>
                 <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
-                    @csrf
+                @csrf
                     <section>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Semestre :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="datesRattPossibles">
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="semestre2">
+                                        <option>--select a semester--</option>
+                                        @foreach ($Semestres as $Semester)
+                                            <option value="{{ $Semester->id }}">{{ $Semester->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Nom :</label>
-                                    <input class="form-control datetimepicker" name="dateRattOptionnel" placeholder="Date d'absence :" type="text" autocomplete="off">
+                                    <input class="form-control" name="NomModule"  type="text" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Module :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="datesRattPossibles">
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="module2" required>
                                     </select>
                                 </div>
                                     <div class="form-group">
                                     <label>Volume Horaire :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="datesRattPossibles">
+                                    <input class="form-control" type="number" name="VH" >
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-danger" formaction="/chef/rattrapages/annuler/" formnovalidate>Supprimer</button>
-                        <button type="submit" class="btn btn-success" formaction="/chef/rattrapages/valider/">Valider</button>
+                        <button type="submit" class="btn btn-danger"  formaction="/master/deleteModule" >Supprimer</button>
+                        <button type="submit" class="btn btn-success" formaction="/master/saveModule">Sauvegarder</button>
                     </div>
                 </form>
             </div>
@@ -144,28 +150,32 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Semestre :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="datesRattPossibles">
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="semestre3">
+                                        <option>--select a semester--</option>
+                                        @foreach ($Semestres as $Semester)
+                                            <option value="{{ $Semester->id }}">{{ $Semester->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Matiere :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="datesRattPossibles">
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="matiere3">
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Nom :</label>
-                                    <input class="form-control datetimepicker" name="dateRattOptionnel" placeholder="Date d'absence :" type="text" autocomplete="off">
+                                    <input class="form-control datetimepicker" name="nom3" type="text" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Module :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="datesRattPossibles">
+                                    <select class="custom-select2 form-control"  style="width: 100%; height: 38px;" id="module3" name="module3">
                                     </select>
                                 </div>
                                     <div class="form-group">
                                     <label>Volume Horaire :</label>
-                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="datesRattPossibles">
+                                    <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="vh3">
                                     </select>
                                 </div>
                             </div>
@@ -238,30 +248,117 @@
     <script type="text/javascript">
         jQuery(document).ready(function ()
         {
-                jQuery('select[name="filieres"]').on('change',function(){
+                jQuery('select[name="filieres1"]').on('change',function(){
                    var idFiliere = jQuery(this).val();
                    if(idFiliere)
                    {
                       jQuery.ajax({
-                         url : 'absences/getMatiere/' +idFiliere,
+                         url : '/master/getSemestresOfFiliere/'+idFiliere,
                          type : "GET",
                          dataType : "json",
                          success:function(data)
                          {
                             console.log(data);
-                            jQuery('select[name="matiere"]').empty();
+                            jQuery('select[name="semestre1"]').empty();
                             jQuery.each(data, function(key,value){
-                               $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nomMatiere +'</option>');
+                               $('select[name="semestre1"]').append('<option value="'+ value.id +'">'+ value.name +'</option>');
                             });
                          }
                       });
                    }
                    else
                    {
-                      $('select[name="matiere"]').empty();
+                      $('select[name="semestre1"]').empty();
                    }
                 });
         });
     </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="semestre2"]').on('change',function(){
+                   var idSemester = jQuery(this).val();
+                   if(idSemester)
+                   {
+                      jQuery.ajax({
+                         url : '/master/getModuleOfSemester/' + idSemester,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(data)
+                         {
+                            console.log(data);
+                            jQuery('select[name="module2"]').empty();
+                            jQuery.each(data, function(key,value){
+                               $('select[name="module2"]').append('<option value="'+ value.idModule +'">'+ value.name +'</option>');
+                            });
+                         }
+                      });
+                   }
+                   else
+                   {
+                      $('select[name="module2"]').empty();
+                   }
+                });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="semestre3"]').on('change',function(){
+                   var idSemester = jQuery(this).val();
+                   if(idSemester)
+                   {
+                      jQuery.ajax({
+                         url : '/master/getModuleOfSemester/' + idSemester,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(data)
+                         {
+                            console.log(data);
+                            jQuery('select[name="module3"]').empty();
+                            $('select[name="module3"]').append('<option value="" selected>--select module--</option>');
+                            jQuery.each(data, function(key,value){
+                               $('select[name="module3"]').append('<option value="'+ value.idModule +'">'+ value.name +'</option>');
+                            });
+
+                         }
+                      });
+                   }
+                   else
+                   {
+                      $('select[name="module3"]').empty();
+                   }
+                });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="module3"]').on('change',function(){
+                   var idModule = jQuery(this).val();
+                   if(idModule)
+                   {
+                      jQuery.ajax({
+                         url : '/master/getMatieresOfModule/' + idModule,
+                         type : "GET",
+                         dataType : "json",
+                         success:function(data)
+                         {
+                            console.log(data);
+                            jQuery('select[name="matiere3"]').empty();
+                            jQuery.each(data, function(key,value){
+                               $('select[name="matiere3"]').append('<option value="'+ value.idMatiere +'">'+ value.name +'</option>');
+                            });
+                         }
+                      });
+                   }
+                   else
+                   {
+                      $('select[name="matiere3"]').empty();
+                   }
+                });
+        });
+    </script>
+
 
     @endsection
