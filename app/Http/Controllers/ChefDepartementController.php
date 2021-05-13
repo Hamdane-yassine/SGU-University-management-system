@@ -494,6 +494,8 @@ class ChefDepartementController extends Controller
         $absence->etat = 'annulé';
         $absence->save();
 
+        //send notification to the prof that his absence has been rejected
+
         return redirect('/chef/rattrapages');
     }
 
@@ -505,6 +507,8 @@ class ChefDepartementController extends Controller
         if(!is_null($request->dateRattOptionnel)) {$absence->dateRattrapage = $request->dateRattOptionnel;}
         else {$absence->dateRattrapage = $request->datesRattPossibles;}
         $absence->save();
+
+        //send notification to the prof that his absence is valideated
 
         return redirect('/chef/rattrapages');
     }
