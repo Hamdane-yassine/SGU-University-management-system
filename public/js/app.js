@@ -1956,8 +1956,8 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Pusher.logToConsole = true;
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
-  key: "175b6522f4a3c21fa191",
-  cluster: "eu",
+  key: "",
+  cluster: "mt1",
   forceTLS: false
 });
 

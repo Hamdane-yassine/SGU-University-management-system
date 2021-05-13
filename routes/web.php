@@ -259,3 +259,9 @@ Route::post('/master/deleteModule', [MasterController::class ,'deleteModule']);
 Route::get('/master/getMatieresOfModule/{idModule}', [MasterController::class , 'getMatieresOfModule']);
 
 Route::post('/master/deleteMatiere', [MasterController::class , 'deleteMatiere']);
+
+Route::get('/master/dashboard', [MasterController::class , 'indexDashboard']);
+
+Route::get('/master/dashboard/chefdepsdatatable', [MasterController::class , 'chefdepsdatatable'])->name('MasterChefDatatable');
+
+Route::get('/master/dashboard/adminsdatatable', [MasterController::class , 'adminsdatatable'])->name('MasterAdminsDataTable');
