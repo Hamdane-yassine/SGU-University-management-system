@@ -321,11 +321,11 @@
                 var reader = new FileReader();
                 const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
                 const newImage = document.getElementById('imgUpload').files[0];
-                reader.readAsDataURL(newImage);
                 reader.onerror = function (error) {
                     console.log('Error: ', error);
                 };
-                reader.onload = function (error) {
+
+                function sendFiles() {
                     $.ajax({
                         type: 'POST',
                         // url: "{{ route('profile.update.image',Auth::user()) }}",
@@ -352,6 +352,10 @@
                         }
                     });
                 };
+                reader.onload = sendFiles;
+                if(newImage)
+                    reader.readAsDataURL(newImage);
+                else sendFiles();
 
 
                 // $('avatar-photo').css()
@@ -403,8 +407,8 @@
             @if($errors->has('current') || $errors->has('passwd') || $errors->has('retypedPasswd'))
                 if('{{ request()->tab }}' == 'passwd'){
                     $('a[role=tab]').click();
-            }
-            @endif('current')
+                }
+            @endif
         });
     </script>
 

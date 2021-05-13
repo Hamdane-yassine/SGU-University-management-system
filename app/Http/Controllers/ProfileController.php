@@ -165,7 +165,7 @@ class ProfileController extends Controller
 
         $profile->croppedImage = $this->filePath($request, 'img');
 
-        if($request->has('newImg')){
+        if($request->has('newImg') && $request->newImg != null){
             // $request->user->profile->imagePath = $request->file('newImg');
             $profile->imagePath = $this->filePath($request, 'newImg');
         }
