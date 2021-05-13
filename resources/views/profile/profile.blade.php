@@ -344,6 +344,7 @@
                         success: function (response) {
                             console.log("success");
                             $('.avatar-photo').attr('src',file);
+                            $('img')[0].src = file;
                             $('#newImage').value = "";
                             $('#modal-close').click();
                         },
