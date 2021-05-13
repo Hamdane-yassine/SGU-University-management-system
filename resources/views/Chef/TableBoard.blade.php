@@ -100,7 +100,7 @@
 							<ul>
 								<li>
                                     @if(Auth::User()->notifications->count())
-                                    @foreach (Auth::User()->UnreadNotifications as $notification)
+                                    @foreach (Auth::User()->notifications as $notification)
                                     <li>
                                         @if($notification->type === 'App\Notifications\NotifyEvent' )
                                         <a href="{{ url('/evenement/'.$notification->data['idEvent']) .'?idNotif='.$notification->data['idNotif']}}">
