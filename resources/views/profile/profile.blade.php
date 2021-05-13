@@ -29,7 +29,7 @@
                     @endcan
                         <div class="pd-20 card-box height-100-p">
                             <div class="profile-photo">
-                                <img src="{{ url($imagePath) }}" style="" alt="" class="avatar-photo">
+                                <img src="{{ url($croppedImage) }}" style="" alt="" class="avatar-photo">
                                 @can('update',$profile)
                                     <a href="modal" style="r" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
                                     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -109,7 +109,7 @@
                                 <div class="tab height-100-p">
                                     <ul class="nav nav-tabs customtab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#setting">Settings</a>
+                                            <a class="nav-link active" data-toggle="tab" href="#setting">Info personnel</a>
                                         </li>
                                         <li class="nav-item">
 											<a class="nav-link" data-toggle="tab" href="#passwd" role="tab">Mot de passe</a>
@@ -119,17 +119,20 @@
                                         <!-- Setting Tab start -->
                                         <div class="tab-pane active height-100-p" id="setting" role="tabpanel">
                                             <div class="profile-setting">
-                                                <form>
+                                                <form method="POST" action="{{ route('profile.update', $profile) }}">
+                                                    @csrf
                                                     <ul class="profile-edit-list row">
                                                         <li class="weight-500 col-md-6">
                                                             <h4 class="text-blue h5 mb-20">Modifier vos informations</h4>
-                                                            <div class="form-group">
+                                                            {{-- <div class="form-group">
                                                                 <label>Title</label>
                                                                 <input class="form-control form-control-lg" type="text">
-                                                            </div>
+                                                            </div> --}}
                                                             <div class="form-group">
                                                                 <label>Email personnel</label>
-                                                                <input class="form-control form-control-lg" type="email">
+                                                                <input class="form-control form-control-lg @error('email')
+                                                                    is-invalid
+                                                                @enderror" name="email" type="email">
                                                             </div>
                                                             {{-- <div class="form-group">
                                                                 <label>Date de naissance</label>
@@ -168,39 +171,39 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label>Numero de telephone</label>
-                                                                <input class="form-control form-control-lg" type="text">
+                                                                <input class="form-control form-control-lg" name="tel" type="text">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Address</label>
-                                                                <textarea class="form-control"></textarea>
+                                                                <label>Adresse</label>
+                                                                <textarea class="form-control" name="adresse"></textarea>
                                                             </div>
-                                                            <div class="form-group">
+                                                            {{-- <div class="form-group">
                                                                 <div class="custom-control custom-checkbox mb-5">
                                                                     <input type="checkbox" class="custom-control-input" id="customCheck1-1">
                                                                     <label class="custom-control-label weight-400" for="customCheck1-1">I agree to receive notification emails</label>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="submit" class="btn btn-primary" value="Update Information">
-                                                            </div>
+                                                            </div> --}}
                                                         </li>
                                                         <li class="weight-500 col-md-6">
-                                                            <h4 class="text-blue h5 mb-20">Edit Social Media links</h4>
+                                                            <h4 class="text-blue h5 mb-20">Modifier les liens reseaux sociaux</h4>
                                                             <div class="form-group">
                                                                 <label>Facebook URL:</label>
                                                                 <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Linkedin URL:</label>
-                                                                <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
+                                                                <input class="form-control form-control-lg" name="linkedin" type="text" placeholder="Paste your link here">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Dropbox URL:</label>
-                                                                <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
+                                                                <input class="form-control form-control-lg" name="dropbox" type="text" placeholder="Paste your link here">
                                                             </div>
-                                                            <div class="form-group mb-0">
+                                                            <div class="form-group fa-pull-right mt-0 pt-30">
+                                                                <input type="submit" class="btn btn-primary bottom-0" value="Valider">
+                                                            </div>
+                                                            {{-- <div class="form-group mb-0">
                                                                 <input type="submit" class="btn btn-primary" value="Save &amp; Update">
-                                                            </div>
+                                                            </div> --}}
                                                         </li>
                                                     </ul>
                                                 </form>
@@ -218,28 +221,41 @@
 															<h5>Changer votre mot de passe</h5>
 														</div>
 													</div>
-													<div class="profile-task-list pb-30">
-														<ul>
-															<li class="weight-500 col-md-6">
-															{{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
-															<div class="form-group">
-																<label>Old password:</label>
-																<input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-															</div>
-															<div class="form-group">
-																<label>New Password:</label>
-																<input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-															</div>
-															<div class="form-group">
-																<label>New Password:</label>
-																<input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-															</div>
-															<div class="form-group mb-0">
-																<input type="submit" class="btn btn-primary" value="Save & Update">
-															</div>
-														</li>
-														</ul>
-													</div>
+                                                    <form name="formPasswd" method="POST" action="{{ route('profile.update.passwd') }}">
+                                                        @csrf
+                                                        <div class="profile-task-list pb-30">
+                                                            <ul>
+                                                                <li class="weight-500 col-md-6">
+                                                                {{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
+                                                                <div class="form-group">
+                                                                    <label>Mot de passe courrant:</label>
+                                                                    <input class="form-control form-control-lg @error('current')
+                                                                    is-invalid
+                                                                    @enderror" type="text" placeholder="Paste your link here" name="current">
+                                                                    @error('current')
+                                                                        {{ $message }}
+                                                                    @enderror
+                                                                    <span></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Nouveau mot de passe:</label>
+                                                                    <input class="form-control form-control-lg @error('retypedPasswd')
+                                                                    is-invalid
+                                                                    @enderror" type="password" name="passwd">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Retaper le nouveau mot de passe:</label>
+                                                                    <input class="form-control form-control-lg @error('retypedPasswd')
+                                                                    is-invalid
+                                                                    @enderror" type="password" name="retypedPasswd">
+                                                                </div>
+                                                                <div class="form-group mb-0">
+                                                                    <input type="submit" class="btn btn-primary" value="Save & Update">
+                                                                </div>
+                                                            </li>
+                                                            </ul>
+                                                        </div>
+                                                    </form>
 													<!-- Open Task End -->
                                                 </div>
                                             </div>
@@ -293,29 +309,45 @@
                 cropper.destroy();
             });
 
-            $('input[value=Update]').click(e=>{
-                // var reader = new FileReader();
-                // console.log(cropper.getCropBoxData());
-                const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
-                $.ajax({
-                    type: 'POST',
-                    // url: "{{ route('profile.update.image',Auth::user()) }}",
-                    url: "/profile/updateImage",
-                    dataType: 'text',
-                    data: {
-                        img : file
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    succes: function (response) {
-                        console.log("succes");
-                    },
-                    error: function (error) {
-                        console.log("error");
-                    }
 
-                 })
+
+            $('input[value=Update]').click(e=>{
+                const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
+                var reader = new FileReader();
+                const newImage = document.getElementById('imgUpload').files[0];
+                reader.readAsDataURL(newImage);
+                reader.onerror = function (error) {
+                    console.log('Error: ', error);
+                };
+                reader.onload = function (error) {
+                    $.ajax({
+                        type: 'POST',
+                        // url: "{{ route('profile.update.image',Auth::user()) }}",
+                        url: "/profile/updateImage",
+                        dataType: 'json',
+                        // data: fdata,
+                        data: {
+                            'img' : file,
+                            'newImg': reader.result
+                        },
+                        // processData: false,
+                        // contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (response) {
+                            console.log("success");
+                            $('.avatar-photo').attr('src',file);
+                            $('#newImage').value = "";
+                            $('#modal-close').click();
+                        },
+                        error: function (error) {
+                            console.log("error");
+                        }
+                    });
+                };
+
+
                 // $('avatar-photo').css()
             });
             //  for custom file input
@@ -323,9 +355,19 @@
                 $('#imgUpload').click();
             });
 
-            $('#imgUpload').change(e=>{
+            $('#imgUpload').change(e => {
                 $('#formPhoto').submit();
+                $('input[value=Update]').show();
             });
+
+            if($('.avatar-photo').attr('src') == "{{ url($croppedImage) }}"){
+                $('input[value=Update]').hide();
+            }
+
+            $('#modal-close').change(e => {
+                $('#newImage').value = "";
+            });
+
 
             $('#formPhoto').ajaxForm({
                 beforeSend: function() {
@@ -351,10 +393,12 @@
                     // cropper.destroy();
                 }
             });
+
+            // $('#formPasswd').submit(function (param) {
+            //     alert('asd');
+            // });
+
         });
-
-
-
     </script>
 
     @endsection

@@ -80,7 +80,7 @@ class NotifyEvent extends Notification implements ShouldBroadcast
 
         return [
             // 'image' => $evt->chefdep->professeur->user->profile->imagePath,
-            'image' =>asset('/vendors/images/user.svg'),
+            'image' =>$evt->chefdep->professeur->user->profile->croppedImage,
             'from'=>$evt->chefdep->professeur->user->personne->nom.' '.$evt->chefdep->professeur->user->personne->prenom,
             'idNotif'=>$this->id,
             'idEvent'=>json_decode($this->event)->idEvenement,
