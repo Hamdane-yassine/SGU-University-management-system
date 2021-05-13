@@ -104,15 +104,10 @@ Route::prefix('evenement')->group(function () {
     Route::get('download/{evenement}', [EvenementController::class,'downloadAttachements'])->name('evenement.download');
 });
 
-Route::get('user/impersonate', [UserController::class,'impersonate']);
-Route::post('user/impersonate', [UserController::class,'impersonateGet']);
+Route::post('user/impersonate', [UserController::class,'impersonate']);
+Route::get('user/impersonate', [UserController::class,'impersonateGet']);
 
 Route::impersonate();
-Route::get('/h', [UserController::class,'impersonate']);
-
-Route::get('/k', function () {
-    return redirect()->route('impersonate',10);
-});
 // ===============
 Route::get('/{nb}', function ($nb) {
     // broadcast(new \App\Events\Evt())->toOthers();

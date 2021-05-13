@@ -100,21 +100,18 @@ class UserController extends Controller
 
     public function impersonateGet()
     {
-        if (app('impersonate')->isImpersonating()) {
-            Auth::user()->leaveImpersonation();
-            return (Auth::user()->role == 'master')?redirect('/masters') : redirect('/home');
-        }
+        if (app('impersonate')->isImpersonating())
+            return redirect()->route('impersonate.leave');
         else {
             return view('master.impersonate', [
-                'other_users' => $this->user->joiningTable('personnes')->where('id', '!=', auth()->id)->get([ 'id', 'name', 'role' ])
+                // 'other_users' => User::join('personne', 'personne.idPersonne', 'users.id')->where('users.id', '!=', auth()->id)->get([ 'users.id', 'nom', 'role' ])
+                'other_users' => User::join('personne', 'personne.idPersonne', 'users.id')->where('users.id', '!=', auth()->id())->get([ 'id', 'nom', 'role' ])
             ]);
         }
     }
 
     public function impersonate(Request $request)
     {
-        $user = $this->user->find($request->id);
-        Auth::user()->impersonate($user);
-        return redirect('/home');
+        return redirect()->route('impersonate',$request->id);
     }
 }

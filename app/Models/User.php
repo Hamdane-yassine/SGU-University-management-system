@@ -68,6 +68,11 @@ class User extends Authenticatable
 		'remember_token'
 	];
 
+    public function canImpersonate()
+    {
+        return $this->hasRole('master');
+    }
+
 	public function personne()
 	{
 		return $this->belongsTo(Personne::class, 'idPersonne');

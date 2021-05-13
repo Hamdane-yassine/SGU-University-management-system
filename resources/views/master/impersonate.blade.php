@@ -5,13 +5,12 @@
 @section('content')
 <div class="container">
     <div class="panel panel-default">
-        <table class="table">
+        <table class="table table-bordered yajra-datatable">
             <thead>
                 <tr>
-                    <th>ID)</th>
-                    <th>Nom)</th>
+                    <th>ID</th>
+                    <th>Nom</th>
                     <th>Role</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +22,7 @@
                         <td>{{ $other_user->name }}</td>
                         <td>{{ $other_user->role }}</td>
                         <td>
-                            <input type="hidden" name="id" value="{{$other_user->id}}" />
+                            <input type="hidden" name="id" value="{{ $other_user->id }}" />
                             <button class="btn btn-default">Impersonate</button>
                         </td>
                     </tr>
