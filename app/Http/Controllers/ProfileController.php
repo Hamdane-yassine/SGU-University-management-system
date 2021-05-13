@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Models\User;
 use App\Rules\checkPasswd;
+use App\Rules\ChekEqualPasswd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -93,13 +94,31 @@ class ProfileController extends Controller
     public function updatePasswd(Request $request)
     {
 
-        $request->validate([
-            'current'=>['required', new checkPasswd($request->user())],
-            'passwd'=>['required', new checkPasswd($request->user())],
-            'retypedPasswd'=>['required'],
-            // 'adresse'=>'required'
-        ]);
+        // $request->validate([
+        //     'current'=>['required', new checkPasswd($request->user())],
+        //     'passwd'=>['required', new checkPasswd($request->user())],
+        //     'retypedPasswd'=>['required'],
+        //     // 'adresse'=>'required'
+        // ]);
+        $validator = Validator::make($request->all(),
+            [
+                'current'=>['required', new checkPasswd($request->user())],
+                'passwd'=>['required', new checkPasswd($request->user())],
+                'retypedPasswd'=>['required',new ChekEqualPasswd($request->passwd)],            // 'adresse'=>'required'
+            ]
+        );
 
+        if($validator->fails()){
+            if($request->has('current')) $tab = 'passwd'; else $tab = '';
+            return redirect('/profile/'.$request->user()->id.'?tab='.$tab)
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
+        $request->user->password = bcrypt($request->passwd);
+        $request->user->save();
+
+        return redirect()->back();
         // $request->user->email = $request->email;
         // $request->user = $request->email;
     }
