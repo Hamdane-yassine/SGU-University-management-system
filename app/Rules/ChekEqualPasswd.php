@@ -2,21 +2,19 @@
 
 namespace App\Rules;
 
-use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
 
-class checkPasswd implements Rule
+class ChekEqualPasswd implements Rule
 {
-    protected User $user;
+    protected string $ppassed;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(string $ppassed)
     {
-        $this->user = $user;
+        $this->ppassed = $ppassed;
     }
 
     /**
@@ -28,10 +26,8 @@ class checkPasswd implements Rule
      */
     public function passes($attribute, $value)
     {
-        $hash = $this->user->password;
-
-            return !Hash::check($value, $hash);
-        }
+        return $value == $this->ppassed;
+    }
 
     /**
      * Get the validation error message.
@@ -40,6 +36,6 @@ class checkPasswd implements Rule
      */
     public function message()
     {
-        return 'Utiliser un nouveau mot de passe';
+        return 'Assurez-vous que les deux sont les identique';
     }
 }
