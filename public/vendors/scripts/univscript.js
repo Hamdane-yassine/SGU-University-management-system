@@ -68,7 +68,7 @@ var table1 = $('.data-table-export').DataTable({
             previous: '<i class="ion-chevron-left"></i>'
         }
     },
-    dom: '<"top"<"left-col"B><"right-col"f>>rtip',
+    dom: '<"top"<"left-col"B><"right-col"f>>rt<"row"<"col-sm-4"l><"col-sm-8"p>>',
     buttons: [{
         extend: 'print',
         text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
