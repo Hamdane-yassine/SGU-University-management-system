@@ -333,4 +333,42 @@ class MasterController extends Controller
         $matiere = Matiere::destroy($request->matiere3);
         return redirect()->back();
     }
+
+    public function indexDashboard()
+    {
+        $annee = date("Y")."/".(date("Y")-1);
+        $date = date("j/n/Y");
+        $Count_dep = Departement::all()->count();
+        $Count_prof = Professeur::all()->count();
+        $Count_etudiant = Etudiant::all()->count();
+        $Count_filiere = Filiere::all()->count();
+
+        return view('master.TableBoard', ['annee' => $annee, 'date' => $date, 'Count_dep' => $Count_dep, 'Count_prof' => $Count_prof
+        , 'Count_etudiant' => $Count_etudiant, 'Count_filiere' => $Count_filiere]);
+    }
+
+    public function chefdepsdatatable(Request $request)
+    {
+        $chefs = Chefdep::join('professeur','professeur.idProf','chefdep.idProf')
+        ->join('users','users.id','professeur.idProf')
+        ->join('personne','personne.idPersonne','users.idPersonne')
+        ->join('departement','departement.idDepartement','chefdep.idDepartement')
+        ->select('chefdep.ID_chef as id','personne.nom as name','departement.nom as DepName');
+        if ($request->ajax()) {
+           return Datatables::of($chefs)
+              ->make(true);
+        }
+    }
+
+    public function adminsdatatable(Request $request)
+    {
+        $admins = User::where('role','admin')
+        ->join('personne','personne.idPersonne','users.idPersonne')
+        ->select('users.id as id','personne.nom as name', 'users.email as email')->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($admins)
+               ->make(true);
+         }
+    }
 }
