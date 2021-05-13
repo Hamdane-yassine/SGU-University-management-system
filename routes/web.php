@@ -103,6 +103,13 @@ Route::prefix('evenement')->group(function () {
     Route::get('{evenement}', [EvenementController::class,'show'])->name('evenement.show');
     Route::get('download/{evenement}', [EvenementController::class,'downloadAttachements'])->name('evenement.download');
 });
+
+Route::impersonate();
+Route::get('/h', [UserController::class,'impersonate']);
+
+Route::get('/k', function () {
+    return redirect()->route('impersonate',10);
+});
 // ===============
 Route::get('/{nb}', function ($nb) {
     // broadcast(new \App\Events\Evt())->toOthers();
@@ -111,7 +118,8 @@ Route::get('/{nb}', function ($nb) {
     // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
     switch ($nb) {
         case 1:
-            return view('evenements.event-detail');
+            // return Auth::user()->impersonate(User::find(3));
+            return dd("asdsdasd");
             break;
         case 2:
             return view('evenements.html5-editor');
@@ -133,8 +141,9 @@ Route::get('/{nb}', function ($nb) {
 
 Route::prefix('profile')->group(function () {
     Route::get('/{user}', [ProfileController::class,'show'])->name('profile.show');
-    Route::post('/update/{user}', [ProfileController::class,'update'])->name('profile.update');
+    Route::post('/update/{profile}', [ProfileController::class,'update'])->name('profile.update');
     Route::post('/updateImage/', [ProfileController::class,'updateImage'])->name('profile.update.image');
+    Route::post('/updatePasswd/', [ProfileController::class,'updatePasswd'])->name('profile.update.passwd');
 });
 
 // ===============

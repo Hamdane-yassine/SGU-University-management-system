@@ -17,7 +17,7 @@ class CreateProfilesTable extends Migration
             $table->id('idProfile');
             $table->unsignedBigInteger('idUtilisateur');
             $table->string('imagePath');
-            $table->string('imageProps')->nullable();
+            $table->string('croppedImage');
             $table->string('facebook')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('skype')->nullable();

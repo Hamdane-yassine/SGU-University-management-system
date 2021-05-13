@@ -76,7 +76,7 @@
                             @foreach (Auth::User()->UnreadNotifications as $notification)
                             <li>
                                 @if($notification->type === 'App\Notifications\NotifyEvent' )
-                                <a href="{{ url('/evenements/'.$notification->data['idEvent']) }}">
+                                <a href="{{ url('/evenement/'.$notification->data['idEvent']) .'?idNotif='.$notification->data['idNotif']}}">
                                 @else <a href="{{ url('/notifications?idNotif='.$notification->data['idNotif']) }}">
                                 @endif
                                     <img src="{{ $notification->data['image'] }}" alt="profile image">
@@ -98,7 +98,7 @@
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                     <span class="user-icon">
-                        <img src="{{ asset('vendors/images/user.svg') }}" alt="">
+                        <img src="{{ url(Auth::user()->profile->croppedImage) }}" alt="">
                     </span>
                     <span class="user-name">
                        {{ auth()->user()->personne->prenom.' '.auth()->user()->personne->nom }}

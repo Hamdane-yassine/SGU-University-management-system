@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -85,9 +86,16 @@ class UserController extends Controller
 
     public function notifs(Request $request)
     {
-
         if($request->idNotif)
             return redirect('/notifications#notif-'.$request->idNotif);
         return view('Chef.Notifications');
+    }
+
+    public function impersonate(Request $request)
+    {
+        // Auth::onceUsingID(session('impersonate'));
+        // dd($request->all());
+        Auth::user()->impersonate(User::find(10));
+        // return view('prof.absences');
     }
 }
