@@ -400,14 +400,11 @@
                 }
             });
 
-            // $('#formPasswd').submit(function (param) {
-            //     alert('asd');
-            // });
-            @error('current')
+            @if($errors->has('current') || $errors->has('passwd') || $errors->has('retypedPasswd'))
                 if('{{ request()->tab }}' == 'passwd'){
                     $('a[role=tab]').click();
-                }
-            @enderror
+            }
+            @endif('current')
         });
     </script>
 

@@ -109,16 +109,15 @@ class ProfileController extends Controller
         );
 
         if($validator->fails()){
-            if($request->has('current') || $request->has('passwd') || $request->has('retypedPasswd'))
-                $tab = 'passwd';
-            return redirect('/profile/'.$request->user()->id.'?tab='.$tab)
+            // if($request->has('current') || $request->has('passwd') || $request->has('retypedPasswd'))
+            return redirect('/profile/'.$request->user()->id.'?tab=passwd')
                     ->withErrors($validator)
                     ->withInput();
         }
 
         Auth::user()->password = bcrypt($request->passwd);
         request()->user()->save();
-        return redirect('/profile/'.$request->user()->id.'?tab='.$tab);
+        return redirect('/profile/'.$request->user()->id.'?tab=passwd');
     }
 
     /**
