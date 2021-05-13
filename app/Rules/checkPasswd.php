@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class checkPasswd implements Rule
 {
-
     protected User $user;
     /**
      * Create a new rule instance.
@@ -30,8 +29,9 @@ class checkPasswd implements Rule
     public function passes($attribute, $value)
     {
         $hash = $this->user->password;
-        return !Hash::check($value, $hash);
-    }
+
+            return !Hash::check($value, $hash);
+        }
 
     /**
      * Get the validation error message.

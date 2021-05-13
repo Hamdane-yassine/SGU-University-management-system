@@ -95,6 +95,8 @@ class ProfileController extends Controller
 
         $request->validate([
             'current'=>['required', new checkPasswd($request->user())],
+            'passwd'=>['required', new checkPasswd($request->user())],
+            'retypedPasswd'=>['required'],
             // 'adresse'=>'required'
         ]);
 

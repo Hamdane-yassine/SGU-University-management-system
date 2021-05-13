@@ -99,46 +99,20 @@
 						<div class="notification-list mx-h-350 customscroll">
 							<ul>
 								<li>
-									<a href="#">
-										<img src="vendors/images/img.jpg" alt="">
-										<h3>John Doe</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="vendors/images/photo1.jpg" alt="">
-										<h3>Lea R. Frith</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="vendors/images/photo2.jpg" alt="">
-										<h3>Erik L. Richards</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="vendors/images/photo3.jpg" alt="">
-										<h3>John Doe</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="vendors/images/photo4.jpg" alt="">
-										<h3>Renee I. Hansen</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="vendors/images/img.jpg" alt="">
-										<h3>Vicki M. Coleman</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
+                                    @if(Auth::User()->notifications->count())
+                                    @foreach (Auth::User()->UnreadNotifications as $notification)
+                                    <li>
+                                        @if($notification->type === 'App\Notifications\NotifyEvent' )
+                                        <a href="{{ url('/evenement/'.$notification->data['idEvent']) .'?idNotif='.$notification->data['idNotif']}}">
+                                        @else <a href="{{ url('/notifications?idNotif='.$notification->data['idNotif']) }}">
+                                        @endif
+                                            <img src="{{ $notification->data['image'] }}" alt="profile image">
+                                            <h3>{{$notification->data['from']}}</h3>
+                                            <p style="word-wrap: break-word">{{Str::substr($notification->data['brief'], 0, 50) }}...</p>
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                    @endif
 								</li>
 							</ul>
 						</div>
