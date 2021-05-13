@@ -69,7 +69,7 @@
                                     <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="filieres1" required>
                                         <option>--select a filiere--</option>
                                         @foreach ($filieres as $filiereX)
-                                            <option value="{{  $filiereX->idFiliere }}">{{  $filiereX->nom }}</option>
+                                            <option value="{{  $filiereX->idFiliere }}">{{  $filiereX->nom }}-{{$filiereX->niveau }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -81,7 +81,8 @@
                                     </select>
                                 </div>
                                 <div class="text-right form-group">
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                    <button type="submit" class="btn btn-secondary">Supprimer</button>
+
                                 </div>
                             </div>
                         </div>
@@ -106,7 +107,7 @@
                                     <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="filiere2">
                                         <option>--sélectionner une filiere--</option>
                                         @foreach ($filieres as $filiere)
-                                            <option value="{{ $filiere->idFiliere }}">{{ $filiere->nom }}</option>
+                                            <option value="{{ $filiere->idFiliere }}">{{ $filiere->nom }}-{{ $filiere->niveau }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -135,8 +136,8 @@
                         </div>
                     </section>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-danger"  formaction="/master/deleteModule" >Supprimer</button>
-                        <button type="submit" class="btn btn-success" formaction="/master/saveModule">Sauvegarder</button>
+                        <button type="submit" class="btn btn-secondary"  formaction="/master/deleteModule" >Supprimer</button>
+                        <button type="submit" class="btn btn-primary" formaction="/master/saveModule">Sauvegarder</button>
                     </div>
                 </form>
             </div>
@@ -158,7 +159,7 @@
                                     <select class="custom-select2 form-control" style="width: 100%; height: 38px;" name="filiere3">
                                         <option>--sélectionner une filiere--</option>
                                         @foreach ($filieres as $filiere)
-                                            <option value="{{ $filiere->idFiliere }}">{{ $filiere->nom }}</option>
+                                            <option value="{{ $filiere->idFiliere }}">{{ $filiere->nom }}{{ $filiere->niveau }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -195,15 +196,12 @@
                         </div>
                     </section>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-danger" formaction="/master/deleteMatiere" formnovalidate>Supprimer</button>
-                        <button type="submit" class="btn btn-success" formaction="/master/saveMatiere">Valider</button>
+                        <button type="submit" class="btn btn-secondary" formaction="/master/deleteMatiere" formnovalidate>Supprimer</button>
+                        <button type="submit" class="btn btn-primary" formaction="/master/saveMatiere">Valider</button>
                     </div>
                 </form>
             </div>
         </div>
-
-
-
     </div>
     <!-- js -->
     @endsection

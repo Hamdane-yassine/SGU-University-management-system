@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label>attachments</label>
                             <div class="custom-file">
-                                <label class="custom-file-label" for="attachments">ajouter des fichiers (max 3)</label>
+                                <label class="custom-file-label" for="attachments">ajouter des fichiers (max 3 avec image headingImg.*)</label>
                                 <input id="attachments"
                                        name="attachments[]"
                                        type="file"
