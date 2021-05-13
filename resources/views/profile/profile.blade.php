@@ -357,7 +357,13 @@
 
             $('#imgUpload').change(e => {
                 $('#formPhoto').submit();
+                $('input[value=Update]').show();
             });
+
+            if($('.avatar-photo').attr('src') == "{{ url($croppedImage) }}"){
+                $('input[value=Update]').hide();
+            }
+
             $('#modal-close').change(e => {
                 $('#newImage').value = "";
             });
