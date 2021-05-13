@@ -30,8 +30,10 @@ class checkPasswd implements Rule
     {
         $hash = $this->user->password;
 
-            return !Hash::check($value, $hash);
-        }
+        if ($attribute == 'current')
+            return Hash::check($value, $hash);
+        return !Hash::check($value, $hash);
+    }
 
     /**
      * Get the validation error message.

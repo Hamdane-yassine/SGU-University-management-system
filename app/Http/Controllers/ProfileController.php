@@ -93,7 +93,7 @@ class ProfileController extends Controller
 
     public function updatePasswd(Request $request)
     {
-
+        $tab = '';
         // $request->validate([
         //     'current'=>['required', new checkPasswd($request->user())],
         //     'passwd'=>['required', new checkPasswd($request->user())],
@@ -109,18 +109,16 @@ class ProfileController extends Controller
         );
 
         if($validator->fails()){
-            if($request->has('current')) $tab = 'passwd'; else $tab = '';
+            if($request->has('current') || $request->has('passwd') || $request->has('retypedPasswd'))
+                $tab = 'passwd';
             return redirect('/profile/'.$request->user()->id.'?tab='.$tab)
                     ->withErrors($validator)
                     ->withInput();
         }
 
-        $request->user->password = bcrypt($request->passwd);
-        $request->user->save();
-
-        return redirect()->back();
-        // $request->user->email = $request->email;
-        // $request->user = $request->email;
+        Auth::user()->password = bcrypt($request->passwd);
+        request()->user()->save();
+        return redirect('/profile/'.$request->user()->id.'?tab='.$tab);
     }
 
     /**

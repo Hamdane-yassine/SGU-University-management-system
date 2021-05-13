@@ -189,7 +189,7 @@
                                                             <h4 class="text-blue h5 mb-20">Modifier les liens reseaux sociaux</h4>
                                                             <div class="form-group">
                                                                 <label>Facebook URL:</label>
-                                                                <input class="form-control form-control-lg" type="text" placeholder="Entrer le nouveau mot de passe">
+                                                                <input class="form-control form-control-lg" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Linkedin URL:</label>
@@ -232,11 +232,10 @@
                                                                     <label>Mot de passe courrant:</label>
                                                                     <input class="form-control form-control-lg @error('current')
                                                                     is-invalid
-                                                                    @enderror" type="password" placeholder="Entrer le nouveau mot de passe" name="current" required>
+                                                                    @enderror" type="password" placeholder="" name="current" required>
                                                                     @error('current')
                                                                     <small class="ml-1 text-danger">{{ $message }}</small>
                                                                     @enderror
-
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Nouveau mot de passe:</label>
@@ -296,7 +295,7 @@
                 cropper = new Cropper(image, {
                     autoCropArea: 0.5,
                     dragMode: 'move',
-                    aspectRatio: 3 / 3,
+                    aspectRatio: 1,
                     restore: false,
                     guides: false,
                     center: false,
@@ -319,8 +318,8 @@
 
 
             $('input[value=Update]').click(e=>{
-                const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
                 var reader = new FileReader();
+                const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
                 const newImage = document.getElementById('imgUpload').files[0];
                 reader.readAsDataURL(newImage);
                 reader.onerror = function (error) {
@@ -367,7 +366,7 @@
                 $('input[value=Update]').show();
             });
 
-            if($('.avatar-photo').attr('src') == "{{ url($croppedImage) }}"){
+            if($('.avatar-photo').attr('src') == "{{ url('/vendors/images/user.svg') }}"){
                 $('input[value=Update]').hide();
             }
 
