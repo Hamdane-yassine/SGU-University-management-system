@@ -36,7 +36,7 @@ class EtudiantFactory extends Factory
             // 'idFiliere' => $i++,
             'cne'=> $this->faker->randomLetter.$this->faker->unique->randomNumber(5),
             'apogee'=>$this->withFaker()->unique()->randomNumber(5),
-            'email' => $this->faker->email,
+            'email' => $this->faker->unique()->email,
             'anneeDuBaccalaureat'=>$this->faker->year(),
             'cinMere'=>$this->faker->randomLetter.$this->faker->randomNumber(5),
             'cinPere'=>$this->faker->randomLetter.$this->faker->randomNumber(5),

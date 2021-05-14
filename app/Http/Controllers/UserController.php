@@ -104,7 +104,6 @@ class UserController extends Controller
             return redirect()->route('impersonate.leave');
         else {
             return view('master.impersonate', [
-                // 'other_users' => User::join('personne', 'personne.idPersonne', 'users.id')->where('users.id', '!=', auth()->id)->get([ 'users.id', 'nom', 'role' ])
                 'other_users' => User::join('personne', 'personne.idPersonne', 'users.id')->where('users.id', '!=', auth()->id())->get([ 'id', 'nom', 'role' ])
             ]);
         }

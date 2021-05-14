@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -80,20 +81,26 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function updateInfo(Request $request, Profile $profile)
     {
         $request->validate([
-            'email'=>'required',
-            'adresse'=>'required'
+            'email'=>['email',Rule::unique('users')],
+            'adresse'=>'max:100',
+            'facbook'=>'max:100',
+            'dropbox'=>'max:100',
+            'tel'=>'max:20'
         ]);
 
-        $request->user->email = $request->email;
-        $request->user = $request->email;
+        $request->user->email = $request->inpute('email');
+
+        $request->user->sendEmailVerificationNotification();
+        $profile->facebook = $request->inpute('facebook');
+        $profile->dropbox = $request->inpute('dropbox');
+        $profile->user->peradresse = $request->inpute('adresse');
     }
 
     public function updatePasswd(Request $request)
     {
-        $tab = '';
         // $request->validate([
         //     'current'=>['required', new checkPasswd($request->user())],
         //     'passwd'=>['required', new checkPasswd($request->user())],
@@ -103,7 +110,7 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(),
             [
                 'current'=>['required', new checkPasswd($request->user())],
-                'passwd'=>['required', new checkPasswd($request->user())],
+                'passwd'=>['required|alpha_num|min:8', new checkPasswd($request->user())],
                 'retypedPasswd'=>['required',new ChekEqualPasswd($request->passwd)],            // 'adresse'=>'required'
             ]
         );

@@ -189,7 +189,7 @@
                                                             <h4 class="text-blue h5 mb-20">Modifier les liens reseaux sociaux</h4>
                                                             <div class="form-group">
                                                                 <label>Facebook URL:</label>
-                                                                <input class="form-control form-control-lg" type="text" placeholder="">
+                                                                <input class="form-control form-control-lg" name="facebook" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Linkedin URL:</label>
