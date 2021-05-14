@@ -49,6 +49,7 @@ var table1 = $(".data-table-export").DataTable({
                     return (
                         '<i class="icon-copy dw dw-edit2"></i>'
                     );
+
                 }else if(row.etat=="ouvert")
                 {
                     return (

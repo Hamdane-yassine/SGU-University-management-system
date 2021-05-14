@@ -29,7 +29,7 @@ class ProfesseurController extends Controller
         $filieres = array();
         if (!empty(auth()->user()->professeur->matieres)) {
             foreach (auth()->user()->professeur->matieres as $matiere) {
-                array_push($filieres, $matiere->module->filiere);
+                array_push($filieres, $matiere->module->semestre->filiere);
             }
             $filieres = array_unique($filieres);
         }
