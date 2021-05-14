@@ -21,9 +21,9 @@ class NotifyRattAnnule extends Notification implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct($user, $absence)
+    public function __construct($professeur, $absence)
     {
-        $this->user = $user;
+        $this->professeur = $professeur;
         $this->absence = $absence;
     }
 
@@ -35,7 +35,7 @@ class NotifyRattAnnule extends Notification implements ShouldBroadcastNow
      */
     public function via($notifiable)
     {
-        return ['databse','broadcast'];
+        return ['database','broadcast'];
     }
 
     /**

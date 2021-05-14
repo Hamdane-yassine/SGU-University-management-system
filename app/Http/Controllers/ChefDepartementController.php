@@ -20,6 +20,7 @@ use App\Models\Prof_departement;
 use App\Models\Professeur;
 use App\Notifications\AnunulerRattNotify;
 use App\Notifications\NotifyRattAccepte;
+use App\Notifications\NotifyRattAnnule;
 use App\Notifications\RattAnunuleNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -499,7 +500,7 @@ class ChefDepartementController extends Controller
         $absence->save();
 
         //send notification to the prof that his absence has been rejected
-        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(),$absence));
+        $absence->professeur->user->notify(new NotifyRattAnnule(Auth::user(),$absence));
         // end
 
         return redirect('/chef/rattrapages');
