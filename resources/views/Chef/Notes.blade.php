@@ -1,5 +1,5 @@
 @extends('layouts.prof')
-@section('title',"$matiere->nom")
+@section('title', "$matiere->nom")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
@@ -9,7 +9,7 @@
                         <h4 class="text-blue h4">{{ $matiere->nom }}</h4>
                     </div>
                     <div class="pb-20">
-
+                        <input type="hidden" id="IdMatiere" value="{{ $matiere->idMatiere }}">
                         <table class="table hover multiple-select-row data-table-export nowrap">
                             <thead>
                                 <tr>
@@ -34,8 +34,8 @@
             </div>
         </div>
     </div>
-   @endsection
-    @section('SpecialScripts')
+@endsection
+@section('SpecialScripts')
     <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -49,82 +49,5 @@
     <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-    <!-- Datatable Setting js -->
-    <script>
-        var table1 = $('.data-table-export').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('ListNotesChef',['matiere' => $matiere]) }}",
-            columns: [
-                {data: 'apogee', name: 'apogee'},
-                {data: 'nom', name: 'nom'},
-                {data: 'prenom', name: 'prenom'},
-                {data: 'cne', name: 'cne'},
-                {
-                  data: 'controle',
-                  render:function(data,type,full,meta){
-                       if(data==null)
-                       {
-                        return '<span style="padding-left: 17px;">&nbsp;---</span>'
-                       }else{
-                        return '<span style="padding-left: 15px;">'+data+'</span>'
-                       }
-                     }
-                },
-                {
-                  data: 'exam', 
-                  render:function(data,type,full,meta){
-                       if(data==null)
-                       {
-                        return '<span style="padding-left: 17px;">&nbsp;---</span>'
-                       }else{
-                        return '<span style="padding-left: 15px;">'+data+'</span>'
-                       }
-                     }
-                },
-                {
-                    data: 'noteGeneral',
-                    render:function(data,type,full,meta){
-                       if(data==null)
-                       {
-                        return '<span>&nbsp;---</span>'
-                       }else{
-                        return '<span>'+data+'</span>'
-                       }
-                     }
-                },
-            ],
-            scrollCollapse: true,
-            autoWidth: false,
-            responsive: true,
-            columnDefs: [{
-                targets: "datatable-nosort",
-                orderable: false,
-            }],
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            "language": {
-                "info": "_START_ à _END_ sur _TOTAL_ éléments",
-                "emptyTable": "Aucune donnée disponible dans le tableau",
-                "lengthMenu": "Afficher _MENU_ éléments",
-                "zeroRecords": "Aucun élément correspondant trouvé",
-                "processing": "Traitement...",
-                "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
-                "loadingRecords": "Chargement...",
-                "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
-                search: "Rechercher:",
-                searchPlaceholder: "Rechercher",
-                paginate: {
-                    next: '<i class="ion-chevron-right"></i>',
-                    previous: '<i class="ion-chevron-left"></i>'  
-                }
-            },
-            dom: '<"top"<"left-col"B><"right-col"f>>rtip',
-            buttons: [
-            {
-                extend: 'print',
-                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
-            }
-            ]
-        });
-    </script>
-    @endsection
+    <script src="{{ asset('vendors/scripts/chef/notes.js') }}"></script>
+@endsection

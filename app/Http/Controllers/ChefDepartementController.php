@@ -302,7 +302,7 @@ class ChefDepartementController extends Controller
         $MatieresList = array();
         foreach($professeur->matieres as $matiere)
         {
-            if($matiere->module->filiere->departement->idDepartement == $departement->idDepartement)
+            if($matiere->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
             {
                 array_push($MatieresList,$matiere);
             }
@@ -323,7 +323,7 @@ class ChefDepartementController extends Controller
         $departement = Departement::find($idDepartement);
         foreach($professeur->matieres as $mat)
         {
-            if($mat->module->filiere->departement->idDepartement == $departement->idDepartement)
+            if($mat->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
             {
                 array_push($MatieresList,$mat);
             }
@@ -343,7 +343,7 @@ class ChefDepartementController extends Controller
         $departement = Departement::find($idDepartement);
         foreach($professeur->matieres as $mat)
         {
-            if($mat->module->filiere->departement->idDepartement == $departement->idDepartement)
+            if($mat->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
             {
                 array_push($MatieresList,$mat);
             }

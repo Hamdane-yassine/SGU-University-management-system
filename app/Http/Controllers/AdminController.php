@@ -317,7 +317,8 @@ class AdminController extends Controller
     {
         $profs = Professeur::whereNull('idEmploi')
             ->join('users', 'professeur.idUtilisateur', 'users.id')
-            ->select('idProf', 'users.name as nomProf', 'specialite')
+            ->join('personne', 'users.idPersonne', 'personne.idPersonne')
+            ->select('idProf', 'personne.nom', 'personne.prenom', 'specialite')
             ->get();
 
         if ($request->ajax()) {

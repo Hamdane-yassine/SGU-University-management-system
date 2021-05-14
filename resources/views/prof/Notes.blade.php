@@ -1,5 +1,5 @@
 @extends('layouts.prof')
-@section('title',"$matiere->nom")
+@section('title', "$matiere->nom")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
@@ -29,7 +29,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -43,23 +44,31 @@
                                 <input type="hidden" id="idEtudiant" name="idEtudiant" value="">
                                 <input type="hidden" id="idMatiere" name="idMatiere" value="{{ $matiere->idMatiere }}">
                                 <div class="form-group row" style="padding-left: 5px;">
-                                    <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Controle</label>
+                                    <label class="col-sm-12 col-md-4 col-form-label"
+                                        style="margin-right: -70px;">Controle</label>
                                     <div class="col-sm-12 col-md-4">
-                                        <input class="form-control" id="control" name="control" value="" step="0.01" type="number" required>
+                                        <input class="form-control" id="control" name="control" value="" step="0.01"
+                                            type="number" required>
                                     </div>
-                                    <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
+                                    <label class="col-sm-12 col-md-4 col-form-label"
+                                        style="margin-right: -85px;">Coef:</label>
                                     <div class="col-sm-12 col-md-3">
-                                        <input class="form-control" id="coefcontrol" name="coefcontrol" value="25" step="25" max="100" min="0" type="number" required>
+                                        <input class="form-control" id="coefcontrol" name="coefcontrol" value="25" step="25"
+                                            max="100" min="0" type="number" required>
                                     </div>
                                 </div>
                                 <div class="form-group row" style="padding-left: 5px;">
-                                    <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -70px;">Examen</label>
+                                    <label class="col-sm-12 col-md-4 col-form-label"
+                                        style="margin-right: -70px;">Examen</label>
                                     <div class="col-sm-12 col-md-4">
-                                        <input class="form-control" id="exam" name="exam" value="" step="0.01" type="number" required>
+                                        <input class="form-control" id="exam" name="exam" value="" step="0.01" type="number"
+                                            required>
                                     </div>
-                                    <label class="col-sm-12 col-md-4 col-form-label" style="margin-right: -85px;">Coef:</label>
+                                    <label class="col-sm-12 col-md-4 col-form-label"
+                                        style="margin-right: -85px;">Coef:</label>
                                     <div class="col-sm-12 col-md-3">
-                                        <input class="form-control" value="25" id="coefexam" name="coefexam" step="25" max="100" min="0" type="number" required>
+                                        <input class="form-control" value="25" id="coefexam" name="coefexam" step="25"
+                                            max="100" min="0" type="number" required>
                                     </div>
                                 </div>
                             </div>
@@ -77,8 +86,8 @@
             </div>
         </div>
     </div>
-    @endsection
-    @section('SpecialScripts')
+@endsection
+@section('SpecialScripts')
     <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
@@ -93,137 +102,6 @@
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
     <!-- Datatable Setting js -->
     <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
-    <script>
-        var table1 = $('.data-table-export').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('getListNotes',['matiere' => $matiere]) }}",
-            columns: [
-                {data: 'apogee', name: 'apogee'},
-                {data: 'nom', name: 'nom'},
-                {data: 'prenom', name: 'prenom'},
-                {data: 'cne', name: 'cne'},
-                {
-                  data: 'controle',
-                  render:function(data,type,full,meta){
-                       if(data==null)
-                       {
-                        return '<span style="padding-left: 17px;">&nbsp;---</span>'
-                       }else{
-                        return '<span style="padding-left: 15px;">'+data+'</span>'
-                       }
-                     }
-                },
-                {
-                  data: 'exam', 
-                  render:function(data,type,full,meta){
-                       if(data==null)
-                       {
-                        return '<span style="padding-left: 17px;">&nbsp;---</span>'
-                       }else{
-                        return '<span style="padding-left: 15px;">'+data+'</span>'
-                       }
-                     }
-                },
-                {
-                    data: 'noteGeneral',
-                    render:function(data,type,full,meta){
-                       if(data==null)
-                       {
-                        return '<span>&nbsp;---</span>'
-                       }else{
-                        return '<span>'+data+'</span>'
-                       }
-                     }
-                },
-                {
-                  data: 'idNote', 
-                  render:function(data,type,row){ return '<a href="" style="color: #265ed7" onclick="getnote('+data+','+row.idEtudiant+')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>' },
-                },
-            ],
-            scrollCollapse: true,
-            autoWidth: false,
-            responsive: true,
-            columnDefs: [{
-                targets: "datatable-nosort",
-                orderable: false,
-            }],
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            "language": {
-                "info": "_START_ à _END_ sur _TOTAL_ éléments",
-                "emptyTable": "Aucune donnée disponible dans le tableau",
-                "lengthMenu": "Afficher _MENU_ éléments",
-                "zeroRecords": "Aucun élément correspondant trouvé",
-                "processing": "Traitement...",
-                "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
-                "loadingRecords": "Chargement...",
-                "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
-                search: "Rechercher:",
-                searchPlaceholder: "Rechercher",
-                paginate: {
-                    next: '<i class="ion-chevron-right"></i>',
-                    previous: '<i class="ion-chevron-left"></i>'  
-                }
-            },
-            dom: '<"top"<"left-col"B><"right-col"f>>rtip',
-            buttons: [
-            {
-                extend: 'print',
-                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
-            }
-            ]
-        });
-        
-       function getnote(idNote,idEtudiant)
-       {  
-            if(idNote==null)
-            {
-                $.ajax({
-                    type: 'GET',
-                    url: "/Nonote/"+idEtudiant,
-                    dataType: 'JSON',
-                    data:{},
-                    success: function(response) {
-                        document.getElementById("control").value = "";
-                        document.getElementById("exam").value = "";
-                        document.getElementById("idNote").value = null;
-                        document.getElementById("coefcontrol").value = 25;
-                        document.getElementById("coefexam").value = 75;
-                        document.getElementById("idEtudiant").value = response;
-                    }
-                }) 
-            }else{
-                $.ajax({
-                    type: 'GET',
-                    url: "/note/"+idNote,
-                    dataType: 'JSON',
-                    data:{},
-                    success: function(response) {
-                        document.getElementById("control").value = response[0].controle;
-                        document.getElementById("exam").value = response[0].exam;
-                        document.getElementById("idNote").value = response[0].idNote;
-                        document.getElementById("coefcontrol").value = response[0].Coefcontrole;
-                        document.getElementById("coefexam").value = response[0].Coefexam;
-                    }
-                }) 
-            }
-                         
-        };
+    <script src="{{ asset('vendors/scripts/prof/notes.js') }}"></script>
 
-        $("#myform").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data)
-                {   
-                    $('#Medium-modal').modal('hide');
-                    table1.ajax.reload();
-                }
-                });
-        });
-    </script>
-    @endsection
+@endsection

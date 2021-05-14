@@ -1,5 +1,5 @@
 @extends('layouts.prof')
-@section('title','Professeurs')
+@section('title', 'Professeurs')
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
@@ -32,7 +32,8 @@
                             <h4 class="h4">Affecter une matière</h4>
                         </div>
                         <hr>
-                        <form action="{{ route('AffecterMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="affecter">
+                        <form action="{{ route('AffecterMatiere') }}" class="tab-wizard wizard-circle wizard pl-20"
+                            method="POST" id="affecter">
                             @csrf
                             <input type="hidden" id="depA" name="depA" value="{{ $departement->idDepartement }}">
                             <section>
@@ -40,24 +41,29 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>professeur :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;" name="prof" id="prof">
+                                            <select class="custom-select2 form-control" style="width: 100%; height: 38px;"
+                                                name="prof" id="prof">
                                                 @foreach ($departement->prof_departements as $prof_departement)
-                                                   <option value="{{ $prof_departement->professeur->idProf }}">{{$prof_departement->professeur->user->personne->nom.' '.$prof_departement->professeur->user->personne->prenom }}</option>
-                                                @endforeach 
+                                                    <option value="{{ $prof_departement->professeur->idProf }}">
+                                                        {{ $prof_departement->professeur->user->personne->nom . ' ' . $prof_departement->professeur->user->personne->prenom }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Matière :</label>
-                                            <select class="custom-select2 form-control"
-                                                style="width: 100%; height: 38px;" name="matiereafect" id="matiereafect">
+                                            <select class="custom-select2 form-control" style="width: 100%; height: 38px;"
+                                                name="matiereafect" id="matiereafect">
                                                 @foreach ($departement->filieres as $filiere)
-                                                    <optgroup label="{{ $filiere->nom.' '.$filiere->niveau }}">
-                                                        @foreach ($filiere->modules as $module)
-                                                            @foreach ($module->matieres as $matiere)
-                                                                <option value="{{ $matiere->idMatiere }}">{{ $matiere->nom }}</option>
+                                                    <optgroup label="{{ $filiere->nom . ' ' . $filiere->niveau }}">
+                                                        @foreach ($filiere->semestres as $semestre)
+                                                            @foreach ($semestre->modules as $module)
+                                                                @foreach ($module->matieres as $matiere)
+                                                                    <option value="{{ $matiere->idMatiere }}">
+                                                                        {{ $matiere->nom }}</option>
+                                                                @endforeach
                                                             @endforeach
                                                         @endforeach
                                                     </optgroup>
@@ -67,8 +73,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <div class="text-right"><input class="btn btn-primary" type="submit"
-                                    value="Affecter"></div>
+                            <div class="text-right"><input class="btn btn-primary" type="submit" value="Affecter"></div>
                         </form>
                     </div>
                 </div>
@@ -78,7 +83,8 @@
                             <h4 class="h4">Retirer une matiére</h4>
                         </div>
                         <hr>
-                        <form action="{{ route('DetacherMatiere') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="detacher">
+                        <form action="{{ route('DetacherMatiere') }}" class="tab-wizard wizard-circle wizard pl-20"
+                            method="POST" id="detacher">
                             @csrf
                             <input type="hidden" id="depD" name="depD" value="{{ $departement->idDepartement }}">
                             <section>
@@ -90,23 +96,25 @@
                                                 style="width: 100%; height: 38px;" required>
                                                 <option value="">---Selectioné un professeur---</option>
                                                 @foreach ($departement->prof_departements as $prof_departement)
-                                                   <option value="{{ $prof_departement->professeur->idProf }}">{{$prof_departement->professeur->user->personne->nom.' '.$prof_departement->professeur->user->personne->prenom }}</option>
-                                                @endforeach                                                 
+                                                    <option value="{{ $prof_departement->professeur->idProf }}">
+                                                        {{ $prof_departement->professeur->user->personne->nom . ' ' . $prof_departement->professeur->user->personne->prenom }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Matière :</label>
-                                            <select class="custom-select1 form-control" name="matiere" id="matiere" style="width: 100%; height: 45px;" required>
-                                                
+                                            <select class="custom-select1 form-control" name="matiere" id="matiere"
+                                                style="width: 100%; height: 45px;" required>
+
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <div class="text-right"><input class="btn btn-primary" type="submit"
-                                    value="Retirer"></div>
+                            <div class="text-right"><input class="btn btn-primary" type="submit" value="Retirer"></div>
                         </form>
                     </div>
                 </div>
@@ -128,7 +136,7 @@
 
                                 <dt class="col-sm-4">Genre</dt>
                                 <dd class="col-sm-8" id="genre"></dd>
-                         
+
                                 <dt class="col-sm-4">Nationalité</dt>
                                 <dd class="col-sm-8" id="nationalite"></dd>
 
@@ -172,7 +180,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="success-modal-aff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="success-modal-aff" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
@@ -185,7 +194,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="success-modal-det" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="success-modal-det" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
@@ -204,8 +214,8 @@
             </div>
         </div>
     </div>
-    @endsection
-    @section('SpecialScripts')
+@endsection
+@section('SpecialScripts')
     <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -219,210 +229,5 @@
     <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-    <script>
-            var table1 = $('.data-table-export').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('getListProfesseurs', ['departement' => $departement]) }}",
-            columns: [{
-                    data: 'idProf',
-                    name: 'idProf'
-                },
-                {
-                    data: 'nom',
-                    name: 'nom'
-                },
-                {
-                    data: 'prenom',
-                    name: 'prenom'
-                },
-                {
-                    data: 'specialite',
-                    name: 'specialite'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'tel',
-                    name: 'tel'
-                },
-                {
-                    data: 'idProf',
-                    render: function(data, type, full, meta) {
-                        return ' <a class="dropdown-item" href="" style="background-color:transparent;" onclick="getProfInfo('+data+')" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="dw dw-eye"></i></a>'
-                    },
-                }
-            ],
-            scrollCollapse: true,
-            autoWidth: false,
-            responsive: true,
-            columnDefs: [{
-                targets: "datatable-nosort",
-                orderable: false,
-            }],
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            "language": {
-                "info": "_START_ à _END_ sur _TOTAL_ éléments",
-                "emptyTable": "Aucune donnée disponible dans le tableau",
-                "lengthMenu": "Afficher _MENU_ éléments",
-                "zeroRecords": "Aucun élément correspondant trouvé",
-                "processing": "Traitement...",
-                "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
-                "loadingRecords": "Chargement...",
-                "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
-                search: "Rechercher:",
-                searchPlaceholder: "Rechercher",
-                paginate: {
-                    next: '<i class="ion-chevron-right"></i>',
-                    previous: '<i class="ion-chevron-left"></i>'
-                }
-            },
-            dom: '<"top"<"left-col"B><"right-col"f>>rtip',
-            buttons: [{
-                extend: 'print',
-                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
-            }]
-        });
-
-        function getProfInfo(id)
-        {
-            document.getElementById("matieres").innerHTML="";
-            $.ajax({
-                type: 'GET',
-                url: "/chef/professeur/" + id,
-                dataType: 'JSON',
-                data: {},
-                success: function(response) {
-                    console.log(response);
-                    document.getElementById("nom").innerHTML = response.prof[0].nom;
-                    document.getElementById("prenom").innerHTML = response.prof[0].prenom;
-                    document.getElementById("genre").innerHTML = response.prof[0].genre;
-                    document.getElementById("datenais").innerHTML = response.prof[0].dateNaissance;
-                    document.getElementById("situation").innerHTML = response.prof[0].situationFamiliale;
-                    document.getElementById("nationalite").innerHTML = response.prof[0].nationalite;
-                    document.getElementById("LieuNaissance").innerHTML = response.prof[0].lieuNaissance;
-                    document.getElementById("cin").innerHTML = response.prof[0].cin;
-                    document.getElementById("adresse").innerHTML = response.prof[0].adressePersonnele;
-                    document.getElementById("tel").innerHTML = response.prof[0].tel;
-                    document.getElementById("email").innerHTML = response.prof[0].email;
-                    document.getElementById("emailins").innerHTML = response.prof[0].emailInstitutionne;
-                    document.getElementById("specialite").innerHTML = response.prof[0].specialite;
-                    if(response.matieres.length > 0)
-                    {
-                        response.matieres.forEach(myFunction);
-                    }else{
-                        document.getElementById("matieres").innerHTML = "Aucune Matiere";
-                    }
-                    function myFunction(item, index) {
-                    document.getElementById("matieres").innerHTML += item.nom + "<br>";
-                    }
-                }
-            })
-        }
-        jQuery(document).ready(function ()
-        {
-                jQuery('select[name="profdet"]').on('change',function(){
-                   var idProf = jQuery(this).val();
-                   var idDep = document.getElementById("depA").value;
-                   if(idProf)
-                   {
-                      jQuery.ajax({
-                         url : '/chef/professeur/getMatiere/'+idProf+'/'+idDep,
-                         type : "GET",
-                         dataType : "json",
-                         success:function(data)
-                         {
-                            console.log(data);
-                            jQuery('select[name="matiere"]').empty();
-                            jQuery.each(data, function(key,value){
-                               $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nom +'</option>');
-                            });
-                         }
-                      });
-                   }
-                   else
-                   {
-                      $('select[name="matiere"]').empty();
-                   }
-                });
-        });
-        $("#affecter").submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                dataType : "JSON",
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    $('#success-modal-aff').modal('show');
-                    if(document.getElementById("profdet").value == data[0].idProf)
-                    {
-                        jQuery('select[name="matiere"]').empty();
-                        jQuery.each(data, function(key,value){
-                            $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nom +'</option>');
-                        });
-                    }else{
-                        jQuery.ajax({
-                         url : '/chef/professeur/getMatiere/'+document.getElementById("profdet").value+'/'+document.getElementById("depA").value,
-                         type : "GET",
-                         dataType : "json",
-                         success:function(response)
-                         {
-                            console.log(response);
-                            jQuery('select[name="matiere"]').empty();
-                            jQuery.each(response, function(key,value){
-                               $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nom +'</option>');
-                            });
-                         }
-                      });
-                    }
-                },
-                error: function (jqXHR, exception) {
-                    var msg = '';
-                    if (jqXHR.status === 0) {
-                        msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        msg = 'Ajax request aborted.';
-                    } else {
-                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                    alert(msg);
-                }
-            });
-        });
-        $("#detacher").submit(function(e) {
-            e.preventDefault(); 
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                dataType : "JSON",
-                data: form.serialize(),
-                success: function(data) {
-                    $('#success-modal-det').modal('show');
-                    jQuery('select[name="matiere"]').empty();
-                    jQuery.each(data, function(key,value){
-                        $('select[name="matiere"]').append('<option value="'+ value.idMatiere +'">'+ value.nom +'</option>');
-                    });
-                }
-            });
-        });
-
-    </script>
-    @endsection
+    <script src="{{ asset('vendors/scripts/chef/profs.js') }}"></script>
+@endsection
