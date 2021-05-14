@@ -31,7 +31,6 @@ class Module extends Model
 
 	protected $casts = [
 		'idSemestre' => 'int',
-		'idFiliere' => 'int',
 		'idModule' => 'int',
 		'vh' => 'int'
 	];
@@ -49,9 +48,5 @@ class Module extends Model
 	public function semestre()
 	{
 		return $this->belongsTo(Semestre::class, 'idSemestre');
-	}
-	public function filiere()
-	{
-		return $this->belongsTo(Filiere::class, 'idFiliere');
 	}
 }

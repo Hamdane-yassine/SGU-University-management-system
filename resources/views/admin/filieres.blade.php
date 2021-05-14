@@ -35,11 +35,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            @if (session()->has('error'))
-                                <h4 class="h4">error</h4>
-                            @elseif(session()->has('success'))
-                                <h4 class="h4">Ajouter</h4>
-                            @endif
+=                            <h4 class="h4">Ajouter</h4>
                         </div>
                         <hr>
                         <form class="tab-wizard wizard-circle wizard pl-20" action="{{ route('ImportExcelfile') }}"

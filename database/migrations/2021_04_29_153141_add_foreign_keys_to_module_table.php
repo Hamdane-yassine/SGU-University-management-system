@@ -14,7 +14,6 @@ class AddForeignKeysToModuleTable extends Migration
     public function up()
     {
         Schema::table('module', function (Blueprint $table) {
-            $table->foreign('idFiliere','fk22')->references('idFiliere')->on('filiere')->onUpdate('RESTRICT')->onDelete('CASCADE');
 			$table->foreign('idSemestre','fk23')->references('idSemestre')->on('semestre')->onUpdate('RESTRICT')->onDelete('CASCADE');
         });
     }
@@ -27,7 +26,6 @@ class AddForeignKeysToModuleTable extends Migration
     public function down()
     {
         Schema::table('module', function (Blueprint $table) {
-            $table->dropForeign('fk22');
 			$table->dropForeign('fk23');
         });
     }

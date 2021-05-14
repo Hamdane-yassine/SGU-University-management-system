@@ -44,13 +44,22 @@ var table1 = $(".data-table-export").DataTable({
         {
             data: "idNote",
             render: function(data, type, row) {
-                return (
-                    '<a href="" style="color: #265ed7" onclick="getnote(' +
-                    data +
-                    "," +
-                    row.idEtudiant +
-                    ')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>'
-                );
+                if(row.etat=="fermé")
+                {
+                    return (
+                        '<i class="icon-copy dw dw-edit2"></i>'
+                    );
+
+                }else if(row.etat=="ouvert")
+                {
+                    return (
+                        '<a href="" style="color: #265ed7" onclick="getnote(' +
+                        data +
+                        "," +
+                        row.idEtudiant +
+                        ')" data-toggle="modal" data-target="#Medium-modal"><i class="icon-copy dw dw-edit2"></i></a>'
+                    );
+                }
             }
         }
     ],
