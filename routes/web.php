@@ -28,7 +28,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Chef.absences');
+    $role = Auth::user()->role;
+    switch ($role) {
+        case 'master':
+            return redirect('master/dashboard');
+            break;
+        case 'chefdep':
+            return redirect('chef/dashboard');
+            break;
+        case 'prof':
+            return redirect('Dashboard');
+            break;
+        case 'admin':
+            return redirect('admin/dashboard');
+            break;
+        default:
+            echo "Not logged";
+            break;
+    }
 })->middleware('auth');
 
 Auth::routes();

@@ -18,7 +18,7 @@ class CheckProf
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        if ($user->hasRole('prof') || $user->hasRole('admin')) {
+        if ($user->hasRole('prof')) {
             return $next($request);
         }
         return redirect('home');

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckChefDep
+class CheckMaster
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class CheckChefDep
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        if ($user->hasRole('chefdep')) {
+        if ($user->hasRole('master')) {
             return $next($request);
         }
         return redirect('/');
