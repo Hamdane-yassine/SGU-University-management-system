@@ -183,7 +183,7 @@
                             </div>
                         </section>
                         <div class="text-right">
-                            <input class="btn btn-secondary" type="button"  value="Supprimer"  data-toggle="modal" data-target="#modal3" />
+                            <input class="btn btn-secondary form" type="button"  value="Supprimer"  data-toggle="modal" data-target="#modal3"/>
                             <button type="submit" class="btn btn-primary" formaction="/master/saveMatiere">Valider</button>
                         </div>
                     </form>
