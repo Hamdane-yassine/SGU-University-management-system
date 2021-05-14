@@ -38,33 +38,31 @@ class ChefDepartementController extends Controller
         ->select('professeur.idProf','users.name as nom')->get();*/
 
         //return list of filiere in that departement
-        $filieres = Filiere::where('idDepartement',$idDepartement)->select('idFiliere','nom','niveau')->get();
-        return view('chef.emploi',['filieres' => $filieres]);
+        $filieres = Filiere::where('idDepartement', $idDepartement)->select('idFiliere', 'nom', 'niveau')->get();
+        return view('chef.emploi', ['filieres' => $filieres]);
     }
 
 
     public function getListOfFilieresEmploi(Request $request)
     {
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $emplois = Filiere::where('idDepartement',$idDepartement)
-        ->join('emploi','emploi.idEmploi','=','filiere.idEmploi')
-        ->select('emploi.idEmploi as idEmploi','filename','filiere.nom as nom','niveau','emploi.updated_at as UpdateDate')->get();
+        $emplois = Filiere::where('idDepartement', $idDepartement)
+            ->join('emploi', 'emploi.idEmploi', '=', 'filiere.idEmploi')
+            ->select('emploi.idEmploi as idEmploi', 'filename', 'filiere.nom as nom', 'niveau', 'emploi.updated_at as UpdateDate')->get();
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
-            ->addColumn('filename', function($row)
-            {
-                $link_to_file = asset('storage/emploi/filiere/'.$row->filename);
-                $btn = '<a href="' .$link_to_file. '"  target="_blank" class="card-link text-primary" >' .$row->filename. '</a>';
-                return $btn;
-            })
-            ->editColumn('UpdateDate', function($row)
-            {
-                setlocale(LC_TIME, "fr_FR", "French");
-                return strftime("%A %d %B %G %R", strtotime($row->UpdateDate));
-            })
-            ->rawColumns(['action','filename'])
-             ->make(true);
+                ->addColumn('filename', function ($row) {
+                    $link_to_file = asset('storage/emploi/filiere/' . $row->filename);
+                    $btn = '<a href="' . $link_to_file . '"  target="_blank" class="card-link text-primary" >' . $row->filename . '</a>';
+                    return $btn;
+                })
+                ->editColumn('UpdateDate', function ($row) {
+                    setlocale(LC_TIME, "fr_FR", "French");
+                    return strftime("%A %d %B %G %R", strtotime($row->UpdateDate));
+                })
+                ->rawColumns(['action', 'filename'])
+                ->make(true);
         }
     }
 
@@ -73,27 +71,27 @@ class ChefDepartementController extends Controller
         return view('chef.Etudiant', ['filiere' => $filiere]);
     }
 
-    public function getEtudiants(Request $request,Filiere $filiere)  //an ajax function to retrieve tha data
+    public function getEtudiants(Request $request, Filiere $filiere)  //an ajax function to retrieve tha data
     {
 
-       $etudiants = Etudiant::where('etudiant.idFiliere',$filiere->idFiliere)  //first inint a user id
-       ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
-       ->select('apogee','nom','prenom','cne','email','tel','idEtudiant')
-       ->get();
-       if ($request->ajax()) {
+        $etudiants = Etudiant::where('etudiant.idFiliere', $filiere->idFiliere)  //first inint a user id
+            ->join('personne', 'etudiant.idPersonne', '=', 'personne.idPersonne') //retrieved matiere
+            ->select('apogee', 'nom', 'prenom', 'cne', 'email', 'tel', 'idEtudiant')
+            ->get();
+        if ($request->ajax()) {
             return Datatables::of($etudiants)
-            ->make(true);
+                ->make(true);
         }
     }
 
-    public function getEtudiant(Request $request,Etudiant $etudiant)  //an ajax function to retrieve tha data
+    public function getEtudiant(Request $request, Etudiant $etudiant)  //an ajax function to retrieve tha data
     {
 
-       $etudiant = Etudiant::where('idEtudiant',$etudiant->idEtudiant)  //first inint a user id
-       ->join('personne','etudiant.idPersonne','=','personne.idPersonne') //retrieved matiere
-       ->select('nom','prenom','apogee','cne','genre','dateNaissance','situationFamiliale','nationalite','lieuNaissance','cin','cinPere','cinMere','adressePersonnele','tel','email','emailInstitutionne','anneeDuBaccalaureat','regimeDeCovertureMedicale','etudiant.idEtudiant')
-       ->get();
-       if ($request->ajax()) {
+        $etudiant = Etudiant::where('idEtudiant', $etudiant->idEtudiant)  //first inint a user id
+            ->join('personne', 'etudiant.idPersonne', '=', 'personne.idPersonne') //retrieved matiere
+            ->select('nom', 'prenom', 'apogee', 'cne', 'genre', 'dateNaissance', 'situationFamiliale', 'nationalite', 'lieuNaissance', 'cin', 'cinPere', 'cinMere', 'adressePersonnele', 'tel', 'email', 'emailInstitutionne', 'anneeDuBaccalaureat', 'regimeDeCovertureMedicale', 'etudiant.idEtudiant')
+            ->get();
+        if ($request->ajax()) {
             echo json_encode($etudiant);
         }
     }
@@ -111,7 +109,7 @@ class ChefDepartementController extends Controller
         echo $idEmploi;
         $emploi = Emploi::find($idEmploi);
         $filename = $emploi->fileName;
-        Storage::delete('emploi/prof/'.$filename);  //delete the physical file
+        Storage::delete('emploi/prof/' . $filename);  //delete the physical file
         $emploi->delete();
         return redirect('/chef/emploi');
     }
@@ -121,7 +119,7 @@ class ChefDepartementController extends Controller
         $idEmploi = request('idEmploi');
         $emploi = Emploi::find($idEmploi);
         $filename = $emploi->fileName;
-        Storage::delete('emploi/filiere/'.$filename);  //delete the physical file
+        Storage::delete('emploi/filiere/' . $filename);  //delete the physical file
         $emploi->delete();
     }
 
@@ -129,36 +127,35 @@ class ChefDepartementController extends Controller
     {
         $idFiliere =  $request->filiere;
         $file = $request->uploadedFile;
-        $filiere = Filiere::where('idFiliere',$idFiliere)->select('idFiliere','nom as name','niveau','idEmploi')->get()[0];
+        $filiere = Filiere::where('idFiliere', $idFiliere)->select('idFiliere', 'nom as name', 'niveau', 'idEmploi')->get()[0];
 
         //echo $idFiliere.'<br>';
         //echo $filiere->nom;
 
         //add or update entry in emploi and filiere table
-        if(is_null($filiere->idEmploi)) //then creat a new entry
+        if (is_null($filiere->idEmploi)) //then creat a new entry
         {
             $emploi = Emploi::create([
-                'fileName' => $filiere->name.$filiere->niveau.'.pdf'
+                'fileName' => $filiere->name . $filiere->niveau . '.pdf'
             ]);
-            $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
-            $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
+            $file->storeAs('emploi/filiere/', $filiere->name . $filiere->niveau . '.pdf');  //store with the original name
+            $emploi = Emploi::where('fileName', $filiere->name . $filiere->niveau . '.pdf')->select('idEmploi')->get()[0];
             $filiere = Filiere::find($idFiliere);
             $filiere->idEmploi = $emploi->idEmploi;
             $filiere->save();
-        }
-        else //meaning the filiere has already an emploi
+        } else //meaning the filiere has already an emploi
         {
             //delete old file
-            Storage::delete('emploi/filiere/'.$filiere->name.$filiere->niveau.'.pdf');
+            Storage::delete('emploi/filiere/' . $filiere->name . $filiere->niveau . '.pdf');
             //delete the old entry
             $oldEmploi = Emploi::find($filiere->idEmploi);
             $oldEmploi->delete();
             //add new one
             $emploi = Emploi::create([
-                'fileName' => $filiere->name.$filiere->niveau.'.pdf'
+                'fileName' => $filiere->name . $filiere->niveau . '.pdf'
             ]);
-            $file->storeAs('emploi/filiere/', $filiere->name.$filiere->niveau.'.pdf');  //store with the original name
-            $emploi = Emploi::where('fileName',$filiere->name.$filiere->niveau.'.pdf')->select('idEmploi')->get()[0];
+            $file->storeAs('emploi/filiere/', $filiere->name . $filiere->niveau . '.pdf');  //store with the original name
+            $emploi = Emploi::where('fileName', $filiere->name . $filiere->niveau . '.pdf')->select('idEmploi')->get()[0];
             $filiere = Filiere::find($idFiliere);
             $filiere->idEmploi = $emploi->idEmploi;
             $filiere->save();
@@ -166,71 +163,73 @@ class ChefDepartementController extends Controller
 
         //mail the emploi to all students of the same filiere
         $filiere_ = Filiere::find($idFiliere);
-        $filePath = 'emploi/filiere/'.$filiere_->nom.$filiere_->niveau.'.pdf';
-        $etudiants = Etudiant::where('idFiliere',$idFiliere)->get();
-        foreach($etudiants as $etudiant)
-        {
-            $mailData = ['mailTo' => $etudiant->email,'userName' => strval($etudiant->personne->nom.' '.$etudiant->personne->prenom),
-                'nomfiliere' => $etudiant->filiere->nom ,'filePath' => $filePath, 'niveau' => $filiere_->niveau];
+        $filePath = 'emploi/filiere/' . $filiere_->nom . $filiere_->niveau . '.pdf';
+        $etudiants = Etudiant::where('idFiliere', $idFiliere)->get();
+        foreach ($etudiants as $etudiant) {
+            $mailData = [
+                'mailTo' => $etudiant->email, 'userName' => strval($etudiant->personne->nom . ' ' . $etudiant->personne->prenom),
+                'nomfiliere' => $etudiant->filiere->nom, 'filePath' => $filePath, 'niveau' => $filiere_->niveau
+            ];
             SendEmploiEmail::dispatch($mailData);
         }
         return redirect('/chef/emploi'); //just in case
     }
     public function UpdateEtudiant()
     {
-        $idEtudiant=request('inIdEtudiant');
+        $idEtudiant = request('inIdEtudiant');
         $etudiant = Etudiant::find($idEtudiant);
         $idPersonne = $etudiant->idPersonne;
         $personne = Personne::find($idPersonne);
-        request()->validate([
-            'inIdEtudiant' => 'required',
-            'innom' => 'required',
-            'inprenom' => 'required',
-            'insituation' => 'required',
-            'ingenre' => 'required',
-            'indatenais' => ['required','date'],
-            'innationalite' => 'required',
-            'inLieuNaissance' => 'required',
-            'inadresse' => 'required',
-            'incin' => ['required','unique:personne,cin,'.$personne->idPersonne.',idPersonne'],
-            'intel' => 'required',
-            'inemail' => ['required','email','unique:etudiant,email,'.$etudiant->idEtudiant.',idEtudiant'],
-            'inemailins' => ['required','email','unique:personne,emailInstitutionne,'.$personne->idPersonne.',idPersonne'],
-            'inapogee' => ['required','unique:etudiant,apogee,'.$etudiant->idEtudiant.',idEtudiant'],
-            'incne' => ['required','unique:etudiant,cne,'.$etudiant->idEtudiant.',idEtudiant'],
-            'incinpere' => 'required',
-            'incinmere' => 'required',
-            'inannebac' => 'required',
-            'incouv' => 'required'
-        ],
-        [
-            'incin.unique' => 'C.N.I.E est déjà existé.',
-            'inemail.unique' => 'Email est déjà utilisée.',
-            'inemailins.unique' => 'Email est déjà utilisée.',
-            'incne.unique' => 'CNE est déjà existé.',
-            'inapogee.unique' => 'Numéro apogée est déjà utilisée.',
-            'inemail.email' => 'Email invalide.',
-            'inemailins.email' => 'Email invalide.'
-        ]
+        request()->validate(
+            [
+                'inIdEtudiant' => 'required',
+                'innom' => 'required',
+                'inprenom' => 'required',
+                'insituation' => 'required',
+                'ingenre' => 'required',
+                'indatenais' => ['required', 'date'],
+                'innationalite' => 'required',
+                'inLieuNaissance' => 'required',
+                'inadresse' => 'required',
+                'incin' => ['required', 'unique:personne,cin,' . $personne->idPersonne . ',idPersonne'],
+                'intel' => 'required',
+                'inemail' => ['required', 'email', 'unique:etudiant,email,' . $etudiant->idEtudiant . ',idEtudiant'],
+                'inemailins' => ['required', 'email', 'unique:personne,emailInstitutionne,' . $personne->idPersonne . ',idPersonne'],
+                'inapogee' => ['required', 'unique:etudiant,apogee,' . $etudiant->idEtudiant . ',idEtudiant'],
+                'incne' => ['required', 'unique:etudiant,cne,' . $etudiant->idEtudiant . ',idEtudiant'],
+                'incinpere' => 'required',
+                'incinmere' => 'required',
+                'inannebac' => 'required',
+                'incouv' => 'required'
+            ],
+            [
+                'incin.unique' => 'C.N.I.E est déjà existé.',
+                'inemail.unique' => 'Email est déjà utilisée.',
+                'inemailins.unique' => 'Email est déjà utilisée.',
+                'incne.unique' => 'CNE est déjà existé.',
+                'inapogee.unique' => 'Numéro apogée est déjà utilisée.',
+                'inemail.email' => 'Email invalide.',
+                'inemailins.email' => 'Email invalide.'
+            ]
         );
-        $personne->nom=request('innom');
-        $personne->prenom=request('inprenom');
-        $personne->situationFamiliale=request('insituation');
-        $personne->genre=request('ingenre');
-        $personne->dateNaissance=request('indatenais');
-        $personne->nationalite=request('innationalite');
-        $personne->lieuNaissance=request('inLieuNaissance');
-        $personne->adressePersonnele=request('inadresse');
-        $personne->cin=request('incin');
-        $personne->tel=request('intel');
-        $personne->emailInstitutionne=request('inemailins');
-        $etudiant->apogee=request('inapogee');
-        $etudiant->cne=request('incne');
-        $etudiant->email=request('inemail');
-        $etudiant->cinPere=request('incinpere');
-        $etudiant->cinMere=request('incinmere');
-        $etudiant->anneeDuBaccalaureat=request('inannebac');
-        $etudiant->regimeDeCovertureMedicale=request('incouv');
+        $personne->nom = request('innom');
+        $personne->prenom = request('inprenom');
+        $personne->situationFamiliale = request('insituation');
+        $personne->genre = request('ingenre');
+        $personne->dateNaissance = request('indatenais');
+        $personne->nationalite = request('innationalite');
+        $personne->lieuNaissance = request('inLieuNaissance');
+        $personne->adressePersonnele = request('inadresse');
+        $personne->cin = request('incin');
+        $personne->tel = request('intel');
+        $personne->emailInstitutionne = request('inemailins');
+        $etudiant->apogee = request('inapogee');
+        $etudiant->cne = request('incne');
+        $etudiant->email = request('inemail');
+        $etudiant->cinPere = request('incinpere');
+        $etudiant->cinMere = request('incinmere');
+        $etudiant->anneeDuBaccalaureat = request('inannebac');
+        $etudiant->regimeDeCovertureMedicale = request('incouv');
         $personne->save();
         $etudiant->save();
     }
@@ -245,21 +244,22 @@ class ChefDepartementController extends Controller
         return view('chef.Notes', ['matiere' => $matiere]);
     }
 
-    public function getListNotes(Request $request,Matiere $matiere)  //an ajax function to retrieve tha data
+    public function getListNotes(Request $request, Matiere $matiere)  //an ajax function to retrieve tha data
     {
-
-       $notes = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
-       ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
-       ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
-       ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
-       ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
-       ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
-       ->leftJoin('note', 'etudiant.idEtudiant', '=', 'note.idEtudiant')
-       ->select('apogee','personne.nom','personne.prenom','cne','controle','exam','noteGeneral')
-       ->get();
-       if ($request->ajax()) {
+        $idFiliere = $matiere->module->semestre->filiere->idFiliere;
+        $notes = Etudiant::where('filiere.idFiliere', $idFiliere)  //first inint a user id
+            ->join('filiere', 'etudiant.idFiliere', '=', 'filiere.idFiliere')
+            ->join('departement', 'departement.idDepartement', '=', 'filiere.idDepartement')
+            ->join('personne', 'etudiant.idPersonne', '=', 'personne.idPersonne')
+            ->leftJoin('note', function ($q) use ($matiere) {
+                $q->on('note.idEtudiant', '=', 'etudiant.idEtudiant')
+                    ->where('note.idMatiere', '=', "$matiere->idMatiere");
+            })
+            ->select('apogee', 'personne.nom', 'insertion_notes as etat', 'personne.prenom', 'cne', 'controle', 'exam', 'noteGeneral', 'idNote', 'etudiant.idEtudiant')
+            ->get();
+        if ($request->ajax()) {
             return Datatables::of($notes)
-            ->make(true);
+                ->make(true);
         }
     }
     public function Professeurs(Departement $departement)
@@ -267,31 +267,31 @@ class ChefDepartementController extends Controller
         return view('chef.profs', ['departement' => $departement]);
     }
 
-    public function getProfesseurs(Request $request , Departement $departement)
+    public function getProfesseurs(Request $request, Departement $departement)
     {
-        $professeurs = Departement::where('departement.idDepartement',$departement->idDepartement)  //first inint a user id
-       ->join('prof_departement','departement.idDepartement','=','prof_departement.idDepartement')
-       ->join('professeur','prof_departement.idProf','=','professeur.idProf')
-       ->join('users','professeur.idUtilisateur','=','users.id')
-       ->join('personne','users.idPersonne','=','personne.idPersonne')
-       ->select('professeur.idProf','personne.nom','personne.prenom','professeur.specialite','email','tel',)
-       ->get();
-       if ($request->ajax()) {
+        $professeurs = Departement::where('departement.idDepartement', $departement->idDepartement)  //first inint a user id
+            ->join('prof_departement', 'departement.idDepartement', '=', 'prof_departement.idDepartement')
+            ->join('professeur', 'prof_departement.idProf', '=', 'professeur.idProf')
+            ->join('users', 'professeur.idUtilisateur', '=', 'users.id')
+            ->join('personne', 'users.idPersonne', '=', 'personne.idPersonne')
+            ->select('professeur.idProf', 'personne.nom', 'personne.prenom', 'professeur.specialite', 'email', 'tel',)
+            ->get();
+        if ($request->ajax()) {
             return Datatables::of($professeurs)
-            ->make(true);
+                ->make(true);
         }
     }
 
-    public function getProfesseur(Request $request,Professeur $professeur)
+    public function getProfesseur(Request $request, Professeur $professeur)
     {
-        $professeurs = Professeur::where('professeur.idProf',$professeur->idProf)  //first inint a user id
-       ->join('users','professeur.idUtilisateur','=','users.id')
-       ->join('personne','users.idPersonne','=','personne.idPersonne')
-       ->select('professeur.idProf','personne.nom','personne.prenom','professeur.specialite','email','tel','dateNaissance','nationalite','lieuNaissance','situationFamiliale','genre','cin','adressePersonnele','emailInstitutionne')
-       ->get();
+        $professeurs = Professeur::where('professeur.idProf', $professeur->idProf)  //first inint a user id
+            ->join('users', 'professeur.idUtilisateur', '=', 'users.id')
+            ->join('personne', 'users.idPersonne', '=', 'personne.idPersonne')
+            ->select('professeur.idProf', 'personne.nom', 'personne.prenom', 'professeur.specialite', 'email', 'tel', 'dateNaissance', 'nationalite', 'lieuNaissance', 'situationFamiliale', 'genre', 'cin', 'adressePersonnele', 'emailInstitutionne')
+            ->get();
 
-        $matieres = Matiere::where('idProf',$professeur->idProf)
-        ->select('nom')->get();
+        $matieres = Matiere::where('idProf', $professeur->idProf)
+            ->select('nom')->get();
 
         $data = array();
         $data['prof'] = $professeurs;
@@ -302,14 +302,12 @@ class ChefDepartementController extends Controller
         }
     }
 
-    public function getMatiere(Professeur $professeur,Departement $departement) //get Matiere based on idFiliere
+    public function getMatiere(Professeur $professeur, Departement $departement) //get Matiere based on idFiliere
     {
         $MatieresList = array();
-        foreach($professeur->matieres as $matiere)
-        {
-            if($matiere->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
-            {
-                array_push($MatieresList,$matiere);
+        foreach ($professeur->matieres as $matiere) {
+            if ($matiere->module->semestre->filiere->departement->idDepartement == $departement->idDepartement) {
+                array_push($MatieresList, $matiere);
             }
         }
         echo json_encode($MatieresList);
@@ -321,16 +319,14 @@ class ChefDepartementController extends Controller
         $idMatiere = request('matiereafect');
         $idDepartement = request('depA');
         $matiere = Matiere::find($idMatiere);
-        $matiere->idProf=$idProf;
+        $matiere->idProf = $idProf;
         $matiere->save();
         $professeur = Professeur::find($idProf);
         $MatieresList = array();
         $departement = Departement::find($idDepartement);
-        foreach($professeur->matieres as $mat)
-        {
-            if($mat->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
-            {
-                array_push($MatieresList,$mat);
+        foreach ($professeur->matieres as $mat) {
+            if ($mat->module->semestre->filiere->departement->idDepartement == $departement->idDepartement) {
+                array_push($MatieresList, $mat);
             }
         }
         return json_encode($MatieresList);
@@ -341,16 +337,14 @@ class ChefDepartementController extends Controller
         $idProf = request('profdet');
         $idDepartement = request('depD');
         $matiere = Matiere::find($idMatiere);
-        $matiere->idProf=null;
+        $matiere->idProf = null;
         $matiere->save();
         $professeur = Professeur::find($idProf);
         $MatieresList = array();
         $departement = Departement::find($idDepartement);
-        foreach($professeur->matieres as $mat)
-        {
-            if($mat->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
-            {
-                array_push($MatieresList,$mat);
+        foreach ($professeur->matieres as $mat) {
+            if ($mat->module->semestre->filiere->departement->idDepartement == $departement->idDepartement) {
+                array_push($MatieresList, $mat);
             }
         }
         return json_encode($MatieresList);
@@ -365,111 +359,105 @@ class ChefDepartementController extends Controller
         //get the departement id of the current chef
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         //get all profs within the same departement
-        $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
+        $profs = Prof_departement::where('idDepartement', $idDepartement)->select('idProf')->get()->toArray();
 
-        $absences = Absence::whereIn('absence.idProf',$profs)
-        ->where('filiere.idDepartement',$idDepartement)
-        ->join('professeur','absence.idProf','=','professeur.idProf')
-        ->join('matiere','absence.idMatiere','matiere.idMatiere')
-        ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
-        ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
-        ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
-        ->join('users','users.id','=','professeur.idUtilisateur')
-        ->join('personne','personne.idPersonne','users.idPersonne')
-        ->select('idAbsence','matiere.nom as nomMatiere',DB::raw("concat_ws(' ',filiere.nom, filiere.niveau) AS nomFiliere"),DB::raw("concat_ws(' ',personne.nom, personne.prenom) AS nomProf"),'absence.dateAbsence as date','absence.etat')
-        ->get();
+        $absences = Absence::whereIn('absence.idProf', $profs)
+            ->where('filiere.idDepartement', $idDepartement)
+            ->join('professeur', 'absence.idProf', '=', 'professeur.idProf')
+            ->join('matiere', 'absence.idMatiere', 'matiere.idMatiere')
+            ->join('module', 'module.idModule', '=', 'matiere.idModule') //retrieved matiere
+            ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+            ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
+            ->join('users', 'users.id', '=', 'professeur.idUtilisateur')
+            ->join('personne', 'personne.idPersonne', 'users.idPersonne')
+            ->select('idAbsence', 'matiere.nom as nomMatiere', DB::raw("concat_ws(' ',filiere.nom, filiere.niveau) AS nomFiliere"), DB::raw("concat_ws(' ',personne.nom, personne.prenom) AS nomProf"), 'absence.dateAbsence as date', 'absence.etat')
+            ->get();
 
         if ($request->ajax()) {
             return Datatables::of($absences)
-            ->addColumn('etat', function($row)
-            {
-                $btn = ' ';
-                if($row->etat == 'rattrapée')
-                {
-                    $btn = '<span style="background-color: #33cc33;" class="badge badge-pill">Rattrapé</span>';
-                }
-                else if($row->etat == 'annulé')
-                {
-                    $btn = '<span style="background-color: #ff4d4d;" class="badge badge-pill">annulé</span>';
-                }
-                else
-                {
-                    $btn = '<span style="background-color: #ff4d4d;" class="badge badge-pill">En attend</span>';
-                }
-                return $btn;
-            })
-            ->addColumn('date', function($row)
-            {
-                setlocale(LC_TIME, "fr_FR", "French");
-                return strftime("%A %d %B %G %R", strtotime($row->date));
-            })
-            ->rawColumns(['etat','date'])
-            ->make(true);
+                ->addColumn('etat', function ($row) {
+                    $btn = ' ';
+                    if ($row->etat == 'rattrapée') {
+                        $btn = '<span style="background-color: #33cc33;" class="badge badge-pill">Rattrapé</span>';
+                    } else if ($row->etat == 'annulé') {
+                        $btn = '<span style="background-color: #ff4d4d;" class="badge badge-pill">annulé</span>';
+                    } else {
+                        $btn = '<span style="background-color: #ff4d4d;" class="badge badge-pill">En attend</span>';
+                    }
+                    return $btn;
+                })
+                ->addColumn('date', function ($row) {
+                    setlocale(LC_TIME, "fr_FR", "French");
+                    return strftime("%A %d %B %G %R", strtotime($row->date));
+                })
+                ->rawColumns(['etat', 'date'])
+                ->make(true);
         }
     }
 
     public function getChefDashboard()
     {
-        $annee = date("Y")."/".(date("Y")-1);
+        $annee = date("Y") . "/" . (date("Y") - 1);
         $date = date("j/n/Y");
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         //get the count of students in the same departement
-        $Count_etudiants = Filiere::where('idDepartement',$idDepartement)
-        ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
-        ->count();
+        $Count_etudiants = Filiere::where('idDepartement', $idDepartement)
+            ->join('etudiant', 'etudiant.idFiliere', '=', 'filiere.idFiliere')
+            ->count();
 
         //filieres count
-        $Count_filieres = Filiere::where('idDepartement',$idDepartement)->count();
+        $Count_filieres = Filiere::where('idDepartement', $idDepartement)->count();
 
         //get absences count (of profs within the same dep)
-        $profs = Prof_departement::where('idDepartement',$idDepartement)
-        ->select('idProf')->get()->toArray();
+        $profs = Prof_departement::where('idDepartement', $idDepartement)
+            ->select('idProf')->get()->toArray();
 
-        $Count_absences = Absence::whereIn('absence.idProf',$profs)
-        ->where('filiere.idDepartement',$idDepartement)
-        ->join('professeur','absence.idProf','=','professeur.idProf')
-        ->join('matiere','absence.idMatiere','matiere.idMatiere')
-        ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
-        ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
-        ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
-        ->join('users','users.id','=','professeur.idUtilisateur')
-        ->join('personne','personne.idPersonne','users.idPersonne')
-        ->count();
+        $Count_absences = Absence::whereIn('absence.idProf', $profs)
+            ->where('filiere.idDepartement', $idDepartement)
+            ->join('professeur', 'absence.idProf', '=', 'professeur.idProf')
+            ->join('matiere', 'absence.idMatiere', 'matiere.idMatiere')
+            ->join('module', 'module.idModule', '=', 'matiere.idModule') //retrieved matiere
+            ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+            ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
+            ->join('users', 'users.id', '=', 'professeur.idUtilisateur')
+            ->join('personne', 'personne.idPersonne', 'users.idPersonne')
+            ->count();
 
         $etat_notes = Departement::find($idDepartement)->insertion_notes;
 
         //echo $annee.'<br>'.$date.'<br>'.$Count_etudiants.'<br>'.$Count_filieres.'<br>'.$Count_absences.'<br>'.$etat_notes;
 
-        return view('chef.TableBoard',['annee' => $annee,'date' => $date,'Count_etudiants' => $Count_etudiants ,
-          'Count_filieres' => $Count_filieres , 'Count_absences' => $Count_absences, 'etat_notes' => $etat_notes]);
+        return view('chef.TableBoard', [
+            'annee' => $annee, 'date' => $date, 'Count_etudiants' => $Count_etudiants,
+            'Count_filieres' => $Count_filieres, 'Count_absences' => $Count_absences, 'etat_notes' => $etat_notes
+        ]);
     }
 
     public function getAbsencesListForChefDashboard(Request $request)
     {
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
-        $absences = Absence::whereIn('absence.idProf',$profs)
-        ->where('absence.etat','en attendant')
-        ->where('filiere.idDepartement',$idDepartement)
-        ->join('professeur','absence.idProf','=','professeur.idProf')
-        ->join('matiere','absence.idMatiere','matiere.idMatiere')
-        ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
-        ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
-        ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
-        ->join('users','users.id','=','professeur.idUtilisateur')
-        ->join('personne','personne.idPersonne','users.idPersonne')
-        ->select('Absence.idAbsence as idAbsence','personne.nom as nomProf','Absence.dateAbsence as dateAbsence')
-        ->get();
+        $profs = Prof_departement::where('idDepartement', $idDepartement)->select('idProf')->get()->toArray();
+        $absences = Absence::whereIn('absence.idProf', $profs)
+            ->where('absence.etat', 'en attendant')
+            ->where('filiere.idDepartement', $idDepartement)
+            ->join('professeur', 'absence.idProf', '=', 'professeur.idProf')
+            ->join('matiere', 'absence.idMatiere', 'matiere.idMatiere')
+            ->join('module', 'module.idModule', '=', 'matiere.idModule') //retrieved matiere
+            ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+            ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
+            ->join('users', 'users.id', '=', 'professeur.idUtilisateur')
+            ->join('personne', 'personne.idPersonne', 'users.idPersonne')
+            ->select('Absence.idAbsence as idAbsence', 'personne.nom as nomProf', 'Absence.dateAbsence as dateAbsence')
+            ->get();
 
         if ($request->ajax()) {
             return Datatables::of($absences)
-            ->addColumn('dateAbsence', function($row)
-            {
-                setlocale(LC_TIME, "fr_FR", "French");
-                return strftime("%A %d %B %G %R", strtotime($row->dateAbsence));
-            })
-            ->rawColumns(['dateAbsence'])
-            ->make(true);
+                ->addColumn('dateAbsence', function ($row) {
+                    setlocale(LC_TIME, "fr_FR", "French");
+                    return strftime("%A %d %B %G %R", strtotime($row->dateAbsence));
+                })
+                ->rawColumns(['dateAbsence'])
+                ->make(true);
         }
     }
 
@@ -480,20 +468,20 @@ class ChefDepartementController extends Controller
 
         //get all profs in the same departement
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
-        $profs = Prof_departement::where('idDepartement',$idDepartement)->select('idProf')->get()->toArray();
-        $absences = Absence::whereIn('absence.idProf',$profs)
-        ->where('absence.etat','en attendant')
-        ->where('filiere.idDepartement',$idDepartement)
-        ->join('professeur','absence.idProf','=','professeur.idProf')
-        ->join('matiere','absence.idMatiere','matiere.idMatiere')
-        ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
-        ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
-        ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
-        ->join('users','users.id','=','professeur.idUtilisateur')
-        ->join('personne','personne.idPersonne','users.idPersonne')
-        ->get();
+        $profs = Prof_departement::where('idDepartement', $idDepartement)->select('idProf')->get()->toArray();
+        $absences = Absence::whereIn('absence.idProf', $profs)
+            ->where('absence.etat', 'en attendant')
+            ->where('filiere.idDepartement', $idDepartement)
+            ->join('professeur', 'absence.idProf', '=', 'professeur.idProf')
+            ->join('matiere', 'absence.idMatiere', 'matiere.idMatiere')
+            ->join('module', 'module.idModule', '=', 'matiere.idModule') //retrieved matiere
+            ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+            ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
+            ->join('users', 'users.id', '=', 'professeur.idUtilisateur')
+            ->join('personne', 'personne.idPersonne', 'users.idPersonne')
+            ->get();
 
-        return view('chef.rattrapage',['absences' => $absences]);
+        return view('chef.rattrapage', ['absences' => $absences]);
     }
 
     public function AnnulerRatt(Request $request, $idAbsence)
@@ -504,7 +492,7 @@ class ChefDepartementController extends Controller
         $absence->save();
 
         //send notification to the prof that his absence has been rejected
-        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(),$absence));
+        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(), $absence));
         // end
 
         return redirect('/chef/rattrapages');
@@ -515,12 +503,15 @@ class ChefDepartementController extends Controller
         $absence = Absence::find($idAbsence);
         $absence->etat = 'rattrapée';  //validée
         $absence->salle = $request->salle;
-        if(!is_null($request->dateRattOptionnel)) {$absence->dateRattrapage = $request->dateRattOptionnel;}
-        else {$absence->dateRattrapage = $request->datesRattPossibles;}
+        if (!is_null($request->dateRattOptionnel)) {
+            $absence->dateRattrapage = $request->dateRattOptionnel;
+        } else {
+            $absence->dateRattrapage = $request->datesRattPossibles;
+        }
         $absence->save();
 
         //send notification to the prof that his absence is valideated
-        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(),$absence));
+        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(), $absence));
 
         return redirect('/chef/rattrapages');
     }

@@ -62,7 +62,7 @@ class ProfesseurController extends Controller
     {
         $MatieresList = Filiere::where('filiere.idFiliere', $idFiliere)
             ->where('matiere.idProf', Auth::user()->professeur->idProf)
-            ->join('semestre','filiere.idFiliere','=','semestre.idFiliere')
+            ->join('semestre', 'filiere.idFiliere', '=', 'semestre.idFiliere')
             ->join('module', 'module.idSemestre', '=', 'semestre.idSemestre')
             ->join('matiere', 'module.idModule', '=', 'matiere.idModule')
             ->select('matiere.idMatiere as idMatiere', 'matiere.nom as nomMatiere')->get();
@@ -90,14 +90,14 @@ class ProfesseurController extends Controller
                 'dateAbsence' => $dateAbsence,
                 'dateRattrapage' => $dateRatt,  //old one user streplace
                 'etat' => 'en attendant',
-            ]);            
+            ]);
             //send mails if informerEtudiants=on
             if ($informerEtudiants == 'on') {
                 $profName = Auth::user()->personne->nom . ' ' . Auth::user()->personne->prenom;
                 $dateAbsence;
                 $filiere = Matiere::where('idMatiere', $idMatiere)
                     ->join('module', 'matiere.idModule', 'module.idModule')
-                    ->join('semestre','semestre.idSemestre','=','module.idSemestre')
+                    ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
                     ->select('semestre.idFiliere as idFiliere', 'matiere.nom as nom')->get()[0];
 
                 $etudiants = Etudiant::where('idFiliere', $filiere->idFiliere)->get();
@@ -159,7 +159,7 @@ class ProfesseurController extends Controller
         $filieres = array();
         if (!empty(auth()->user()->professeur->matieres)) {
             foreach (auth()->user()->professeur->matieres as $matiere) {
-                array_push($filieres, $matiere->module->filiere);
+                array_push($filieres, $matiere->module->semestre->filiere);
             }
             $filieres = array_unique($filieres);
         }
@@ -190,15 +190,15 @@ class ProfesseurController extends Controller
 
     public function getListNotes(Request $request, Matiere $matiere)  //an ajax function to retrieve tha data
     {
-
-        $notes = Matiere::where('matiere.idMatiere', $matiere->idMatiere)  //first inint a user id
-            ->join('module', 'module.idModule', '=', 'matiere.idModule')
-            ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
-            ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
+        $idFiliere = $matiere->module->semestre->filiere->idFiliere;
+        $notes = Etudiant::where('filiere.idFiliere', $idFiliere)  //first inint a user id
+            ->join('filiere', 'etudiant.idFiliere', '=', 'filiere.idFiliere')
             ->join('departement', 'departement.idDepartement', '=', 'filiere.idDepartement')
-            ->join('etudiant', 'etudiant.idFiliere', '=', 'filiere.idFiliere')
             ->join('personne', 'etudiant.idPersonne', '=', 'personne.idPersonne')
-            ->leftJoin('note', 'etudiant.idEtudiant', '=', 'note.idEtudiant')
+            ->leftJoin('note', function ($q) use ($matiere) {
+                $q->on('note.idEtudiant', '=', 'etudiant.idEtudiant')
+                    ->where('note.idMatiere', '=', "$matiere->idMatiere");
+            })
             ->select('apogee', 'personne.nom', 'insertion_notes as etat', 'personne.prenom', 'cne', 'controle', 'exam', 'noteGeneral', 'idNote', 'etudiant.idEtudiant')
             ->get();
         if ($request->ajax()) {
