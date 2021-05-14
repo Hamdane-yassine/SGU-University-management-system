@@ -20,6 +20,6 @@ class CheckAdmin
         if ($user->hasRole('admin')) {
             return $next($request);
         }
-        return redirect('home');
+        return redirect('/');
     }
 }

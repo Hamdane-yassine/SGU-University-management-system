@@ -18,6 +18,9 @@ use App\Models\Module;
 use App\Models\Personne;
 use App\Models\Prof_departement;
 use App\Models\Professeur;
+use App\Notifications\AnunulerRattNotify;
+use App\Notifications\NotifyRattAccepte;
+use App\Notifications\RattAnunuleNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Constraint\IsNull;
@@ -496,6 +499,8 @@ class ChefDepartementController extends Controller
         $absence->save();
 
         //send notification to the prof that his absence has been rejected
+        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(),$absence));
+        // end
 
         return redirect('/chef/rattrapages');
     }
@@ -510,6 +515,7 @@ class ChefDepartementController extends Controller
         $absence->save();
 
         //send notification to the prof that his absence is valideated
+        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(),$absence));
 
         return redirect('/chef/rattrapages');
     }

@@ -1,5 +1,5 @@
 @extends('layouts.prof')
-@section('title', 'Professeurs')
+@section('title', "$departement->nom")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
@@ -502,6 +502,7 @@
     <script src="{{ asset('src/plugins/datatables/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('vendors/scripts/admin/profs.js') }}"></script>
 @endsection

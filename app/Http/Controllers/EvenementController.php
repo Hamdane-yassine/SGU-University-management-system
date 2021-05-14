@@ -146,9 +146,9 @@ class EvenementController extends Controller
 
         $zip = new ZipArchive;
 
-        $fileName = 'Example.zip';
-
-        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
+        $fileName = '/storage/temp/Example.zip';
+        //if smthing went wrog back to last modif
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE|ZipArchive::OVERWRITE) === TRUE)
         {
 
         foreach ($files as $key => $value) {

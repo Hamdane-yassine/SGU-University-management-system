@@ -28,7 +28,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Chef.absences');
+    $role = Auth::user()->role;
+    switch ($role) {
+        case 'master':
+            return redirect('master/dashboard');
+            break;
+        case 'chefdep':
+            return redirect('chef/dashboard');
+            break;
+        case 'prof':
+            return redirect('Dashboard');
+            break;
+        case 'admin':
+            return redirect('admin/dashboard');
+            break;
+        default:
+            echo "Not logged";
+            break;
+    }
 })->middleware('auth');
 
 Auth::routes();
@@ -117,7 +134,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/profile/' . auth()->id);
+    return redirect('/profile/'.Auth::user()->getAuthIdentifier());
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::impersonate();
@@ -150,10 +167,11 @@ Route::get('/{nb}', function ($nb) {
 // });
 
 Route::prefix('profile')->group(function () {
-    Route::get('/{user}', [ProfileController::class, 'show'])->name('profile.show');
-    Route::post('/update/{profile}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/updateImage/', [ProfileController::class, 'updateImage'])->name('profile.update.image');
-    Route::post('/updatePasswd/', [ProfileController::class, 'updatePasswd'])->name('profile.update.passwd');
+    Route::get('/{user}', [ProfileController::class,'show'])->name('profile.show');
+    Route::post('/update/{profile}', [ProfileController::class,'update'])->name('profile.update');
+    Route::post('/updateImage/', [ProfileController::class,'updateImage'])->name('profile.update.image');
+    Route::post('/updatePasswd/', [ProfileController::class,'updatePasswd'])->name('profile.update.passwd');
+    Route::post('/updateInfo/{profile}', [ProfileController::class,'updateInfo'])->name('profile.update.info');
 });
 
 // ===============

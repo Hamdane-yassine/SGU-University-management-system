@@ -87,6 +87,13 @@ var table1 = $(".data-table-export").DataTable({
             exportOptions: {
                 columns: ":not(.datatable-nosort)"
             }
+        },
+        {
+            extend: "excel",
+            text: '<i class="icon-copy fa fa-file-excel-o" aria-hidden="true">&nbsp;&nbspExcel</i>',
+            exportOptions: {
+                columns: ":not(.datatable-nosort)"
+            }
         }
     ]
 });

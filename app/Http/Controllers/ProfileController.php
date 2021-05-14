@@ -91,12 +91,21 @@ class ProfileController extends Controller
             'tel'=>'max:20'
         ]);
 
-        $request->user->email = $request->inpute('email');
+        if($request->has('email')){
+            $profile->user->email = $request->input('email');
+            $profile->user->sendEmailVerificationNotification();
+        }
+        if($request->has('facebook'))
+            $profile->facebook = $request->input('facebook');
+        if($request->has('dropbox'))
+            $profile->dropbox = $request->input('dropbox');
 
-        $request->user->sendEmailVerificationNotification();
-        $profile->facebook = $request->inpute('facebook');
-        $profile->dropbox = $request->inpute('dropbox');
-        $profile->user->peradresse = $request->inpute('adresse');
+        if($request->has('adresse'))
+            $profile->user->personne->adressePersonnele = $request->input('adresse');
+
+        $profile->save();
+        $profile->user->save();
+        return redirect()->back();
     }
 
     public function updatePasswd(Request $request)
