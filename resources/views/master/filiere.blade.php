@@ -24,36 +24,7 @@
             </div>
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" action="/updateFiliere/{{ $idDepartement }}">
-                                @csrf
-                                <label>Nom : </label>
-                                <input type="text" class="form-control" name="nomFiliere" placeholder="nom du filiere"><br>
-                                <label>Niveau : </label>
-                                <input type="number" class="form-control" name="niveau" placeholder="niveau">
-                                <input type="hidden" class="form-control" name="idFiliere" id="hiddenIdFiliere">
-                                <input type="hidden" class="form-control" name="idDepartement" id="idDepartement"
-                                    value={{ $idDepartement }}>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="pd-20 mb-20 card-box">
                 <div class="wizard-content">
@@ -61,8 +32,7 @@
                         <h4 class="h4 d-inline">Supprimer semestre : </h4>
                     </div>
                     <hr>
-                    <form class="tab-wizard wizard-circle wizard pl-20" method="POST"
-                        action="{{ route('deleteSemestreOfFiliere') }}">
+                    <form id="deleteFiliere"  class="tab-wizard wizard-circle wizard pl-20" method="POST" action="{{ route('deleteSemestreOfFiliere') }}">
                         @csrf
                         <section>
                             <div class="row">
@@ -87,8 +57,8 @@
                                         </select>
                                     </div>
                                     <div class="text-right form-group">
-                                        <button type="submit" class="btn btn-secondary">Supprimer</button>
-
+                                        <!--<button type="submit" class="btn btn-secondary">Supprimer</button>--->
+                                        <input class="btn btn-secondary" type="button"  value="Supprimer"  data-toggle="modal" data-target="#modal1" />
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +73,7 @@
                         <h4 class="h4 d-inline">Modifier Module : </h4>
                     </div>
                     <hr>
-                    <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
+                    <form id="deleteModule" class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data" action="/master/deleteModule">
                         @csrf
                         <section>
                             <div class="row">
@@ -146,8 +116,7 @@
                             </div>
                         </section>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-secondary"
-                                formaction="/master/deleteModule">Supprimer</button>
+                            <input class="btn btn-secondary" type="button"  value="Supprimer"  data-toggle="modal" data-target="#modal2" />
                             <button type="submit" class="btn btn-primary"
                                 formaction="/master/saveModule">Sauvegarder</button>
                         </div>
@@ -161,7 +130,7 @@
                         <h4 class="h4 d-inline">Modifier Matiere : </h4>
                     </div>
                     <hr>
-                    <form class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data">
+                    <form id="deleteMatiere" class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data" action="/master/deleteMatiere">
                         @csrf
                         <section>
                             <div class="row">
@@ -214,13 +183,110 @@
                             </div>
                         </section>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-secondary" formaction="/master/deleteMatiere"
-                                formnovalidate>Supprimer</button>
+                            <input class="btn btn-secondary" type="button"  value="Supprimer"  data-toggle="modal" data-target="#modal3" />
                             <button type="submit" class="btn btn-primary" formaction="/master/saveMatiere">Valider</button>
                         </div>
                     </form>
                 </div>
             </div>
+                <!--modals-->
+                <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body text-center font-18">
+                                <h4 class="padding-top-30 mb-30 weight-500">Vous êtes sûr ?</h4>
+                                <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn"
+                                            data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                        NON
+                                    </div>
+                                    <div class="col-6">
+                                            <button id="submit1"
+                                                class="btn btn-primary border-radius-100 btn-block confirmation-btn"><i
+                                                    class="fa fa-check"></i></button>
+                                            OUI
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body text-center font-18">
+                                <h4 class="padding-top-30 mb-30 weight-500">Vous êtes sûr ?</h4>
+                                <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn"
+                                            data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                        NON
+                                    </div>
+                                    <div class="col-6">
+                                            <button id="submit2"
+                                                class="btn btn-primary border-radius-100 btn-block confirmation-btn"><i
+                                                    class="fa fa-check"></i></button>
+                                            OUI
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body text-center font-18">
+                                <h4 class="padding-top-30 mb-30 weight-500">Vous êtes sûr ?</h4>
+                                <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn"
+                                            data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                        NON
+                                    </div>
+                                    <div class="col-6">
+                                            <button id="submit3"
+                                                class="btn btn-primary border-radius-100 btn-block confirmation-btn"><i
+                                                    class="fa fa-check"></i></button>
+                                            OUI
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="/updateFiliere/{{ $idDepartement }}">
+                                    @csrf
+                                    <label>Nom : </label>
+                                    <input type="text" class="form-control" name="nomFiliere" placeholder="nom du filiere"><br>
+                                    <label>Niveau : </label>
+                                    <input type="number" class="form-control" name="niveau" placeholder="niveau">
+                                    <input type="hidden" class="form-control" name="idFiliere" id="hiddenIdFiliere">
+                                    <input type="hidden" class="form-control" name="idDepartement" id="idDepartement"
+                                        value={{ $idDepartement }}>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
         <!-- js -->
     @endsection
@@ -233,4 +299,16 @@
         <script src="{{ asset('src/plugins/jquery-steps/jquery.steps.js') }}"></script>
         <script src="{{ asset('vendors/scripts/steps-setting.js') }}"></script>
         <script src="{{ asset('vendors/scripts/master/filiere.js') }}"></script>
+        <script>
+
+            $('#submit1').click(function(){
+            $('#deleteFiliere').submit();});
+
+            $('#submit2').click(function(){
+            $('#deleteModule').submit();});
+
+            $('#submit3').click(function(){
+            $('#deleteMatiere').submit();});
+
+        </script>
     @endsection
