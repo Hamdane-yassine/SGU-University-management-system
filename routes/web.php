@@ -153,7 +153,7 @@ Route::get('/{nb}', function ($nb) {
             return view('evenements.html5-editor');
             break;
         case 3:
-            return view('Chef.Notifications');
+            return view('notifications.Notifications');
             break;
 
             // default:

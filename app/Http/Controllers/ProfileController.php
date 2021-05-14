@@ -84,7 +84,7 @@ class ProfileController extends Controller
     public function updateInfo(Request $request, Profile $profile)
     {
         $request->validate([
-            'email'=>['email',Rule::unique('users')],
+            'email'=>['email','unique:users'],
             'adresse'=>'max:100',
             'facbook'=>'max:100',
             'dropbox'=>'max:100',
@@ -119,7 +119,7 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(),
             [
                 'current'=>['required', new checkPasswd($request->user())],
-                'passwd'=>['required|alpha_num|min:8', new checkPasswd($request->user())],
+                'passwd'=>['required', 'alpha_num' ,'min:8', new checkPasswd($request->user())],
                 'retypedPasswd'=>['required',new ChekEqualPasswd($request->passwd)],            // 'adresse'=>'required'
             ]
         );

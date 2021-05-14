@@ -21,9 +21,9 @@ class NotifyRattAccepte extends Notification implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct($user, $absence)
+    public function __construct($professeur, $absence)
     {
-        $this->user = $user;
+        $this->professeur = $professeur;
         $this->absence = $absence;
     }
 
@@ -35,7 +35,7 @@ class NotifyRattAccepte extends Notification implements ShouldBroadcastNow
      */
     public function via($notifiable)
     {
-        return ['databse','broadcast'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -66,7 +66,7 @@ class NotifyRattAccepte extends Notification implements ShouldBroadcastNow
             'from'=>$abs->chefdep->professeur->user->personne->nom.' '.$abs->chefdep->professeur->user->personne->prenom,
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
-            'brief'=>'Votre demande de rattrapage a été rejetée.',
+            'brief'=>'Votre demande de rattrapage a été accepté.',
         ];
     }
 }

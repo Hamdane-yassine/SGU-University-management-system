@@ -95,7 +95,7 @@ class UserController extends Controller
     {
         if($request->idNotif)
             return redirect('/notifications#notif-'.$request->idNotif);
-        return view('Chef.Notifications');
+        return view('notifications.Notifications');
     }
 
     public function impersonateGet()

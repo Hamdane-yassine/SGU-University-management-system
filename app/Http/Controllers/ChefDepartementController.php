@@ -20,6 +20,7 @@ use App\Models\Prof_departement;
 use App\Models\Professeur;
 use App\Notifications\AnunulerRattNotify;
 use App\Notifications\NotifyRattAccepte;
+use App\Notifications\NotifyRattAnnule;
 use App\Notifications\RattAnunuleNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -241,7 +242,7 @@ class ChefDepartementController extends Controller
 
     public function getNotes(Matiere $matiere)
     {
-        return view('chef.Notes', ['matiere' => $matiere]);
+        return view('notifications.Notifications', ['matiere' => $matiere]);
     }
 
     public function getListNotes(Request $request, Matiere $matiere)  //an ajax function to retrieve tha data
@@ -493,6 +494,7 @@ class ChefDepartementController extends Controller
 
         //send notification to the prof that his absence has been rejected
         $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(), $absence));
+        $absence->professeur->user->notify(new NotifyRattAnnule(Auth::user(),$absence));
         // end
 
         return redirect('/chef/rattrapages');
