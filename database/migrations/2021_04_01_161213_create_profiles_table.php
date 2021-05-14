@@ -20,7 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('croppedImage');
             $table->string('facebook')->nullable();
             $table->string('linkedin')->nullable();
-            $table->string('skype')->nullable();
+            $table->string('dropbox')->nullable();
             $table->timestamps();
         });
     }

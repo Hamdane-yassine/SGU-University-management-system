@@ -117,7 +117,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/profile/'.auth()->id);
+    return redirect('/profile/'.Auth::user()->getAuthIdentifier());
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::impersonate();
@@ -155,6 +155,7 @@ Route::prefix('profile')->group(function () {
     Route::post('/update/{profile}', [ProfileController::class,'update'])->name('profile.update');
     Route::post('/updateImage/', [ProfileController::class,'updateImage'])->name('profile.update.image');
     Route::post('/updatePasswd/', [ProfileController::class,'updatePasswd'])->name('profile.update.passwd');
+    Route::post('/updateInfo/{profile}', [ProfileController::class,'updateInfo'])->name('profile.update.info');
 });
 
 // ===============
