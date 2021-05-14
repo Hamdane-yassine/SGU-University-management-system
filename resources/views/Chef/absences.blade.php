@@ -1,5 +1,5 @@
 @extends('layouts.prof')
-@section('title','Absences')
+@section('title', 'Absences')
 @section('content')
     <div class="main-container">
 
@@ -32,58 +32,20 @@
             </div>
         </div>
     </div>
-    @endsection
-    @section('SpecialScripts')
-        <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-        <!-- buttons for Export datatable -->
-        <script src="{{ asset('src/plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/buttons.print.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/buttons.html5.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
-        <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-        <!-- Datatable Setting js -->
-
-
-        <script type="text/javascript">
-            $('.data-table').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('getAbsencesForChef') }}",
-                    columns: [
-                        {data: 'idAbsence', name: 'idAbsence'},
-                        {data: 'nomMatiere', name: 'nomMatiere'},
-                        {data: 'nomFiliere', name: 'nomFiliere'},
-                        {data: 'nomProf', name: 'nomProf'},
-                        {data: 'date', name: 'date'},
-                        {data: 'etat', name: 'etat'}
-                    ],
-                    scrollCollapse: true,
-                    autoWidth: false,
-                    responsive: true,
-
-                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                    "language": {
-                        "info": "_START_ à _END_ sur _TOTAL_ éléments",
-                        "emptyTable": "Aucune donnée disponible dans le tableau",
-                        "lengthMenu": "Afficher _MENU_ éléments",
-                        "zeroRecords": "Aucun élément correspondant trouvé",
-                        "processing": "Traitement...",
-                        "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
-                        "loadingRecords": "Chargement...",
-                        "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
-                        search: "Rechercher:",
-                        searchPlaceholder: "Rechercher",
-                        paginate: {
-                            next: '<i class="ion-chevron-right"></i>',
-                            previous: '<i class="ion-chevron-left"></i>'
-                        }
-                    },
-                });
-        </script>
-    @endsection
+@endsection
+@section('SpecialScripts')
+    <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+    <!-- buttons for Export datatable -->
+    <script src="{{ asset('src/plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/chef/absences.js') }}"></script>
+@endsection
