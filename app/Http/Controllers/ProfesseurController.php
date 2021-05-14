@@ -26,7 +26,6 @@ class ProfesseurController extends Controller
 {
     public function index()   //returns the page without the absence section (a non ajax request)
     {
-
         $filieres=array();
         if(!empty(auth()->user()->professeur->matieres))
         {
@@ -47,7 +46,7 @@ class ProfesseurController extends Controller
         ->join('module','matiere.idModule','=','module.idModule')
         ->join('filiere','module.idFiliere','=','filiere.idFiliere')
         ->join('departement','filiere.idDepartement','=','departement.idDepartement')
-        ->select('IdAbsence','matiere.nom as nomMatiere','departement.nom as nomDepartement',DB::raw("concat_ws(filiere.nom,' ', filiere.niveau) AS nomFiliere"),'dateAbsence as date','etat')
+        ->select('IdAbsence','matiere.nom as nomMatiere','departement.nom as nomDepartement',DB::raw("concat_ws(' ',filiere.nom,filiere.niveau) AS nomFiliere"),'dateAbsence as date','etat')
         ->get(); //altough this object is a Collection , we can still iterate overit using loops
         //return $absences;
          if ($request->ajax()) {

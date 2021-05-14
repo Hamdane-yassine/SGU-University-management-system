@@ -44,7 +44,7 @@
                                                 style="width: 100%; height: 38px;" name="prof" id="prof">
                                                 @foreach ($departement->prof_departements as $prof_departement)
                                                    <option value="{{ $prof_departement->professeur->idProf }}">{{$prof_departement->professeur->user->personne->nom.' '.$prof_departement->professeur->user->personne->prenom }}</option>
-                                                @endforeach 
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -91,15 +91,15 @@
                                                 <option value="">---Selectioné un professeur---</option>
                                                 @foreach ($departement->prof_departements as $prof_departement)
                                                    <option value="{{ $prof_departement->professeur->idProf }}">{{$prof_departement->professeur->user->personne->nom.' '.$prof_departement->professeur->user->personne->prenom }}</option>
-                                                @endforeach                                                 
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Matière :</label>
-                                            <select class="custom-select1 form-control" name="matiere" id="matiere" style="width: 100%; height: 45px;" required>
-                                                
+                                            <select class="custom-select2 form-control" name="matiere" id="matiere" style="width: 100%; height: 45px;" required>
+
                                             </select>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
 
                                 <dt class="col-sm-4">Genre</dt>
                                 <dd class="col-sm-8" id="genre"></dd>
-                         
+
                                 <dt class="col-sm-4">Nationalité</dt>
                                 <dd class="col-sm-8" id="nationalite"></dd>
 
@@ -406,7 +406,7 @@
             });
         });
         $("#detacher").submit(function(e) {
-            e.preventDefault(); 
+            e.preventDefault();
             var form = $(this);
             var url = form.attr('action');
             $.ajax({

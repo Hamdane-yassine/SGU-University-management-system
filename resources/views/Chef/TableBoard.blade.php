@@ -59,17 +59,29 @@
 				</div>
 				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
 					<div class="card-box height-100-p widget-style3">
-						<div class="d-flex flex-wrap">
-							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark">{{ $etat_notes }}</div>
-								<div class="font-14 text-secondary weight-500">Insértion des notes</div>
-							</div>
-							<div class="widget-icon">
-								<div class="icon" data-color="#09cc06"><i class="icon-copy fi-check"
-										aria-hidden="true"></i></div>
-								<!-- <div class="icon" data-color="red"><i class="icon-copy fi-x" aria-hidden="true"></i></div> -->
-							</div>
-						</div>
+                        @if($etat_notes == 'ouvert')
+						    <div class="d-flex flex-wrap">
+						    	<div class="widget-data">
+						    		<div class="weight-700 font-24 text-dark">{{ $etat_notes }}</div>
+						    		<div class="font-14 text-secondary weight-500">Insértion des notes</div>
+						    	</div>
+						    	<div class="widget-icon">
+						    		<div class="icon" data-color="#09cc06"><i class="icon-copy fi-check"
+						    				aria-hidden="true"></i></div>
+						    		<!-- <div class="icon" data-color="red"><i class="icon-copy fi-x" aria-hidden="true"></i></div> -->
+						    	</div>
+						    </div>
+                        @elseif ($etat_notes == 'fermé')
+                                <div class="d-flex flex-wrap">
+                                    <div class="widget-data">
+                                        <div class="weight-700 font-24 text-dark">{{ $etat_notes }}</div>
+                                        <div class="font-14 text-secondary weight-500">Insértion des notes</div>
+                                    </div>
+                                    <div class="widget-icon">
+                                        <div class="icon" data-color="red"><i class="icon-copy fi-x" aria-hidden="true"></i></div>
+                                    </div>
+                                </div>
+                        @endif
 					</div>
 				</div>
 			</div>

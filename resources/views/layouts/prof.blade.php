@@ -355,7 +355,7 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li>
-                    <a href="/admin/dashboard" class="dropdown-toggle no-arrow">
+                    <a href="/master/dashboard" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-dashboard"
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau de bord</span>
                     </a>
