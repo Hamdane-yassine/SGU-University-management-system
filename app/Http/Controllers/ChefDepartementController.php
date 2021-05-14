@@ -18,9 +18,13 @@ use App\Models\Module;
 use App\Models\Personne;
 use App\Models\Prof_departement;
 use App\Models\Professeur;
+use App\Notifications\AnunulerRattNotify;
+use App\Notifications\NotifyRattAccepte;
+use App\Notifications\RattAnunuleNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Constraint\IsNull;
+use Illuminate\Support\Facades\DB;
 
 class ChefDepartementController extends Controller
 {
@@ -370,7 +374,7 @@ class ChefDepartementController extends Controller
         ->join('filiere','module.idFiliere','filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
-        ->select('idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','personne.nom as nomProf','absence.dateAbsence as date','absence.etat')
+        ->select('idAbsence','matiere.nom as nomMatiere',DB::raw("concat_ws(' ',filiere.nom, filiere.niveau) AS nomFiliere"),DB::raw("concat_ws(' ',personne.nom, personne.prenom) AS nomProf"),'absence.dateAbsence as date','absence.etat')
         ->get();
 
         if ($request->ajax()) {
@@ -495,6 +499,8 @@ class ChefDepartementController extends Controller
         $absence->save();
 
         //send notification to the prof that his absence has been rejected
+        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(),$absence));
+        // end
 
         return redirect('/chef/rattrapages');
     }
@@ -509,6 +515,7 @@ class ChefDepartementController extends Controller
         $absence->save();
 
         //send notification to the prof that his absence is valideated
+        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(),$absence));
 
         return redirect('/chef/rattrapages');
     }

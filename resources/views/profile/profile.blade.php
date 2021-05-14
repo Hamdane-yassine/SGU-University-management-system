@@ -119,7 +119,7 @@
                                         <!-- Setting Tab start -->
                                         <div class="tab-pane active height-100-p" id="setting" role="tabpanel">
                                             <div class="profile-setting">
-                                                <form method="POST" action="{{ route('profile.update', $profile) }}">
+                                                <form method="POST" action="{{ route('profile.update.info', $profile) }}">
                                                     @csrf
                                                     <ul class="profile-edit-list row">
                                                         <li class="weight-500 col-md-6">
