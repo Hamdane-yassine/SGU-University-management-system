@@ -60,7 +60,7 @@ class NotifyRattAccepte extends Notification implements ShouldBroadcastNow
      */
     public function toArray($notifiable)
     {
-        $abs = new ((array)json_decode($this->absence));
+        $abs = new Absence((array)json_decode($this->absence));
         return [
             'image' =>$abs->chefdep->professeur->user->profile->croppedImage,
             'from'=>$abs->chefdep->professeur->user->personne->nom.' '.$abs->chefdep->professeur->user->personne->prenom,
