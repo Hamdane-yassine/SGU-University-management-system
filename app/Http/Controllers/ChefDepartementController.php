@@ -24,6 +24,7 @@ use App\Notifications\RattAnunuleNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Constraint\IsNull;
+use Illuminate\Support\Facades\DB;
 
 class ChefDepartementController extends Controller
 {
@@ -305,7 +306,7 @@ class ChefDepartementController extends Controller
         $MatieresList = array();
         foreach($professeur->matieres as $matiere)
         {
-            if($matiere->module->filiere->departement->idDepartement == $departement->idDepartement)
+            if($matiere->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
             {
                 array_push($MatieresList,$matiere);
             }
@@ -326,7 +327,7 @@ class ChefDepartementController extends Controller
         $departement = Departement::find($idDepartement);
         foreach($professeur->matieres as $mat)
         {
-            if($mat->module->filiere->departement->idDepartement == $departement->idDepartement)
+            if($mat->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
             {
                 array_push($MatieresList,$mat);
             }
@@ -346,7 +347,7 @@ class ChefDepartementController extends Controller
         $departement = Departement::find($idDepartement);
         foreach($professeur->matieres as $mat)
         {
-            if($mat->module->filiere->departement->idDepartement == $departement->idDepartement)
+            if($mat->module->semestre->filiere->departement->idDepartement == $departement->idDepartement)
             {
                 array_push($MatieresList,$mat);
             }
@@ -373,7 +374,7 @@ class ChefDepartementController extends Controller
         ->join('filiere','module.idFiliere','filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
-        ->select('idAbsence','matiere.nom as nomMatiere','filiere.nom as nomFiliere','personne.nom as nomProf','absence.dateAbsence as date','absence.etat')
+        ->select('idAbsence','matiere.nom as nomMatiere',DB::raw("concat_ws(' ',filiere.nom, filiere.niveau) AS nomFiliere"),DB::raw("concat_ws(' ',personne.nom, personne.prenom) AS nomProf"),'absence.dateAbsence as date','absence.etat')
         ->get();
 
         if ($request->ajax()) {
