@@ -77,6 +77,10 @@ var table1 = $(".data-table-export").DataTable({
         {
             extend: "print",
             text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimer'
+        },
+        {
+            extend: "excel",
+            text: '<i class="icon-copy fa fa-file-excel-o" aria-hidden="true">&nbsp;&nbspExcel</i>',
         }
     ]
 });

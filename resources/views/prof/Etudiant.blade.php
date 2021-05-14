@@ -119,6 +119,7 @@
     <script src="{{ asset('src/plugins/datatables/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('src/plugins/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('vendors/scripts/prof/etudiants.js') }}"></script>
     @endsection
