@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Models\User;
 use App\Rules\checkPasswd;
+use App\Rules\ChekEqualPasswd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -79,29 +81,50 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function updateInfo(Request $request, Profile $profile)
     {
         $request->validate([
-            'email'=>'required',
-            'adresse'=>'required'
+            'email'=>['email',Rule::unique('users')],
+            'adresse'=>'max:100',
+            'facbook'=>'max:100',
+            'dropbox'=>'max:100',
+            'tel'=>'max:20'
         ]);
 
-        $request->user->email = $request->email;
-        $request->user = $request->email;
+        $request->user->email = $request->inpute('email');
+
+        $request->user->sendEmailVerificationNotification();
+        $profile->facebook = $request->inpute('facebook');
+        $profile->dropbox = $request->inpute('dropbox');
+        $profile->user->peradresse = $request->inpute('adresse');
     }
 
     public function updatePasswd(Request $request)
     {
+        // $request->validate([
+        //     'current'=>['required', new checkPasswd($request->user())],
+        //     'passwd'=>['required', new checkPasswd($request->user())],
+        //     'retypedPasswd'=>['required'],
+        //     // 'adresse'=>'required'
+        // ]);
+        $validator = Validator::make($request->all(),
+            [
+                'current'=>['required', new checkPasswd($request->user())],
+                'passwd'=>['required|alpha_num|min:8', new checkPasswd($request->user())],
+                'retypedPasswd'=>['required',new ChekEqualPasswd($request->passwd)],            // 'adresse'=>'required'
+            ]
+        );
 
-        $request->validate([
-            'current'=>['required', new checkPasswd($request->user())],
-            'passwd'=>['required', new checkPasswd($request->user())],
-            'retypedPasswd'=>['required'],
-            // 'adresse'=>'required'
-        ]);
+        if($validator->fails()){
+            // if($request->has('current') || $request->has('passwd') || $request->has('retypedPasswd'))
+            return redirect('/profile/'.$request->user()->id.'?tab=passwd')
+                    ->withErrors($validator)
+                    ->withInput();
+        }
 
-        // $request->user->email = $request->email;
-        // $request->user = $request->email;
+        Auth::user()->password = bcrypt($request->passwd);
+        request()->user()->save();
+        return redirect('/profile/'.$request->user()->id.'?tab=passwd');
     }
 
     /**
@@ -149,7 +172,7 @@ class ProfileController extends Controller
 
         $profile->croppedImage = $this->filePath($request, 'img');
 
-        if($request->has('newImg')){
+        if($request->has('newImg') && $request->newImg != null){
             // $request->user->profile->imagePath = $request->file('newImg');
             $profile->imagePath = $this->filePath($request, 'newImg');
         }

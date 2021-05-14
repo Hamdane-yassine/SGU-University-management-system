@@ -9,8 +9,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Evenement;
 use App\Models\User;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Chef.absences');
 })->middleware('auth');
 
 Auth::routes();
@@ -104,12 +106,21 @@ Route::prefix('evenement')->group(function () {
     Route::get('download/{evenement}', [EvenementController::class,'downloadAttachements'])->name('evenement.download');
 });
 
-Route::impersonate();
-Route::get('/h', [UserController::class,'impersonate']);
+Route::post('user/impersonate', [UserController::class,'impersonate']);
+Route::get('user/impersonate', [UserController::class,'impersonateGet']);
 
-Route::get('/k', function () {
-    return redirect()->route('impersonate',10);
-});
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/profile/'.auth()->id);
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::impersonate();
 // ===============
 Route::get('/{nb}', function ($nb) {
     // broadcast(new \App\Events\Evt())->toOthers();
@@ -261,3 +272,9 @@ Route::post('/master/deleteModule', [MasterController::class ,'deleteModule']);
 Route::get('/master/getMatieresOfModule/{idModule}', [MasterController::class , 'getMatieresOfModule']);
 
 Route::post('/master/deleteMatiere', [MasterController::class , 'deleteMatiere']);
+
+Route::get('/master/dashboard', [MasterController::class , 'indexDashboard']);
+
+Route::get('/master/dashboard/chefdepsdatatable', [MasterController::class , 'chefdepsdatatable'])->name('MasterChefDatatable');
+
+Route::get('/master/dashboard/adminsdatatable', [MasterController::class , 'adminsdatatable'])->name('MasterAdminsDataTable');

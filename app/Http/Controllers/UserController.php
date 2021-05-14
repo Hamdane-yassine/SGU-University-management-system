@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    protected User $user;
+
+    function __construct(User $user)
+    {
+        $this->user = $user;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -91,11 +98,19 @@ class UserController extends Controller
         return view('Chef.Notifications');
     }
 
+    public function impersonateGet()
+    {
+        if (app('impersonate')->isImpersonating())
+            return redirect()->route('impersonate.leave');
+        else {
+            return view('master.impersonate', [
+                'other_users' => User::join('personne', 'personne.idPersonne', 'users.id')->where('users.id', '!=', auth()->id())->get([ 'id', 'nom', 'role' ])
+            ]);
+        }
+    }
+
     public function impersonate(Request $request)
     {
-        // Auth::onceUsingID(session('impersonate'));
-        // dd($request->all());
-        Auth::user()->impersonate(User::find(10));
-        // return view('prof.absences');
+        return redirect()->route('impersonate',$request->id);
     }
 }

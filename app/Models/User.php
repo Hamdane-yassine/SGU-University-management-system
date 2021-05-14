@@ -34,7 +34,7 @@ use Lab404\Impersonate\Models\Impersonate;
  *
  * @package App\Models
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
 	use HasFactory, Notifiable, Impersonate;
 
@@ -67,6 +67,11 @@ class User extends Authenticatable
 		'role',
 		'remember_token'
 	];
+
+    public function canImpersonate()
+    {
+        return $this->hasRole('master');
+    }
 
 	public function personne()
 	{

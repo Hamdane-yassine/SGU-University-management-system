@@ -14,7 +14,7 @@
                             </div>
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Profile</li>
                                 </ol>
                             </nav>
@@ -130,9 +130,10 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label>Email personnel</label>
-                                                                <input class="form-control form-control-lg @error('email')
-                                                                    is-invalid
-                                                                @enderror" name="email" type="email">
+                                                                <input
+                                                                    class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                                                    name="email"
+                                                                    type="email">
                                                             </div>
                                                             {{-- <div class="form-group">
                                                                 <label>Date de naissance</label>
@@ -171,7 +172,7 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label>Numero de telephone</label>
-                                                                <input class="form-control form-control-lg" name="tel" type="text">
+                                                                <input class="form-control form-control-lg" name="tel" type="tel">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Adresse</label>
@@ -188,7 +189,7 @@
                                                             <h4 class="text-blue h5 mb-20">Modifier les liens reseaux sociaux</h4>
                                                             <div class="form-group">
                                                                 <label>Facebook URL:</label>
-                                                                <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
+                                                                <input class="form-control form-control-lg" name="facebook" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Linkedin URL:</label>
@@ -231,23 +232,28 @@
                                                                     <label>Mot de passe courrant:</label>
                                                                     <input class="form-control form-control-lg @error('current')
                                                                     is-invalid
-                                                                    @enderror" type="text" placeholder="Paste your link here" name="current">
+                                                                    @enderror" type="password" placeholder="" name="current" required>
                                                                     @error('current')
-                                                                        {{ $message }}
+                                                                    <small class="ml-1 text-danger">{{ $message }}</small>
                                                                     @enderror
-                                                                    <span></span>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Nouveau mot de passe:</label>
                                                                     <input class="form-control form-control-lg @error('retypedPasswd')
                                                                     is-invalid
-                                                                    @enderror" type="password" name="passwd">
+                                                                    @enderror" type="password" name="passwd" required>
+                                                                    @error('passwd')
+                                                                    <small class="ml-1 text-danger">{{ $message }}</small>
+                                                                    @enderror
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Retaper le nouveau mot de passe:</label>
                                                                     <input class="form-control form-control-lg @error('retypedPasswd')
                                                                     is-invalid
-                                                                    @enderror" type="password" name="retypedPasswd">
+                                                                    @enderror" type="password" name="retypedPasswd" required>
+                                                                    @error('retypedPasswd')
+                                                                    <small class="ml-1 text-danger">{{ $message }}</small>
+                                                                    @enderror
                                                                 </div>
                                                                 <div class="form-group mb-0">
                                                                     <input type="submit" class="btn btn-primary" value="Save & Update">
@@ -289,7 +295,7 @@
                 cropper = new Cropper(image, {
                     autoCropArea: 0.5,
                     dragMode: 'move',
-                    aspectRatio: 3 / 3,
+                    aspectRatio: 1,
                     restore: false,
                     guides: false,
                     center: false,
@@ -312,14 +318,14 @@
 
 
             $('input[value=Update]').click(e=>{
-                const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
                 var reader = new FileReader();
+                const file = cropper.getCroppedCanvas().toDataURL('image/jpg');
                 const newImage = document.getElementById('imgUpload').files[0];
-                reader.readAsDataURL(newImage);
                 reader.onerror = function (error) {
                     console.log('Error: ', error);
                 };
-                reader.onload = function (error) {
+
+                function sendFiles() {
                     $.ajax({
                         type: 'POST',
                         // url: "{{ route('profile.update.image',Auth::user()) }}",
@@ -338,6 +344,7 @@
                         success: function (response) {
                             console.log("success");
                             $('.avatar-photo').attr('src',file);
+                            $('img')[0].src = file;
                             $('#newImage').value = "";
                             $('#modal-close').click();
                         },
@@ -346,6 +353,10 @@
                         }
                     });
                 };
+                reader.onload = sendFiles;
+                if(newImage)
+                    reader.readAsDataURL(newImage);
+                else sendFiles();
 
 
                 // $('avatar-photo').css()
@@ -360,7 +371,7 @@
                 $('input[value=Update]').show();
             });
 
-            if($('.avatar-photo').attr('src') == "{{ url($croppedImage) }}"){
+            if($('.avatar-photo').attr('src') == "{{ url('/vendors/images/user.svg') }}"){
                 $('input[value=Update]').hide();
             }
 
@@ -394,10 +405,11 @@
                 }
             });
 
-            // $('#formPasswd').submit(function (param) {
-            //     alert('asd');
-            // });
-
+            @if($errors->has('current') || $errors->has('passwd') || $errors->has('retypedPasswd'))
+                if('{{ request()->tab }}' == 'passwd'){
+                    $('a[role=tab]').click();
+                }
+            @endif
         });
     </script>
 
