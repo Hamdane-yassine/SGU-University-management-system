@@ -249,8 +249,9 @@ class ChefDepartementController extends Controller
     {
 
        $notes = Matiere::where('matiere.idMatiere',$matiere->idMatiere)  //first inint a user id
-       ->join('module','module.idModule','=','matiere.idModule')
-       ->join('filiere','module.idFiliere','=','filiere.idFiliere')
+       ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
+       ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+       ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
        ->join('etudiant','etudiant.idFiliere','=','filiere.idFiliere')
        ->join('personne','etudiant.idPersonne','=','personne.idPersonne')
        ->leftJoin('note', 'etudiant.idEtudiant', '=', 'note.idEtudiant')
@@ -370,8 +371,9 @@ class ChefDepartementController extends Controller
         ->where('filiere.idDepartement',$idDepartement)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('matiere','absence.idMatiere','matiere.idMatiere')
-        ->join('module','matiere.idModule','module.idModule')
-        ->join('filiere','module.idFiliere','filiere.idFiliere')
+        ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
+        ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+        ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
         ->select('idAbsence','matiere.nom as nomMatiere',DB::raw("concat_ws(' ',filiere.nom, filiere.niveau) AS nomFiliere"),DB::raw("concat_ws(' ',personne.nom, personne.prenom) AS nomProf"),'absence.dateAbsence as date','absence.etat')
@@ -427,8 +429,9 @@ class ChefDepartementController extends Controller
         ->where('filiere.idDepartement',$idDepartement)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('matiere','absence.idMatiere','matiere.idMatiere')
-        ->join('module','matiere.idModule','module.idModule')
-        ->join('filiere','module.idFiliere','filiere.idFiliere')
+        ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
+        ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+        ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
         ->count();
@@ -450,8 +453,9 @@ class ChefDepartementController extends Controller
         ->where('filiere.idDepartement',$idDepartement)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('matiere','absence.idMatiere','matiere.idMatiere')
-        ->join('module','matiere.idModule','module.idModule')
-        ->join('filiere','module.idFiliere','filiere.idFiliere')
+        ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
+        ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+        ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
         ->select('Absence.idAbsence as idAbsence','personne.nom as nomProf','Absence.dateAbsence as dateAbsence')
@@ -482,8 +486,9 @@ class ChefDepartementController extends Controller
         ->where('filiere.idDepartement',$idDepartement)
         ->join('professeur','absence.idProf','=','professeur.idProf')
         ->join('matiere','absence.idMatiere','matiere.idMatiere')
-        ->join('module','matiere.idModule','module.idModule')
-        ->join('filiere','module.idFiliere','filiere.idFiliere')
+        ->join('module','module.idModule','=','matiere.idModule')//retrieved matiere
+        ->join('semestre', 'semestre.idSemestre', '=', 'module.idSemestre')
+        ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
         ->join('users','users.id','=','professeur.idUtilisateur')
         ->join('personne','personne.idPersonne','users.idPersonne')
         ->get();

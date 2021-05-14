@@ -28,19 +28,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/jquery-steps/jquery.steps.css') }}">
     @yield('SpecialStyles')
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script> --}}
-    {{-- <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-119386393-1');
-    </script> --}}
 </head>
 
 <body>
@@ -156,7 +143,7 @@
                             {
                                 foreach (auth()->user()->professeur->matieres as $matiere)
                                 {
-                                    array_push($filieres, $matiere->module->filiere);
+                                    array_push($filieres, $matiere->module->semestre->filiere);
                                 }
                                 $filieres = array_unique($filieres);
                             }
@@ -192,7 +179,7 @@
                             {
                                 foreach (auth()->user()->professeur->matieres as $matiere)
                                 {
-                                    array_push($filieres, $matiere->module->filiere);
+                                    array_push($filieres, $matiere->module->semestre->filiere);
                                 }
                                 $filieres = array_unique($filieres);
                             }
