@@ -296,7 +296,7 @@ Route::get('/master/dashboard/chefdepsdatatable', [MasterController::class, 'che
 
 Route::get('/master/dashboard/adminsdatatable', [MasterController::class, 'adminsdatatable'])->name('MasterAdminsDataTable');
 
-Route::get('/master/admins', [MasterController::class ,'adminsIndex']);
+Route::get('/master/admins', [MasterController::class ,'adminsIndex'])->name('MasterAdminsIndex');
 
 Route::get('/master/admin/{idAdmin}', [MasterController::class , 'getAdminById']);
 

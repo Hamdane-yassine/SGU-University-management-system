@@ -353,6 +353,12 @@
                             style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Gestion  d'université</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('MasterAdminsIndex') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon fa fa-gears"
+                            style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Gestion des admins</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
