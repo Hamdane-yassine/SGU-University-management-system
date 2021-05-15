@@ -545,13 +545,13 @@ class AdminController extends Controller
         $user->password = bcrypt($RandPass);
         $user->save();
         //added by otmane , to fix emploi issue (just in case a bug happened)
+        $idUserLast = DB::getPdo()->lastInsertId();
         $profile = new Profile;
-        $profile->idUtilisateur = DB::getPdo()->lastInsertId();
+        $profile->idUtilisateur = $idUserLast;
         $profile->croppedImage = '/vendors/images/user.svg';
         $profile->imagePath    = '/vendors/images/user.svg';
         $profile->save();
         //
-        $idUserLast = DB::getPdo()->lastInsertId();
         $professeur = new Professeur;
         $professeur->idUtilisateur = $idUserLast;
         $professeur->specialite = request('ajspecialite');
