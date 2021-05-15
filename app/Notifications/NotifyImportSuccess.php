@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Models\Absence;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
@@ -10,22 +9,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NotifyRattAccepte extends Notification implements ShouldBroadcast
+class NotifyImportSuccess extends Notification implements ShouldBroadcastNow
 {
     use Queueable;
 
-    public string $user;
-    public string $absence;
 
+    public string $NomFiliere;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($professeur, $absence)
+    public function __construct($NomFiliere)
     {
-        $this->professeur = $professeur;
-        $this->absence = $absence;
+        $this->NomFiliere = $NomFiliere;
     }
 
     /**
@@ -61,15 +58,12 @@ class NotifyRattAccepte extends Notification implements ShouldBroadcast
      */
     public function toArray($notifiable)
     {
-        $abs = new Absence((array)json_decode($this->absence));
         return [
-            'image' =>$abs->professeur->user->profile->croppedImage,
-            'from'=>$abs->professeur->user->personne->nom.' '.$abs->chefdep->professeur->user->personne->prenom,
+            'image' =>'/vendors/images/checkmark.svg',
+            'from'=>'Importation avec succés',
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
-            'brief'=>"Votre demande de rattrapage a été accepté."
-                    ."la date de rattrapage : ".$abs->dateRattrapage."\n"
-                    ."la salle : ".$abs->salle,
+            'brief'=>"Les etudiants de la filière ".$this->NomFiliere." sont importés avec succés",
         ];
     }
 }

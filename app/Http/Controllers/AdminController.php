@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
 use Illuminate\Support\Facades\Log;
-use App\Notifications\NotifyUserOfCompletedImport;
+use App\Notifications\NotifyImportSuccess;
 
 class AdminController extends Controller
 {
@@ -639,8 +639,12 @@ class AdminController extends Controller
         $idFiliere = request('filiere');
         // $import = new ImportEtudiants($idFiliere);
         // $import->import(request()->file('uploadedFile'), 'local', \Maatwebsite\Excel\Excel::XLSX);
-        (new ImportEtudiants($idFiliere))->queue(request()->file('uploadedFile'))->chain([
-            new NotifyUserOfCompletedImport(request()->user()),
-        ]);
+        // (new ImportEtudiants($idFiliere, Auth::user()))->queue(request()->file('uploadedFile'))->chain([
+        //     request()->user()->notify(new NotifyImportSuccess(Filiere::find($idFiliere)->nom)),
+        // ]);
+
+        (new ImportEtudiants($idFiliere, Auth::user()))->import(request()->file('uploadedFile'));
+
+
     }
 }

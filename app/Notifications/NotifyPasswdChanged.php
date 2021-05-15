@@ -2,30 +2,23 @@
 
 namespace App\Notifications;
 
-use App\Models\Absence;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NotifyRattAccepte extends Notification implements ShouldBroadcast
+class NotifyPasswdChanged extends Notification
 {
     use Queueable;
-
-    public string $user;
-    public string $absence;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($professeur, $absence)
+    public function __construct()
     {
-        $this->professeur = $professeur;
-        $this->absence = $absence;
+        //
     }
 
     /**
@@ -36,7 +29,7 @@ class NotifyRattAccepte extends Notification implements ShouldBroadcast
      */
     public function via($notifiable)
     {
-        return ['database','broadcast'];
+        return ['mail'];
     }
 
     /**
@@ -61,15 +54,8 @@ class NotifyRattAccepte extends Notification implements ShouldBroadcast
      */
     public function toArray($notifiable)
     {
-        $abs = new Absence((array)json_decode($this->absence));
         return [
-            'image' =>$abs->professeur->user->profile->croppedImage,
-            'from'=>$abs->professeur->user->personne->nom.' '.$abs->chefdep->professeur->user->personne->prenom,
-            'idNotif'=>$this->id,
-            // 'idEvent'=>json_decode($this->event)->idEvenement,
-            'brief'=>"Votre demande de rattrapage a été accepté."
-                    ."la date de rattrapage : ".$abs->dateRattrapage."\n"
-                    ."la salle : ".$abs->salle,
+            //
         ];
     }
 }
