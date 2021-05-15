@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Log;
 use App\Notifications\NotifyImportSuccess;
 
@@ -543,8 +544,14 @@ class AdminController extends Controller
         $RandPass = Str::random(10);
         $user->password = bcrypt($RandPass);
         $user->save();
-        //
+        //added by otmane , to fix emploi issue (just in case a bug happened)
         $idUserLast = DB::getPdo()->lastInsertId();
+        $profile = new Profile;
+        $profile->idUtilisateur = $idUserLast;
+        $profile->croppedImage = '/vendors/images/user.svg';
+        $profile->imagePath    = '/vendors/images/user.svg';
+        $profile->save();
+        //
         $professeur = new Professeur;
         $professeur->idUtilisateur = $idUserLast;
         $professeur->specialite = request('ajspecialite');
@@ -575,6 +582,9 @@ class AdminController extends Controller
                 $dep->save();
             }
         }
+
+
+
         $mailData = ['mailTo' => request('ajemail'), 'Username' => strval(request('ajnom') . ' ' . request('ajprenom')), 'email' => request('ajemail'), 'password' => $RandPass];
         SendAccountEmail::dispatch($mailData);
     }

@@ -1,22 +1,20 @@
 @extends('layouts.prof')
-@section('title', "$filiere->nom $filiere->niveau")
+@section('title', "")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
-                <div class="card-box mb-30">
+                <div class="card-box pb-10">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">{{ $filiere->nom . ' ' . $filiere->niveau }}</h4>
+                        <h4 class="text-blue h4">Table des professeurs</h4>
                     </div>
                     <div class="pb-20">
-                        <input type="hidden" id="idFiliere" value="{{ $filiere->idFiliere }}">
                         <table class="table hover multiple-select-row data-table-export nowrap">
                             <thead>
                                 <tr>
-                                    <th>N° Apogée</th>
+                                    <th>ID</th>
                                     <th>Nom</th>
                                     <th>Prénom</th>
-                                    <th>Code Massar</th>
                                     <th>Email Personnel</th>
                                     <th>Téléphone</th>
                                     <th class="datatable-nosort">Actions</th>
@@ -28,82 +26,119 @@
                         </table>
                     </div>
                 </div>
+                <div class="title pb-20 pt-20 pl-">
+                    <h2 class="h3 mb-0">Ajouter</h2>
+                </div>
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
-                        <div>
-                            <h4 class="h4">transmission des étudiants</h4>
-                        </div>
-                        <hr>
-                        <form action="{{ route('transEtudiants') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="transetud">
+                        <form action="{{ route('AjouterAdmin') }}" method="POST" id="ajoutAdmin">
                             @csrf
-                            <input type="hidden" id="idFiliereT" name="idFiliereT" value="{{ $filiere->idFiliere }}">
-                            <section>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Vers les filieres :</label>
-                                            <select class="custom-select2 form-control" name="fil" id="fil"
-                                                style="width: 100%;" required>
-                                                @foreach ($filieres as $fil)
-                                                    @if ($fil->idFiliere != $filiere->idFiliere)
-                                                        <option value="{{ $fil->idFiliere }}">
-                                                            {{ $fil->nom . ' ' . $fil->niveau }}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Nom</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" type="text" id="ajnom" name="ajnom" placeholder="Nom"
+                                        value="" required>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label></label>
-                                            <div class="custom-control custom-radio mb-5">
-                                                <input type="radio" id="customRadio1" name="customRadio" value="T" class="custom-control-input">
-									        	<label class="custom-control-label" for="customRadio1">Tout les étudiants</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Sauf:</label>
-                                            <select class="custom-select2 form-control" multiple="multiple" id="etudiantsauf"
-                                                name="etudiantsauf[]" style="width: 100%; height: 35px;">
-                                                @foreach ($filiere->etudiants as $etudiant)
-                                                    <option value="{{ $etudiant->idEtudiant }}">
-                                                        {{ $etudiant->apogee . '-' . $etudiant->personne->nom . ' ' . $etudiant->personne->prenom }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>     
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Prénom</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" placeholder="Prénom" id="ajprenom" name="ajprenom"
+                                        type="text" value="" required>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label></label>
-                                            <div class="custom-control custom-radio mb-5">
-                                                <input type="radio" id="customRadio2" name="customRadio" value="S" class="custom-control-input">
-									        	<label class="custom-control-label" for="customRadio2">Sélectioné les étudiants</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Sélectioné:</label>
-                                            <select class="custom-select2 form-control" multiple="multiple" id="etudiantsel"
-                                                name="etudiantsel[]" style="width: 100%;  height: 35px;">
-                                                @foreach ($filiere->etudiants as $etudiant)
-                                                    <option value="{{ $etudiant->idEtudiant }}">
-                                                        {{ $etudiant->apogee . '-' . $etudiant->personne->nom . ' ' . $etudiant->personne->prenom }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>     
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Genre</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="custom-select col-12" id="ajgenre" name="ajgenre">
+                                        <option value="Masculin" selected>Masculin</option>
+                                        <option value="Féminin">Féminin</option>
+                                    </select>
                                 </div>
-                            </section>
-                            <div class="text-right"><input class="btn btn-primary" type="submit" value="Confirmer"></div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Naissance</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control date-picker" placeholder="Date de naissance" type="text"
+                                        id="ajdatenais" name="ajdatenais" value="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label pt-0">Situation
+                                    familiale</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="custom-select col-12" id="ajsituation" name="ajsituation">
+                                        <option value="Célibataire" selected>Célibataire</option>
+                                        <option value="Divorcé">Divorcé</option>
+                                        <option value="Marié">Marié</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Nationalité</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" placeholder="Nationalité" type="text" id="ajnationalite"
+                                        name="ajnationalite" value="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label pt-0">Lieu de naissance</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" placeholder="Lieu de naissance" type="text"
+                                        id="ajLieuNaissance" name="ajLieuNaissance" value="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" placeholder="N° C.N.I.E" type="text" id="ajcin" name="ajcin"
+                                        value="" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrcin"></strong></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label pt-0">Adresse</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" placeholder="Adresse" type="text" id="ajadresse"
+                                        name="ajadresse" value="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Téléphone</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" value="" type="tel" placeholder="Téléphone" id="ajtel"
+                                        name="ajtel" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail personnel</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" type="email" placeholder="Email" id="ajemail" name="ajemail"
+                                        value="" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrmail"></strong></span>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label pt-0">E-mail
+                                    institutionnel</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" id="ajemailins" placeholder="Email institutionnel"
+                                        name="ajemailins" value="" type="email" required>
+                                    <span class="invalid-feedback pl-2" role="alert"> <strong
+                                            style="font-family:'Inter',sans-serif; font-weight: 400;"
+                                            id="msgerrmailins"></strong></span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="button" onclick="reins();" class="btn btn-secondary"
+                                    style="text-decoration: none;">Annuler</button>
+                                <input class="btn btn-primary" type="submit" value="Ajouter">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -123,20 +158,8 @@
                                 <dt class="col-sm-4">Prénom</dt>
                                 <dd class="col-sm-8" id="prenom"></dd>
 
-                                <dt class="col-sm-4">Code Apogée</dt>
-                                <dd class="col-sm-8" id="apogee"></dd>
-
-                                <dt class="col-sm-4">CNE / Code Massar</dt>
-                                <dd class="col-sm-8" id="cne"></dd>
-
                                 <dt class="col-sm-4">Genre</dt>
                                 <dd class="col-sm-8" id="genre"></dd>
-
-                                <dt class="col-sm-4">Date de naissance</dt>
-                                <dd class="col-sm-8" id="datenais"></dd>
-
-                                <dt class="col-sm-4">Situation familiale</dt>
-                                <dd class="col-sm-8" id="situation"></dd>
 
                                 <dt class="col-sm-4">Nationalité</dt>
                                 <dd class="col-sm-8" id="nationalite"></dd>
@@ -144,16 +167,16 @@
                                 <dt class="col-sm-4">Lieu de naissance</dt>
                                 <dd class="col-sm-8" id="LieuNaissance"></dd>
 
+                                <dt class="col-sm-4">Date de naissance</dt>
+                                <dd class="col-sm-8" id="datenais"></dd>
+
+                                <dt class="col-sm-4">Situation familiale</dt>
+                                <dd class="col-sm-8" id="situation"></dd>
+
                                 <dt class="col-sm-4">N° C.N.I.E</dt>
                                 <dd class="col-sm-8" id="cin"></dd>
 
-                                <dt class="col-sm-4">N° C.N.I.E du père</dt>
-                                <dd class="col-sm-8" id="cinpere"></dd>
-
-                                <dt class="col-sm-4">N° C.N.I.E de la mère</dt>
-                                <dd class="col-sm-8" id="cinmere"></dd>
-
-                                <dt class="col-sm-4">Adresse </dt>
+                                <dt class="col-sm-4">Adresse</dt>
                                 <dd class="col-sm-8" id="adresse"></dd>
 
                                 <dt class="col-sm-4">Téléphone</dt>
@@ -165,12 +188,9 @@
                                 <dt class="col-sm-4">E-mail institutionnel</dt>
                                 <dd class="col-sm-8" id="emailins"></dd>
 
-                                <dt class="col-sm-4">Année du BAC</dt>
-                                <dd class="col-sm-8" id="annebac"></dd>
-
-                                <dt class="col-sm-4">Couverture médicale</dt>
-                                <dd class="col-sm-8" id="couv"></dd>
-
+                                <dt class="col-sm-4">role</dt>
+                                <dd class="col-sm-8" id="outrole"></dd>
+                                </dd>
                             </dl>
                         </div>
                         <div class="modal-footer">
@@ -194,9 +214,9 @@
                                     NON
                                 </div>
                                 <div class="col-6">
-                                    <form action="{{ route('SupprimerEtudiant') }}" method="POST" id="suppetud">
+                                    <form action="{{ route('deleteAdmin') }}" method="POST" id="suppadmin">
                                         @csrf
-                                        <input type="hidden" id="idEtudiant" name="idEtudiant" value="">
+                                        <input type="hidden" id="idAdmin" name="idAdmin" value="">
                                         <button type="submit"
                                             class="btn btn-primary border-radius-100 btn-block confirmation-btn"><i
                                                 class="fa fa-check"></i></button>
@@ -212,9 +232,9 @@
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
-                        <form action="{{ route('updateEtudiant') }}" method="POST" id="updEtud">
+                        <form action="{{ route('updateAdmin') }}" method="POST" id="updAdmin">
                             @csrf
-                            <input type="hidden" id="inIdEtudiant" name="inIdEtudiant">
+                            <input type="hidden" id="inidAdmin" name="inidAdmin" value="">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
@@ -232,26 +252,6 @@
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" placeholder="Prénom" id="inprenom" name="inprenom"
                                                 type="text" value="" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-12 col-md-2 col-form-label">Code Apogée</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" id="inapogee" name="inapogee" type="number"
-                                                required>
-                                            <span class="invalid-feedback pl-2" role="alert"> <strong
-                                                    style="font-family:'Inter',sans-serif; font-weight: 400;"
-                                                    id="inmsgerrapog"></strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-12 col-md-2 col-form-label">Code Massar</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" id="incne" name="incne" type="text"
-                                                required>
-                                            <span class="invalid-feedback pl-2" role="alert"> <strong
-                                                    style="font-family:'Inter',sans-serif; font-weight: 400;"
-                                                    id="inmsgerrcne"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -302,21 +302,7 @@
                                                 name="incin" value="" required>
                                             <span class="invalid-feedback pl-2" role="alert"> <strong
                                                     style="font-family:'Inter',sans-serif; font-weight: 400;"
-                                                    id="inmsgerrcin"></strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(père)</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="N° C.N.I.E du père" type="text"
-                                                id="incinpere" name="incinpere" value="" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-12 col-md-2 col-form-label">C.N.I.E(mère)</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="N° C.N.I.E de la mère" type="text"
-                                                id="incinmere" name="incinmere" value="" required>
+                                                    id="msgerrincin"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -340,7 +326,7 @@
                                                 required>
                                             <span class="invalid-feedback pl-2" role="alert"> <strong
                                                     style="font-family:'Inter',sans-serif; font-weight: 400;"
-                                                    id="inmsgerrmail"></strong></span>
+                                                    id="msgerrinmail"></strong></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -351,45 +337,31 @@
                                                 type="email" required>
                                             <span class="invalid-feedback pl-2" role="alert"> <strong
                                                     style="font-family:'Inter',sans-serif; font-weight: 400;"
-                                                    id="inmsgerrmailins"></strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-12 col-md-2 col-form-label">Année du BAC</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" value="" type="number" min="2015" id="inannebac"
-                                                name="inannebac" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-12 col-md-2 col-form-label pt-0">Couverture
-                                            médicale</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" placeholder="Couverture médicale" type="text"
-                                                id="incouv" name="incouv" value="" required>
+                                                    id="msgerrinmainins"></strong></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" data-dismiss="modal" class="btn btn-secondary"
-                                    style="text-decoration: none;" onclick="reinsup()">Annuler</button>
+                                    style="text-decoration: none;" onclick="reinsupd()">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Enregistrer">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
-                            <h3 class="mb-20 pt-5">transmission réussie!</h3>
+                            <h3 class="mb-20 pt-5" id="msg"></h3>
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
+                            <button type="button" class="btn btn-primary" onclick="ren()"
+                                data-dismiss="modal">terminer</button>
                         </div>
                     </div>
                 </div>
@@ -402,11 +374,11 @@
     </div>
 @endsection
 @section('SpecialScripts')
+    <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
     <!-- buttons for Export datatable -->
     <script src="{{ asset('src/plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
@@ -416,5 +388,5 @@
     <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/chef/etudiants.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/master/admins.js') }}"></script>
 @endsection
