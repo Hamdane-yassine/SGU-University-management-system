@@ -26,6 +26,7 @@ use DataTables;
 use Egulias\EmailValidator\Exception\UnclosedComment;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
+use App\Models\Profile;
 use App\Models\Semestre;
 use Illuminate\Support\Facades\Log;
 
@@ -364,11 +365,179 @@ class MasterController extends Controller
     {
         $admins = User::where('role','admin')
         ->join('personne','personne.idPersonne','users.idPersonne')
-        ->select('users.id as id','personne.nom as name', 'users.email as email')->get();
+        ->select('users.id as id','personne.nom as name', 'users.email as email', 'personne.prenom as prenom' ,'personne.tel as tel')->get();
 
         if ($request->ajax()) {
             return Datatables::of($admins)
                ->make(true);
          }
     }
+
+    public function adminsIndex()
+    {
+        return view('master.admins');
+    }
+
+    public function getAdminById(Request $request,$idAdmin) //id user
+    {
+        $admin = User::where('users.id',$idAdmin)
+            ->join('personne', 'users.idPersonne', '=', 'personne.idPersonne')
+            ->select('users.id', 'personne.nom', 'personne.prenom', 'role',
+             'email', 'tel', 'dateNaissance', 'nationalite', 'lieuNaissance', 'situationFamiliale', 'genre', 'cin', 'adressePersonnele', 'emailInstitutionne')
+            ->get();
+
+        $data = array();
+        $data['admin'] = $admin;
+
+        if ($request->ajax()) {
+            echo json_encode($data);
+        }
+    }
+
+    public function updateAdmin(Request $request)
+    {
+        /*echo dd($admin = User::find($request->inidAdmin));
+        echo '<br>new Atts : ';
+        echo '<br>';
+        echo 'id Admin : '.$request->inidAdmin;
+        echo '<br>';
+        echo 'name : '.$request->innom;
+        echo '<br>';
+        echo 'prenom : '.$request->inprenom;
+        echo '<br>';
+        echo 'genre : '.$request->ingenre;
+        echo '<br>';
+        echo 'dat naisace : '.$request->indatenais;
+        echo '<br>';
+        echo 'situation : '.$request->insituation;
+        echo '<br>';
+        echo 'nationalite : '.$request->innationalite;
+        echo '<br>';
+        echo 'Lieu naissace : '.$request->inLieuNaissance;
+        echo '<br>';
+        echo 'cin : '.$request->incin;
+        echo '<br>';
+        echo 'Adresse : '.$request->inadresse;
+        echo '<br>';
+        echo 'tel : '.$request->intel;
+        echo '<br>';
+        echo 'email perso : '.$request->inemail;
+        echo '<br>';
+        echo 'email inst : '.$request->inemailins;*/
+
+        $admin = User::find($request->inidAdmin);
+        $personne = $admin->personne;
+        request()->validate(
+            [
+                'inidAdmin' => 'required',
+                'innom' => 'required',
+                'inprenom' => 'required',
+                'insituation' => 'required',
+                'ingenre' => 'required',
+                'indatenais' => ['required', 'date'],
+                'innationalite' => 'required',
+                'inLieuNaissance' => 'required',
+                'inadresse' => 'required',
+                'incin' => 'required|unique:personne,cin,' . $personne->idPersonne . ',idPersonne',
+                'intel' => 'required',
+                'inemail' => 'required|email|unique:users,email,' . $admin->id,
+                'inemailins' => 'required|email|unique:personne,emailInstitutionne,' . $personne->idPersonne . ',idPersonne',
+            ],
+            [
+                'incin.unique' => 'C.N.I.E est déjà existé.',
+                'inemail.unique' => 'Email est déjà utilisée.',
+                'inemailins.unique' => 'Email est déjà utilisée.',
+                'inemail.email' => 'Email invalide.',
+                'inemailins.email' => 'Email invalide.'
+            ]
+        );
+        $admin->email = $request->inemail;
+        $admin->save();
+
+        $personne->nom = $request->innom;
+        $personne->prenom = $request->inprenom;
+        $personne->genre = $request->ingenre;
+        $personne->dateNaissance = $request->indatenais;
+        $personne->situationFamiliale = $request->insituation;
+        $personne->nationalite = $request->innationalite;
+        $personne->lieuNaissance = $request->inLieuNaissance;
+        $personne->cin = $request->incin;
+        $personne->adressePersonnele = $request->inadresse;
+        $personne->tel = $request->intel;
+        $personne->emailInstitutionne = $request->inemailins;
+
+        $personne->save();
+    }
+
+    public function deletAdmin(Request $request)
+    {
+        $user = User::find($request->idAdmin);
+        $personne = $user->personne;
+        $toDestroy = $personne->idPersonne;
+        Personne::destroy($toDestroy);
+    }
+
+    public function AjouterAdmin(Request $request)
+    {
+        request()->validate(
+            [
+                'ajnom' => 'required',
+                'ajprenom' => 'required',
+                'ajsituation' => 'required',
+                'ajgenre' => 'required',
+                'ajdatenais' => ['required', 'date'],
+                'ajnationalite' => 'required',
+                'ajLieuNaissance' => 'required',
+                'ajadresse' => 'required',
+                'ajcin' => ['required', 'unique:personne,cin'],
+                'ajtel' => 'required',
+                'ajemail' => ['required', 'email', 'unique:users,email'],
+                'ajemailins' => ['required', 'email', 'unique:personne,emailInstitutionne'],
+            ],
+            [
+                'ajcin.unique' => 'C.N.I.E est déjà existé.',
+                'ajemail.unique' => 'Email est déjà utilisée.',
+                'ajemailins.unique' => 'Email est déjà utilisée.',
+                'ajemail.email' => 'Email invalide.',
+                'ajemailins.email' => 'Email invalide.'
+            ]
+        );
+
+        //first create the person
+        $personne = new Personne;
+        $personne->nom = $request->ajnom;
+        $personne->prenom = $request->ajnom;
+        $personne->genre = $request->ajgenre;
+        $personne->dateNaissance = $request->ajdatenais;
+        $personne->situationFamiliale = $request->ajsituation;
+        $personne->nationalite = $request->ajnationalite;
+        $personne->lieuNaissance = $request->ajLieuNaissance;
+        $personne->cin = $request->ajcin;
+        $personne->adressePersonnele = $request->ajadresse;
+        $personne->tel = $request->ajtel;
+        $personne->emailInstitutionne = $request->ajemailins;
+
+        $personne->save();
+
+        $idPersonne = DB::getPdo()->lastInsertId();
+
+        $user = new User;
+        $user->idPersonne = $idPersonne;
+        $user->email = $request->ajemail;
+        $user->role = 'admin';
+        $RandPass = Str::random(10);
+        $user->password = bcrypt($RandPass);
+        $user->save();
+
+        $profile = new Profile;
+        $profile->idUtilisateur = DB::getPdo()->lastInsertId();
+        $profile->croppedImage = '/vendors/images/user.svg';
+        $profile->imagePath    = '/vendors/images/user.svg';
+        $profile->save();
+
+        $mailData = ['mailTo' => request('ajemail'), 'Username' => strval(request('ajnom') . ' ' . request('ajprenom')), 'email' => request('ajemail'), 'password' => $RandPass];
+        SendAccountEmail::dispatch($mailData);
+    }
 }
+
+

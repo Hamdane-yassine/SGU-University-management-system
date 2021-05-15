@@ -67,7 +67,7 @@
                                 <div class="font-14 text-secondary weight-500">Professeurs sans emploi</div>
                             </div>
                             <div class="widget-icon">
-                                <div class="icon" data-color="red"><i class="icon-copy fi-calendar" aria-hidden="true"></i>
+                                <div class="icon" ><i class="icon-copy fi-calendar" aria-hidden="true"></i>
                                 </div>
                                 <!-- <div class="icon" data-color="red"><i class="icon-copy fi-x" aria-hidden="true"></i></div> -->
                             </div>

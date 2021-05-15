@@ -295,3 +295,13 @@ Route::get('/master/dashboard', [MasterController::class, 'indexDashboard']);
 Route::get('/master/dashboard/chefdepsdatatable', [MasterController::class, 'chefdepsdatatable'])->name('MasterChefDatatable');
 
 Route::get('/master/dashboard/adminsdatatable', [MasterController::class, 'adminsdatatable'])->name('MasterAdminsDataTable');
+
+Route::get('/master/admins', [MasterController::class ,'adminsIndex']);
+
+Route::get('/master/admin/{idAdmin}', [MasterController::class , 'getAdminById']);
+
+Route::post('/master/admin/updateAdmin', [MasterController::class ,'updateAdmin'])->name('updateAdmin');
+
+Route::post('/master/admin/deleteadmin', [MasterController::class ,'deletAdmin'])->name('deleteAdmin');
+
+Route::post('/master/admin/AjouterAdmin', [MasterController::class ,'AjouterAdmin'])->name('AjouterAdmin');
