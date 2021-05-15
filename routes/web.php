@@ -114,6 +114,10 @@ Route::post('/chef/affectermatiere', [ChefDepartementController::class, 'Affecte
 
 Route::post('/chef/detachermatiere', [ChefDepartementController::class, 'DetacherMatiere'])->name('DetacherMatiere');
 
+Route::post('/chef/transetudiant', [ChefDepartementController::class, 'TransEtudiants'])->name('transEtudiants');
+
+Route::get('/chef/loadselects/{filiere}', [ChefDepartementController::class, 'getEtudiantsForSelects'])->name('getEtudiantsForSelects');
+
 Route::get('notifications', [UserController::class, 'notifs']);
 
 Route::prefix('evenement')->group(function () {

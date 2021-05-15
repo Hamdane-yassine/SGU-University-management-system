@@ -69,7 +69,8 @@ class ChefDepartementController extends Controller
 
     public function Etudiants(Filiere $filiere)
     {
-        return view('chef.Etudiant', ['filiere' => $filiere]);
+        $filieres = $filiere->departement->filieres;
+        return view('chef.Etudiant', ['filiere' => $filiere, 'filieres' => $filieres]);
     }
 
     public function getEtudiants(Request $request, Filiere $filiere)  //an ajax function to retrieve tha data
@@ -85,6 +86,17 @@ class ChefDepartementController extends Controller
         }
     }
 
+    public function getEtudiantsForSelects(Request $request, Filiere $filiere)  //an ajax function to retrieve tha data
+    {
+        $etudiants = Etudiant::where('etudiant.idFiliere', $filiere->idFiliere)  //first inint a user id
+            ->join('personne', 'etudiant.idPersonne', '=', 'personne.idPersonne') //retrieved matiere
+            ->select('apogee', 'nom', 'prenom', 'cne', 'email', 'tel', 'idEtudiant')
+            ->get();
+        if ($request->ajax()) {
+            echo json_encode($etudiants);
+        }
+    }
+
     public function getEtudiant(Request $request, Etudiant $etudiant)  //an ajax function to retrieve tha data
     {
 
@@ -96,7 +108,38 @@ class ChefDepartementController extends Controller
             echo json_encode($etudiant);
         }
     }
-
+    public function TransEtudiants()
+    {
+        $idFiliere = request('idFiliereT');
+        $idFiliereTo = request('fil');
+        $filiere = Filiere::find($idFiliere);
+        $op = request('customRadio');
+        if ($op == "T") {
+            $etudiants = request('etudiantsauf');
+            foreach ($filiere->Etudiants as $etudiant) {
+                $check = 0;
+                if ($etudiants != null) {
+                    foreach ($etudiants as $idEtud) {
+                        if ($etudiant->idEtudiant == $idEtud) {
+                            $check++;
+                            break;
+                        }
+                    }
+                }
+                if ($check == 0) {
+                    $etudiant->idFiliere = $idFiliereTo;
+                    $etudiant->save();
+                }
+            }
+        } else if ($op == "S" && request('etudiantsel') != null) {
+            $etudiants = request('etudiantsel');
+            foreach ($etudiants as $idEtud) {
+                $etudiant = Etudiant::find($idEtud);
+                $etudiant->idFiliere = $idFiliereTo;
+                $etudiant->save();
+            }
+        }
+    }
     public function SupprimerEtudiant()
     {
         $idEtudiant = request('idEtudiant');
@@ -494,7 +537,7 @@ class ChefDepartementController extends Controller
 
         //send notification to the prof that his absence has been rejected
         $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(), $absence));
-        $absence->professeur->user->notify(new NotifyRattAnnule(Auth::user(),$absence));
+        $absence->professeur->user->notify(new NotifyRattAnnule(Auth::user(), $absence));
         // end
 
         return redirect('/chef/rattrapages');

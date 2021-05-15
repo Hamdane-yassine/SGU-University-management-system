@@ -204,6 +204,44 @@ $("#suppetud").submit(function(e) {
         }
     });
 });
+$("#transetud").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var form = $(this);
+    var url = form.attr("action");
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(), // serializes the form's elements.
+        success: function(data) {
+            $("#success-modal").modal("show");
+            ReloadSelects();
+            table1.ajax.reload();
+        }
+    });
+});
+
+function ReloadSelects() {
+    jQuery.ajax({
+        url: "/chef/loadselects/"+document.getElementById('idFiliere').value,
+        type: "GET",
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+            jQuery('select[name="etudiantsauf[]"]').empty();
+            jQuery.each(response, function(key, value) {
+                $('select[name="etudiantsauf[]"]').append(
+                    '<option value="' +value.idEtudiant +'">' +value.apogee+" "+value.nom +" "+value.prenom+"</option>"
+                );
+            });
+            jQuery('select[name="etudiantsel[]"]').empty();
+            jQuery.each(response, function(key, value) {
+                $('select[name="etudiantsel[]"]').append(
+                    '<option value="' +value.idEtudiant +'">' +value.apogee+" "+value.nom +" "+value.prenom+"</option>"
+                );
+            });
+        }
+    });
+}
 
 $("#updEtud").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
