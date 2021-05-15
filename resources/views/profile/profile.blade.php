@@ -193,11 +193,11 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Linkedin URL:</label>
-                                                                <input class="form-control form-control-lg" name="linkedin" type="text" placeholder="Paste your link here">
+                                                                <input class="form-control form-control-lg" name="linkedin" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Dropbox URL:</label>
-                                                                <input class="form-control form-control-lg" name="dropbox" type="text" placeholder="Paste your link here">
+                                                                <input class="form-control form-control-lg" name="dropbox" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group fa-pull-right mt-0 pt-30">
                                                                 <input type="submit" class="btn btn-primary bottom-0" value="Valider">

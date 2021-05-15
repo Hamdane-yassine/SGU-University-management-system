@@ -35,7 +35,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-=                            <h4 class="h4">Ajouter</h4>
+                            = <h4 class="h4">Ajouter</h4>
                         </div>
                         <hr>
                         <form class="tab-wizard wizard-circle wizard pl-20" action="{{ route('ImportExcelfile') }}"
@@ -100,25 +100,30 @@
         <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
         <script>
-            // $("#addexcel").submit(function(e) {
-            //     var formData = new FormData();
-            //     formData.append('uploadedFile', $('#uploadedFile')[0].files[0]);
-            //     formData.append('csrfmiddlewaretoken', CSRF_TOKEN);
-            //     e.preventDefault(); // avoid to execute the actual submit of the form.
-            //     var form = $(this);
-            //     var url = form.attr('action');
-            //     $.ajax({
-            //         type: "POST",
-            //         url: url,
-            //         data: form.serialize(), // serializes the form's elements.
-            //         success: function(data) {
-            //             alert('daz');
-            //         },
-            //         error: function(err) {
+            $(document).ready(function() {
+                $("#addexcel").submit(function(e) {
+                    e.preventDefault(); // avoid to execute the actual submit of the form.
+                    var formData = new FormData();
+                    formData.append('uploadedFile', $('#uploadedFile')[0].files[0],$('#uploadedFile')[0].files[0].name);
+                    formData.append('filiere', $('#filiere').val());
+                    formData.append('_token', '{{ csrf_token() }}');
+                    var form = $(this);
+                    var url = form.attr('action');
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: formData, // serializes the form's elements.
+                        processData : false,
+                        contentType : false,
+                        success: function(data) {
+                           
+                        },
+                        error: function(err) {
 
-            //         }
-            //     });
-            // });
+                        }
+                    });
+                });
+            })
 
         </script>
     @endsection

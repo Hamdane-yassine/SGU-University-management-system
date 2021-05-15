@@ -27,6 +27,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Log;
+use App\Notifications\NotifyUserOfCompletedImport;
 
 class AdminController extends Controller
 {
@@ -646,18 +647,10 @@ class AdminController extends Controller
             ]
         );
         $idFiliere = request('filiere');
-        $import = new ImportEtudiants($idFiliere);
-        try {
-            $import->import(request()->file('uploadedFile'), 'local', \Maatwebsite\Excel\Excel::XLSX);
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            $failures = $e->failures();
-            foreach ($failures as $failure) {
-                echo $failure->row(); // row that went wrong
-                //  $failure->attribute(); // either heading key (if using heading row concern) or column index
-                //  $failure->errors(); // Actual error messages from Laravel validator
-                //  $failure->values(); // The values of the row that has failed.
-            }
-        }
-        //redirect()->back()->with('success', 'yes');
+        // $import = new ImportEtudiants($idFiliere);
+        // $import->import(request()->file('uploadedFile'), 'local', \Maatwebsite\Excel\Excel::XLSX);
+        (new ImportEtudiants($idFiliere))->queue(request()->file('uploadedFile'))->chain([
+            new NotifyUserOfCompletedImport(request()->user()),
+        ]);
     }
 }

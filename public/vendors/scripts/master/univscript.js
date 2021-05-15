@@ -103,7 +103,7 @@ function setDepId(id) {
 }
 function ReloadSelects(id) {
     jQuery.ajax({
-        url: "{{ route('getNewDepartements') }}",
+        url: "/master/getNewDepartements",
         type: "GET",
         dataType: "json",
         success: function(response) {
@@ -132,6 +132,7 @@ function ReloadAllSelects() {
     ReloadSelects("semdep");
     ReloadSelects("moddep");
     ReloadSelects("matdep");
+    LoadFixSemester();
     jQuery('select[name="semfil"]').empty();
     jQuery('select[name="modfil"]').empty();
     $('select[name="modfil"]').append(
@@ -242,6 +243,20 @@ function LoadModules(semsel, modsel) {
         }
     });
 }
+function LoadFixSemester()
+{
+    jQuery('select[name="semester[]"]').empty();
+    jQuery('select[name="semester[]"]').append('<option value="S1">S1</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S2">S2</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S3">S3</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S4">S4</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S5">S5</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S6">S6</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S7">S7</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S8">S8</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S9">S9</option>');
+    jQuery('select[name="semester[]"]').append('<option value="S10">S10</option>');
+}
 function getDepInfo(id) {
     $.ajax({
         type: "GET",
@@ -290,6 +305,7 @@ $("#updDep").submit(function(e) {
         success: function(data) {
             $("#bd-edit-modal").modal("hide");
             table1.ajax.reload();
+            ReloadAllSelects();
         }
     });
 });
@@ -324,6 +340,7 @@ $("#ajfiliere").submit(function(e) {
                 "Filière Ajoutée!";
             document.getElementById("ajfiliere").reset();
             $("#success-modal").modal("show");
+            ReloadAllSelects();
         }
     });
 });
@@ -336,8 +353,8 @@ $("#affsem").submit(function(e) {
         url: url,
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
-            document.getElementById("msgsuccess").innerHTML =
-                "Les semesteres sont Affecté!";
+            document.getElementById("msgsuccess").innerHTML ="Les semesteres sont Affecté!";
+            ReloadAllSelects();
             $("#success-modal").modal("show");
         }
     });
@@ -354,6 +371,7 @@ $("#ajmodule").submit(function(e) {
             document.getElementById("msgsuccess").innerHTML = "Module ajoutée!";
             document.getElementById("ajmodule").reset();
             $("#success-modal").modal("show");
+            ReloadAllSelects();
         }
     });
 });
@@ -370,6 +388,7 @@ $("#ajmatiere").submit(function(e) {
                 "Matiere ajoutée!";
             document.getElementById("ajmatiere").reset();
             $("#success-modal").modal("show");
+            ReloadAllSelects();
         }
     });
 });

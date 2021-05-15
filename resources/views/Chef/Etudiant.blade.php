@@ -28,6 +28,85 @@
                         </table>
                     </div>
                 </div>
+                <div class="pd-20 card-box mb-30">
+                    <div class="wizard-content">
+                        <div>
+                            <h4 class="h4">transmission des étudiants</h4>
+                        </div>
+                        <hr>
+                        <form action="{{ route('transEtudiants') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="transetud">
+                            @csrf
+                            <input type="hidden" id="idFiliereT" name="idFiliereT" value="{{ $filiere->idFiliere }}">
+                            <section>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Vers les filieres :</label>
+                                            <select class="custom-select2 form-control" name="fil" id="fil"
+                                                style="width: 100%;" required>
+                                                @foreach ($filieres as $fil)
+                                                    @if ($fil->idFiliere != $filiere->idFiliere)
+                                                        <option value="{{ $fil->idFiliere }}">
+                                                            {{ $fil->nom . ' ' . $fil->niveau }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label></label>
+                                            <div class="custom-control custom-radio mb-5">
+                                                <input type="radio" id="customRadio1" name="customRadio" value="T" class="custom-control-input">
+									        	<label class="custom-control-label" for="customRadio1">Tout les étudiants</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Sauf:</label>
+                                            <select class="custom-select2 form-control" multiple="multiple" id="etudiantsauf"
+                                                name="etudiantsauf[]" style="width: 100%; height: 35px;">
+                                                @foreach ($filiere->etudiants as $etudiant)
+                                                    <option value="{{ $etudiant->idEtudiant }}">
+                                                        {{ $etudiant->apogee . '-' . $etudiant->personne->nom . ' ' . $etudiant->personne->prenom }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>     
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label></label>
+                                            <div class="custom-control custom-radio mb-5">
+                                                <input type="radio" id="customRadio2" name="customRadio" value="S" class="custom-control-input">
+									        	<label class="custom-control-label" for="customRadio2">Sélectioné les étudiants</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Sélectioné:</label>
+                                            <select class="custom-select2 form-control" multiple="multiple" id="etudiantsel"
+                                                name="etudiantsel[]" style="width: 100%;  height: 35px;">
+                                                @foreach ($filiere->etudiants as $etudiant)
+                                                    <option value="{{ $etudiant->idEtudiant }}">
+                                                        {{ $etudiant->apogee . '-' . $etudiant->personne->nom . ' ' . $etudiant->personne->prenom }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>     
+                                </div>
+                            </section>
+                            <div class="text-right"><input class="btn btn-primary" type="submit" value="Confirmer"></div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog"
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -298,6 +377,20 @@
                                 <input class="btn btn-primary" type="submit" value="Enregistrer">
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20 pt-5">transmission réussie!</h3>
+                            <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
+                        </div>
                     </div>
                 </div>
             </div>

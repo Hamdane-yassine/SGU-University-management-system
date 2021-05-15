@@ -4,23 +4,21 @@ namespace App\Imports;
 
 use App\Models\Personne;
 use App\Models\Etudiant;
+use App\Notifications\ImportHasFailedNotification;//class of notification
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
-use Maatwebsite\Excel\Concerns\SkipsFailures;
-use Maatwebsite\Excel\Concerns\SkipsOnFailure;
-use Maatwebsite\Excel\Concerns\SkipsOnError;
-use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\Importable;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Illuminate\Support\Facades\DB;
 
-class ImportEtudiants implements ToCollection, WithStartRow ,WithChunkReading,ShouldQueue,SkipsOnFailure,SkipsOnError
+class ImportEtudiants implements ToCollection, WithStartRow ,WithChunkReading,ShouldQueue,WithEvents
 {
-    use Importable,SkipsFailures,SkipsErrors;
+    use Importable;
 
     /**
      * @param array $row
@@ -93,5 +91,13 @@ class ImportEtudiants implements ToCollection, WithStartRow ,WithChunkReading,Sh
                 'idFiliere' => $this->idFiliere
             ]);
         }
+    }
+    public function registerEvents(): array
+    {
+        return [
+        //     ImportFailed::class => function(ImportFailed $event) {  // notify the user by ImportFailed
+        //         $this->importedBy->notify(new ImportHasFailedNotification);
+        //     },
+        ];
     }
 }
