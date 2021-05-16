@@ -371,12 +371,18 @@
             $('#notifications').append
     };
 
+    function playSound(url) {
+        const audio = new Audio('{{ asset('vendors/sounds/notification.mp3') }}');
+        audio.play();
+    }
+
     window.Echo.private('App.Models.User.{{ Auth::user()->id }}')
     .listen('.Evt', (e) => {
         console.log(e);
     }).listen('\\Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
         console.log(notification);
         addToDropDown(notification);
+        playSound();
 
     }).on('pusher:subscription_succeeded', (member) => {
         console.log('successfulddly subscribed!');
