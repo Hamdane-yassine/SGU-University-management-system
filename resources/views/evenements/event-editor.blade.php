@@ -45,7 +45,7 @@
                         <div class="form-group ">
                                 <label >Date d'evenement</label>
                                 <input class="form-control date-picker @error('date') is-invalid @enderror"
-                                       placeholder="Date d'evenement" type="text"
+                                       placeholder="Date d'evenement" type="date"
                                        id="date"
                                        name="date"
                                        value="{{ old('date') }}" required>

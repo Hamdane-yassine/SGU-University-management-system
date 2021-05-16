@@ -59,7 +59,7 @@ class NotifyImportSuccess extends Notification implements ShouldBroadcastNow
     public function toArray($notifiable)
     {
         return [
-            'image' =>'/vendors/images/checkmark.svg',
+            'image' =>'/vendors/images/success.svg',
             'from'=>'Importation avec succés',
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
