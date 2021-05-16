@@ -73,7 +73,7 @@ class ImportEtudiants implements ToCollection, WithStartRow ,WithChunkReading, S
         ]);
 
         if($validator->fails()){
-            request()->user()->notify(new NotifyImportFailed(Filiere::find($this->idFiliere)->nom));
+            $this->user->notify(new NotifyImportFailed(Filiere::find($this->idFiliere)->nom));
         }
         else{
 
