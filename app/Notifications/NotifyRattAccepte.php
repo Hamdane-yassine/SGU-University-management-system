@@ -64,12 +64,12 @@ class NotifyRattAccepte extends Notification implements ShouldBroadcast
         $abs = new Absence((array)json_decode($this->absence));
         return [
             'image' =>$abs->professeur->user->profile->croppedImage,
-            'from'=>$abs->professeur->user->personne->nom.' '.$abs->chefdep->professeur->user->personne->prenom,
+            'from'=>$abs->professeur->user->personne->nom.' '.$abs->professeur->user->personne->prenom,
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
-            'brief'=>"Votre demande de rattrapage a été accepté."
+            'brief'=>"Votre demande de rattrapage a été accepté.\n"
                     ."la date de rattrapage : ".$abs->dateRattrapage."\n"
-                    ."la salle : ".$abs->salle,
+                    ."salle : ".$abs->salle,
         ];
     }
 }

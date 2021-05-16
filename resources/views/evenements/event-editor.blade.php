@@ -43,10 +43,12 @@
                     <form id="evtform" method="POST" action="/evenement/store" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group ">
-                            <label>Date d'evenement</label>
-                            <input class="form-control date-picker @error('date') is-invalid @enderror"
-                                placeholder="Date d'evenement" type="text" id="date" name="date" value="{{ old('date') }}"
-                                required>
+                                <label >Date d'evenement</label>
+                                <input class="form-control date-picker @error('date') is-invalid @enderror"
+                                       placeholder="Date d'evenement" type="date"
+                                       id="date"
+                                       name="date"
+                                       value="{{ old('date') }}" required>
                         </div>
                         @error('date')
                             <small class="form-text text-danger"><strong>{{ $message }}</strong></small>

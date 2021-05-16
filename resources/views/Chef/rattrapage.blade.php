@@ -20,7 +20,7 @@
                         <div>
                             <h4 class="h4 d-inline">{{ $absence->professeur->user->personne->nom }} {{ $absence->professeur->user->personne->prenom }}</h4>
                             <small class="form-text text-muted pl-10 d-inline">
-                                &#8594; Absence : @php setlocale(LC_TIME, "fr_FR", "French");echo strftime("%A %d %B %G %R", strtotime($absence->dateAbsence)); @endphp | Matiere : {{ $absence->matiere->nom }} | Filiere : {{ $absence->matiere->module->filiere->nom}}
+                                &#8594; Absence : @php setlocale(LC_TIME, "fr_FR", "French");echo strftime("%A %d %B %G %R", strtotime($absence->dateAbsence)); @endphp | Matiere : {{ $absence->matiere->nom }} | Filiere : {{ $absence->matiere->module->semestre->filiere->nom}}
                             </small>
                         </div>
                         <hr>
