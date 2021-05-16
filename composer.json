@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "maatwebsite/excel": "^3.1",
+        "mckenziearts/laravel-notify": "^2.1",
         "pusher/pusher-php-server": "^6.1",
         "reliese/laravel": "^1.1",
         "yajra/laravel-datatables-oracle": "^9.18"

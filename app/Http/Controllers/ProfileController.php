@@ -107,6 +107,7 @@ class ProfileController extends Controller
 
         $profile->save();
         $profile->user->save();
+        // $profile->user()->notify(new Ema)
         return redirect()->back();
     }
 

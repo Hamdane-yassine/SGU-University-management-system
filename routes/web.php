@@ -151,7 +151,7 @@ Route::get('/{nb}', function ($nb) {
     switch ($nb) {
         case 1:
             // return Auth::user()->impersonate(User::find(3));
-            return dd("asdsdasd");
+            return view('test');
             break;
         case 2:
             return view('evenements.event-editor');
