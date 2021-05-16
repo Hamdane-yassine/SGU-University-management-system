@@ -34,7 +34,9 @@
 
 <body>
     <div class="header">
-        <div class="header-left"></div>
+        <div class="header-left">
+            <div class="menu-icon dw dw-menu"></div>
+        </div>
         <div class="header-right">
             <div class="user-notification">
                 <div class="dropdown">
