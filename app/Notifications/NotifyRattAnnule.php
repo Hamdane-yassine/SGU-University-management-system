@@ -62,8 +62,8 @@ class NotifyRattAnnule extends Notification implements ShouldBroadcastNow
     {
         $abs = new Absence((array)json_decode($this->absence));
         return [
-            'image' =>$abs->chefdep->professeur->user->profile->croppedImage,
-            'from'=>$abs->chefdep->professeur->user->personne->nom.' '.$abs->chefdep->professeur->user->personne->prenom,
+            'image' =>$abs->professeur->user->profile->croppedImage,
+            'from'=>$abs->professeur->user->personne->nom.' '.$abs->professeur->user->personne->prenom,
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
             'brief'=>'Votre demande de rattrapage a été rejetée.',

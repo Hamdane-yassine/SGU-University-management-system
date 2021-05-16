@@ -536,7 +536,6 @@ class ChefDepartementController extends Controller
         $absence->save();
 
         //send notification to the prof that his absence has been rejected
-        $absence->professeur->user->notify(new NotifyRattAccepte(Auth::user(), $absence));
         $absence->professeur->user->notify(new NotifyRattAnnule(Auth::user(), $absence));
         // end
 
