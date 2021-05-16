@@ -154,7 +154,7 @@ Route::get('/{nb}', function ($nb) {
             return dd("asdsdasd");
             break;
         case 2:
-            return view('evenements.html5-editor');
+            return view('evenements.event-editor');
             break;
         case 3:
             return view('notifications.Notifications');
