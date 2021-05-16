@@ -1,4 +1,4 @@
-@extends('layouts.prof')
+@extends('layouts.app')
 @section('title', 'Gestion des emplois')
 @section('content')
     <div class="main-container">
@@ -25,21 +25,16 @@
                         </table>
                     </div>
                 </div>
-            </div>
-
-            <div class="footer-wrap pd-20 mb-20 card-box">
-                DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
-                    Hingarajiya</a>
+                @include('layouts.footer')
             </div>
         </div>
-    </div>
-@endsection
-@section('SpecialScripts')
-    <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/admin/emploifilieres.js') }}"></script>
-@endsection
+    @endsection
+    @section('SpecialScripts')
+        <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
+        <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
+        <script src="{{ asset('vendors/scripts/admin/emploifilieres.js') }}"></script>
+    @endsection

@@ -250,3 +250,14 @@ jQuery(document).ready(function() {
         }
     });
 });
+$("#submit1").click(function() {
+    $("#deleteFiliere").submit();
+});
+
+$("#submit2").click(function() {
+    $("#deleteModule").submit();
+});
+
+$("#submit3").click(function() {
+    $("#deleteMatiere").submit();
+});

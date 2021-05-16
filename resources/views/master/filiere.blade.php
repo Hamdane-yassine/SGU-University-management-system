@@ -1,4 +1,4 @@
-    @extends('layouts.prof')
+    @extends('layouts.app')
     @section('title', 'filieres')
     @section('content')
         <div class="main-container">
@@ -287,6 +287,7 @@
                         </div>
                     </div>
                 </div>
+                @include('layouts.footer')
         </div>
         <!-- js -->
     @endsection
@@ -299,16 +300,4 @@
         <script src="{{ asset('src/plugins/jquery-steps/jquery.steps.js') }}"></script>
         <script src="{{ asset('vendors/scripts/steps-setting.js') }}"></script>
         <script src="{{ asset('vendors/scripts/master/filiere.js') }}"></script>
-        <script>
-
-            $('#submit1').click(function(){
-            $('#deleteFiliere').submit();});
-
-            $('#submit2').click(function(){
-            $('#deleteModule').submit();});
-
-            $('#submit3').click(function(){
-            $('#deleteMatiere').submit();});
-
-        </script>
     @endsection
