@@ -229,10 +229,13 @@
                                                                 <li class="weight-500 col-md-6">
                                                                 {{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
                                                                 <div class="form-group">
-                                                                    <label>Mot de passe courrant:</label>
-                                                                    <input class="form-control form-control-lg @error('current')
-                                                                    is-invalid
-                                                                    @enderror" type="password" placeholder="" name="current" required>
+                                                                    <label>Mot de passe courant:</label>
+                                                                    <input class="form-control form-control-lg
+                                                                            @error('current') is-invalid @enderror"
+                                                                           type="password"
+                                                                           placeholder=""
+                                                                           name="current"
+                                                                           required>
                                                                     @error('current')
                                                                     <small class="ml-1 text-danger">{{ $message }}</small>
                                                                     @enderror

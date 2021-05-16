@@ -79,7 +79,6 @@ class NotifyEvent extends Notification implements ShouldBroadcast
         // echo $chef = Chefdep::find($this->event[0]);
 
         return [
-            // 'image' => $evt->chefdep->professeur->user->profile->imagePath,
             'image' =>$evt->chefdep->professeur->user->profile->croppedImage,
             'from'=>$evt->chefdep->professeur->user->personne->nom.' '.$evt->chefdep->professeur->user->personne->prenom,
             'idNotif'=>$this->id,

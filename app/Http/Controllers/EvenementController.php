@@ -49,7 +49,7 @@ class EvenementController extends Controller
             'date'=>'date|required',
             'resume'=>'required',
             'corps'=>'required',
-            'attachments.*'=>'mimes:png,jpg,pdf|max:30000',
+            'attachments.*'=>'file|mimes:png,jpg,pdf|max:20000',
             'attachments'=>'max:3',
             ],
             ['attachments.max'=>'vous avez uploader plus que 3 fichiers']
@@ -62,16 +62,18 @@ class EvenementController extends Controller
             'resume'=>$request->input('resume'),
         ]);
         // dd($request->file('attachments'));
-        if(count($request->file('attachments')) > 1){
-            $filePaths = array();
-            foreach ($files as $file) {
-                // $filePaths .= array_push($file->store('attachments/'.$evenement->idEvenement));
-                array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
+        if(is_array($request->file('attachments'))){
+            if(count($request->file('attachments')) > 1){
+                $filePaths = array();
+                foreach ($files as $file) {
+                    // $filePaths .= array_push($file->store('attachments/'.$evenement->idEvenement));
+                    array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
+                }
+                $evenement->attachments = $filePaths;
             }
-            $evenement->attachments = $filePaths;
-        }
-        else if(count($request->file('attachments')) === 1){
-            $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
+            else if(count($request->file('attachments')) === 1){
+                $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
+            }
         }
 
         $evenement->save();
@@ -91,7 +93,6 @@ class EvenementController extends Controller
         $attArr = json_decode($evenement->attachments);
         $headingImg = '';
         if($attArr){
-
             if(count($attArr) > 0){
                 foreach ($attArr as $key) {
                     if(preg_match('/.(jpg|jpeg|png|csv|txt|zip|csv|excel|pdf)/i',$key)){

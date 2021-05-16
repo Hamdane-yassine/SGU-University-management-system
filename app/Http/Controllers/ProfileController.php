@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Notifications\NotifyPasswdChanged;
 use App\Rules\checkPasswd;
 use App\Rules\ChekEqualPasswd;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -118,9 +120,12 @@ class ProfileController extends Controller
         // ]);
         $validator = Validator::make($request->all(),
             [
-                'current'=>['required', new checkPasswd($request->user())],
-                'passwd'=>['required', 'alpha_num' ,'min:8', new checkPasswd($request->user())],
+                'current'=>['required', new checkPasswd($request->user(),1)],
+                'passwd'=>['required', new checkPasswd($request->user()), Password::min(8)],
                 'retypedPasswd'=>['required',new ChekEqualPasswd($request->passwd)],            // 'adresse'=>'required'
+            ],
+            [
+                'current.checkPasswd'=>'entrer votre mot de passe courant'
             ]
         );
 
@@ -133,6 +138,7 @@ class ProfileController extends Controller
 
         Auth::user()->password = bcrypt($request->passwd);
         request()->user()->save();
+        request()->user()->notify(new NotifyPasswdChanged);
         return redirect('/profile/'.$request->user()->id.'?tab=passwd');
     }
 

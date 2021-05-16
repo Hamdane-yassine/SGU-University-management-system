@@ -110,7 +110,7 @@
                         <!-- <div class="text-center text-secondary">Aucun notification</div> -->
                         <div class="notification-list mx-h-350 customscroll">
                             <ul>
-                                @include('components.NotificationComponents')
+                                @include('components.EventsComponents')
                             </ul>
                         </div>
                     </div>

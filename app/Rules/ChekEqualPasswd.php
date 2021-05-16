@@ -36,6 +36,6 @@ class ChekEqualPasswd implements Rule
      */
     public function message()
     {
-        return 'Assurez-vous que les deux sont les identique';
+        return 'Les deux mots de passe ne sont pas identiques';
     }
 }
