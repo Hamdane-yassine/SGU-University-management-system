@@ -1,4 +1,4 @@
-@extends('layouts.prof')
+@extends('layouts.app')
 @section('title',"$filiere->nom $filiere->niveau")
 @section('SpecialStyles')
 <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/switchery/switchery.min.css') }}">
@@ -67,10 +67,7 @@
 
                     </div>
                 </div>
-            </div>
-            <div class="footer-wrap pd-20 mb-20 card-box">
-                DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
-                    Hingarajiya</a>
+                @include('layouts.footer')
             </div>
         </div>
     </div>

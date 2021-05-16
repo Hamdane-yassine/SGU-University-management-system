@@ -1,12 +1,12 @@
-@extends('layouts.prof')
-@section('title'," $filiere->nom $filiere->niveau")
+@extends('layouts.app')
+@section('title', " $filiere->nom $filiere->niveau")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
                 <div class="card-box mb-30">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">{{ $filiere->nom.' '.$filiere->niveau }}</h4>
+                        <h4 class="text-blue h4">{{ $filiere->nom . ' ' . $filiere->niveau }}</h4>
                     </div>
                     <div class="pb-20">
                         <input type="hidden" id="idFiliere" value="{{ $filiere->idFiliere }}">
@@ -27,8 +27,10 @@
                         </table>
                     </div>
                 </div>
+                @include('layouts.footer')
             </div>
-            <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog"
+                aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -93,20 +95,17 @@
                             </dl>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="printJS({printable: 'modall',type: 'html', targetStyles: ['*']})"><i
+                            <button type="button" class="btn btn-primary"
+                                onclick="printJS({printable: 'modall',type: 'html', targetStyles: ['*']})"><i
                                     class="fa fa-print"></i>&nbsp;&nbsp;Imprimer</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="footer-wrap pd-20 mb-20 card-box">
-                DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
-                    Hingarajiya</a>
-            </div>
         </div>
     </div>
-    @endsection
-    @section('SpecialScripts')
+@endsection
+@section('SpecialScripts')
     <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
@@ -122,4 +121,4 @@
     <script src="{{ asset('src/plugins/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('vendors/scripts/prof/etudiants.js') }}"></script>
-    @endsection
+@endsection

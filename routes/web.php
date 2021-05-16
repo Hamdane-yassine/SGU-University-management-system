@@ -50,10 +50,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-//Route::get('/absences',[ProfesseurController::class, 'getAllData']);
-
 Route::post('addRatt', [ProfesseurController::class, 'addRatt']);
 
 Route::get('/absences', [ProfesseurController::class, 'index']);
@@ -83,6 +79,7 @@ Route::get('/note/{note}', [App\Http\Controllers\ProfesseurController::class, 'g
 Route::get('/Nonote/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiantId']);
 
 Route::post('updateNote', [ProfesseurController::class, 'updateNote'])->name('updateNote');
+
 
 Route::get('/chef/emploi', [ChefDepartementController::class, 'index']);
 

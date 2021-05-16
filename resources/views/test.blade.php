@@ -5,14 +5,10 @@
         @notifyCss
     </head>
     <body>
+        @php
+            notify()->success('Welcome to Laravel Notify ⚡', 'My custom title');
+        @endphp
         @include('notify::messages')
         @notifyJs
     </body>
-    <script>
-        function display() {
-            @php
-             notify()->success('Welcome to Laravel Notify ⚡', 'My custom title');
-            @endphp
-        }
-    </script>
 </html>

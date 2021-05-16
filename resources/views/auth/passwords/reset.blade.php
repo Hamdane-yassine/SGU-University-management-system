@@ -1,4 +1,4 @@
-@extends('layouts.Auth')
+@extends('layouts.auth')
 @section('title','Réinitialiser le mot de passe')
 @section('content')
 	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">

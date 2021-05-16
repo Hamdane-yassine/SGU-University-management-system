@@ -1,4 +1,4 @@
-@extends('layouts.prof')
+@extends('layouts.app')
 @section('title','Rattrapage')
 @section('content')
     <div class="main-container">

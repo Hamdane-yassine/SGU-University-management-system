@@ -1,8 +1,7 @@
-    @extends('layouts.prof')
+    @extends('layouts.app')
     @section('title', 'Absences')
     @section('content')
         <div class="main-container">
-
             <div class="pd-ltr-20 xs-pd-20-10">
                 <div class="min-height-200px">
                     <div class="pd-20 card-box mb-30">
@@ -101,13 +100,9 @@
 
                         </form>
                     </div>
-                </div>
-                <div class="footer-wrap pd-20 mb-20 card-box">
-                    DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
-                        Hingarajiya</a>
+                    @include('layouts.footer')
                 </div>
             </div>
-        </div>
         </div>
         <!-- js -->
     @endsection

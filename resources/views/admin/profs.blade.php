@@ -1,4 +1,4 @@
-@extends('layouts.prof')
+@extends('layouts.app')
 @section('title', "$departement->nom")
 @section('content')
     <div class="main-container">
@@ -235,6 +235,7 @@
                         </form>
                     </div>
                 </div>
+                @include('layouts.footer')
             </div>
             <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog"
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -481,10 +482,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer-wrap pd-20 mb-20 card-box">
-                DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
-                    Hingarajiya</a>
             </div>
         </div>
     </div>

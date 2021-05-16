@@ -1,4 +1,4 @@
-@extends('layouts.prof')
+@extends('layouts.app')
 @section('title', 'Gestion des emplois')
 @section('content')
     <div class="main-container">
@@ -63,6 +63,7 @@
                         </form>
                     </div>
                 </div>
+                @include('layouts.footer')
             </div>
             <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -90,10 +91,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer-wrap pd-20 mb-20 card-box">
-                DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
-                    Hingarajiya</a>
             </div>
         </div>
     </div>
