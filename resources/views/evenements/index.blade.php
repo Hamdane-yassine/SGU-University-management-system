@@ -34,6 +34,16 @@
                                                             <img src="{{ url('/storage/'.$evenement->headingImg) }}" alt="" class="bg_img">
                                                         @else <img src="{{ asset('vendors/images/event-default.jpg') }}" alt="" class="bg_img">
                                                         @endif
+                                                        {{-- <div class="dropdown">
+                                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                                <i class="dw dw-more"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+                                                            </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-8 col-md-12 col-sm-12">
@@ -66,7 +76,7 @@
                                         @foreach (\App\Models\Evenement::all()->take(6) as $evt)
                                         <li>
                                             <a href="{{ url('/evenement/'.$evt->idEvenement) }}">{{ $evt->titre }}
-                                                <p class="caption">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date }}</small></p>
+                                                <p class="caption" style="word-break:break-all">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date }}</small></p>
                                             </a>
                                         </li>
                                         @endforeach

@@ -18,11 +18,11 @@ class CreateEvenementTable extends Migration {
 			$table->id('idEvenement');
 			$table->unsignedBigInteger('ID_chef');
 			$table->date('date');
-			$table->string('html', 2048);
+			$table->longText('html');
 			$table->string('titre', 100);
 			$table->string('attachments',256)->nullable();
 			$table->string('headingImg',256)->nullable();
-			$table->string('resume',256);
+			$table->longText('resume');
             $table->timestamps();
 		});
 	}
