@@ -80,5 +80,5 @@ $(".admintable").DataTable({
             previous: '<i class="ion-chevron-left"></i>'
         }
     },
-    dom: '<"top"<"left-col"f>>rtp',
+    dom: '<"top"<"left-col"f>>rtip',
 });
