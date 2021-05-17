@@ -21,6 +21,7 @@ class CreateEvenementTable extends Migration {
 			$table->string('html', 2048);
 			$table->string('titre', 100);
 			$table->string('attachments',256)->nullable();
+			$table->string('headingImg',256)->nullable();
 			$table->string('resume',256);
             $table->timestamps();
 		});

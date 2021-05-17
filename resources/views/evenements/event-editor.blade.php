@@ -7,16 +7,16 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="title">
-                                <h4>Form</h4>
+                                <h4>Evénements</h4>
                             </div>
-                            <nav aria-label="breadcrumb" role="navigation">
+                            {{-- <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Form</li>
                                 </ol>
-                            </nav>
+                            </nav> --}}
                         </div>
-                        <div class="col-md-6 col-sm-12 text-right">
+                        {{-- <div class="col-md-6 col-sm-12 text-right">
                             <div class="dropdown">
                                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                                     January 2018
@@ -27,7 +27,7 @@
                                     <a class="dropdown-item" href="#">View Assets</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -36,16 +36,16 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="clearfix">
                         <div class="pull-left">
-                            <h4 class="text-blue h4">horizontal Basic Forms</h4>
-                            <p class="mb-30">All bootstrap element classies</p>
+                            <h4 class="text-blue h4">Ajouter un événement</h4>
+                            <p class="mb-30">remplire les champs nécessaires</p>
                         </div>
                     </div>
                     <form id="evtform" method="POST" action="/evenement/store" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group ">
-                                <label >Date d'evenement</label>
+                                <label >Date d'événement</label>
                                 <input class="form-control date-picker @error('date') is-invalid @enderror"
-                                       placeholder="Date d'evenement" type="date"
+                                       placeholder="Date d'evenement"
                                        id="date"
                                        name="date"
                                        value="{{ old('date') }}" required>

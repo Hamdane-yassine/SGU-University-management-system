@@ -50,7 +50,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::prefix('prof')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::post('addRatt', [ProfesseurController::class, 'addRatt']);
     Route::get('/absences', [ProfesseurController::class, 'index']);
     Route::get('/AbsencesList', [ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
@@ -68,7 +68,7 @@ Route::prefix('prof')->group(function () {
     Route::post('updateNote', [ProfesseurController::class, 'updateNote'])->name('updateNote');
 });
 
-Route::prefix('chef')->group(function () {
+Route::middleware(['chefdep','auth'])->group(function () {
     Route::get('/chef/emploi', [ChefDepartementController::class, 'index']);
     Route::get('/chef/etudiants/{filiere}', [ChefDepartementController::class, 'Etudiants']);
     Route::get('/chef/EtudiantsList/{filiere}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiants'])->name('EtudiantsListChef');
@@ -102,12 +102,14 @@ Route::prefix('chef')->group(function () {
 Route::get('notifications', [UserController::class, 'notifs']);
 
 Route::prefix('evenement')->group(function () {
+    Route::get('/', [EvenementController::class, 'index'])->name('evenement.index');
     Route::get('create', [EvenementController::class, 'create'])->name('evenement.create');
     Route::post('store', [EvenementController::class, 'store'])->name('evenement.store');
     Route::get('{evenement}', [EvenementController::class, 'show'])->name('evenement.show');
     Route::get('download/{evenement}', [EvenementController::class, 'downloadAttachements'])->name('evenement.download');
 });
 
+Route::impersonate();
 Route::post('user/impersonate', [UserController::class, 'impersonate']);
 Route::get('user/impersonate', [UserController::class, 'impersonateGet']);
 
@@ -122,7 +124,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/profile/' . Auth::user()->getAuthIdentifier());
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::impersonate();
+
 // ===============
 Route::get('/{nb}', function ($nb) {
     // broadcast(new \App\Events\Evt())->toOthers();
@@ -138,7 +140,7 @@ Route::get('/{nb}', function ($nb) {
             return view('evenements.event-editor');
             break;
         case 3:
-            return view('notifications.Notifications');
+            return redirect('/evenement/');
             break;
 
             // default:
@@ -151,7 +153,7 @@ Route::get('/{nb}', function ($nb) {
 //     // Route::get('', [UserController::class,'Notifs']);
 // });
 
-Route::prefix('profile')->group(function () {
+Route::prefix('profile')->middleware('auth')->group(function () {
     Route::get('/{user}', [ProfileController::class, 'show'])->name('profile.show');
     Route::post('/update/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/updateImage/', [ProfileController::class, 'updateImage'])->name('profile.update.image');
@@ -161,7 +163,7 @@ Route::prefix('profile')->group(function () {
 
 // ===============
 
-Route::prefix('admin')->group(function () {
+Route::middleware(['admin','auth'])->group(function () {
     Route::get('admin/emploi', [AdminController::class, 'index']);
     Route::get('admin/emploi/profs', [AdminController::class, 'getListOfProfEmploi'])->name('getProfsEmploi'); //this one isn't used by the chefdep anymore , rather it will be reused in admin's UI
     Route::post('/upload/profEmploi', [AdminController::class, 'uploadEmploi'])->name('uploadEmploiprof');
@@ -190,7 +192,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/admin/emploi/filiere/datatable', [AdminController::class, 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
 });
 
-Route::prefix('master')->group(function () {
+Route::middleware(['master','auth'])->group(function () {
     Route::get('/master/universite', [MasterController::class, 'Universite'])->name('GestionUniversite');
     Route::get('/master/departements', [MasterController::class, 'getDepartements'])->name('getDepartements');
     Route::post('/master/deletedepartement', [MasterController::class, 'SupprimerDepartement'])->name('SupprimerDepartement');
@@ -207,7 +209,7 @@ Route::prefix('master')->group(function () {
     Route::get('/master/getModulesSem/{semester}', [MasterController::class, 'getModulesSem'])->name('getModulesSem');
     Route::get('/master/filiere/{idDepartement}', [MasterController::class, 'indexFilieres']);
     Route::get('/master/filiere/{idDepartement}/datatable', [MasterController::class, 'getFilieresDatatable'])->name('MasterFiliereDatatable');
-    Route::post('/updateFiliere/{idDepartement}', [MasterController::class, 'updateFiliere']); 
+    Route::post('/updateFiliere/{idDepartement}', [MasterController::class, 'updateFiliere']);
     Route::get('/master/filiere/delete/{idFiliere}', [MasterController::class, 'deleteFiliere']);
     Route::get('/master/getSemestresOfFiliere/{idFiliere}', [MasterController::class, 'getSemestresOfFiliere']);
     Route::post('/master/deleteSemestreOfFiliere', [MasterController::class, 'deleteSemestreOfFiliere'])->name('deleteSemestreOfFiliere');

@@ -6,6 +6,7 @@ use App\Models\Evenement;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile as HttpUploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
@@ -22,7 +23,8 @@ class EvenementController extends Controller
      */
     public function index()
     {
-        //
+        $evenements = Evenement::latest()->paginate(5);
+        return view('evenements.index', compact('evenements'));
     }
 
     /**
@@ -32,7 +34,7 @@ class EvenementController extends Controller
      */
     public function create()
     {
-        return view('evenements.html5-editor');
+        return view('evenements.event-editor');
     }
 
     /**
@@ -45,6 +47,7 @@ class EvenementController extends Controller
     {
         // $files = $request->file('attachments');
         $files = $request->file('attachments');
+        $headingImg = '';
         $request->validate([
             'date'=>'date|required',
             'resume'=>'required',
@@ -67,15 +70,21 @@ class EvenementController extends Controller
                 $filePaths = array();
                 foreach ($files as $file) {
                     // $filePaths .= array_push($file->store('attachments/'.$evenement->idEvenement));
-                    array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
+                    if(preg_match('/(headingImg)/',$file->getClientOriginalName()))
+                        $headingImg = $file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName());
+                    else
+                        array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
                 }
                 $evenement->attachments = $filePaths;
             }
-            else if(count($request->file('attachments')) === 1){
-                $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
+            else if(count($request->file('attachments')) == 1){
+                if(preg_match('/(headingImg)/',$request->file('attachments')[0]->getClientOriginalName()))
+                    $headingImg = $request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName());
+                else
+                    $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
             }
         }
-
+        $evenement->headingImg = $headingImg;
         $evenement->save();
         // $files->store('attachments/'.$evenement->idEvenement);
         return redirect('/evenement/'.$evenement->idEvenement);
@@ -91,18 +100,17 @@ class EvenementController extends Controller
     {
         $attachments = array();
         $attArr = json_decode($evenement->attachments);
-        $headingImg = '';
-        if($attArr){
-            if(count($attArr) > 0){
-                foreach ($attArr as $key) {
-                    if(preg_match('/.(jpg|jpeg|png|csv|txt|zip|csv|excel|pdf)/i',$key)){
-                        if(preg_match('/(headingImg)/',$key))
-                            $headingImg = $key;
-                        else array_push($attachments, $key);
-                    }
-                }
-            }
-        }
+        $headingImg = $evenement->headingImg;
+        $attachments= array($evenement->attachments);
+        // if($attArr){
+        //     if(count($attArr) > 0){
+        //         foreach ($attArr as $key) {
+        //             if(preg_match('/.(jpg|jpeg|png|csv|txt|zip|csv|excel|pdf)/i',$key)){
+        //                 array_push($attachments, $key);
+        //             }
+        //         }
+        //     }
+        // }
         // dd($attachments);
         return view('evenements.event-detail', compact('evenement','attachments','headingImg'));
     }

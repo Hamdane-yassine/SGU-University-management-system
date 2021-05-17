@@ -35,7 +35,7 @@ class Evenement extends Model
 	];
 
 	protected $dates = [
-        'date'
+        'date'=>'DD-MM-YYYY'
 	];
 
 	protected $fillable = [
@@ -44,7 +44,8 @@ class Evenement extends Model
         'titre',
 		'html',
         'resume',
-        'attachments'
+        'attachments',
+        'headingImg'
 	];
 
 	public function chefdep()
