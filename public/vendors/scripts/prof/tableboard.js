@@ -33,3 +33,6 @@ $(".data-table").DataTable({
         }
     }
 });
+$(document).ready(function() {
+    $('.dataTables_filter input[type="search"]').css({ width: "60%" });
+});

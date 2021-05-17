@@ -10,6 +10,8 @@ $(".cheftable").DataTable({
     scrollCollapse: true,
     autoWidth: false,
     responsive: true,
+    pageLength : 5,
+    lengthChange: false,
     columnDefs: [
         {
             targets: "datatable-nosort",
@@ -48,6 +50,8 @@ $(".admintable").DataTable({
     ],
     scrollCollapse: true,
     autoWidth: false,
+    pageLength : 5,
+    lengthChange: false,
     responsive: true,
     columnDefs: [
         {
@@ -77,5 +81,5 @@ $(".admintable").DataTable({
     }
 });
 $(document).ready(function() {
-    $('.dataTables_filter input[type="search"]').css({ width: "60%" });
+    $('.dataTables_filter input[type="search"]').css('width',"45%");
 });

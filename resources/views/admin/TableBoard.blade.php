@@ -23,7 +23,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $CountEtudiant }}</div>
-                                <div class="font-14 text-secondary weight-500">Etudiants</div>
+                                <div class="font-14 text-secondary weight-500">Etudiants<span style="opacity:0;">xxxx xxxxxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><span class="icon-copy fi-torsos-all"></span></div>
@@ -36,7 +36,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $CountEtudiant }}</div>
-                                <div class="font-14 text-secondary weight-500">Filiéres</div>
+                                <div class="font-14 text-secondary weight-500">Filiéres<span style="opacity:0;">xxxx xxxxxxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><i class="fa fa-graduation-cap"></i></div>
@@ -49,7 +49,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $CountDepartement }}</div>
-                                <div class="font-14 text-secondary weight-500">départements</div>
+                                <div class="font-14 text-secondary weight-500">départements<span style="opacity:0;">xxxx xxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><i class="micon fa fa-building" aria-hidden="true"></i></div>
@@ -63,7 +63,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $CountProf }}</div>
-                                <div class="font-14 text-secondary weight-500">Professeurs sans emploi</div>
+                                <div class="font-14 text-secondary weight-500">Professeurs sans emploi</div> <!--23-->
                             </div>
                             <div class="widget-icon">
                                 <div class="icon" ><i class="icon-copy fi-calendar" aria-hidden="true"></i>
