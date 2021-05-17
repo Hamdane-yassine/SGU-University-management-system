@@ -16,8 +16,7 @@ class CheckChefDep
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
-        if ($user->hasRole('chefdep')) {
+        if ($request->user()->hasRole('chefdep')) {
             return $next($request);
         }
         return redirect('/');
