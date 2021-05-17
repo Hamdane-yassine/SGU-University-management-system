@@ -23,7 +23,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $Count_etudiants }}</div>
-                                <div class="font-14 text-secondary weight-500">Etudiants</div>
+                                <div class="font-14 text-secondary weight-500">Etudiants<span style="opacity:0;">xxxx xxxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><span class="icon-copy fi-torsos-all"></span></div>
@@ -36,7 +36,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $Count_filieres }}</div>
-                                <div class="font-14 text-secondary weight-500">Filiéres</div>
+                                <div class="font-14 text-secondary weight-500">Filiéres<span style="opacity:0;">xxxx xxxxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><i class="fa fa-graduation-cap"></i></div>

@@ -50,7 +50,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','prof'])->group(function () {
     Route::post('addRatt', [ProfesseurController::class, 'addRatt']);
     Route::get('/absences', [ProfesseurController::class, 'index']);
     Route::get('/AbsencesList', [ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('updateNote', [ProfesseurController::class, 'updateNote'])->name('updateNote');
 });
 
-Route::middleware(['chefdep','auth'])->group(function () {
+Route::middleware(['auth','chefdep'])->group(function () {
     Route::get('/chef/emploi', [ChefDepartementController::class, 'index']);
     Route::get('/chef/etudiants/{filiere}', [ChefDepartementController::class, 'Etudiants']);
     Route::get('/chef/EtudiantsList/{filiere}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiants'])->name('EtudiantsListChef');
@@ -153,7 +153,7 @@ Route::get('/{nb}', function ($nb) {
 //     // Route::get('', [UserController::class,'Notifs']);
 // });
 
-Route::prefix('profile')->middleware('auth')->group(function () {
+Route::prefix('profile')->middleware(['auth'])->group(function () {
     Route::get('/{user}', [ProfileController::class, 'show'])->name('profile.show');
     Route::post('/update/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/updateImage/', [ProfileController::class, 'updateImage'])->name('profile.update.image');
@@ -192,7 +192,7 @@ Route::middleware(['admin','auth'])->group(function () {
     Route::get('/admin/emploi/filiere/datatable', [AdminController::class, 'getAdminEmploiFiliereDatatable'])->name('getAdminEmploiFiliereDatatable');
 });
 
-Route::middleware(['master','auth'])->group(function () {
+Route::middleware(['auth','master'])->group(function () {
     Route::get('/master/universite', [MasterController::class, 'Universite'])->name('GestionUniversite');
     Route::get('/master/departements', [MasterController::class, 'getDepartements'])->name('getDepartements');
     Route::post('/master/deletedepartement', [MasterController::class, 'SupprimerDepartement'])->name('SupprimerDepartement');
