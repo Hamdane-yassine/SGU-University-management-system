@@ -30,8 +30,8 @@
                                             <div class="row no-gutters">
                                                 <div class="col-lg-4 col-md-12 col-sm-12">
                                                     <div class="blog-img">
-                                                        @if($evenement->headindImg)
-                                                        <img src="{{ $evenement->headindImg }}" alt="" class="bg_img">
+                                                        @if($evenement->headingImg != null)
+                                                            <img src="{{ url('/storage/'.$evenement->headingImg) }}" alt="" class="bg_img">
                                                         @else <img src="{{ asset('vendors/images/event-default.jpg') }}" alt="" class="bg_img">
                                                         @endif
                                                     </div>
@@ -39,7 +39,7 @@
                                                 <div class="col-lg-8 col-md-12 col-sm-12">
                                                     <div class="blog-caption">
                                                         <h4><a href="{{ url('/evenement/' . $evenement->idEvenement ) }}">{{ $evenement->titre }}</a></h4>
-                                                        <div class="blog-by">
+                                                        <div class="blog-by" style="word-break: break-all">
                                                             <p>{{ $evenement->resume }}</p>
                                                                 <div class="pt-10">
                                                                     <a href="{{ url('/evenement/' . $evenement->idEvenement ) }}" class="btn btn-outline-primary">Détails</a>
