@@ -15,6 +15,8 @@ $(".data-table").DataTable({
     scrollCollapse: true,
     autoWidth: false,
     responsive: true,
+    pageLength : 5,
+    lengthChange: false,
     columnDefs: [
         {
             targets: "datatable-nosort",
@@ -40,6 +42,4 @@ $(".data-table").DataTable({
     },
     dom: '<"top"<"left-col"f>>rtp',
 });
-$(document).ready(function() {
-    $('.dataTables_filter input[type="search"]').css({ width: "60%" });
-});
+

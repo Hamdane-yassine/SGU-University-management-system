@@ -31,13 +31,14 @@ $(".cheftable").DataTable({
         infoEmpty: "Affichage de 0 à 0 sur 0 éléments",
         loadingRecords: "Chargement...",
         infoFiltered: "(filtrés depuis un total de _MAX_ éléments)",
-        search: "Rechercher:",
+        search: "",
         searchPlaceholder: "Rechercher",
         paginate: {
             next: '<i class="ion-chevron-right"></i>',
             previous: '<i class="ion-chevron-left"></i>'
         }
-    }
+    },
+    dom: '<"top"<"left-col"f>>rtp',
 });
 $(".admintable").DataTable({
     processing: true,
@@ -72,14 +73,12 @@ $(".admintable").DataTable({
         infoEmpty: "Affichage de 0 à 0 sur 0 éléments",
         loadingRecords: "Chargement...",
         infoFiltered: "(filtrés depuis un total de _MAX_ éléments)",
-        search: "Rechercher: ",
+        search: "",
         searchPlaceholder: "Rechercher",
         paginate: {
             next: '<i class="ion-chevron-right"></i>',
             previous: '<i class="ion-chevron-left"></i>'
         }
-    }
-});
-$(document).ready(function() {
-    $('.dataTables_filter input[type="search"]').css('width',"45%");
+    },
+    dom: '<"top"<"left-col"f>>rtp',
 });
