@@ -285,7 +285,7 @@ class ChefDepartementController extends Controller
 
     public function getNotes(Matiere $matiere)
     {
-        return view('notifications.Notifications', ['matiere' => $matiere]);
+        return view('chef.Notes', ['matiere' => $matiere]);
     }
 
     public function getListNotes(Request $request, Matiere $matiere)  //an ajax function to retrieve tha data
