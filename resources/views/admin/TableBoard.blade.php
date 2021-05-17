@@ -63,7 +63,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $CountProf }}</div>
-                                <div class="font-14 text-secondary weight-500">Professeurs sans emploi</div> <!--23-->
+                                <div class="font-14 text-secondary weight-500" >Professeurs sans emploi</div> <!--23-->
                             </div>
                             <div class="widget-icon">
                                 <div class="icon" ><i class="icon-copy fi-calendar" aria-hidden="true"></i>
@@ -78,7 +78,7 @@
             <div class="row pb-10">
                 <div class="col-md-8 mb-20">
                     <div class="card-box height-100-p pd-20">
-                        <div class="h5">Professeurs sans emploi : </div>
+                        <div class="h5" style="padding-bottom: 10px">Professeurs sans emploi : </div>
                         <table class="data-table table stripe hover nowrap">
                             <thead>
                                 <tr>
