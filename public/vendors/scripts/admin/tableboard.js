@@ -15,6 +15,8 @@ $(".data-table").DataTable({
     scrollCollapse: true,
     autoWidth: false,
     responsive: true,
+    pageLength : 5,
+    lengthChange: false,
     columnDefs: [
         {
             targets: "datatable-nosort",
@@ -31,11 +33,13 @@ $(".data-table").DataTable({
         infoEmpty: "Affichage de 0 à 0 sur 0 éléments",
         loadingRecords: "Chargement...",
         infoFiltered: "(filtrés depuis un total de _MAX_ éléments)",
-        search: "Rechercher:",
+        search: "",
         searchPlaceholder: "Rechercher",
         paginate: {
             next: '<i class="ion-chevron-right"></i>',
             previous: '<i class="ion-chevron-left"></i>'
         }
-    }
+    },
+    dom: '<"top"<"left-col"f>>rtp',
 });
+
