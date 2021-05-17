@@ -8,12 +8,12 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="title">
                             <a href="{{ route('evenement.create') }}"><mtext class="pull-right pt-3 fa-2x fa fa-plus"></mtext></a>
-                            <h4>Blog</h4>
+                            <h4>Evenements</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                                <li class="breadcrumb-item"><a href="index.html">Tableau de bord</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Evenements</li>
                             </ol>
                         </nav>
                     </div>

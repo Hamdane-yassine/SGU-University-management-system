@@ -35,7 +35,7 @@ class Evenement extends Model
 	];
 
 	protected $dates = [
-        'date'
+        'date'=>'Y-M-D'
 	];
 
 	protected $fillable = [
