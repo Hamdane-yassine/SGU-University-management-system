@@ -136,9 +136,9 @@ Route::get('/{nb}', function ($nb) {
             // return Auth::user()->impersonate(User::find(3));
             return view('test');
             break;
-        case 2:
-            return view('evenements.event-editor');
-            break;
+        // case 2:
+        //     return view('evenements.event-editor');
+        //     break;
         case 3:
             return redirect('/evenement/');
             break;
