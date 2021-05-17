@@ -7,6 +7,7 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="title">
+                            <a href="{{ route('evenement.create') }}"><mtext class="pull-right pt-3 fa-2x fa fa-plus"></mtext></a>
                             <h4>Blog</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">

@@ -118,8 +118,8 @@
 <!-- js -->
 @section('SpecialScripts')
 
-    <script src="vendors/scripts/process.js"></script>
-    <script src="vendors/scripts/layout-settings.js"></script>
+    <script src="{{ asset('vendors/scripts/process.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
     <script>
         // $(function(){
         //         $("input[type = 'submit']").click(function(){

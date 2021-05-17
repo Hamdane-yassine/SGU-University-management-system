@@ -21,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- CSS -->
+    @notifyCss
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
     <link rel="stylesheet" type="text/css"
@@ -269,7 +270,13 @@
                                     class="mtext">Rattrapage</span>
                             </a>
                         </li>
-
+                        <li>
+                            <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
+                                <span class="micon fa fa-globe"
+                                    style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                                    class="mtext">Evénements</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="{{ url('notifications') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-bell-o"
@@ -339,6 +346,13 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
+                                <span class="micon fa fa-globe"
+                                    style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                                    class="mtext">Evénements</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url('/notifications') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-bell-o"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
@@ -374,6 +388,13 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
+                                <span class="micon fa fa-globe"
+                                    style="padding-left: 15px; padding-bottom: 5px;"></span><span
+                                    class="mtext">Evénements</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url('/notifications') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-bell-o"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
@@ -384,7 +405,7 @@
                 </div>
             </div>
         @endif
-
+        @include('notify::messages')
     </div>
     <div class="mobile-menu-overlay"></div>
     @yield('content')
@@ -452,7 +473,15 @@
         }
         $('.icon-copy').click(hello());
 
+        // $('img').click(function (param) {
+
+        //     @php
+        //         notify()->success('Welcome to Laravel Notify ⚡', 'My custom title');
+        //     @endphp
+        // });
+
     </script>
+    @notifyJs
     @yield('SpecialScripts')
 </body>
 
