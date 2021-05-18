@@ -2,7 +2,7 @@
     <li>
         <a href="{{ url('/evenement/'.$evt->idEvenement) }}">{{ $evt->titre }}
             <img src="{{ asset('vendors/images/event.svg') }}" alt="event">
-            <p class="caption" style="word-break: break-all">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date }}</small></p>
+            <p class="caption" style="word-break: break-all">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date->format('Y M D') }}</small></p>
             {{-- {{ dd($evt->date->format('Y-M-D')) }} --}}
         </a>
     </li>
