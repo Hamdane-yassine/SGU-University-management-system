@@ -32,7 +32,7 @@ class PersonneFactory extends Factory
             'genre' => $this->faker->randomElement(['male','female']),
             'lieuNaissance' => $this->faker->city,
             'emailInstitutionne' =>  $this->faker->unique()->safeEmail,
-            'situationFamiliale'=> ['Célibataire', 'Divorcé','Marié']
+            'situationFamiliale'=> $this->faker->randomElement(['Célibataire', 'Divorcé','Marié'])
         ];
     }
 }
