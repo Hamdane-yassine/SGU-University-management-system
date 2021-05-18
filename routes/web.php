@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Evenement;
 use App\Models\User;
+use App\Notifications\NotifyEmailChanged;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -126,7 +127,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-
+    request()->user()->notify(new NotifyEmailChanged);
     return redirect('/profile/' . Auth::user()->getAuthIdentifier());
 })->middleware(['auth', 'signed'])->name('verification.verify');
 

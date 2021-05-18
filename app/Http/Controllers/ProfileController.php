@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Notifications\NotifyInfoChanged;
 use App\Notifications\NotifyPasswdChanged;
 use App\Rules\checkPasswd;
 use App\Rules\ChekEqualPasswd;
@@ -92,28 +93,33 @@ class ProfileController extends Controller
     public function updateInfo(Request $request, Profile $profile)
     {
         $request->validate([
-            'email'=>['email','unique:users'],
-            'adresse'=>'max:100',
-            'facbook'=>'max:100',
-            'dropbox'=>'max:100',
-            'tel'=>'max:20'
+            'email'=>'nullable|email|unique:users',
+            'adresse'=>'nullable|max:100',
+            'facbook'=>'nullable|max:100',
+            'dropbox'=>'nullable|max:100',
+            'tel'=>'nullable|max:20'
         ]);
-
-        if($request->has('email')){
+        // dd($request->all());
+        if($request->input('email')){
             $profile->user->email = $request->input('email');
             $profile->user->sendEmailVerificationNotification();
         }
-        if($request->has('facebook'))
-            $profile->facebook = $request->input('facebook');
-        if($request->has('dropbox'))
-            $profile->dropbox = $request->input('dropbox');
+        if($request->input('facebook'))
+        $profile->facebook = $request->input('facebook');
+        if($request->input('dropbox'))
+        $profile->dropbox = $request->input('dropbox');
+        if($request->input('adresse'))
+        $profile->user->personne->adressePersonnele = $request->input('adresse');
+        if($request->input('tel'))
+            $profile->user->personne->tel = $request->input('tel');
 
-        if($request->has('adresse'))
-            $profile->user->personne->adressePersonnele = $request->input('adresse');
-
-        $profile->save();
+        $profile->user->personne->save();
         $profile->user->save();
+        $profile->save();
         // $profile->user()->notify(new Ema)
+        if($request->input('facebook') || $request->input('dropbox')  || $request->input('adresse') || $request->input('tel'))
+            request()->user()->notify(new NotifyInfoChanged);
+
         return redirect()->back();
     }
 

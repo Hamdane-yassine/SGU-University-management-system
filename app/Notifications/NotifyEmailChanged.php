@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NotifyPasswdChanged extends Notification implements ShouldBroadcast
+class NotifyEmailChanged extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
@@ -57,10 +57,10 @@ class NotifyPasswdChanged extends Notification implements ShouldBroadcast
     {
         return [
             'image' => '/vendors/images/success.svg',
-            'from'=>'Changement de mot de passe',
+            'from'=>'Email modifié',
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
-            'brief'=>'Votre mot de passe a été changé avec succés',
+            'brief'=>'Votre email a été changé avec succés',
         ];
     }
 }

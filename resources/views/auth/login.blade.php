@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.Auth')
 @section('title','Login')
 @section('content')
 	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
@@ -16,7 +16,7 @@
 							@csrf
 							<div class="input-group custom">
 								<input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Email " name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-								
+
 								@error('email')
                                     <span class="invalid-feedback pl-2" role="alert">
                                         <strong style="font-family: 'Inter',sans-serif; font-weight: 400;">{{ $message }}</strong>
@@ -57,7 +57,7 @@
 								<div class="col-sm-12">
 									<div class="input-group mb-0">
 										<input class="btn btn-primary btn-lg btn-block" type="submit" value="Se connecter">
-									</div>									
+									</div>
 								</div>
 							</div>
 						</form>
