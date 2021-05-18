@@ -34,7 +34,7 @@ class MatiereFactory extends Factory
             },
             'nom'=> $this->faker->name(),
             'vh'=> $this->faker->randomNumber(),
-            'coeff'=> $this->faker->randomFloat,
+            'coeff'=> $this->faker->randomNumber(1),
         ];
     }
 }
