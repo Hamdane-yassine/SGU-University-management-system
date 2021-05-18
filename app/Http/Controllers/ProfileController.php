@@ -99,22 +99,25 @@ class ProfileController extends Controller
             'dropbox'=>'nullable|max:100',
             'tel'=>'nullable|max:20'
         ]);
-
-        if($request->has('email')){
+        // dd($request->all());
+        if($request->input('email')){
             $profile->user->email = $request->input('email');
             $profile->user->sendEmailVerificationNotification();
         }
-        if($request->has('facebook'))
-            $profile->facebook = $request->input('facebook');
-        if($request->has('dropbox'))
-            $profile->dropbox = $request->input('dropbox');
-        if($request->has('adresse'))
-            $profile->user->personne->adressePersonnele = $request->input('adresse');
+        if($request->input('facebook'))
+        $profile->facebook = $request->input('facebook');
+        if($request->input('dropbox'))
+        $profile->dropbox = $request->input('dropbox');
+        if($request->input('adresse'))
+        $profile->user->personne->adressePersonnele = $request->input('adresse');
+        if($request->input('tel'))
+            $profile->user->personne->tel = $request->input('tel');
 
-        $profile->save();
+        $profile->user->personne->save();
         $profile->user->save();
+        $profile->save();
         // $profile->user()->notify(new Ema)
-        if($request->input('facebook') || $request->has('dropbox')  || $request->has('adresse'))
+        if($request->input('facebook') || $request->input('dropbox')  || $request->input('adresse') || $request->input('tel'))
             request()->user()->notify(new NotifyInfoChanged);
 
         return redirect()->back();
