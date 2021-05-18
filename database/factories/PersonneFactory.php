@@ -29,6 +29,7 @@ class PersonneFactory extends Factory
             'tel' => $this->faker->unique->phoneNumber,
             'dateNaissance' =>  $this->faker->date(),
             'nationalite' => $this->faker->country,
+            'genre' => $this->faker->randomElemet(['male','female']),
             'lieuNaissance' => $this->faker->city,
             'emailInstitutionne' =>  $this->faker->unique()->safeEmail,
         ];
