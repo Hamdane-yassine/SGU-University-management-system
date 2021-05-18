@@ -559,4 +559,10 @@ class ChefDepartementController extends Controller
 
         return redirect('/chef/rattrapages');
     }
+
+    // public function getNotesEtudiant(Etudiant $etudiant)
+    // {
+    //     $etudiant->filiere->semestres[0]->modules[0]->matieres[0]->note;
+    //     $etudiant->notes;
+    // }
 }

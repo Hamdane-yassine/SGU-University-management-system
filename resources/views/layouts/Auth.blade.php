@@ -6,9 +6,7 @@
 	<title>@yield('title')</title>
 
 	<!-- Site favicon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('vendors/images/apple-touch-icon.png') }}">
-	<link rel="icon" type="image/png" sizes="32x32" href=" {{ asset('vendors/images/favicon-32x32.png') }}">
-	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('vendors/images/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('vendors/images/favicon.png') }}">
 
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,7 +33,7 @@
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="{{ route('login') }}">
-					<img src="{{ asset('vendors/images/deskapp-logo.svg') }}" alt="">
+					<img src="{{ asset('vendors/images/logoblack.svg') }}" alt="">
 				</a>
 			</div>
 		</div>
