@@ -42,6 +42,16 @@ var table1 = $(".data-table-export").DataTable({
             }
         },
         {
+            data: "noteRatt",
+            render: function(data, type, full, meta) {
+                if (data == null) {
+                    return "<span>&nbsp;---</span>";
+                } else {
+                    return '<span  style="padding-left: 15px;">' + data + '</span>';
+                }
+            }
+        },
+        {
             data: "idNote",
             render: function(data, type, row) {
                 if(row.etat=="fermé")
@@ -122,6 +132,7 @@ function getnote(idNote, idEtudiant) {
             success: function(response) {
                 document.getElementById("control").value = "";
                 document.getElementById("exam").value = "";
+                document.getElementById("ratt").value = "";
                 document.getElementById("idNote").value = null;
                 document.getElementById("coefcontrol").value = 25;
                 document.getElementById("coefexam").value = 75;
@@ -137,6 +148,7 @@ function getnote(idNote, idEtudiant) {
             success: function(response) {
                 document.getElementById("control").value = response[0].controle;
                 document.getElementById("exam").value = response[0].exam;
+                document.getElementById('ratt').value= response[0].noteRatt;
                 document.getElementById("idNote").value = response[0].idNote;
                 document.getElementById("coefcontrol").value =
                     response[0].Coefcontrole;

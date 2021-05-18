@@ -13,7 +13,9 @@
                         <tr>
                             <th>N°</th>
                             <th>Nom</th>
+                            <th>Raccourcie</th>
                             <th>Niveau</th>
+                            <th>Diplome</th>
                             <th>Nombre Etudiants</th>
                             <th>Action</th>
                         </tr>
@@ -22,10 +24,6 @@
                     </tbody>
                 </table>
             </div>
-
-
-
-
             <div class="pd-20 mb-20 card-box">
                 <div class="wizard-content">
                     <div>
@@ -273,6 +271,10 @@
                                     @csrf
                                     <label>Nom : </label>
                                     <input type="text" class="form-control" name="nomFiliere" placeholder="nom du filiere"><br>
+                                    <label>Diplome : </label>
+                                    <input type="text" class="form-control" name="dip" placeholder="nom du filiere"><br>
+                                    <label>Raccourcie : </label>
+                                    <input type="text" class="form-control" name="rac" placeholder="nom du filiere"><br>
                                     <label>Niveau : </label>
                                     <input type="number" class="form-control" name="niveau" placeholder="niveau">
                                     <input type="hidden" class="form-control" name="idFiliere" id="hiddenIdFiliere">

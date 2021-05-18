@@ -18,6 +18,8 @@ class CreateFiliereTable extends Migration {
 			$table->id('idFiliere');
 			$table->bigInteger('idDepartement')->unsigned();
 			$table->string('nom', 254);
+			$table->string('shortcut', 45);
+			$table->string('diplome', 254);
 			$table->integer('niveau');
             $table->bigInteger('idEmploi')->unsigned()->nullable();
 		});

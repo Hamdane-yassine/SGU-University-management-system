@@ -303,7 +303,7 @@ class ChefDepartementController extends Controller
                 $q->on('note.idEtudiant', '=', 'etudiant.idEtudiant')
                     ->where('note.idMatiere', '=', "$matiere->idMatiere");
             })
-            ->select('apogee', 'personne.nom', 'insertion_notes as etat', 'personne.prenom', 'cne', 'controle', 'exam', 'noteGeneral', 'idNote', 'etudiant.idEtudiant')
+            ->select('apogee', 'personne.nom', 'insertion_notes as etat', 'personne.prenom', 'cne', 'controle', 'exam','noteRatt','noteGeneral', 'idNote', 'etudiant.idEtudiant')
             ->get();
         if ($request->ajax()) {
             return Datatables::of($notes)
@@ -564,9 +564,11 @@ class ChefDepartementController extends Controller
         return redirect('/chef/rattrapages');
     }
 
-    // public function getNotesEtudiant(Etudiant $etudiant)
-    // {
-    //     $etudiant->filiere->semestres[0]->modules[0]->matieres[0]->note;
-    //     $etudiant->notes;
-    // }
+    public function getResulatEtudiant(Etudiant $etudiant)
+    {
+       $filiere = $etudiant->filiere;
+
+        return view('chef.resultat',['filiere' => $filiere,'etudiant'=>$etudiant]);
+
+    }
 }

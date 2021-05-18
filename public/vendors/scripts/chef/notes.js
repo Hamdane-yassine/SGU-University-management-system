@@ -32,6 +32,16 @@ var table1 = $(".data-table-export").DataTable({
             }
         },
         {
+            data: "noteRatt",
+            render: function(data, type, full, meta) {
+                if (data == null) {
+                    return "<span>&nbsp;---</span>";
+                } else {
+                    return '<span  style="padding-left: 15px;">' + data + '</span>';
+                }
+            }
+        },
+        {
             data: "noteGeneral",
             render: function(data, type, full, meta) {
                 if (data == null) {

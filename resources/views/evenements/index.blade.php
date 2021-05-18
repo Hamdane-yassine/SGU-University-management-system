@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Evenements')
 @section('content')
 <div class="main-container">
     <div class="pd-ltr-20 height-100-p xs-pd-20-10">
