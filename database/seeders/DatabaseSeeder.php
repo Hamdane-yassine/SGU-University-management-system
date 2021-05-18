@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         // Truncate all tables, except migrations
         // +++++++++++ START +++++++++++++
-        // Schema::disableForeignKeyConstraints();
+        Schema::disableForeignKeyConstraints();
         // $tables = DB::select('SHOW TABLES');
         // foreach ($tables as $table) {
         //     if ($table->Tables_in_pfe !== 'migrations')
