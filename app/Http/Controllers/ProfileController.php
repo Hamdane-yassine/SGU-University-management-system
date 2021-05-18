@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Notifications\NotifyInfoChanged;
 use App\Notifications\NotifyPasswdChanged;
 use App\Rules\checkPasswd;
 use App\Rules\ChekEqualPasswd;
@@ -107,13 +108,15 @@ class ProfileController extends Controller
             $profile->facebook = $request->input('facebook');
         if($request->has('dropbox'))
             $profile->dropbox = $request->input('dropbox');
-
         if($request->has('adresse'))
             $profile->user->personne->adressePersonnele = $request->input('adresse');
 
         $profile->save();
         $profile->user->save();
         // $profile->user()->notify(new Ema)
+        if($request->input('facebook') || $request->has('dropbox')  || $request->has('adresse'))
+            request()->user()->notify(new NotifyInfoChanged);
+
         return redirect()->back();
     }
 
