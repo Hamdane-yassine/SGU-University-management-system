@@ -7,9 +7,11 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="title">
+                            @can('create', App\Models\Evenement::class)
                             <a href="{{ route('evenement.create') }}">
                                 <mtext class="pull-right pt-3 fa-2x fa fa-plus"></mtext>
                             </a>
+                            @endcan
                             <h4>Evenements</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
@@ -49,7 +51,7 @@
                                                             @endcannot
                                                             @can('update', $evenement)
                                                             <div class="dropdown mt-10 justify-between">
-                                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle text-danger" href="#" role="button" data-toggle="dropdown">
                                                                     <i class="dw dw-more"></i>
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">

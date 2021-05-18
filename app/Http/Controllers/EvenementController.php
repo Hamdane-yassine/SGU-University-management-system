@@ -39,6 +39,7 @@ class EvenementController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',App\Models\Evenement::class);
         return view('evenements.event-editor');
     }
 
@@ -50,6 +51,7 @@ class EvenementController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create',App\Models\Evenement::class);
         // $files = $request->file('attachments');
         $files = $request->file('attachments');
         $headingImg = '';

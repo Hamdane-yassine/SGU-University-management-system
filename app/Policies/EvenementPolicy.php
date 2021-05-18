@@ -27,4 +27,10 @@ class EvenementPolicy
         return $user->hasRole('master') || $user->hasRole('chefdep') ||  auth()->user()->id == $evenement->chefdep->professeur->user->id;
         // return true;
     }
+    public function create(User $user)
+    {
+        return $user->hasRole('master') || $user->hasRole('chefdep');
+    }
+
+
 }
