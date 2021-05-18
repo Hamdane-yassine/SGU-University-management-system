@@ -13,6 +13,7 @@ class UserController extends Controller
 
     function __construct(User $user)
     {
+        $this->middleware('auth');
         $this->user = $user;
     }
     /**
@@ -96,6 +97,14 @@ class UserController extends Controller
         if($request->idNotif)
             return redirect('/notifications#notif-'.$request->idNotif);
         return view('notifications.Notifications');
+    }
+
+    public function markAllAsRead(User $user)
+    {
+        foreach ($user->UnreadNotifications as $notification) {
+            $notification->markAsRead();
+        }
+        return redirect()->back();
     }
 
     public function impersonateGet()

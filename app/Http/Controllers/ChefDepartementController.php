@@ -29,6 +29,10 @@ use Illuminate\Support\Facades\DB;
 
 class ChefDepartementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['chefdep']);
+    }
     public function index()
     {
         //return list of profs in this department

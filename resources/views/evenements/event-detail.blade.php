@@ -52,7 +52,7 @@
                                             <li>
                                                 <h4><a href="{{ url('/evenement/'.$evt->idEvenement) }}">{{ $evt->titre }}</a></h4>
                                                 <p class="caption break-all">{{ Str::substr($evt->resume, 0, 50) }}</p>
-                                                <span>{{ $evt->date }}</span>
+                                                <span>{{ $evt->date->format('Y M D') }}</span>
                                             </li>
                                         </ul>
                                     </div>

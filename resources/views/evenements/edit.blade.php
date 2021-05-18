@@ -48,7 +48,7 @@
                                        placeholder="Date d'evenement"
                                        id="date"
                                        name="date"
-                                       value="{{ old('date') }}" required>
+                                       value="{{ $evenement->date }}" required>
                         </div>
                         @error('date')
                             <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label>Titre</label>
                             <input id="titre" class="form-control @error('titre')  is-invalid @enderror" type="text"
-                                name="titre" value="{{ old('titre') }}" placeholder="Titre" required>
+                                name="titre" value="{{ $evenement->titre }}" placeholder="Titre" required>
                             @error('titre')
                                 <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
                                 </span>
@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label>Resumé</label>
                             <textarea id="resume" class="form-control @error('resume') is-invalid @enderror " name="resume"
-                                form="evtform" required>{{ old('resume') }}</textarea>
+                                form="evtform" required>{{ $evenement->resume }}</textarea>
                             @error('resume')
                                 <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
                                 </span>
@@ -76,10 +76,10 @@
                         <div class="form-group">
                             <div class="html-editor mb-30">
                                 <h4 class="h4 text-blue">Corps</h4>
-                                <p>Ajouter le corp d'évenement</p>
+                                <p>Ajouter le corps d'évenement</p>
                                 <textarea id="corps" name="corps"
                                     class="textarea_editor form-control border-radius-0 @error('corps') is-invalid @enderror"
-                                    form="evtform" required>{{ old('corps') }}</textarea>
+                                    form="evtform" required>{{ $evenement->html }}</textarea>
                             </div>
                             @error('htmlEditor')
                                 <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
@@ -89,8 +89,7 @@
                         <div class="form-group">
                             <label>attachments</label>
                             <div class="custom-file">
-                                <label class="custom-file-label" for="attachments">ajouter des fichiers (max 3 avec image
-                                    headingImg.*)</label>
+                                <label class="custom-file-label" for="attachments">ajouter des fichiers (max 3 avec image headingImg.*)</label>
                                 <input id="attachments" name="attachments[]" type="file"
                                     class="custom-file-input @error('attachments') is-invalid @enderror" multiple>
                             </div>

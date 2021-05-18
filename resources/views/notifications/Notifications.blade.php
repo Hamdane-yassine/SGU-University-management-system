@@ -6,7 +6,7 @@
             <div class="min-height-200px">
                 <div class="bg-white border-radius-4 box-shadow mb-30">
                     <div class="pt-20 pl-20 pb-0">
-                        <h4 class="h4">Notifications</h4>
+                        <h4 class="h4">Notifications<a class="pull-right pr-10 h6" href="{{ route('notifications.markAllAsRead',auth()->user()) }}">Marquer tout comme lu</a> </h4>
                     </div>
                     <hr>
                     <div class="row no-gutters no-footer">

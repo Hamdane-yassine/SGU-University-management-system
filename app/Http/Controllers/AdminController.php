@@ -31,6 +31,11 @@ use App\Notifications\NotifyImportSuccess;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['admin']);
+    }
     public function index()
     {
         $profs = Professeur::join('users', 'users.id', '=', 'professeur.idUtilisateur')
