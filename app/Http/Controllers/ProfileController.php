@@ -17,6 +17,12 @@ use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -113,6 +119,7 @@ class ProfileController extends Controller
 
     public function updatePasswd(Request $request)
     {
+        $this->authorize('update', $request->user()->profile);
         // $request->validate([
         //     'current'=>['required', new checkPasswd($request->user())],
         //     'passwd'=>['required', new checkPasswd($request->user())],

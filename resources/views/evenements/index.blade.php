@@ -7,13 +7,17 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="title">
-                            <a href="{{ route('evenement.create') }}"><mtext class="pull-right pt-3 fa-2x fa fa-plus"></mtext></a>
-                            <h4>Blog</h4>
+                            @can('create', App\Models\Evenement::class)
+                            <a href="{{ route('evenement.create') }}">
+                                <mtext class="pull-right pt-3 fa-2x fa fa-plus"></mtext>
+                            </a>
+                            @endcan
+                            <h4>Evenements</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                                <li class="breadcrumb-item"><a href="index.html">Tableau de bord</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Evenements</li>
                             </ol>
                         </nav>
                     </div>
@@ -26,29 +30,43 @@
                             <div class="blog-list">
                                 <ul>
                                     @foreach ($evenements as $evenement )
-                                        <li>
-                                            <div class="row no-gutters">
-                                                <div class="col-lg-4 col-md-12 col-sm-12">
-                                                    <div class="blog-img">
-                                                        @if($evenement->headingImg != null)
-                                                            <img src="{{ url('/storage/'.$evenement->headingImg) }}" alt="" class="bg_img">
-                                                        @else <img src="{{ asset('vendors/images/event-default.jpg') }}" alt="" class="bg_img">
-                                                        @endif
-                                                    </div>
+                                    <li>
+                                        <div class="row no-gutters">
+                                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                                <div class="blog-img">
+                                                    @if($evenement->headingImg != null)
+                                                    <img src="{{ url('/storage/'.$evenement->headingImg) }}" alt="" class="bg_img">
+                                                    @else <img src="{{ asset('vendors/images/event-default.jpg') }}" alt="" class="bg_img">
+                                                    @endif
                                                 </div>
-                                                <div class="col-lg-8 col-md-12 col-sm-12">
-                                                    <div class="blog-caption">
-                                                        <h4><a href="{{ url('/evenement/' . $evenement->idEvenement ) }}">{{ $evenement->titre }}</a></h4>
-                                                        <div class="blog-by" style="word-break: break-all">
-                                                            <p>{{ $evenement->resume }}</p>
-                                                                <div class="pt-10">
-                                                                    <a href="{{ url('/evenement/' . $evenement->idEvenement ) }}" class="btn btn-outline-primary">Détails</a>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12 col-sm-12">
+                                                <div class="blog-caption">
+                                                    <h4><a href="{{ url('/evenement/' . $evenement->idEvenement ) }}">{{ $evenement->titre }}</a></h4>
+                                                    <div class="blog-by" style="word-break: break-all">
+                                                        <p>{{ $evenement->resume }}</p>
+                                                        <div class="pt-10">
+                                                            @cannot('update', $evenement)
+                                                            <a href="{{ url('/evenement/' . $evenement->idEvenement ) }}" class="btn btn-outline-primary">Détails</a>
+                                                            @endcannot
+                                                            @can('update', $evenement)
+                                                            <div class="dropdown mt-10 justify-between">
+                                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle text-danger" href="#" role="button" data-toggle="dropdown">
+                                                                    <i class="dw dw-more"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                                    <a class="dropdown-item" href="{{ route('evenement.show',$evenement) }}"><i class="dw dw-eye"></i> View</a>
+                                                                    <a class="dropdown-item" href="{{ route('evenement.edit',$evenement) }}"><i class="dw dw-edit2"></i> Edit</a>
+                                                                    <a class="dropdown-item" href="{{ route('evenement.delete',$evenement) }}"><i class="dw dw-delete-3"></i> Delete</a>
                                                                 </div>
                                                             </div>
+                                                            @endcan
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </div>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -66,7 +84,7 @@
                                         @foreach (\App\Models\Evenement::all()->take(6) as $evt)
                                         <li>
                                             <a href="{{ url('/evenement/'.$evt->idEvenement) }}">{{ $evt->titre }}
-                                                <p class="caption">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date }}</small></p>
+                                                <p class="caption" style="word-break:break-all">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date }}</small></p>
                                             </a>
                                         </li>
                                         @endforeach

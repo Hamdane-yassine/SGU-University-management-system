@@ -105,7 +105,7 @@
                 </div>
                 <div class="col-md-4 mb-20">
                     <div class="card-box height-100-p pd-20">
-                        <div class="h5 mb-md-0">Notifications</div>
+                        <div class="h5 mb-md-0">Evenements</div>
                         <hr>
                         <!-- <div class="text-center text-secondary">Aucun notification</div> -->
                         <div class="notification-list mx-h-350 customscroll">

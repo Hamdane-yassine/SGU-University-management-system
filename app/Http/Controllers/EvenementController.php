@@ -16,6 +16,11 @@ use function PHPSTORM_META\map;
 
 class EvenementController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,6 +39,7 @@ class EvenementController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',App\Models\Evenement::class);
         return view('evenements.event-editor');
     }
 
@@ -45,6 +51,7 @@ class EvenementController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create',App\Models\Evenement::class);
         // $files = $request->file('attachments');
         $files = $request->file('attachments');
         $headingImg = '';
@@ -58,7 +65,7 @@ class EvenementController extends Controller
             ['attachments.max'=>'vous avez uploader plus que 3 fichiers']
         );
         $evenement = Evenement::create([
-            'ID_chef'=>auth()->user()->getAuthIdentifier(),
+            'ID_chef'=>auth()->user()->professeur->chefdep->ID_chef,
             'titre'=>$request->input('titre'),
             'date'=>$request->input('date'),
             'html'=>$request->input('corps'),
@@ -123,7 +130,8 @@ class EvenementController extends Controller
      */
     public function edit(Evenement $evenement)
     {
-        //
+        $this->authorize('update', $evenement);
+        return view('evenements.edit',compact('evenement'));
     }
 
     /**
@@ -135,7 +143,49 @@ class EvenementController extends Controller
      */
     public function update(Request $request, Evenement $evenement)
     {
-        //
+        $this->authorize('update', $request->user());
+        $files = $request->file('attachments');
+        $request->validate([
+            'date'=>'date|required',
+            'resume'=>'required',
+            'corps'=>'required',
+            'attachments.*'=>'file|mimes:png,jpg,pdf|max:20000',
+            'attachments'=>'max:3',
+            ],
+            ['attachments.max'=>'vous avez uploader plus que 3 fichiers']
+        );
+
+        $evenement = Evenement::find($evenement->idEvenement);
+        $evenement->titre = $request->input('titre');
+        $evenement->date = $request->input('date');
+        $evenement->html = $request->input('corps');
+        $evenement->resume = $request->input('resume');
+
+        // dd($request->file('attachments'));
+        if(is_array($request->file('attachments'))){
+            if(count($request->file('attachments')) > 1){
+                foreach ($files as $file) {
+                    // $filePaths .= array_push($file->store('attachments/'.$evenement->idEvenement));
+                    if(!Storage::exists('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName())){
+                        if(preg_match('/(headingImg)/',$file->getClientOriginalName()))
+                            $evenement->headingImg = $file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName());
+                        else
+                            array_push($evenement->attachments, $file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
+                    }
+                }
+            }
+            else if(count($request->file('attachments')) == 1){
+                if(!Storage::exists('evenements/'.$evenement->idEvenement.'/attachements',$files[0]->getClientOriginalName())){
+                    if(preg_match('/(headingImg)/',$request->file('attachments')[0]->getClientOriginalName()))
+                        $evenement->headingImg = $request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName());
+                    else
+                        $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
+                }
+            }
+        }
+        $evenement->save();
+        // $files->store('attachments/'.$evenement->idEvenement);
+        return redirect('/evenement/'.$evenement->idEvenement);
     }
 
     /**
@@ -169,5 +219,12 @@ class EvenementController extends Controller
         }
 
         return response()->download(public_path($fileName));
+    }
+
+    public function delete(Evenement $evenement)
+    {
+        $this->authorize('update', request()->user());
+        $evenement->delete();
+        return redirect()->route('evenement.index')->with('success','model successfuly deletecd ');
     }
 }

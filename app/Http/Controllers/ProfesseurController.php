@@ -24,6 +24,11 @@ use App\Models\User;
 
 class ProfesseurController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['prof']);
+    }
+
     public function index()   //returns the page without the absence section (a non ajax request)
     {
         $filieres = array();

@@ -32,6 +32,12 @@ use Illuminate\Support\Facades\Log;
 
 class MasterController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['master']);
+    }
+
     public function indexFilieres($idDepartement)
     {
         //get list of filieres in that departement

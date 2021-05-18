@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Evenement;
+use App\Models\Profile;
+use App\Policies\EvenementPolicy;
+use App\Policies\ProfilePolicy;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -16,7 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Profile::class => ProfilePolicy::class,
+        Evenement::class => EvenementPolicy::class,
     ];
 
     /**

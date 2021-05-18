@@ -100,11 +100,16 @@ Route::middleware(['auth','chefdep'])->group(function () {
 
 
 Route::get('notifications', [UserController::class, 'notifs']);
+Route::get('notifications/markAllAsRead/{user}', [UserController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
+
 
 Route::prefix('evenement')->group(function () {
     Route::get('/', [EvenementController::class, 'index'])->name('evenement.index');
     Route::get('create', [EvenementController::class, 'create'])->name('evenement.create');
     Route::post('store', [EvenementController::class, 'store'])->name('evenement.store');
+    Route::post('update/{evenement}', [EvenementController::class, 'update'])->name('evenement.update');
+    Route::get('edit/{evenement}', [EvenementController::class, 'edit'])->name('evenement.edit');
+    Route::get('delete/{evenement}', [EvenementController::class, 'delete'])->name('evenement.delete');
     Route::get('{evenement}', [EvenementController::class, 'show'])->name('evenement.show');
     Route::get('download/{evenement}', [EvenementController::class, 'downloadAttachements'])->name('evenement.download');
 });
