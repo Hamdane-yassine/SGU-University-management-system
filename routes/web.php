@@ -97,6 +97,7 @@ Route::middleware(['auth','chefdep'])->group(function () {
     Route::get('/chef/rattrapages', [ChefDepartementController::class, 'RattrapagesIndex']);
     Route::post('/chef/rattrapages/valider/{idAbsence}', [ChefDepartementController::class, 'ValiderRatt'])->name('ValiderRatt');
     Route::post('/chef/rattrapages/annuler/{idAbsence}', [ChefDepartementController::class, 'AnnulerRatt'])->name('AnnulerRatt');
+    Route::get('/chef/resultat/{etudiant}', [ChefDepartementController::class, 'getResulatEtudiant']);
 });
 
 

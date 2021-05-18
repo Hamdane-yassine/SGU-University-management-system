@@ -204,7 +204,7 @@ class ProfesseurController extends Controller
                 $q->on('note.idEtudiant', '=', 'etudiant.idEtudiant')
                     ->where('note.idMatiere', '=', "$matiere->idMatiere");
             })
-            ->select('apogee', 'personne.nom', 'insertion_notes as etat', 'personne.prenom', 'cne', 'controle', 'exam', 'noteGeneral', 'idNote', 'etudiant.idEtudiant')
+            ->select('apogee', 'personne.nom', 'insertion_notes as etat', 'personne.prenom', 'cne', 'controle', 'exam', 'noteGeneral','noteRatt', 'idNote', 'etudiant.idEtudiant')
             ->get();
         if ($request->ajax()) {
             return Datatables::of($notes)
@@ -246,7 +246,7 @@ class ProfesseurController extends Controller
     {
 
         $note = Note::where('idNote', $note->idNote)  //first inint a user id
-            ->select('idNote', 'controle', 'exam', 'Coefcontrole', 'Coefexam')
+            ->select('idNote', 'controle', 'exam','noteRatt','Coefcontrole', 'Coefexam')
             ->get();
 
         if ($request->ajax()) {
@@ -267,11 +267,16 @@ class ProfesseurController extends Controller
         $coefcontrol = request('coefcontrol');
         $coefexam = request('coefexam');
         $idNote = request('idNote');
+        $ratt=request('ratt');
         $notegeneral = (($control * ($coefcontrol / 100)) + ($exam * ($coefexam / 100)));
         if ($idNote != null) {
             $note = Note::find($idNote);
             $note->controle = $control;
             $note->exam = $exam;
+            if(!empty($ratt))
+            {
+                $note->noteRatt=$ratt;
+            }
             $note->noteGeneral = $notegeneral;
             $note->Coefcontrole = $coefcontrol;
             $note->Coefexam = $coefexam;
@@ -282,6 +287,10 @@ class ProfesseurController extends Controller
             $idMatiere = request('idMatiere');
             $note->controle = $control;
             $note->exam = $exam;
+            if(!empty($ratt))
+            {
+                $note->noteRatt=$ratt;
+            }
             $note->noteGeneral = $notegeneral;
             $note->Coefcontrole = $coefcontrol;
             $note->Coefexam = $coefexam;

@@ -35,7 +35,7 @@
                                         $NumMod = 0;
                                     @endphp
                                     <tr>
-                                        <td scope="row" rowspan="{{ $rowspanval }}" class="text-center">{{ $semestre->nom }}</td>
+                                        <td scope="row" rowspan="{{ $rowspanval }}" class="text-center">Semestre {{ $semestre->num }}</td>
                                     </tr>
                                     @foreach ( $semestre->modules as $module)
                                         @php

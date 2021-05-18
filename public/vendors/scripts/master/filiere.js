@@ -8,8 +8,15 @@ $(".data-table").DataTable({
     columns: [
         { data: "idFiliere", name: "idFiliere" },
         { data: "nomFiliere", name: "nomFiliere" },
+        { data: "shortcut", name: "shortcut" },
         { data: "niveau", name: "niveau" },
-        { data: "CountEtudiant", name: "CountEtudiant" },
+        { data: "diplome", name: "diplome" },
+        { 
+            data: "CountEtudiant",
+            render: function(data, type, full, meta) {
+                    return '<span  style="padding-left: 55px;">' + data + '</span>';
+            }
+        },
         { data: "action", name: "action" }
     ],
     scrollCollapse: true,
@@ -61,8 +68,8 @@ jQuery(document).ready(function() {
                         $('select[name="semestre1"]').append(
                             '<option value="' +
                                 value.id +
-                                '">' +
-                                value.name +
+                                '">'+'S'+
+                                value.num+
                                 "</option>"
                         );
                     });
@@ -93,8 +100,8 @@ jQuery(document).ready(function() {
                         $('select[name="semestre2"]').append(
                             '<option value="' +
                                 value.id +
-                                '">' +
-                                value.name +
+                                '">'+'S'+
+                                value.num+
                                 "</option>"
                         );
                     });
@@ -153,8 +160,8 @@ jQuery(document).ready(function() {
                         $('select[name="semestre3"]').append(
                             '<option value="' +
                                 value.id +
-                                '">' +
-                                value.name +
+                                '">'+'S'+
+                                value.num+
                                 "</option>"
                         );
                     });

@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int|null $idEmploi
  * @property int $idFiliere
  * @property string|null $nom
+ * @property string|null $shortcut
+ * @property string|null $diplome
  * @property int|null $niveau
  *
  * @property Departement|null $departement
@@ -41,6 +43,8 @@ class Filiere extends Model
 	protected $fillable = [
 		'idDepartement',
 		'nom',
+		'shortcut',
+		'diplome',
 		'niveau',
         'idEmploi'
 	];

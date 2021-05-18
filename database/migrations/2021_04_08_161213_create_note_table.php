@@ -21,6 +21,7 @@ class CreateNoteTable extends Migration {
 			$table->float('controle', 10, 0)->nullable();
 			$table->float('exam', 10, 0)->nullable();
 			$table->float('noteGeneral', 10, 0)->nullable();
+			$table->float('noteRatt', 10, 0)->nullable();
 			$table->bigInteger('Coefcontrole')->nullable()->default('25');
 			$table->bigInteger('Coefexam')->nullable()->default('75');
 		});

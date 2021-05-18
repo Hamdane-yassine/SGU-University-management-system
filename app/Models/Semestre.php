@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int|null $idFiliere
  * @property int|null $idModule
  * @property int|null $idAnnee
- * @property string|null $nom
+ * @property int|null $num
  *
  * @property Filiere|null $filiere
  * @property Anneescolaire|null $anneescolaire
@@ -37,7 +37,7 @@ class Semestre extends Model
 
 	protected $fillable = [
 		'idFiliere',
-		'nom',
+		'num',
 		'Annee_universaitaire'
 	];
 
