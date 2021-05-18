@@ -29,7 +29,7 @@ class PersonneFactory extends Factory
             'tel' => $this->faker->unique->phoneNumber,
             'dateNaissance' =>  $this->faker->date(),
             'nationalite' => $this->faker->country,
-            'genre' => $this->faker->randomElement(['male','female']),
+            'genre' => $this->faker->randomElement(['Masculin', 'Féminin']),
             'lieuNaissance' => $this->faker->city,
             'emailInstitutionne' =>  $this->faker->unique()->safeEmail,
             'situationFamiliale'=> $this->faker->randomElement(['Célibataire', 'Divorcé','Marié'])
