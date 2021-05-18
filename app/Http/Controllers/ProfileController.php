@@ -92,11 +92,11 @@ class ProfileController extends Controller
     public function updateInfo(Request $request, Profile $profile)
     {
         $request->validate([
-            'email'=>['email','unique:users'],
-            'adresse'=>'max:100',
-            'facbook'=>'max:100',
-            'dropbox'=>'max:100',
-            'tel'=>'max:20'
+            'email'=>'nullable|email|unique:users',
+            'adresse'=>'nullable|max:100',
+            'facbook'=>'nullable|max:100',
+            'dropbox'=>'nullable|max:100',
+            'tel'=>'nullable|max:20'
         ]);
 
         if($request->has('email')){
