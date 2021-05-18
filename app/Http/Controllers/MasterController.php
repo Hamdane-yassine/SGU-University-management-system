@@ -244,7 +244,7 @@ class MasterController extends Controller
    {
       echo 'idFiliere to update : ' . $request->idFiliere . ' nom: ' . $request->nomFiliere . ' niv : ' . $request->niveau;
 
-      if (is_null($request->idFiliere) || (is_null($request->niveau) && is_null($request->nomFiliere))) return view('master.filiere');
+      if (is_null($request->idFiliere) || (is_null($request->niveau) && is_null($request->nomFiliere))) return redirect('/master/filiere/' . $idDepartement);
 
       $filiere = Filiere::find($request->idFiliere);
       if (!is_null($request->nomFiliere)) $filiere->nom = $request->nomFiliere;
