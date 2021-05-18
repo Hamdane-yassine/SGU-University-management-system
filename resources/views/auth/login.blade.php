@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.Auth')
 @section('title','Login')
 @section('content')
 	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
