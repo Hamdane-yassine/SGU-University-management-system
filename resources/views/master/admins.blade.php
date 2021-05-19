@@ -6,7 +6,7 @@
             <div class="min-height-200px">
                 <div class="card-box pb-10">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">Table des professeurs</h4>
+                        <h4 class="text-blue h4">Table des Admins</h4>
                     </div>
                     <div class="pb-20">
                         <table class="table hover multiple-select-row data-table-export nowrap">
