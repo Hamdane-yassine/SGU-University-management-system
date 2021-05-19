@@ -41,7 +41,7 @@
                             <p class="mb-30">remplire les champs nécessaires</p>
                         </div>
                     </div>
-                    <form id="evtform" method="POST" action="/evenement/store" enctype="multipart/form-data">
+                    <form id="evtform" method="POST" action="{{ route('evenement.update',$evenement) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group ">
                                 <label >Date d'événement</label>

@@ -31,6 +31,7 @@ class EvenementObserver
         // $id = Auth::user()->id;
         $id = Auth::user()->id;
         $current = User::find($id);
+        // to change later
         $users = User::where('id','<>',$id)->limit(10)->get();
         $evt->saveQuietly();
         if($users->count()>0)
