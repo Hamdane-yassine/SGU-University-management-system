@@ -18,6 +18,7 @@ use App\Models\Module;
 use App\Models\Personne;
 use App\Models\Prof_departement;
 use App\Models\Professeur;
+use App\Models\User;
 use App\Notifications\AnunulerRattNotify;
 use App\Notifications\NotifyRattAccepte;
 use App\Notifications\NotifyRattAnnule;
@@ -564,6 +565,14 @@ class ChefDepartementController extends Controller
         return redirect('/chef/rattrapages');
     }
 
+    public function impersonate(Request $request)
+    {
+        if (app('impersonate')->isImpersonating())
+            return redirect()->route('impersonate.leave');
+        else {
+            return redirect()->route('impersonate', $request->user()->professeur->chefdep->ID_chef);
+        }
+    }
     public function getResulatEtudiant(Etudiant $etudiant)
     {
        $filiere = $etudiant->filiere;
