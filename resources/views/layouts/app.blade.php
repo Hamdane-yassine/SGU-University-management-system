@@ -68,16 +68,15 @@
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                         <a class="dropdown-item" href="{{ url('profile/' . Auth::user()->id) }}"><i
                                 class="dw dw-user1"></i> Profil</a>
-                        @if (Auth::user()->canImpersonate())
-                            @if(Auth::user()->hasRole('chefdep'))
-                            <a class="dropdown-item" href="{{ route('chef.impersonate') }}"><i class="dw dw-help"></i>
-                                {{ app('impersonate')->isImpersonating() ? 'Mode Chef departement' : 'Mode professeur' }}
+                        @if(Auth::user()->hasRole('chefdep'))
+                            <a class="dropdown-item" href="{{ route('chef.mode',['chefView'=> request()->path() == 'chef/dashboard' ? 1 : 0 ]) }}"><i class="dw dw-help"></i>
+                                {{ request()->path() === 'chef/dashboard' ? 'Mode professeur' : 'Mode Chef departement' }}
                             </a>
-                            @else
+                        @endif
+                        @if (Auth::user()->canImpersonate())
                             <a class="dropdown-item" href="{{ url('user/impersonate') }}"><i class="dw dw-help"></i>
                                 {{ app('impersonate')->isImpersonating() ? 'Quitter' : 'personnifier' }}
                             </a>
-                            @endif
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i

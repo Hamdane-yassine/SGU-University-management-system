@@ -24,13 +24,17 @@ class EvenementPolicy
     {
         // dd($user->id, $evenement->chefdep->professeur->user->id)
         // dd(auth()->user()->professeur);
-        return $user->hasRole('master') || $user->hasRole('chefdep') ||  auth()->user()->id == $evenement->chefdep->professeur->user->id;
+        return $user->hasRole('master') ? true : ($user->hasRole('chefdep') ? (auth()->user()->id == $evenement->chefdep->professeur->user->id) : false );
         // return true;
     }
     public function create(User $user)
     {
-        return $user->hasRole('master') || $user->hasRole('chefdep');
+        return $user->hasRole('chefdep');
     }
 
+    public function delete(User $user, Evenement $evenement)
+    {
+        return auth()->user()->hasRole('master') ? true  : auth()->user()->id == $evenement->chefdep->professeur->user->id;
+    }
 
 }

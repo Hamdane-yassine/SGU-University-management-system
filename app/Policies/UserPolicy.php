@@ -16,10 +16,6 @@ class UserPolicy
         return $user->canImpersonate();
     }
 
-    public function chefImpersonateProf(User $user)
-    {
-        return $user->haseRole('chefdep');
-    }
     /**
      * Determine whether the user can view any models.
      *

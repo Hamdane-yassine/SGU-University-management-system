@@ -7,6 +7,7 @@ use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile as HttpUploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
@@ -143,7 +144,7 @@ class EvenementController extends Controller
      */
     public function update(Request $request, Evenement $evenement)
     {
-        $this->authorize('update', $request->user());
+        $this->authorize('update', $evenement);
         $files = $request->file('attachments');
         $request->validate([
             'date'=>'date|required',
@@ -156,6 +157,7 @@ class EvenementController extends Controller
         );
 
         $evenement = Evenement::find($evenement->idEvenement);
+
         $evenement->titre = $request->input('titre');
         $evenement->date = $request->input('date');
         $evenement->html = $request->input('corps');
@@ -223,7 +225,15 @@ class EvenementController extends Controller
 
     public function delete(Evenement $evenement)
     {
-        $this->authorize('update', request()->user());
+        $this->authorize('delete', $evenement);
+        // delete all notifs
+        $notifs = DB::table('notifications')
+                  ->where('type','App\Notifications\NotifyEvent')->get();
+        foreach ($notifs as $notif){
+            $idEvet = json_decode($notif->data)->idEvent;
+            if($idEvet == $evenement->idEvenement)
+                DB::delete('delete from notifications where id = ?', [$notif->id]);
+        };
         $evenement->delete();
         return redirect()->route('evenement.index')->with('success','model successfuly deletecd ');
     }

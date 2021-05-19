@@ -23,7 +23,7 @@
                                     @csrf
                                     <tr>
                                         <td>{{ $other_user->id }}</td>
-                                        <td>{{ $other_user->name }}</td>
+                                        <td>{{ $other_user->nom }}</td>
                                         <td>{{ $other_user->role }}</td>
                                         <td>
                                             <input type="hidden" name="id" value="{{ $other_user->id }}" />
