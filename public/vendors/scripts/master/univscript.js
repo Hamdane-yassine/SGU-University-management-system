@@ -111,7 +111,7 @@ function ReloadSelects(id) {
             jQuery('select[name="' + id + '"]').empty();
             if (id != "ajfildep") {
                 $('select[name="' + id + '"]').append(
-                    "<option disabled selected>---Sélectioné une département---</option>"
+                    "<option disabled selected>---Sélectionner un département---</option>"
                 );
             }
             jQuery.each(response, function(key, value) {
@@ -144,7 +144,7 @@ function ReloadAllSelects(type) {
     jQuery('select[name="modsem"]').empty();
     jQuery('select[name="modfil"]').empty();
     $('select[name="modfil"]').append(
-        "<option disabled selected>---Sélectioné une filiére---</option>"
+        "<option disabled selected>---Sélectionner une filiére---</option>"
     );
     }
     if(type!="ma")
@@ -152,12 +152,12 @@ function ReloadAllSelects(type) {
     ReloadSelects("matdep");
     jQuery('select[name="matfil"]').empty();
     $('select[name="matfil"]').append(
-        "<option disabled selected>---Sélectioné une filiére---</option>"
+        "<option disabled selected>---Sélectionner une filiére---</option>"
     );
     jQuery('select[name="matmod"]').empty();
     jQuery('select[name="matsem"]').empty();
     $('select[name="matsem"]').append(
-        "<option disabled selected>---Sélectioné une semester---</option>"
+        "<option disabled selected>---Sélectionner un semestre---</option>"
     );
     }
 }
@@ -174,7 +174,7 @@ function LoadFilieres(depsel, filsel) {
                     jQuery('select[name="' + filsel + '"]').empty();
                     if (filsel == "modfil" || filsel == "matfil") {
                         $('select[name="' + filsel + '"]').append(
-                            "<option disabled selected>---Sélectioné une filiére---</option>"
+                            "<option disabled selected>---Sélectionner une filiére---</option>"
                         );
                     }
                     jQuery.each(data, function(key, value) {
@@ -208,7 +208,7 @@ function LoadSemesters(filsel, semsel) {
                     jQuery('select[name="' + semsel + '"]').empty();
                     if (semsel == "matsem") {
                         $('select[name="' + semsel + '"]').append(
-                            "<option disabled selected>---Sélectioné une semester---</option>"
+                            "<option disabled selected>---Sélectionner un semestre---</option>"
                         );
                     }
                     jQuery.each(data, function(key, value) {
@@ -364,7 +364,7 @@ $("#affsem").submit(function(e) {
         url: url,
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
-            document.getElementById("msgsuccess").innerHTML ="Les semesteres sont Affecté!";
+            document.getElementById("msgsuccess").innerHTML ="Les semestres sont Affectés!";
             ReloadAllSelects("s");
             $("#success-modal").modal("show");
         }
@@ -379,7 +379,7 @@ $("#ajmodule").submit(function(e) {
         url: url,
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
-            document.getElementById("msgsuccess").innerHTML = "Module ajoutée!";
+            document.getElementById("msgsuccess").innerHTML = "Module ajouté!";
             document.getElementById("ajmodule").reset();
             $("#success-modal").modal("show");
             ReloadAllSelects("m");
@@ -396,7 +396,7 @@ $("#ajmatiere").submit(function(e) {
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
             document.getElementById("msgsuccess").innerHTML =
-                "Matiere ajoutée!";
+                "Matière ajoutée!";
             document.getElementById("ajmatiere").reset();
             $("#success-modal").modal("show");
             ReloadAllSelects("ma");

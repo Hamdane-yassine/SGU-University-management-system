@@ -84,7 +84,7 @@
                                 <tr>
                                     <th>N°</th>
                                     <th>Nom</th>
-                                    <th>Departement</th>
+                                    <th>Département</th>
                                 </tr>
                             </thead>
                             <tbody>

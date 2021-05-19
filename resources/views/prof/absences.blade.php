@@ -13,9 +13,9 @@
                             <thead>
                                 <tr>
                                     <th>N°</th>
-                                    <th>Matiére</th>
+                                    <th>Matière</th>
                                     <th>Filière</th>
-                                    <th>Departement</th>
+                                    <th>Département</th>
                                     <th>Date d'absence</th>
                                     <th>État</th>
                                 </tr>
@@ -39,10 +39,10 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Filiere :</label>
+                                                <label>Filière :</label>
                                                 <select class="custom-select2 form-control" name="filiere" id="filiere"
                                                     style="width: 100%; height: 38px;">
-                                                    <option>--select a filiere-- </option>
+                                                    <option>--Sélectionner une filière‏-- </option>
                                                     @foreach ($filieresList as $filiere)
                                                         <option value={{ $filiere->idFiliere }}>{{ $filiere->nom }} -
                                                             {{ $filiere->niveau }}</option>
@@ -52,7 +52,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Matiére :</label>
+                                                <label>Matière :</label>
                                                 <select class="custom-select2 form-control " name="matiere" id="matiere"
                                                     style="width: 100%; height: 38px;" required>
 

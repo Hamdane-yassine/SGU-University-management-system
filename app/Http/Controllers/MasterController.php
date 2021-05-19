@@ -468,8 +468,8 @@ class MasterController extends Controller
             ],
             [
                 'incin.unique' => 'C.N.I.E est déjà existé.',
-                'inemail.unique' => 'Email est déjà utilisée.',
-                'inemailins.unique' => 'Email est déjà utilisée.',
+                'inemail.unique' => 'Email est déjà utilisé.',
+                'inemailins.unique' => 'Email est déjà utilisé.',
                 'inemail.email' => 'Email invalide.',
                 'inemailins.email' => 'Email invalide.'
             ]
@@ -519,8 +519,8 @@ class MasterController extends Controller
             ],
             [
                 'ajcin.unique' => 'C.N.I.E est déjà existé.',
-                'ajemail.unique' => 'Email est déjà utilisée.',
-                'ajemailins.unique' => 'Email est déjà utilisée.',
+                'ajemail.unique' => 'Email est déjà utilisé.',
+                'ajemailins.unique' => 'Email est déjà utilisé.',
                 'ajemail.email' => 'Email invalide.',
                 'ajemailins.email' => 'Email invalide.'
             ]

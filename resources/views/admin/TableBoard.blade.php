@@ -36,7 +36,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $CountEtudiant }}</div>
-                                <div class="font-14 text-secondary weight-500">Filiéres<span style="opacity:0;">xxxx xxxxxxxx</span></div>
+                                <div class="font-14 text-secondary weight-500">Filières<span style="opacity:0;">xxxx xxxxxxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><i class="fa fa-graduation-cap"></i></div>
@@ -49,7 +49,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $CountDepartement }}</div>
-                                <div class="font-14 text-secondary weight-500">départements<span style="opacity:0;">xxxx xxxx</span></div>
+                                <div class="font-14 text-secondary weight-500">Départements<span style="opacity:0;">xxxx xxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><i class="micon fa fa-building" aria-hidden="true"></i></div>
@@ -84,7 +84,7 @@
                                 <tr>
                                     <th>N°</th>
                                     <th>Professeur</th>
-                                    <th>Specialite</th>
+                                    <th>Spécialité</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-md-4 mb-20">
                     <div class="card-box height-100-p pd-20">
-                        <div class="h5 mb-md-0">Evenement</div>
+                        <div class="h5 mb-md-0">Evènement</div>
                         <hr>
                         <!-- <div class="text-center text-secondary">Aucun notification</div> -->
                         <div class="notification-list mx-h-350 customscroll">

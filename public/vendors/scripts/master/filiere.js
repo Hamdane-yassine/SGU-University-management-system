@@ -94,7 +94,7 @@ jQuery(document).ready(function() {
                     console.log(data);
                     jQuery('select[name="semestre2"]').empty();
                     $('select[name="semestre2"]').append(
-                        '<option value="" selected>--select Semestre--</option>'
+                        '<option value="" selected>--Sélectionner un semestre--</option>'
                     );
                     jQuery.each(data, function(key, value) {
                         $('select[name="semestre2"]').append(
@@ -154,7 +154,7 @@ jQuery(document).ready(function() {
                     console.log(data);
                     jQuery('select[name="semestre3"]').empty();
                     $('select[name="semestre3"]').append(
-                        '<option value="" selected>--select Semestre--</option>'
+                        '<option value="" selected>--Sélectionner un semestre--</option>'
                     );
                     jQuery.each(data, function(key, value) {
                         $('select[name="semestre3"]').append(
@@ -211,7 +211,7 @@ jQuery(document).ready(function() {
                     console.log(data);
                     jQuery('select[name="module3"]').empty();
                     $('select[name="module3"]').append(
-                        '<option value="" selected>--select module--</option>'
+                        '<option value="" selected>--Sélectionner un module--</option>'
                     );
                     jQuery.each(data, function(key, value) {
                         $('select[name="module3"]').append(

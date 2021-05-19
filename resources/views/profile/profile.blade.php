@@ -10,12 +10,11 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="title">
-                                <h4>Profile</h4>
+                                <h4>Profil</h4>
                             </div>
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Profil</li>
                                 </ol>
                             </nav>
                         </div>
@@ -75,7 +74,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <span>Numero de telephone:</span>
+                                        <span>Numéro de téléphone:</span>
                                         {{ $personne->tel }}
                                     </li>
                                     <li>
@@ -89,7 +88,7 @@
                                 </ul>
                             </div>
                             <div class="profile-social">
-                                <h5 class="mb-20 h5 text-blue">Reseau sociaux</h5>
+                                <h5 class="mb-20 h5 text-blue">Réseau sociaux</h5>
                                 <ul class="clearfix">
                                     <li><a href="{{ $profile->facebook }}" class="btn" data-bgcolor="#3b5998" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(59, 89, 152);"><i class="fa fa-facebook"></i></a></li>
                                     {{-- <li><a href="#" class="btn" data-bgcolor="#1da1f2" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);"><i class="fa fa-twitter"></i></a></li> --}}
@@ -171,7 +170,7 @@
                                                                 <input class="form-control form-control-lg" type="text">
                                                             </div> --}}
                                                             <div class="form-group">
-                                                                <label>Numero de telephone</label>
+                                                                <label>Numéro de téléphone</label>
                                                                 <input class="form-control form-control-lg" name="tel" type="tel">
                                                             </div>
                                                             <div class="form-group">
@@ -186,7 +185,7 @@
                                                             </div> --}}
                                                         </li>
                                                         <li class="weight-500 col-md-6">
-                                                            <h4 class="text-blue h5 mb-20">Modifier les liens reseaux sociaux</h4>
+                                                            <h4 class="text-blue h5 mb-20">Modifier les liens réseaux sociaux</h4>
                                                             <div class="form-group">
                                                                 <label>Facebook URL:</label>
                                                                 <input class="form-control form-control-lg" name="facebook" type="text" placeholder="">

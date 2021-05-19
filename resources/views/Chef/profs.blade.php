@@ -80,7 +80,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            <h4 class="h4">Retirer une matiére</h4>
+                            <h4 class="h4">Retirer une matière</h4>
                         </div>
                         <hr>
                         <form action="{{ route('DetacherMatiere') }}" class="tab-wizard wizard-circle wizard pl-20"
@@ -94,7 +94,7 @@
                                             <label>professeur :</label>
                                             <select class="custom-select2 form-control" name="profdet" id="profdet"
                                                 style="width: 100%; height: 38px;" required>
-                                                <option value="">---Selectioné un professeur---</option>
+                                                <option value="">---Sélectionner un professeur---</option>
                                                 @foreach ($departement->prof_departements as $prof_departement)
                                                     <option value="{{ $prof_departement->professeur->idProf }}">
                                                         {{ $prof_departement->professeur->user->personne->nom . ' ' . $prof_departement->professeur->user->personne->prenom }}
@@ -168,7 +168,7 @@
                                 <dt class="col-sm-4">Spécialité</dt>
                                 <dd class="col-sm-8" id="specialite"></dd>
 
-                                <dt class="col-sm-4">Maitéres</dt>
+                                <dt class="col-sm-4">Maitères</dt>
                                 <dd class="col-sm-8" id="matieres">
                                 </dd>
                             </dl>
@@ -190,7 +190,7 @@
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Terminer</button>
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Terminer</button>
                         </div>
                     </div>
                 </div>

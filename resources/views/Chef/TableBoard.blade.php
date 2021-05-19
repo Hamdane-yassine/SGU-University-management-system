@@ -36,7 +36,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $Count_filieres }}</div>
-                                <div class="font-14 text-secondary weight-500">Filiéres<span style="opacity:0;">xxxx xxxxxx</span></div>
+                                <div class="font-14 text-secondary weight-500">Filières<span style="opacity:0;">xxxx xxxxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><i class="fa fa-graduation-cap"></i></div>
@@ -63,7 +63,7 @@
 						    <div class="d-flex flex-wrap">
 						    	<div class="widget-data">
 						    		<div class="weight-700 font-24 text-dark">{{ $etat_notes }}</div>
-						    		<div class="font-14 text-secondary weight-500">Insértion des notes</div>
+						    		<div class="font-14 text-secondary weight-500">Insertion des notes</div>
 						    	</div>
 						    	<div class="widget-icon">
 						    		<div class="icon" data-color="#09cc06"><i class="icon-copy fi-check"
@@ -75,7 +75,7 @@
                                 <div class="d-flex flex-wrap">
                                     <div class="widget-data">
                                         <div class="weight-700 font-24 text-dark">{{ $etat_notes }}</div>
-                                        <div class="font-14 text-secondary weight-500">Insértion des notes</div>
+                                        <div class="font-14 text-secondary weight-500">Insertion des notes</div>
                                     </div>
                                     <div class="widget-icon">
                                         <div class="icon" data-color="red"><i class="icon-copy fi-x" aria-hidden="true"></i></div>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="col-md-4 mb-20">
                     <div class="card-box height-100-p pd-20">
-                        <div class="h5 mb-md-0">Evenements</div>
+                        <div class="h5 mb-md-0">Evènements</div>
                         <hr>
                         <!-- <div class="text-center text-secondary">Aucun notification</div> -->
                         <div class="notification-list mx-h-350 customscroll">

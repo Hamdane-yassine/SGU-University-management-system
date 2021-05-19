@@ -202,10 +202,10 @@ class AdminController extends Controller
             ],
             [
                 'incin.unique' => 'C.N.I.E est déjà existé.',
-                'inemail.unique' => 'Email est déjà utilisée.',
-                'inemailins.unique' => 'Email est déjà utilisée.',
+                'inemail.unique' => 'Email est déjà utilisé.',
+                'inemailins.unique' => 'Email est déjà utilisé.',
                 'incne.unique' => 'CNE est déjà existé.',
-                'inapogee.unique' => 'Numéro apogée est déjà utilisée.',
+                'inapogee.unique' => 'Numéro apogée est déjà utilisé.',
                 'inemail.email' => 'Email invalide.',
                 'inemailins.email' => 'Email invalide.'
             ]
@@ -262,10 +262,10 @@ class AdminController extends Controller
             ],
             [
                 'ajcin.unique' => 'C.N.I.E est déjà existé.',
-                'ajemail.unique' => 'Email est déjà utilisée.',
-                'ajemailins.unique' => 'Email est déjà utilisée.',
+                'ajemail.unique' => 'Email est déjà utilisé.',
+                'ajemailins.unique' => 'Email est déjà utilisé.',
                 'ajcne.unique' => 'CNE est déjà existé.',
-                'ajapogee.unique' => 'Numéro apogée est déjà utilisée.',
+                'ajapogee.unique' => 'Numéro apogée est déjà utilisé.',
                 'ajemail.email' => 'Email invalide.',
                 'ajemailins.email' => 'Email invalide.'
             ]
@@ -448,8 +448,8 @@ class AdminController extends Controller
             ],
             [
                 'incin.unique' => 'C.N.I.E est déjà existé.',
-                'inemail.unique' => 'Email est déjà utilisée.',
-                'inemailins.unique' => 'Email est déjà utilisée.',
+                'inemail.unique' => 'Email est déjà utilisé.',
+                'inemailins.unique' => 'Email est déjà utilisé.',
                 'inemail.email' => 'Email invalide.',
                 'inemailins.email' => 'Email invalide.'
             ]
@@ -519,8 +519,8 @@ class AdminController extends Controller
             ],
             [
                 'ajcin.unique' => 'C.N.I.E est déjà existé.',
-                'ajemail.unique' => 'Email est déjà utilisée.',
-                'ajemailins.unique' => 'Email est déjà utilisée.',
+                'ajemail.unique' => 'Email est déjà utilisé.',
+                'ajemailins.unique' => 'Email est déjà utilisé.',
                 'ajemail.email' => 'Email invalide.',
                 'ajemailins.email' => 'Email invalide.'
             ]

@@ -63,7 +63,7 @@ class NotifyImportSuccess extends Notification implements ShouldBroadcastNow
             'from'=>'Importation avec succés',
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
-            'brief'=>"Les etudiants de la filière ".$this->NomFiliere." sont importés avec succés",
+            'brief'=>"Les étudiants de la filière ".$this->NomFiliere." sont importés avec succès",
         ];
     }
 }

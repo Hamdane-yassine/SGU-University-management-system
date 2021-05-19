@@ -67,7 +67,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                         <a class="dropdown-item" href="{{ url('profile/' . Auth::user()->id) }}"><i
-                                class="dw dw-user1"></i> Profile</a>
+                                class="dw dw-user1"></i> Profil</a>
                         @if (Auth::user()->canImpersonate())
                             @if(Auth::user()->hasRole('chefdep'))
                             <a class="dropdown-item" href="{{ route('chef.impersonate') }}"><i class="dw dw-help"></i>
@@ -119,7 +119,7 @@
                             <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon fa fa-graduation-cap"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Les
-                                    etudiants</span>
+                                    étudiants</span>
                             </a>
                             <ul class="submenu">
                                 @php
@@ -184,14 +184,14 @@
                             <a href="/absences" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-calendar-check-o"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Absenses</span>
+                                    class="mtext">Absences</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-globe"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Evénements</span>
+                                    class="mtext">Evènements</span>
                             </a>
                         </li>
                         <li>
@@ -220,7 +220,7 @@
                             <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon fa fa-graduation-cap"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Les
-                                    etudiants</span>
+                                    étudiants</span>
                             </a>
                             <ul class="submenu">
                                 @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
@@ -259,8 +259,8 @@
                             <a href="/chef/professeurs/{{ auth()->user()->professeur->chefdep->departement->idDepartement }}"
                                 class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-user-o"
-                                    style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Gestion
-                                    des Professeurs</span>
+                                    style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">
+                                    Les Professeurs</span>
                             </a>
                         </li>
 
@@ -283,7 +283,7 @@
                             <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-globe"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Evénements</span>
+                                    class="mtext">Evènements</span>
                             </a>
                         </li>
                         <li>
@@ -320,14 +320,14 @@
                             <a href="/admin/emploi/filiere" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-calendar"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Emploi
-                                    des Filieres</span>
+                                    des Filières</span>
                             </a>
                         </li>
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon fa fa-graduation-cap"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Les
-                                    etudiants</span>
+                                    étudiants</span>
                             </a>
                             <ul class="submenu">
                                 @php
@@ -358,7 +358,7 @@
                             <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-globe"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Evénements</span>
+                                    class="mtext">Evènements</span>
                             </a>
                         </li>
                         <li>
@@ -400,7 +400,7 @@
                             <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-globe"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Evénements</span>
+                                    class="mtext">Evènements</span>
                             </a>
                         </li>
                         <li>

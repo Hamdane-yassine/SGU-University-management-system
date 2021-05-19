@@ -183,7 +183,7 @@ function getProfInfo(id) {
                 response.matieres.forEach(myFunction);
             } else {
                 document.getElementById("matieres").innerHTML =
-                    "Aucune Matiere";
+                    "Aucune Matière";
             }
 
             function myFunction(item, index) {
@@ -241,7 +241,7 @@ $("#retirer").submit(function(e) {
         url: url,
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
-            document.getElementById("msg").innerHTML = "Professeur retirer";
+            document.getElementById("msg").innerHTML = "Professeur retiré";
             $("#success-modal").modal("show");
             $("html, body").animate(
                 {

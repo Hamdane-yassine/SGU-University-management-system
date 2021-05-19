@@ -201,7 +201,7 @@ $("#ajoutAdmin").submit(function(e) {
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
             reins();
-            document.getElementById("msg").innerHTML = "Professeur est ajouté!";
+            document.getElementById("msg").innerHTML = "Admin est ajouté!";
             $("#success-modal").modal("show");
         },
         error: function(err) {
