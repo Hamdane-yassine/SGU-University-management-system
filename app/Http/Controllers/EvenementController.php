@@ -224,6 +224,8 @@ class EvenementController extends Controller
     public function delete(Evenement $evenement)
     {
         $this->authorize('update', request()->user());
+        // delete all notifs
+        // DB::table('notifications')->all();
         $evenement->delete();
         return redirect()->route('evenement.index')->with('success','model successfuly deletecd ');
     }

@@ -565,14 +565,18 @@ class ChefDepartementController extends Controller
         return redirect('/chef/rattrapages');
     }
 
-    public function impersonate(Request $request)
+    public function mode(Request $request)
     {
-        if (app('impersonate')->isImpersonating())
-            return redirect()->route('impersonate.leave');
-        else {
-            return redirect()->route('impersonate', $request->user()->professeur->chefdep->ID_chef);
+        if ($request->chefView){
+            // dd($request->all());
+            return redirect('/Dashboard');
         }
+        else {
+            return redirect('chef/dashboard');
+        }
+        return redirect('/');
     }
+
     public function getResulatEtudiant(Etudiant $etudiant)
     {
        $filiere = $etudiant->filiere;

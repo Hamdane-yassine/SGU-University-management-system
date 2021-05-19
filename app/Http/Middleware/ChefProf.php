@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckProf
+class ChefProf
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,8 @@ class CheckProf
      */
     public function handle(Request $request, Closure $next)
     {
-        // && $request->user()->professeur->chefdep->ID_chef === $request->user()->id
-        if ($request->user()->hasRole('prof') || ($request->user()->hasRole('chefdep')  ) ) {
-            return $next($request);
-        }
-        return redirect('/');
+
+        // if($request->route(''))
+        return $next($request);
     }
 }
