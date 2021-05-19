@@ -69,9 +69,15 @@
                         <a class="dropdown-item" href="{{ url('profile/' . Auth::user()->id) }}"><i
                                 class="dw dw-user1"></i> Profile</a>
                         @if (Auth::user()->canImpersonate())
+                            @if(Auth::user()->hasRole('chefdep'))
+                            <a class="dropdown-item" href="{{ route('chef.impersonate') }}"><i class="dw dw-help"></i>
+                                {{ app('impersonate')->isImpersonating() ? 'Mode Chef departement' : 'Mode professeur' }}
+                            </a>
+                            @else
                             <a class="dropdown-item" href="{{ url('user/impersonate') }}"><i class="dw dw-help"></i>
                                 {{ app('impersonate')->isImpersonating() ? 'Quitter' : 'personnifier' }}
                             </a>
+                            @endif
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
@@ -443,7 +449,7 @@
                 playSound();
 
             }).on('pusher:subscription_succeeded', (member) => {
-                console.log('successfulddly subscribed!');
+                console.log('successfully subscribed!');
             });
 
         function addToDropDown(notification) {

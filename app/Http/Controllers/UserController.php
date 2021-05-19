@@ -109,6 +109,7 @@ class UserController extends Controller
 
     public function impersonateGet()
     {
+        $this->authorize('impersonateAny',request()->user());
         if (app('impersonate')->isImpersonating())
             return redirect()->route('impersonate.leave');
         else {
@@ -120,6 +121,7 @@ class UserController extends Controller
 
     public function impersonate(Request $request)
     {
+        $this->authorize('impersonateAny',request()->user());
         return redirect()->route('impersonate',$request->id);
     }
 }

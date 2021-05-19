@@ -7,6 +7,7 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\Chefdep;
 use App\Models\Evenement;
 use App\Models\User;
 use App\Notifications\NotifyEmailChanged;
@@ -28,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     $role = Auth::user()->role;
     switch ($role) {
@@ -44,12 +47,11 @@ Route::get('/', function () {
             return redirect('admin/dashboard');
             break;
         default:
-            echo "Not logged";
+            return redirect('/login');
             break;
     }
 })->middleware('auth');
 
-Auth::routes();
 
 Route::middleware(['auth','prof'])->group(function () {
     Route::post('addRatt', [ProfesseurController::class, 'addRatt']);
@@ -97,6 +99,7 @@ Route::middleware(['auth','chefdep'])->group(function () {
     Route::get('/chef/rattrapages', [ChefDepartementController::class, 'RattrapagesIndex']);
     Route::post('/chef/rattrapages/valider/{idAbsence}', [ChefDepartementController::class, 'ValiderRatt'])->name('ValiderRatt');
     Route::post('/chef/rattrapages/annuler/{idAbsence}', [ChefDepartementController::class, 'AnnulerRatt'])->name('AnnulerRatt');
+    Route::get('chef/impersonate', [ChefDepartementController::class, 'impersonate'])->name('chef.impersonate');
 });
 
 
