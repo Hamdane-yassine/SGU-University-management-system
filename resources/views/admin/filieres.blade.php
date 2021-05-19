@@ -15,6 +15,7 @@
                                     <th>N°</th>
                                     <th>Nom</th>
                                     <th>Niveau</th>
+                                    <th>Diplome</th>
                                     <th>Les etudiants</th>
                                 </tr>
                             </thead>
@@ -25,6 +26,7 @@
                                         <td><a href="/admin/etudiants/{{ $filiere->idFiliere }}" target="_blank"
                                                 class="card-link text-primary">{{ $filiere->nom }}</a></td>
                                         <td>{{ $filiere->niveau }}</td>
+                                        <td>{{ $filiere->diplome }}</td>
                                         <td style="padding-left: 50px">{{ count($filiere->etudiants) }}</td>
                                     </tr>
                                 @endforeach

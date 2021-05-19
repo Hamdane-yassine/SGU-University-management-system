@@ -20,6 +20,7 @@
                                     <th>Controle</th>
                                     <th>Examen‏</th>
                                     <th>Note</th>
+                                    <th>NoteRatt</th>
                                 </tr>
                             </thead>
                             <tbody>

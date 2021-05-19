@@ -204,8 +204,8 @@ function LoadSemesters(filsel, semsel) {
                         $('select[name="' + semsel + '"]').append(
                             '<option value="' +
                                 value.idSemestre +
-                                '">' +
-                                value.nom +
+                                '">'+'S'+
+                                value.num +
                                 "</option>"
                         );
                     });

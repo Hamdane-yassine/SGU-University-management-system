@@ -46,7 +46,7 @@ class MasterController extends Controller
         //get list of semesters
         $Semestres = Semestre::where('filiere.idDepartement', $idDepartement)
             ->join('filiere','filiere.idFiliere','semestre.idFiliere')
-            ->select('idSemestre as id','semestre.nom as name')->get();
+            ->select('idSemestre as id','semestre.num')->get();
 
         return view('master.filiere',['idDepartement' => $idDepartement, 'filieres' => $filieres, 'Semestres' => $Semestres ]);
     }
@@ -56,7 +56,7 @@ class MasterController extends Controller
         $filieres = Filiere::where('filiere.idDepartement',$idDepartement)
         ->leftJoin('etudiant','etudiant.idFiliere','filiere.idFiliere')
         ->groupBy('filiere.idFiliere')
-        ->select('filiere.idFiliere as idFiliere','filiere.nom as nomFiliere','filiere.niveau as niveau',DB::raw('COUNT(*) as CountEtudiant'))->get();
+        ->select('filiere.idFiliere as idFiliere','filiere.nom as nomFiliere','diplome','shortcut','filiere.niveau as niveau',DB::raw('COUNT(*) as CountEtudiant'))->get();
 
         if($request->ajax()) {
             return Datatables::of($filieres)
@@ -162,22 +162,29 @@ class MasterController extends Controller
       $idDepartement = request('ajfildep');
       $dip = request('diplome');
       $nom = request('filnom');
-      if($dip == 1 || $dip == 3)
+      $rac = request('rac');
+      if($dip == "DEUG" || $dip == "DUT" ||$dip == "master")
       {
          $filiere1 = new Filiere;
          $filiere1->nom=$nom;
          $filiere1->niveau=1;
+         $filiere1->diplome=$dip;
          $filiere1->idDepartement=$idDepartement;
          $filiere2 = new Filiere;
          $filiere2->nom=$nom;
          $filiere2->niveau=2;
+         $filiere2->diplome=$dip;
          $filiere2->idDepartement=$idDepartement;
+         $filiere1->shortcut=$rac;
+         $filiere2->shortcut=$rac;
          $filiere1->save();
          $filiere2->save();
       }else{
          $filiere = new Filiere;
          $filiere->nom=$nom;
          $filiere->niveau=1;
+         $filiere->shortcut=$rac;
+         $filiere->diplome=$dip;
          $filiere->idDepartement=$idDepartement;
          $filiere->save();
       }
@@ -202,7 +209,7 @@ class MasterController extends Controller
       foreach($semesteres as $semester)
       {
          $semesterToInsert = new Semestre;
-         $semesterToInsert->nom=$semester;
+         $semesterToInsert->num=$semester;
          $semesterToInsert->idFiliere=$idFiliere;
          $semesterToInsert->Annee_universaitaire=$annee;
          $semesterToInsert->save();
@@ -215,10 +222,8 @@ class MasterController extends Controller
    }
    public function AjouterModule()
    {
-      $idFiliere = request('modfil');
       $idSemester = request('modsem');
       $module = new Module;
-      $module->idFiliere=$idFiliere;
       $module->idSemestre=$idSemester;
       $module->nom=request('modnom');
       $module->vh=request('modvh');
@@ -236,6 +241,7 @@ class MasterController extends Controller
       $matiere = new Matiere;
       $matiere->idModule=$idModule;
       $matiere->nom=request('matnom');
+      $matiere->coeff=request('coef');
       $matiere->vh=request('matvh');
       $matiere->save();
    }
@@ -244,11 +250,13 @@ class MasterController extends Controller
    {
       echo 'idFiliere to update : ' . $request->idFiliere . ' nom: ' . $request->nomFiliere . ' niv : ' . $request->niveau;
 
-      if (is_null($request->idFiliere) || (is_null($request->niveau) && is_null($request->nomFiliere))) return view('master.filiere');
+      if (is_null($request->idFiliere) || (is_null($request->niveau) && is_null($request->nomFiliere))) return redirect('/master/filiere/' . $idDepartement);
 
       $filiere = Filiere::find($request->idFiliere);
       if (!is_null($request->nomFiliere)) $filiere->nom = $request->nomFiliere;
       if (!is_null($request->niveau)) $filiere->niveau = $request->niveau;
+      if (!is_null($request->dip)) $filiere->diplome = $request->dip;
+      if (!is_null($request->rac)) $filiere->shortcut = $request->rac;
       $filiere->save();
 
       return redirect('/master/filiere/' . $idDepartement);
@@ -263,7 +271,7 @@ class MasterController extends Controller
 
     public function getSemestresOfFiliere($idFiliere)
     {
-        $Semestres = Semestre::where('idFiliere',$idFiliere)->select('idSemestre as id','nom as name')->get()->toArray();
+        $Semestres = Semestre::where('idFiliere',$idFiliere)->select('idSemestre as id','num')->get()->toArray();
         //echo $MatieresList;
         return json_encode($Semestres);
     }
@@ -278,8 +286,7 @@ class MasterController extends Controller
     {
         //given a semester id , you retrieve a filiere , and find its modules
         $semester = Semestre::find($idSemester);
-        $Modules = Filiere::where('filiere.idFiliere',$semester->idFiliere)->where('module.idSemestre',$semester->idSemestre)
-        ->join('module','module.idFiliere','filiere.idFiliere')
+        $Modules = Module::where('module.idSemestre',$semester->idSemestre)
         ->select('module.idModule as idModule','module.nom as name')->get()->toArray();
 
         return json_encode($Modules);

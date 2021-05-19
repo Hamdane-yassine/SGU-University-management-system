@@ -81,19 +81,27 @@
                                             <label>Diplome :</label>
                                             <select class="custom-select2 form-control" name="diplome" id="diplome"
                                                 style="width: 100%; height: 45px;" required>
-                                                <option value="1" selected>DUT/DEUG</option>
-                                                <option value="2">licence</option>
-                                                <option value="3">master</option>
+                                                <option value="DEUG" selected>DEUG</option>
+                                                <option value="DUT">DUT</option>
+                                                <option value="licence">licence</option>
+                                                <option value="master">master</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Nom du Filière :</label>
                                             <input class="form-control" type="text" id="filnom" name="filnom"
                                                 placeholder="Nom" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Raccourcie :</label>
+                                            <input class="form-control" type="text" id="rac" name="rac"
+                                                placeholder="Raccourcie" required>
                                         </div>
                                     </div>
                                 </div>
@@ -146,16 +154,16 @@
                                             <label>Semester :</label>
                                             <select class="custom-select2 form-control" multiple="multiple" id="semester"
                                                 name="semester[]" style="width: 100%;">
-                                                <option value="S1">S1</option>
-                                                <option value="S2">S2</option>
-                                                <option value="S3">S3</option>
-                                                <option value="S4">S4</option>
-                                                <option value="S5">S5</option>
-                                                <option value="S6">S6</option>
-                                                <option value="S7">S7</option>
-                                                <option value="S8">S8</option>
-                                                <option value="S9">S9</option>
-                                                <option value="S10">S10</option>
+                                                <option value="1">S1</option>
+                                                <option value="2">S2</option>
+                                                <option value="3">S3</option>
+                                                <option value="4">S4</option>
+                                                <option value="5">S5</option>
+                                                <option value="6">S6</option>
+                                                <option value="7">S7</option>
+                                                <option value="8">S8</option>
+                                                <option value="9">S9</option>
+                                                <option value="10">S10</option>
                                             </select>
                                         </div>
                                     </div>
@@ -297,7 +305,14 @@
                                                 placeholder="Nom" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>coefficient  :</label>
+                                            <input class="form-control" type="number" id="coef" name="coef" min="0"
+                                                placeholder="coef" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>volume horaire :</label>
                                             <input class="form-control" type="number" id="matvh" name="matvh" min="0"

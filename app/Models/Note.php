@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property float|null $controle
  * @property float|null $exam
  * @property float|null $noteGeneral
- *
+ * @property float|null $noteRatt
+
  * @property Etudiant|null $etudiant
  * @property Matiere|null $matiere
  *
@@ -38,6 +39,7 @@ class Note extends Model
 		'controle' => 'float',
 		'exam' => 'float',
 		'noteGeneral' => 'float',
+		'noteRatt' => 'float',
 		'Coefcontrole' => 'int',
 		'Coefexam' => 'int'
 	];
@@ -48,6 +50,7 @@ class Note extends Model
 		'controle',
 		'exam',
 		'noteGeneral',
+		'noteRatt',
 		'Coefcontrole',
 		'Coefexam'
 	];
