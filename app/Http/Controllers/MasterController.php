@@ -113,6 +113,16 @@ class MasterController extends Controller
       }
    }
 
+   public function getDepartement(Request $request,Departement $departement)
+   {
+      $departement = Departement::where('departement.idDepartement',$departement->idDepartement) //retrieved matiere
+         ->select('departement.idDepartement', 'departement.nom', 'departement.insertion_notes')
+         ->get();
+      if ($request->ajax()) {
+         echo json_encode($departement);
+      }
+   }
+
    public function SupprimerDepartement()
    {
       $departement = Departement::find(request('idDep'));
@@ -250,7 +260,7 @@ class MasterController extends Controller
    {
       echo 'idFiliere to update : ' . $request->idFiliere . ' nom: ' . $request->nomFiliere . ' niv : ' . $request->niveau;
 
-      if (is_null($request->idFiliere) || (is_null($request->niveau) && is_null($request->nomFiliere))) return redirect('/master/filiere/' . $idDepartement);
+      if (is_null($request->idFiliere) || (is_null($request->niveau) && is_null($request->nomFiliere) && is_null($request->rac) && is_null($request->dip))) return redirect('/master/filiere/' . $idDepartement);
 
       $filiere = Filiere::find($request->idFiliere);
       if (!is_null($request->nomFiliere)) $filiere->nom = $request->nomFiliere;

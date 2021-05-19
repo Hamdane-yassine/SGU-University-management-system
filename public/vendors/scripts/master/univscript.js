@@ -127,28 +127,39 @@ function ReloadSelects(id) {
     });
 }
 
-function ReloadAllSelects() {
+function ReloadAllSelects(type) {
+    if(type!="f")
+    {
     ReloadSelects("ajfildep");
+    }
+    if(type!="s")
+    {
     ReloadSelects("semdep");
-    ReloadSelects("moddep");
-    ReloadSelects("matdep");
-    LoadFixSemester();
     jQuery('select[name="semfil"]').empty();
+    }
+    LoadFixSemester();    
+    if(type!="m")
+    {
+    ReloadSelects("moddep");
+    jQuery('select[name="modsem"]').empty();
     jQuery('select[name="modfil"]').empty();
     $('select[name="modfil"]').append(
         "<option disabled selected>---Sélectioné une filiére---</option>"
     );
-    jQuery('select[name="modsem"]').empty();
+    }
+    if(type!="ma")
+    {
+    ReloadSelects("matdep");
     jQuery('select[name="matfil"]').empty();
     $('select[name="matfil"]').append(
         "<option disabled selected>---Sélectioné une filiére---</option>"
     );
-    jQuery('select[name="modsem"]').empty();
     jQuery('select[name="matmod"]').empty();
     jQuery('select[name="matsem"]').empty();
     $('select[name="matsem"]').append(
         "<option disabled selected>---Sélectioné une semester---</option>"
     );
+    }
 }
 function LoadFilieres(depsel, filsel) {
     jQuery('select[name="' + depsel + '"]').on("change", function() {
@@ -246,16 +257,16 @@ function LoadModules(semsel, modsel) {
 function LoadFixSemester()
 {
     jQuery('select[name="semester[]"]').empty();
-    jQuery('select[name="semester[]"]').append('<option value="S1">S1</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S2">S2</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S3">S3</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S4">S4</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S5">S5</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S6">S6</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S7">S7</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S8">S8</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S9">S9</option>');
-    jQuery('select[name="semester[]"]').append('<option value="S10">S10</option>');
+    jQuery('select[name="semester[]"]').append('<option value="1">S1</option>');
+    jQuery('select[name="semester[]"]').append('<option value="2">S2</option>');
+    jQuery('select[name="semester[]"]').append('<option value="3">S3</option>');
+    jQuery('select[name="semester[]"]').append('<option value="4">S4</option>');
+    jQuery('select[name="semester[]"]').append('<option value="5">S5</option>');
+    jQuery('select[name="semester[]"]').append('<option value="6">S6</option>');
+    jQuery('select[name="semester[]"]').append('<option value="7">S7</option>');
+    jQuery('select[name="semester[]"]').append('<option value="8">S8</option>');
+    jQuery('select[name="semester[]"]').append('<option value="9">S9</option>');
+    jQuery('select[name="semester[]"]').append('<option value="10">S10</option>');
 }
 function getDepInfo(id) {
     $.ajax({
@@ -290,7 +301,7 @@ $("#suppdep").submit(function(e) {
         success: function(data) {
             $("#confirmation-modal").modal("hide");
             table1.ajax.reload();
-            ReloadAllSelects();
+            ReloadAllSelects("none");
         }
     });
 });
@@ -305,7 +316,7 @@ $("#updDep").submit(function(e) {
         success: function(data) {
             $("#bd-edit-modal").modal("hide");
             table1.ajax.reload();
-            ReloadAllSelects();
+            ReloadAllSelects("none");
         }
     });
 });
@@ -323,7 +334,7 @@ $("#ajdep").submit(function(e) {
             document.getElementById("ajdep").reset();
             $("#success-modal").modal("show");
             table1.ajax.reload();
-            ReloadAllSelects();
+            ReloadAllSelects("none");
         }
     });
 });
@@ -340,7 +351,7 @@ $("#ajfiliere").submit(function(e) {
                 "Filière Ajoutée!";
             document.getElementById("ajfiliere").reset();
             $("#success-modal").modal("show");
-            ReloadAllSelects();
+            ReloadAllSelects("f");
         }
     });
 });
@@ -354,7 +365,7 @@ $("#affsem").submit(function(e) {
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
             document.getElementById("msgsuccess").innerHTML ="Les semesteres sont Affecté!";
-            ReloadAllSelects();
+            ReloadAllSelects("s");
             $("#success-modal").modal("show");
         }
     });
@@ -371,7 +382,7 @@ $("#ajmodule").submit(function(e) {
             document.getElementById("msgsuccess").innerHTML = "Module ajoutée!";
             document.getElementById("ajmodule").reset();
             $("#success-modal").modal("show");
-            ReloadAllSelects();
+            ReloadAllSelects("m");
         }
     });
 });
@@ -388,7 +399,7 @@ $("#ajmatiere").submit(function(e) {
                 "Matiere ajoutée!";
             document.getElementById("ajmatiere").reset();
             $("#success-modal").modal("show");
-            ReloadAllSelects();
+            ReloadAllSelects("ma");
         }
     });
 });
