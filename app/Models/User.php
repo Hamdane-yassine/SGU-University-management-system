@@ -70,7 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function canImpersonate()
     {
-        return $this->hasRole('master');
+        return $this->hasRole('master') || $this->hasRole('chefdep');
     }
 
 	public function personne()
