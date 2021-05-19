@@ -11,7 +11,7 @@ $(".data-table").DataTable({
         { data: "shortcut", name: "shortcut" },
         { data: "niveau", name: "niveau" },
         { data: "diplome", name: "diplome" },
-        { 
+        {
             data: "CountEtudiant",
             render: function(data, type, full, meta) {
                     return '<span  style="padding-left: 55px;">' + data + '</span>';
@@ -53,6 +53,16 @@ $(".data-table").DataTable({
 function initModal(idFiliere) {
     document.getElementById("hiddenIdFiliere").value = idFiliere;
 }
+
+function setIdAdmin(id) {
+    document.getElementById("idAdmin").value = id;
+};
+
+
+function setidFiliereToDelete(id) {
+    document.getElementById("idFiliereToDelete").value = id;
+}
+
 jQuery(document).ready(function() {
     jQuery('select[name="filieres1"]').on("change", function() {
         var idFiliere = jQuery(this).val();
@@ -268,3 +278,5 @@ $("#submit2").click(function() {
 $("#submit3").click(function() {
     $("#deleteMatiere").submit();
 });
+
+

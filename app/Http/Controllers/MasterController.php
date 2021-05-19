@@ -67,9 +67,7 @@ class MasterController extends Controller
                                     <a href="#" style="color: #265ed7" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')">
                                         <i class="icon-copy dw dw-edit2"></i>
                                     </a>
-                                    <a href="/master/filiere/delete/'.$row->idFiliere.'" style="color : #e95959" type="button">
-                                        <i class="icon-copy dw dw-delete-3"></i>
-                                    </a>
+                                    <a href="#" style="color : #e95959" onclick="setidFiliereToDelete('.$row->idFiliere.')" data-toggle="modal" data-target="#confirmation-modal" type="button"><i class="icon-copy dw dw-delete-3"></i></a>
                                 </div>
                             </span>';
                 /*$btn = '<div class="table-actions pl-1">
@@ -275,6 +273,11 @@ class MasterController extends Controller
     public function deleteFiliere(Request $request,$idFiliere)
     {
         Filiere::destroy($idFiliere);
+        return redirect()->back();
+    }
+    public function deleteFilierebyId(Request $request)
+    {
+        Filiere::destroy($request->idFiliereToDelete);
         return redirect()->back();
     }
 
