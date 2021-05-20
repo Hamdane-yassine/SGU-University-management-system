@@ -19,7 +19,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- CSS -->
-    @notifyCss
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
     <link rel="stylesheet" type="text/css"
@@ -413,7 +412,6 @@
                 </div>
             </div>
         @endif
-        @include('notify::messages')
     </div>
     <div class="mobile-menu-overlay"></div>
     @yield('content')
@@ -481,15 +479,7 @@
         }
         $('.icon-copy').click(hello());
 
-        // $('img').click(function (param) {
-
-        //     @php
-        //         notify()->success('Welcome to Laravel Notify ⚡', 'My custom title');
-        //     @endphp
-        // });
-
     </script>
-    @notifyJs
     @yield('SpecialScripts')
 </body>
 
