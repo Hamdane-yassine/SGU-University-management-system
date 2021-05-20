@@ -221,6 +221,7 @@ Route::middleware(['auth','master'])->group(function () {
     Route::get('/master/filiere/{idDepartement}', [MasterController::class, 'indexFilieres']);
     Route::get('/master/filiere/{idDepartement}/datatable', [MasterController::class, 'getFilieresDatatable'])->name('MasterFiliereDatatable');
     Route::post('/updateFiliere/{idDepartement}', [MasterController::class, 'updateFiliere']);
+    Route::post('/master/filiere/delete', [MasterController::class, 'deleteFilierebyId'])->name('deleteFiliere');
     Route::get('/master/filiere/delete/{idFiliere}', [MasterController::class, 'deleteFiliere']);
     Route::get('/master/getSemestresOfFiliere/{idFiliere}', [MasterController::class, 'getSemestresOfFiliere']);
     Route::post('/master/deleteSemestreOfFiliere', [MasterController::class, 'deleteSemestreOfFiliere'])->name('deleteSemestreOfFiliere');

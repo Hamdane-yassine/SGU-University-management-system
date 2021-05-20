@@ -19,7 +19,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- CSS -->
-    @notifyCss
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
     <link rel="stylesheet" type="text/css"
@@ -69,7 +68,7 @@
                         <a class="dropdown-item" href="{{ url('profile/' . Auth::user()->id) }}"><i
                                 class="dw dw-user1"></i> Profil</a>
                         @if(Auth::user()->hasRole('chefdep'))
-                            <a class="dropdown-item" href="{{ route('chef.mode',['chefView'=> request()->path() == 'chef/dashboard' ? 1 : 0 ]) }}"><i class="dw dw-help"></i>
+                            <a class="dropdown-item" href="{{ route('chef.mode',['changeView'=> request()->path() == 'chef/dashboard' ? 1 : 0 ]) }}"><i class="dw dw-help"></i>
                                 {{ request()->path() === 'chef/dashboard' ? 'Mode professeur' : 'Mode Chef departement' }}
                             </a>
                         @endif
@@ -102,7 +101,7 @@
                 <i class="ion-close-round"></i>
             </div>
         </div>
-        @if (auth()->user()->role == 'prof')
+        @if (auth()->user()->hasRole('prof') || request()->session()->get('changeView') == 1)
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -203,7 +202,7 @@
                     </ul>
                 </div>
             </div>
-        @elseif (auth()->user()->role == 'chefdep')
+        @elseif (auth()->user()->hasRole('chefdep') && !request()->session()->has('changeView'))
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -296,7 +295,7 @@
                     </ul>
                 </div>
             </div>
-        @elseif (auth()->user()->role=='admin')
+        @elseif (auth()->user()->hasRole('admin'))
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -370,7 +369,7 @@
                     </ul>
                 </div>
             </div>
-        @elseif (auth()->user()->role=='master')
+        @elseif (auth()->user()->hasRole('master'))
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -413,7 +412,6 @@
                 </div>
             </div>
         @endif
-        @include('notify::messages')
     </div>
     <div class="mobile-menu-overlay"></div>
     @yield('content')
@@ -481,15 +479,7 @@
         }
         $('.icon-copy').click(hello());
 
-        // $('img').click(function (param) {
-
-        //     @php
-        //         notify()->success('Welcome to Laravel Notify ⚡', 'My custom title');
-        //     @endphp
-        // });
-
     </script>
-    @notifyJs
     @yield('SpecialScripts')
 </body>
 

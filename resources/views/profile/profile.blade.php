@@ -66,10 +66,13 @@
                                         <span>Adresses email:</span>
                                         <ul>
                                             <li>
-                                                <span class="ml-1">Institutionel:</span>{{ $personne->emailInstitutionne }}
+                                                <span class="ml-1">Institutionel:</span class="ml-1">{{ $personne->emailInstitutionne }}
                                             </li>
                                             <li>
-                                                <span class="ml-1">Personnel:</span>{{ $personne->user->email }}
+                                                <span class="ml-1">Personnel:</span class="ml-1" >{{ $personne->user->email }}
+                                                    @if(Auth::user()->email_verified_at == null)
+                                                        <small class="text-warning">non verifié</small>
+                                                    @endif
                                             </li>
                                         </ul>
                                     </li>
@@ -133,6 +136,12 @@
                                                                     class="form-control form-control-lg @error('email') is-invalid @enderror"
                                                                     name="email"
                                                                     type="email">
+                                                                @error('email')
+                                                                    <small class="text-danger"> {{ $message }}</small>
+                                                                @enderror
+                                                                @if (request()->session()->has('info'))
+                                                                    <small class="text-info"> {{ request()->session()->get('info') }}</small>
+                                                                @endif
                                                             </div>
                                                             {{-- <div class="form-group">
                                                                 <label>Date de naissance</label>
@@ -171,12 +180,18 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label>Numéro de téléphone</label>
-                                                                <input class="form-control form-control-lg" name="tel" type="tel">
+                                                                <input class="form-control form-control-lg @error('tel') is-invalid @enderror" name="tel" type="tel">
                                                             </div>
+                                                            @error('tel')
+                                                                    <small class="text-danger"> {{ $message }}</small>
+                                                            @enderror
                                                             <div class="form-group">
                                                                 <label>Adresse</label>
-                                                                <textarea class="form-control" name="adresse"></textarea>
+                                                                <textarea class="form-control @error('adresse') is-invalid @enderror" name="adresse"></textarea>
                                                             </div>
+                                                            @error('adresse')
+                                                                    <small class="text-danger"> {{ $message }}</small>
+                                                            @enderror
                                                             {{-- <div class="form-group">
                                                                 <div class="custom-control custom-checkbox mb-5">
                                                                     <input type="checkbox" class="custom-control-input" id="customCheck1-1">
@@ -188,15 +203,23 @@
                                                             <h4 class="text-blue h5 mb-20">Modifier les liens réseaux sociaux</h4>
                                                             <div class="form-group">
                                                                 <label>Facebook URL:</label>
-                                                                <input class="form-control form-control-lg" name="facebook" type="text" placeholder="">
+                                                                <input class="form-control form-control-lg
+                                                                @error('facebook')
+                                                                is-invalid
+                                                                @enderror"
+                                                                       name="facebook" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Linkedin URL:</label>
-                                                                <input class="form-control form-control-lg" name="linkedin" type="text" placeholder="">
+                                                                <input class="form-control form-control-lg @error('linkedin')
+                                                                is-invalid
+                                                                @enderror" name="linkedin" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Dropbox URL:</label>
-                                                                <input class="form-control form-control-lg" name="dropbox" type="text" placeholder="">
+                                                                <input class="form-control form-control-lg @error('dropbox')
+                                                                is-invalid
+                                                                @enderror" name="dropbox" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group fa-pull-right mt-0 pt-30">
                                                                 <input type="submit" class="btn btn-primary bottom-0" value="Valider">

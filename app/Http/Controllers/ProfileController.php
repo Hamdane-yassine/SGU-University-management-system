@@ -102,7 +102,9 @@ class ProfileController extends Controller
         // dd($request->all());
         if($request->input('email')){
             $profile->user->email = $request->input('email');
+            $profile->user->email_verified_at = null;
             $profile->user->sendEmailVerificationNotification();
+            request()->session()->flash('info','lien de vérification a été envoyé!');
         }
         if($request->input('facebook'))
         $profile->facebook = $request->input('facebook');
