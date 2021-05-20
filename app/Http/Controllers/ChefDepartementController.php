@@ -10,6 +10,7 @@ use DataTables;
 use App\Models\Absence;
 use App\Models\Chefdep;
 use App\Models\Emploi;
+use App\Models\env_vars;
 use App\Models\Etudiant;
 use App\services\CalculeNotes;
 use App\Models\Filiere;
@@ -305,7 +306,7 @@ class ChefDepartementController extends Controller
                 $q->on('note.idEtudiant', '=', 'etudiant.idEtudiant')
                     ->where('note.idMatiere', '=', "$matiere->idMatiere");
             })
-            ->select('apogee', 'personne.nom', 'insertion_notes as etat', 'personne.prenom', 'cne', 'controle', 'exam','noteRatt','noteGeneral', 'idNote', 'etudiant.idEtudiant')
+            ->select('apogee', 'personne.nom', 'insertion_notes as etat', 'personne.prenom', 'cne', 'controle', 'exam', 'noteRatt', 'noteGeneral', 'idNote', 'etudiant.idEtudiant')
             ->get();
         if ($request->ajax()) {
             return Datatables::of($notes)
@@ -568,11 +569,10 @@ class ChefDepartementController extends Controller
 
     public function mode(Request $request)
     {
-        if ($request->chefView){
+        if ($request->chefView) {
             // dd($request->all());
             return redirect('/Dashboard');
-        }
-        else {
+        } else {
             return redirect('chef/dashboard');
         }
         return redirect('/');
@@ -580,13 +580,46 @@ class ChefDepartementController extends Controller
 
     public function getResulatEtudiant(Etudiant $etudiant)
     {
-        // $filiere = $etudiant->filiere;
-        // $calc = new CalculeNotes($filiere,$etudiant);
-        // $notes = array(
-        //     "noteAnne" => $calc->CalcAnne(),
-        //     "noteSemestres" =>
-        // );
-        // return view('chef.resultat',['filiere' => $filiere,'etudiant'=>$etudiant]);
+        $filieres = array();
+        foreach ($etudiant->notes as $note) {
+            array_push($filieres, $note->matiere->module->semestre->filiere);
+        }
+        $filieres = array_unique($filieres);
+        $filieresnotes = array();
+        $consratt=-100;
+        $consval=12000;
+        $val = env_vars::where('name','ConstantVal')->select('id','value')->get();
+        $rat = env_vars::where('name','ConstantRat')->select('id','value')->get();
+        if(!$rat->isEmpty() && !$val->isEmpty())
+        {
+            $val =$val->toArray();
+            $rat =$rat->toArray();
+            $consval=$val[0]['value'];
+            $consratt=$rat[0]['value'];
+        }
+        foreach ($filieres as $filiere) {
+            $calc = new CalculeNotes($filiere, $etudiant, $consval,$consratt);
+            $noteSemestres = array();
+            $noteModules = array();
+            foreach ($filiere->semestres as $semestre) {
+                array_push($noteSemestres, array('idSemestre' => $semestre->idSemestre, 'noteNormal' => $calc->CalcSemestreNormal($semestre->idSemestre),'noteRatt' => $calc->CalcSemestreRatt($semestre->idSemestre),'etat' => $calc->EtatSemestre($semestre->idSemestre),'CheckNormal' => $calc->CheckSemestreNormal($semestre->idSemestre),'CheckRatt' => $calc->CheckSemestreRatt($semestre->idSemestre),'etatRatt' => $calc->EtatSemestreRatt($semestre->idSemestre)));
+            }
+            foreach ($filiere->semestres as $semestre) {
+                foreach ($semestre->modules as $module) {
+                    array_push($noteModules, array('idModule' => $module->idModule, 'noteNormal' => $calc->CalcModuleNormal($module->idModule),'noteRatt' => $calc->CalcModuleRatt($module->idModule)));
+                }
+            }
+            array_push($filieresnotes, array(
+                "filiere" => $filiere,
+                "noteAnne" => $calc->CalcAnneNormal(),
+                "noteRatt" => $calc->CalcAnneRatt(),
+                "noteSemestres" => $noteSemestres,
+                "noteModules" => $noteModules,
+                "CheckAnne" => $calc->CheckAnne(),
+                "CheckAnneRatt" => $calc->CheckRatt()
+            ));
+        }
+        return view('chef.resultat',['filieresnotes' => $filieresnotes,'etudiant'=>$etudiant ,'consratt' => $consratt,'consval' => $consval]);
 
     }
 }

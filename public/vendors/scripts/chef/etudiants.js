@@ -17,7 +17,15 @@ var table1 = $(".data-table-export").DataTable({
         },
         {
             data: "cne",
-            name: "cne"
+            render: function(data, type, row) {
+                return (
+                    '<a class="card-link text-primary" href="/chef/resultat/' +
+                    row.idEtudiant +
+                    '" target="_blank" style="padding-left:15px">' +
+                    data +
+                    "</a>"
+                );
+            }
         },
         {
             data: "email",

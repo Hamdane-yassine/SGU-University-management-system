@@ -46,7 +46,7 @@
                                 </div>
                             </section>
                             <div class="text-right">
-                                <button type="button" onclick="reset();$('html, body').animate({scrollTop: 0 }, 'fast');"
+                                <button type="button" onclick="$('html, body').animate({scrollTop: 0 }, 'fast');"
                                     class="btn btn-secondary" style="text-decoration: none;">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Ajouter">
                             </div>
@@ -107,7 +107,7 @@
                                 </div>
                             </section>
                             <div class="text-right">
-                                <button type="button" onclick="reset();$('html, body').animate({scrollTop: 0 }, 'fast');"
+                                <button type="button" onclick="$('html, body').animate({scrollTop: 0 }, 'fast');"
                                     class="btn btn-secondary" style="text-decoration: none;">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Ajouter">
                             </div>
@@ -237,7 +237,7 @@
                                 </div>
                             </section>
                             <div class="text-right">
-                                <button type="button" onclick="reset();$('html, body').animate({scrollTop: 0 }, 'fast');"
+                                <button type="button" onclick="$('html, body').animate({scrollTop: 0 }, 'fast');"
                                     class="btn btn-secondary" style="text-decoration: none;">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Ajouter">
                             </div>
@@ -322,9 +322,44 @@
                                 </div>
                             </section>
                             <div class="text-right">
-                                <button type="button" onclick="reset();$('html, body').animate({scrollTop: 0 }, 'fast');"
+                                <button type="button" onclick="$('html, body').animate({scrollTop: 0 }, 'fast');"
                                     class="btn btn-secondary" style="text-decoration: none;">Annuler</button>
                                 <input class="btn btn-primary" type="submit" value="Ajouter">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="pd-20 card-box mb-30">
+                    <div class="wizard-content">
+                        <div>
+                            <h4 class="h4">Constantes de calcul des notes</h4>
+                        </div>
+                        <hr>
+                        <form action="{{ route('EnregistrerVars') }}" class="tab-wizard wizard-circle wizard pl-20"
+                            method="POST" id="upconsts">
+                            @csrf
+                            <section>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Validation</label>
+                                            <input class="form-control" type="number" id="val" name="val" min="0" value="10"
+                                                placeholder="validation" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Rattrapage</label>
+                                            <input class="form-control" type="number" id="rat" name="rat" min="0" value="0"
+                                                placeholder="rattrapage" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="text-right">
+                                <button type="button" onclick="$('html, body').animate({scrollTop: 0 }, 'fast');"
+                                    class="btn btn-secondary" style="text-decoration: none;">Annuler</button>
+                                <input class="btn btn-primary" type="submit" value="Enregistrer">
                             </div>
                         </form>
                     </div>

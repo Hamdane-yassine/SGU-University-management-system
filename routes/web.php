@@ -209,6 +209,7 @@ Route::middleware(['auth','master'])->group(function () {
     Route::post('/master/updatedepartement', [MasterController::class, 'UpdateDepartement'])->name('UpdateDepartement');
     Route::get('/master/departement/{departement}', [MasterController::class, 'getDepartement'])->name('getDepartement');
     Route::post('/master/ajoutedepartement', [MasterController::class, 'AjouterDepartement'])->name('AjouterDepartement');
+    Route::post('/master/enregistrervars', [MasterController::class, 'EnregistrerVars'])->name('EnregistrerVars');
     Route::post('/master/ajoutefiliere', [MasterController::class, 'AjouterFiliere'])->name('AjouterFiliere');
     Route::get('/master/getNewDepartements', [MasterController::class, 'getNewDepartements'])->name('getNewDepartements');
     Route::post('/master/affectersemester', [MasterController::class, 'AffecterSemesteres'])->name('AffecterSemesteres');

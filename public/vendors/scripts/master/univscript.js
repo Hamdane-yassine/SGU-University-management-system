@@ -91,7 +91,8 @@ var table1 = $(".data-table-export").DataTable({
         },
         {
             extend: "excel",
-            text: '<i class="icon-copy fa fa-file-excel-o"></i>&nbsp;&nbspExcel',
+            text:
+                '<i class="icon-copy fa fa-file-excel-o"></i>&nbsp;&nbspExcel',
             exportOptions: {
                 columns: "th:not(:last-child)"
             }
@@ -128,37 +129,33 @@ function ReloadSelects(id) {
 }
 
 function ReloadAllSelects(type) {
-    if(type!="f")
-    {
-    ReloadSelects("ajfildep");
+    if (type != "f") {
+        ReloadSelects("ajfildep");
     }
-    if(type!="s")
-    {
-    ReloadSelects("semdep");
-    jQuery('select[name="semfil"]').empty();
+    if (type != "s") {
+        ReloadSelects("semdep");
+        jQuery('select[name="semfil"]').empty();
     }
-    LoadFixSemester();    
-    if(type!="m")
-    {
-    ReloadSelects("moddep");
-    jQuery('select[name="modsem"]').empty();
-    jQuery('select[name="modfil"]').empty();
-    $('select[name="modfil"]').append(
-        "<option disabled selected>---Sélectionner une filiére---</option>"
-    );
+    LoadFixSemester();
+    if (type != "m") {
+        ReloadSelects("moddep");
+        jQuery('select[name="modsem"]').empty();
+        jQuery('select[name="modfil"]').empty();
+        $('select[name="modfil"]').append(
+            "<option disabled selected>---Sélectionner une filiére---</option>"
+        );
     }
-    if(type!="ma")
-    {
-    ReloadSelects("matdep");
-    jQuery('select[name="matfil"]').empty();
-    $('select[name="matfil"]').append(
-        "<option disabled selected>---Sélectionner une filiére---</option>"
-    );
-    jQuery('select[name="matmod"]').empty();
-    jQuery('select[name="matsem"]').empty();
-    $('select[name="matsem"]').append(
-        "<option disabled selected>---Sélectionner un semestre---</option>"
-    );
+    if (type != "ma") {
+        ReloadSelects("matdep");
+        jQuery('select[name="matfil"]').empty();
+        $('select[name="matfil"]').append(
+            "<option disabled selected>---Sélectionner une filiére---</option>"
+        );
+        jQuery('select[name="matmod"]').empty();
+        jQuery('select[name="matsem"]').empty();
+        $('select[name="matsem"]').append(
+            "<option disabled selected>---Sélectionner un semestre---</option>"
+        );
     }
 }
 function LoadFilieres(depsel, filsel) {
@@ -215,7 +212,8 @@ function LoadSemesters(filsel, semsel) {
                         $('select[name="' + semsel + '"]').append(
                             '<option value="' +
                                 value.idSemestre +
-                                '">'+'S'+
+                                '">' +
+                                "S" +
                                 value.num +
                                 "</option>"
                         );
@@ -254,8 +252,7 @@ function LoadModules(semsel, modsel) {
         }
     });
 }
-function LoadFixSemester()
-{
+function LoadFixSemester() {
     jQuery('select[name="semester[]"]').empty();
     jQuery('select[name="semester[]"]').append('<option value="1">S1</option>');
     jQuery('select[name="semester[]"]').append('<option value="2">S2</option>');
@@ -266,7 +263,9 @@ function LoadFixSemester()
     jQuery('select[name="semester[]"]').append('<option value="7">S7</option>');
     jQuery('select[name="semester[]"]').append('<option value="8">S8</option>');
     jQuery('select[name="semester[]"]').append('<option value="9">S9</option>');
-    jQuery('select[name="semester[]"]').append('<option value="10">S10</option>');
+    jQuery('select[name="semester[]"]').append(
+        '<option value="10">S10</option>'
+    );
 }
 function getDepInfo(id) {
     $.ajax({
@@ -349,7 +348,8 @@ $("#ajfiliere").submit(function(e) {
         success: function(data) {
             document.getElementById("msgsuccess").innerHTML =
                 "Filière Ajoutée!";
-            document.getElementById("ajfiliere").reset();
+            document.getElementById("filnom").value = "";
+            document.getElementById("rac").value = "";
             $("#success-modal").modal("show");
             ReloadAllSelects("f");
         }
@@ -364,7 +364,8 @@ $("#affsem").submit(function(e) {
         url: url,
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
-            document.getElementById("msgsuccess").innerHTML ="Les semestres sont Affectés!";
+            document.getElementById("msgsuccess").innerHTML =
+                "Les semestres sont Affectés!";
             ReloadAllSelects("s");
             $("#success-modal").modal("show");
         }
@@ -380,8 +381,9 @@ $("#ajmodule").submit(function(e) {
         data: form.serialize(), // serializes the form's elements.
         success: function(data) {
             document.getElementById("msgsuccess").innerHTML = "Module ajouté!";
-            document.getElementById("ajmodule").reset();
             $("#success-modal").modal("show");
+            document.getElementById("modnom").value = "";
+            document.getElementById("modvh").value = "";
             ReloadAllSelects("m");
         }
     });
@@ -397,9 +399,26 @@ $("#ajmatiere").submit(function(e) {
         success: function(data) {
             document.getElementById("msgsuccess").innerHTML =
                 "Matière ajoutée!";
-            document.getElementById("ajmatiere").reset();
+            document.getElementById("matnom").value = "";
+            document.getElementById("coef").value = "";
+            document.getElementById("matvh").value = "";
             $("#success-modal").modal("show");
             ReloadAllSelects("ma");
+        }
+    });
+});
+$("#upconsts").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var form = $(this);
+    var url = form.attr("action");
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(), // serializes the form's elements.
+        success: function(data) {
+            document.getElementById("msgsuccess").innerHTML =
+                "Constantes mit à jour!";
+            $("#success-modal").modal("show");
         }
     });
 });
