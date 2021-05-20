@@ -69,7 +69,7 @@
                         <a class="dropdown-item" href="{{ url('profile/' . Auth::user()->id) }}"><i
                                 class="dw dw-user1"></i> Profile</a>
                         @if(Auth::user()->hasRole('chefdep'))
-                            <a class="dropdown-item" href="{{ route('chef.mode',['chefView'=> request()->path() == 'chef/dashboard' ? 1 : 0 ]) }}"><i class="dw dw-help"></i>
+                            <a class="dropdown-item" href="{{ route('chef.mode',['changeView'=> request()->path() == 'chef/dashboard' ? 1 : 0 ]) }}"><i class="dw dw-help"></i>
                                 {{ request()->path() === 'chef/dashboard' ? 'Mode professeur' : 'Mode Chef departement' }}
                             </a>
                         @endif
@@ -102,7 +102,7 @@
                 <i class="ion-close-round"></i>
             </div>
         </div>
-        @if (auth()->user()->hasRole('prof'))
+        @if (auth()->user()->hasRole('prof') || request()->session()->get('changeView') == 1)
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -203,7 +203,7 @@
                     </ul>
                 </div>
             </div>
-        @elseif (auth()->user()->hasRole('chefdep'))
+        @elseif (auth()->user()->hasRole('chefdep') && !request()->session()->has('changeView'))
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">

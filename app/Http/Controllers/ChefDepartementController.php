@@ -567,11 +567,15 @@ class ChefDepartementController extends Controller
 
     public function mode(Request $request)
     {
-        if ($request->chefView){
+
+        // dd($request->session()->get('changeView'));
+        $request->session()->put('changeView', $request->changeView);
+        if ($request->changeView){
             // dd($request->all());
             return redirect('/Dashboard');
         }
         else {
+            $request->session()->forget('changeView');
             return redirect('chef/dashboard');
         }
         return redirect('/');
