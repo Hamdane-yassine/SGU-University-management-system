@@ -102,7 +102,7 @@
                 <i class="ion-close-round"></i>
             </div>
         </div>
-        @if (auth()->user()->role == 'prof')
+        @if (auth()->user()->hasRole('prof'))
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -203,7 +203,7 @@
                     </ul>
                 </div>
             </div>
-        @elseif (auth()->user()->role == 'chefdep')
+        @elseif (auth()->user()->hasRole('chefdep'))
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -296,7 +296,7 @@
                     </ul>
                 </div>
             </div>
-        @elseif (auth()->user()->role=='admin')
+        @elseif (auth()->user()->hasRole('admin'))
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -370,7 +370,7 @@
                     </ul>
                 </div>
             </div>
-        @elseif (auth()->user()->role=='master')
+        @elseif (auth()->user()->hasRole('master'))
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
