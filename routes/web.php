@@ -79,6 +79,7 @@ Route::middleware(['auth','chefdep'])->group(function () {
     Route::post('/suppetudiant', [ChefDepartementController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiant');
     Route::post('updateetudiant', [ChefDepartementController::class, 'UpdateEtudiant'])->name('updateEtudiant');
     Route::post('envoyerresultats', [ChefDepartementController::class, 'EnvoyerNotes'])->name('EnvoyerResultats');
+    Route::post('envoyerresultatetudiant', [ChefDepartementController::class, 'EnvoyerNote'])->name('EnvoyerResultatEtudiant');
     Route::get('/chef/matieres/{filiere}', [ChefDepartementController::class, 'Matieres']);
     Route::get('/chef/notes/{matiere}', [App\Http\Controllers\ChefDepartementController::class, 'getNotes']);
     Route::get('/chef/NotesList/{matiere}', [App\Http\Controllers\ChefDepartementController::class, 'getListNotes'])->name('ListNotesChef');

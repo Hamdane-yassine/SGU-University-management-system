@@ -7,8 +7,16 @@
                 <div class="card-box mb-30">
                     <div class="pd-20 row pt-30">
                         <div class="col-md-6 col-sm-12">
-                            <h4 class="text-blue h4">{{ $etudiant->personne->nom . ' ' . $etudiant->personne->prenom }}
-                            </h4>
+                            <h4 class="text-blue h4">{{ $etudiant->personne->nom . ' ' . $etudiant->personne->prenom }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-12 text-right">
+                            <div class="text-right font-14 text-secondary weight-500">
+                                <form action="{{ route('EnvoyerResultatEtudiant') }}" method="POST" id="envres">
+                                    @csrf
+                                    <input type="hidden" name="idEtudiantResultat" value="{{ $etudiant->idEtudiant }}">
+                                    <input class="btn btn-secondary btn-sm" type="submit" value="Envoyer le résultat">
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <ul class="nav nav-tabs customtab" role="tablist">
@@ -235,6 +243,20 @@
                 </div>
                 @include('layouts.footer')
             </div>
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20 pt-5" id="msg"></h3>
+                            <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Terminer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -243,4 +265,5 @@
     <script src="{{ asset('src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
     <script src="{{ asset('src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js') }}"></script>
     <script src="{{ asset('vendors/scripts/advanced-components.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/chef/resultat.js') }}"></script>
 @endsection
