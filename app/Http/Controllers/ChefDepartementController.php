@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmploiEmail;
+use App\Jobs\SendNoteEmail;
 use App\Models\Departement;
 use Illuminate\Support\Facades\Auth;
 use DataTables;
@@ -572,11 +573,10 @@ class ChefDepartementController extends Controller
 
         // dd($request->session()->get('changeView'));
         $request->session()->put('changeView', $request->changeView);
-        if ($request->changeView){
+        if ($request->changeView) {
             // dd($request->all());
             return redirect('/Dashboard');
-        }
-        else {
+        } else {
             $request->session()->forget('changeView');
             return redirect('chef/dashboard');
         }
@@ -591,27 +591,26 @@ class ChefDepartementController extends Controller
         }
         $filieres = array_unique($filieres);
         $filieresnotes = array();
-        $consratt=-100;
-        $consval=12000;
-        $val = env_vars::where('name','ConstantVal')->select('id','value')->get();
-        $rat = env_vars::where('name','ConstantRat')->select('id','value')->get();
-        if(!$rat->isEmpty() && !$val->isEmpty())
-        {
-            $val =$val->toArray();
-            $rat =$rat->toArray();
-            $consval=$val[0]['value'];
-            $consratt=$rat[0]['value'];
+        $consratt = -100;
+        $consval = 12000;
+        $val = env_vars::where('name', 'ConstantVal')->select('id', 'value')->get();
+        $rat = env_vars::where('name', 'ConstantRat')->select('id', 'value')->get();
+        if (!$rat->isEmpty() && !$val->isEmpty()) {
+            $val = $val->toArray();
+            $rat = $rat->toArray();
+            $consval = $val[0]['value'];
+            $consratt = $rat[0]['value'];
         }
         foreach ($filieres as $filiere) {
-            $calc = new CalculeNotes($filiere, $etudiant, $consval,$consratt);
+            $calc = new CalculeNotes($filiere, $etudiant, $consval, $consratt);
             $noteSemestres = array();
             $noteModules = array();
             foreach ($filiere->semestres as $semestre) {
-                array_push($noteSemestres, array('idSemestre' => $semestre->idSemestre, 'noteNormal' => $calc->CalcSemestreNormal($semestre->idSemestre),'noteRatt' => $calc->CalcSemestreRatt($semestre->idSemestre),'etat' => $calc->EtatSemestre($semestre->idSemestre),'CheckNormal' => $calc->CheckSemestreNormal($semestre->idSemestre),'CheckRatt' => $calc->CheckSemestreRatt($semestre->idSemestre),'etatRatt' => $calc->EtatSemestreRatt($semestre->idSemestre)));
+                array_push($noteSemestres, array('idSemestre' => $semestre->idSemestre, 'noteNormal' => $calc->CalcSemestreNormal($semestre->idSemestre), 'noteRatt' => $calc->CalcSemestreRatt($semestre->idSemestre), 'etat' => $calc->EtatSemestre($semestre->idSemestre), 'CheckNormal' => $calc->CheckSemestreNormal($semestre->idSemestre), 'CheckRatt' => $calc->CheckSemestreRatt($semestre->idSemestre), 'etatRatt' => $calc->EtatSemestreRatt($semestre->idSemestre)));
             }
             foreach ($filiere->semestres as $semestre) {
                 foreach ($semestre->modules as $module) {
-                    array_push($noteModules, array('idModule' => $module->idModule, 'noteNormal' => $calc->CalcModuleNormal($module->idModule),'noteRatt' => $calc->CalcModuleRatt($module->idModule)));
+                    array_push($noteModules, array('idModule' => $module->idModule, 'noteNormal' => $calc->CalcModuleNormal($module->idModule), 'noteRatt' => $calc->CalcModuleRatt($module->idModule)));
                 }
             }
             array_push($filieresnotes, array(
@@ -624,7 +623,56 @@ class ChefDepartementController extends Controller
                 "CheckAnneRatt" => $calc->CheckRatt()
             ));
         }
-        return view('chef.resultat',['filieresnotes' => $filieresnotes,'etudiant'=>$etudiant ,'consratt' => $consratt,'consval' => $consval]);
-
+        return view('chef.resultat', ['filieresnotes' => $filieresnotes, 'etudiant' => $etudiant, 'consratt' => $consratt, 'consval' => $consval]);
+    }
+    public function EnvoyerNotes()
+    {
+        $idFiliere = request('idFiliereResultat');
+        $filiere = Filiere::find($idFiliere);
+        $consratt = 6;
+        $consval = 12;
+        $val = env_vars::where('name', 'ConstantVal')->select('id', 'value')->get();
+        $rat = env_vars::where('name', 'ConstantRat')->select('id', 'value')->get();
+        if (!$rat->isEmpty() && !$val->isEmpty()) {
+            $val = $val->toArray();
+            $rat = $rat->toArray();
+            $consval = $val[0]['value'];
+            $consratt = $rat[0]['value'];
+        }
+        if ($filiere) {
+            foreach ($filiere->Etudiants as $etudiant) {
+                $filieres = array();
+                array_push($filieres, $filiere);
+                $filieres = array_unique($filieres);
+                $filieresnotes = array();
+                foreach ($filieres as $filiere) {
+                    $calc = new CalculeNotes($filiere, $etudiant, $consval, $consratt);
+                    $noteSemestres = array();
+                    $noteModules = array();
+                    foreach ($filiere->semestres as $semestre) {
+                        array_push($noteSemestres, array('idSemestre' => $semestre->idSemestre, 'noteNormal' => $calc->CalcSemestreNormal($semestre->idSemestre), 'noteRatt' => $calc->CalcSemestreRatt($semestre->idSemestre), 'etat' => $calc->EtatSemestre($semestre->idSemestre), 'CheckNormal' => $calc->CheckSemestreNormal($semestre->idSemestre), 'CheckRatt' => $calc->CheckSemestreRatt($semestre->idSemestre), 'etatRatt' => $calc->EtatSemestreRatt($semestre->idSemestre)));
+                    }
+                    foreach ($filiere->semestres as $semestre) {
+                        foreach ($semestre->modules as $module) {
+                            array_push($noteModules, array('idModule' => $module->idModule, 'noteNormal' => $calc->CalcModuleNormal($module->idModule), 'noteRatt' => $calc->CalcModuleRatt($module->idModule)));
+                        }
+                    }
+                    array_push($filieresnotes, array(
+                        "filiere" => $filiere,
+                        "noteAnne" => $calc->CalcAnneNormal(),
+                        "noteRatt" => $calc->CalcAnneRatt(),
+                        "noteSemestres" => $noteSemestres,
+                        "noteModules" => $noteModules,
+                        "CheckAnne" => $calc->CheckAnne(),
+                        "CheckAnneRatt" => $calc->CheckRatt()
+                    ));
+                }
+                $mailData = [
+                    'mailTo' => $etudiant->email, 'filieresnotes' => $filieresnotes,
+                    'etudiant' => $etudiant, 'consval' => $consval, 'consratt' => $consratt
+                ];
+                SendNoteEmail::dispatch($mailData);
+            }
+        }
     }
 }
