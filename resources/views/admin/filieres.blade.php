@@ -15,8 +15,8 @@
                                     <th>N°</th>
                                     <th>Nom</th>
                                     <th>Niveau</th>
-                                    <th>Diplome</th>
-                                    <th>Les etudiants</th>
+                                    <th>Diplôme</th>
+                                    <th>Les étudiants</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,7 +48,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Filiere :</label>
+                                            <label>Filière :</label>
                                             <select class="custom-select2 form-control" name="filiere" id="filiere"
                                                 style="width: 100%; height: 38px;">
                                                 @foreach ($departement->filieres as $filiere)
@@ -84,8 +84,8 @@
             <div class="modal-content">
                 <div class="modal-body text-center font-18">
                     <br>
-                    Les étudiants est entraint d'ajouté veullez attender le message de validation dans la bare
-                    des notifications
+                    Les étudiants sont en train d'ajouter.<br> Veuillez attendre le message de validation dans la barre des
+                    notifications.‏
                     <br>
                 </div>
                 <div class="modal-footer justify-content-center">

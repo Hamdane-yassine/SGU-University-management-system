@@ -285,10 +285,10 @@
                                 <dt class="col-sm-4">Spécialité</dt>
                                 <dd class="col-sm-8" id="specialite"></dd>
 
-                                <dt class="col-sm-4">role</dt>
+                                <dt class="col-sm-4">Rôle</dt>
                                 <dd class="col-sm-8" id="outrole"></dd>
 
-                                <dt class="col-sm-4">Maitéres</dt>
+                                <dt class="col-sm-4">Matières</dt>
                                 <dd class="col-sm-8" id="matieres">
                                 </dd>
                             </dl>

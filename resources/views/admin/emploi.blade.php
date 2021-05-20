@@ -53,7 +53,7 @@
                                         <div class="custom-file" style="margin-top: 31px;">
                                             <input type="file" class="custom-file-input" name="uploadedFile"
                                                 accept="application/pdf" required>
-                                            <label class="custom-file-label">Choisir une pdf</label>
+                                            <label class="custom-file-label">Choisir un pdf</label>
                                         </div>
                                     </div>
                                 </div>

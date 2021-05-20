@@ -121,7 +121,7 @@ function getProfInfo(id) {
                 response.matieres.forEach(myFunction);
             } else {
                 document.getElementById("matieres").innerHTML =
-                    "Aucune Matiere";
+                    "Aucune Matière";
             }
             function myFunction(item, index) {
                 document.getElementById("matieres").innerHTML +=

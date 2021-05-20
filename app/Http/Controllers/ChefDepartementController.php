@@ -11,6 +11,7 @@ use App\Models\Absence;
 use App\Models\Chefdep;
 use App\Models\Emploi;
 use App\Models\Etudiant;
+use App\services\CalculeNotes;
 use App\Models\Filiere;
 use App\Models\Matiere;
 use App\Models\Note;
@@ -583,9 +584,13 @@ class ChefDepartementController extends Controller
 
     public function getResulatEtudiant(Etudiant $etudiant)
     {
-       $filiere = $etudiant->filiere;
-
-        return view('chef.resultat',['filiere' => $filiere,'etudiant'=>$etudiant]);
+        // $filiere = $etudiant->filiere;
+        // $calc = new CalculeNotes($filiere,$etudiant);
+        // $notes = array(
+        //     "noteAnne" => $calc->CalcAnne(),
+        //     "noteSemestres" =>
+        // );
+        // return view('chef.resultat',['filiere' => $filiere,'etudiant'=>$etudiant]);
 
     }
 }

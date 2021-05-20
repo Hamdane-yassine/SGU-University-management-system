@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', "")
+@section('title', "Gestion des admins")
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
@@ -189,7 +189,7 @@
                                 <dt class="col-sm-4">E-mail institutionnel</dt>
                                 <dd class="col-sm-8" id="emailins"></dd>
 
-                                <dt class="col-sm-4">role</dt>
+                                <dt class="col-sm-4">rôle</dt>
                                 <dd class="col-sm-8" id="outrole"></dd>
                                 </dd>
                             </dl>
@@ -362,7 +362,7 @@
                         </div>
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-primary" onclick="ren()"
-                                data-dismiss="modal">terminer</button>
+                                data-dismiss="modal">Terminer</button>
                         </div>
                     </div>
                 </div>

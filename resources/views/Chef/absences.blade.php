@@ -14,7 +14,7 @@
                         <thead>
                             <tr>
                                 <th>N°</th>
-                                <th>Matiére</th>
+                                <th>Matière</th>
                                 <th>Filière</th>
                                 <th>Nom du professeur</th>
                                 <th>Date d'absence</th>

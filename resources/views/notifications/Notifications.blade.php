@@ -28,7 +28,7 @@
                                                             <div class="chat_time float-right mb-10"> {{ $notification->created_at }}</div>
                                                         </div>
                                                     @endforeach
-                                                @else  <p>Aucun</p>
+                                                @else  <p>Aucune</p>
                                                 @endif
                                                 </li>
                                             </ul>

@@ -17,10 +17,10 @@
                                     <th>Nom</th>
                                     <th>Prénom</th>
                                     <th>Code Massar</th>
-                                    <th>Controle</th>
+                                    <th>Contrôle</th>
                                     <th>Examen‏</th>
                                     <th>Note</th>
-                                    <th>NoteRatt</th>
+                                    <th>Note Ratt</th>
                                     <th class="datatable-nosort"></th>
                                 </tr>
                             </thead>
@@ -47,7 +47,7 @@
                                 <input type="hidden" id="idMatiere" name="idMatiere" value="{{ $matiere->idMatiere }}">
                                 <div class="form-group row" style="padding-left: 5px;">
                                     <label class="col-sm-12 col-md-4 col-form-label"
-                                        style="margin-right: -70px;">Controle</label>
+                                        style="margin-right: -70px;">Contrôle</label>
                                     <div class="col-sm-12 col-md-4">
                                         <input class="form-control" id="control" name="control" value="" step="0.01"
                                             type="number" required>

@@ -13,12 +13,12 @@
                                 <mtext class="pull-right pt-3 fa-2x fa fa-plus"></mtext>
                             </a>
                             @endcan
-                            <h4>Evenements</h4>
+                            <h4>Evènements</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ redirect('/') }}">Tableau de bord</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Evenements</li>
+                                <li class="breadcrumb-item active" aria-current="page">Evènements</li>
                             </ol>
                         </nav>
                     </div>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="col-md-4 col-sm-12">
                             <div class="card-box mb-30">
-                                <h5 class="pd-20 h5 mb-0">Les évenemenets les plus récents</h5>
+                                <h5 class="pd-20 h5 mb-0">Les évènements les plus récents</h5>
                                 <div class="latest-post">
                                     <ul>
                                         @foreach (\App\Models\Evenement::all()->take(6) as $evt)
@@ -97,9 +97,6 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="footer-wrap pd-20 mb-20 card-box">
-            DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
-        </div> --}}
     </div>
 </div>
 @endsection

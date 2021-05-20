@@ -62,7 +62,7 @@ class NotifyImportFailed extends Notification implements ShouldBroadcast
             'from'=>'Echec d\'importation',
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
-            'brief'=>"Echec d'importation des etudiants pour la filiere ".$this->NomFiliere,
+            'brief'=>"Echec d'importation des étudiants pour la filière ".$this->NomFiliere,
         ];
     }
 }

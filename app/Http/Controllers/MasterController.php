@@ -67,9 +67,7 @@ class MasterController extends Controller
                                     <a href="#" style="color: #265ed7" data-toggle="modal" data-target="#exampleModal" onclick="initModal('.$row->idFiliere.')">
                                         <i class="icon-copy dw dw-edit2"></i>
                                     </a>
-                                    <a href="/master/filiere/delete/'.$row->idFiliere.'" style="color : #e95959" type="button">
-                                        <i class="icon-copy dw dw-delete-3"></i>
-                                    </a>
+                                    <a href="#" style="color : #e95959" onclick="setidFiliereToDelete('.$row->idFiliere.')" data-toggle="modal" data-target="#confirmation-modal" type="button"><i class="icon-copy dw dw-delete-3"></i></a>
                                 </div>
                             </span>';
                 /*$btn = '<div class="table-actions pl-1">
@@ -277,6 +275,11 @@ class MasterController extends Controller
         Filiere::destroy($idFiliere);
         return redirect()->back();
     }
+    public function deleteFilierebyId(Request $request)
+    {
+        Filiere::destroy($request->idFiliereToDelete);
+        return redirect()->back();
+    }
 
 
     public function getSemestresOfFiliere($idFiliere)
@@ -468,8 +471,8 @@ class MasterController extends Controller
             ],
             [
                 'incin.unique' => 'C.N.I.E est déjà existé.',
-                'inemail.unique' => 'Email est déjà utilisée.',
-                'inemailins.unique' => 'Email est déjà utilisée.',
+                'inemail.unique' => 'Email est déjà utilisé.',
+                'inemailins.unique' => 'Email est déjà utilisé.',
                 'inemail.email' => 'Email invalide.',
                 'inemailins.email' => 'Email invalide.'
             ]
@@ -519,8 +522,8 @@ class MasterController extends Controller
             ],
             [
                 'ajcin.unique' => 'C.N.I.E est déjà existé.',
-                'ajemail.unique' => 'Email est déjà utilisée.',
-                'ajemailins.unique' => 'Email est déjà utilisée.',
+                'ajemail.unique' => 'Email est déjà utilisé.',
+                'ajemailins.unique' => 'Email est déjà utilisé.',
                 'ajemail.email' => 'Email invalide.',
                 'ajemailins.email' => 'Email invalide.'
             ]

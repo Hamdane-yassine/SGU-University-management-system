@@ -31,7 +31,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            <h4 class="h4">transmission des étudiants</h4>
+                            <h4 class="h4">Transmission des étudiants</h4>
                         </div>
                         <hr>
                         <form action="{{ route('transEtudiants') }}" class="tab-wizard wizard-circle wizard pl-20" method="POST" id="transetud">
@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Vers les filieres :</label>
+                                            <label>Vers les filières :</label>
                                             <select class="custom-select2 form-control" name="fil" id="fil"
                                                 style="width: 100%;" required>
                                                 @foreach ($filieres as $fil)
@@ -84,13 +84,13 @@
                                             <label></label>
                                             <div class="custom-control custom-radio mb-5">
                                                 <input type="radio" id="customRadio2" name="customRadio" value="S" class="custom-control-input">
-									        	<label class="custom-control-label" for="customRadio2">Sélectioné les étudiants</label>
+									        	<label class="custom-control-label" for="customRadio2">Sélectionner les étudiants</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Sélectioné:</label>
+                                            <label>Sélectionner:</label>
                                             <select class="custom-select2 form-control" multiple="multiple" id="etudiantsel"
                                                 name="etudiantsel[]" style="width: 100%;  height: 35px;">
                                                 @foreach ($filiere->etudiants as $etudiant)
@@ -386,11 +386,11 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center font-18">
-                            <h3 class="mb-20 pt-5">transmission réussie!</h3>
+                            <h3 class="mb-20 pt-5">Transmission réussie!</h3>
                             <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Terminer</button>
                         </div>
                     </div>
                 </div>

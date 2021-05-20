@@ -48,7 +48,9 @@
                                             </font>
                                         </td>
                                         <td>SE{{ $semestre->num }}</td>
-                                        <td>16.19</td>
+                                        <td>
+                                                
+                                        </td>
                                         <td>Validé</td>
                                         <td></td>
                                         <td></td>
@@ -60,8 +62,28 @@
                                                 <font style="padding-left: 50px">{{ $module->nom }}</font>
                                             </td>
                                             <td>MO</td>
-                                            <td>17.75</td>
-                                            <td>Validé</td>
+                                            <td>
+                                                @php
+                                                    $noteModule=0;
+                                                @endphp
+                                                @foreach ($module->matieres as $matiere)
+                                                    @foreach ($etudiant->notes as $note)
+                                                        @if ($note->matiere->idMatiere == $matiere->idMatiere)
+                                                            @php
+                                                                $noteModule+=$note->noteGeneral*($matiere->coeff/100);
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                                {{ round($noteModule,2) }}
+                                            </td>
+                                            <td>
+                                                @if ($noteModule >= 12)
+                                                    Validé
+                                                @else
+                                                    Non validé
+                                                @endif               
+                                            </td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -74,7 +96,7 @@
                                                 <td>EM</td>
                                                 <td>
                                                     @foreach ($etudiant->notes as $note)
-                                                        @if ($note->matiere->idMatiere==$matiere->idMatiere)
+                                                        @if ($note->matiere->idMatiere == $matiere->idMatiere)
                                                             {{ $note->noteGeneral }}
                                                         @endif
                                                     @endforeach

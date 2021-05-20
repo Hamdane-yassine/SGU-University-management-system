@@ -57,10 +57,10 @@ class NotifyInfoChanged extends Notification implements ShouldBroadcast
     {
         return [
             'image' => '/vendors/images/success.svg',
-            'from'=>'Mettre à jours du profile',
+            'from'=>'Mettre à jours du profil',
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
-            'brief'=>'Votre profile est mis à jours',
+            'brief'=>'Votre profil est mis à jours',
         ];
     }
 }

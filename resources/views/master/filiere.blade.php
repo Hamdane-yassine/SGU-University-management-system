@@ -1,11 +1,11 @@
     @extends('layouts.app')
-    @section('title', 'filieres')
+    @section('title', 'filières')
     @section('content')
         <div class="main-container">
 
             <div class="pd-20 mb-20 card-box">
                 <div class="clearfix">
-                    <h4 class="text-blue h4">Table des Filieres : </h4>
+                    <h4 class="text-blue h4">Table des Filières : </h4>
                     <p class="mb-26"></p>
                 </div>
                 <table class="data-table table stripe hover nowrap">
@@ -15,9 +15,9 @@
                             <th>Nom</th>
                             <th>Raccourcie</th>
                             <th>Niveau</th>
-                            <th>Diplome</th>
+                            <th>Diplôme</th>
                             <th>Nombre Etudiants</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,10 +36,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Filiere : </label>
+                                        <label>Filière : </label>
                                         <select class="custom-select2 form-control" style="width: 100%; height: 38px;"
                                             name="filieres1" required>
-                                            <option>--select a filiere--</option>
+                                            <option>--Sélectionner une filière--</option>
                                             @foreach ($filieres as $filiereX)
                                                 <option value="{{ $filiereX->idFiliere }}">
                                                     {{ $filiereX->nom }}-{{ $filiereX->niveau }}</option>
@@ -77,10 +77,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Filiere :</label>
+                                        <label>Filière :</label>
                                         <select class="custom-select2 form-control" style="width: 100%; height: 38px;"
                                             name="filiere2">
-                                            <option>--sélectionner une filiere--</option>
+                                            <option>--Sélectionner une filière--</option>
                                             @foreach ($filieres as $filiere)
                                                 <option value="{{ $filiere->idFiliere }}">
                                                     {{ $filiere->nom }}-{{ $filiere->niveau }}</option>
@@ -125,7 +125,7 @@
             <div class="pd-20 card-box mb-30">
                 <div class="wizard-content">
                     <div>
-                        <h4 class="h4 d-inline">Modifier Matiere : </h4>
+                        <h4 class="h4 d-inline">Modifier une Matière : </h4>
                     </div>
                     <hr>
                     <form id="deleteMatiere" class="tab-wizard wizard-circle wizard pl-20" method="POST" enctype="multipart/form-data" action="/master/deleteMatiere">
@@ -137,7 +137,7 @@
                                         <label>Filiere :</label>
                                         <select class="custom-select2 form-control" style="width: 100%; height: 38px;"
                                             name="filiere3">
-                                            <option>--sélectionner une filiere--</option>
+                                            <option>--Sélectionner une filière--</option>
                                             @foreach ($filieres as $filiere)
                                                 <option value="{{ $filiere->idFiliere }}">
                                                     {{ $filiere->nom }}{{ $filiere->niveau }}</option>
@@ -168,7 +168,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Matiere :</label>
+                                        <label>Matière :</label>
                                         <select class="custom-select2 form-control" style="width: 100%; height: 38px;"
                                             name="matiere3" required>
                                         </select>
@@ -255,13 +255,41 @@
                     </div>
                 </div>
 
+                <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body text-center font-18">
+                                <h4 class="padding-top-30 mb-30 weight-500">Vous êtes sûr ?</h4>
+                                <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                                    <div class="col-6">
+                                        <button type="button"
+                                            class="btn btn-secondary border-radius-100 btn-block confirmation-btn"
+                                            data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                        NON
+                                    </div>
+                                    <div class="col-6">
+                                        <form action="{{ route('deleteFiliere') }}" method="POST" id="suppadmin">
+                                            @csrf
+                                            <input type="hidden" id="idFiliereToDelete" name="idFiliereToDelete" value="">
+                                            <button type="submit"
+                                                class="btn btn-primary border-radius-100 btn-block confirmation-btn"><i
+                                                    class="fa fa-check"></i></button>
+                                            OUI
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

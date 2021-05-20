@@ -6,7 +6,7 @@
             <div class="min-height-200px">
                 <div class="card-box mb-30">
                     <div class="pd-20">
-                        <h4 class="text-blue h4">Les departements</h4>
+                        <h4 class="text-blue h4">Les départements</h4>
                     </div>
                     <div class="pb-20">
                         <table class="table hover multiple-select-row data-table-export nowrap">
@@ -14,7 +14,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nom</th>
-                                    <th>Insértion des notes</th>
+                                    <th>Insertion des notes</th>
                                     <th>Nb des filières</th>
                                     <th>Nb des professeurs</th>
                                     <th class="datatable-nosort">Actions</th>
@@ -28,7 +28,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            <h4 class="h4">Ajouter une departement</h4>
+                            <h4 class="h4">Ajouter un département</h4>
                         </div>
                         <hr>
                         <form action="{{ route('AjouterDepartement') }}" class="tab-wizard wizard-circle wizard pl-20"
@@ -66,7 +66,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Departement :</label>
+                                            <label>Département :</label>
                                             <select class="custom-select2 form-control" name="ajfildep" id="ajfildep"
                                                 style="width: 100%; height: 45px;" required>
                                                 @foreach ($departements as $departement)
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Diplome :</label>
+                                            <label>Diplôme :</label>
                                             <select class="custom-select2 form-control" name="diplome" id="diplome"
                                                 style="width: 100%; height: 45px;" required>
                                                 <option value="DEUG" selected>DEUG</option>
@@ -117,7 +117,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            <h4 class="h4">Affectation des semesteres</h4>
+                            <h4 class="h4">Affectation des semestres</h4>
                         </div>
                         <hr>
                         <form action="{{ route('AffecterSemesteres') }}" class="tab-wizard wizard-circle wizard pl-20"
@@ -127,10 +127,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Departement :</label>
+                                            <label>Département :</label>
                                             <select class="custom-select2 form-control" name="semdep" id="semdep"
                                                 style="width: 100%; height: 45px;" required>
-                                                <option disabled selected>---Sélectioné une département---
+                                                <option disabled selected>---Sélectionner un département---
                                                 </option>
                                                 @foreach ($departements as $departement)
                                                     <option value="{{ $departement->idDepartement }}">
@@ -151,7 +151,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Semester :</label>
+                                            <label>Semestre :</label>
                                             <select class="custom-select2 form-control" multiple="multiple" id="semester"
                                                 name="semester[]" style="width: 100%;">
                                                 <option value="1">S1</option>
@@ -190,10 +190,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Departement :</label>
+                                            <label>Département :</label>
                                             <select class="custom-select2 form-control" name="moddep" id="moddep"
                                                 style="width: 100%; height: 45px;" required>
-                                                <option disabled selected>---Sélectioné une département---</option>
+                                                <option disabled selected>---Sélectionner un département---</option>
                                                 @foreach ($departements as $departement)
                                                     <option value="{{ $departement->idDepartement }}">
                                                         {{ $departement->nom }}</option>
@@ -206,7 +206,7 @@
                                             <label>Filière :</label>
                                             <select class="custom-select2 form-control" name="modfil" id="modfil"
                                                 style="width: 100%; height: 45px;" required>
-                                                <option disabled selected>---Sélectioné une filiére---</option>
+                                                <option disabled selected>---Sélectionner une filiére---</option>
                                             </select>
                                         </div>
                                     </div>
@@ -214,7 +214,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Semester :</label>
+                                            <label>Semestre :</label>
                                             <select class="custom-select2 form-control" name="modsem" id="modsem"
                                                 style="width: 100%; height: 45px;" required>
                                             </select>
@@ -222,7 +222,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label>Nom de module :</label>
+                                            <label>Nom du module :</label>
                                             <input class="form-control" type="text" id="modnom" name="modnom"
                                                 placeholder="Nom" required>
                                         </div>
@@ -247,7 +247,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="wizard-content">
                         <div>
-                            <h4 class="h4">Ajouter des matieres</h4>
+                            <h4 class="h4">Ajouter des matières</h4>
                         </div>
                         <hr>
                         <form action="{{ route('AjouteMatiere') }}" class="tab-wizard wizard-circle wizard pl-20"
@@ -257,10 +257,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Departement :</label>
+                                            <label>Département :</label>
                                             <select class="custom-select2 form-control" name="matdep" id="matdep"
                                                 style="width: 100%; height: 45px;" required>
-                                                <option disabled selected>---Sélectioné une département---</option>
+                                                <option disabled selected>---Sélectionner un département---</option>
                                                 @foreach ($departements as $departement)
                                                     <option value="{{ $departement->idDepartement }}">
                                                         {{ $departement->nom }}</option>
@@ -273,7 +273,7 @@
                                             <label>Filière :</label>
                                             <select class="custom-select2 form-control" name="matfil" id="matfil"
                                                 style="width: 100%; height: 45px;" required>
-                                                <option disabled selected>---Sélectioné une filiére---</option>
+                                                <option disabled selected>---Sélectionner une filière---</option>
                                             </select>
                                         </div>
                                     </div>
@@ -281,10 +281,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Semester :</label>
+                                            <label>Semestre :</label>
                                             <select class="custom-select2 form-control" name="matsem" id="matsem"
                                                 style="width: 100%; height: 45px;" required>
-                                                <option disabled selected>---Sélectioné une semester---</option>
+                                                <option disabled selected>---Sélectionner un semestre---</option>
                                             </select>
                                         </div>
                                     </div>
@@ -300,7 +300,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Nom du matiére :</label>
+                                            <label>Nom du matière :</label>
                                             <input class="form-control" type="text" id="matnom" name="matnom"
                                                 placeholder="Nom" required>
                                         </div>
@@ -353,7 +353,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Insértion<br> des notes</label>
+                                <label class="col-sm-12 col-md-2 col-form-label">Insertion<br> des notes</label>
                                 <div class="col-sm-12 col-md-10">
                                     <select class="custom-select col-12" id="etatnote" name="etatnote">
                                         <option value="ouvert" selected>Ouvert</option>
@@ -381,7 +381,7 @@
                     <div class="mb-30 text-center"><img src="{{ asset('vendors/images/success.png') }}"></div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">terminer</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Terminer</button>
                 </div>
             </div>
         </div>

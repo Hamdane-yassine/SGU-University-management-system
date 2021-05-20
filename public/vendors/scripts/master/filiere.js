@@ -11,7 +11,7 @@ $(".data-table").DataTable({
         { data: "shortcut", name: "shortcut" },
         { data: "niveau", name: "niveau" },
         { data: "diplome", name: "diplome" },
-        { 
+        {
             data: "CountEtudiant",
             render: function(data, type, full, meta) {
                     return '<span  style="padding-left: 55px;">' + data + '</span>';
@@ -53,6 +53,16 @@ $(".data-table").DataTable({
 function initModal(idFiliere) {
     document.getElementById("hiddenIdFiliere").value = idFiliere;
 }
+
+function setIdAdmin(id) {
+    document.getElementById("idAdmin").value = id;
+};
+
+
+function setidFiliereToDelete(id) {
+    document.getElementById("idFiliereToDelete").value = id;
+}
+
 jQuery(document).ready(function() {
     jQuery('select[name="filieres1"]').on("change", function() {
         var idFiliere = jQuery(this).val();
@@ -94,7 +104,7 @@ jQuery(document).ready(function() {
                     console.log(data);
                     jQuery('select[name="semestre2"]').empty();
                     $('select[name="semestre2"]').append(
-                        '<option value="" selected>--select Semestre--</option>'
+                        '<option value="" selected>--Sélectionner un semestre--</option>'
                     );
                     jQuery.each(data, function(key, value) {
                         $('select[name="semestre2"]').append(
@@ -154,7 +164,7 @@ jQuery(document).ready(function() {
                     console.log(data);
                     jQuery('select[name="semestre3"]').empty();
                     $('select[name="semestre3"]').append(
-                        '<option value="" selected>--select Semestre--</option>'
+                        '<option value="" selected>--Sélectionner un semestre--</option>'
                     );
                     jQuery.each(data, function(key, value) {
                         $('select[name="semestre3"]').append(
@@ -211,7 +221,7 @@ jQuery(document).ready(function() {
                     console.log(data);
                     jQuery('select[name="module3"]').empty();
                     $('select[name="module3"]').append(
-                        '<option value="" selected>--select module--</option>'
+                        '<option value="" selected>--Sélectionner un module--</option>'
                     );
                     jQuery.each(data, function(key, value) {
                         $('select[name="module3"]').append(
@@ -268,3 +278,5 @@ $("#submit2").click(function() {
 $("#submit3").click(function() {
     $("#deleteMatiere").submit();
 });
+
+
