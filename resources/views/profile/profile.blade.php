@@ -216,7 +216,7 @@
                                                                 @enderror" name="linkedin" type="text" placeholder="">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Dropbox URL:</label>
+                                                                <label>Skype URL:</label>
                                                                 <input class="form-control form-control-lg @error('dropbox')
                                                                 is-invalid
                                                                 @enderror" name="dropbox" type="text" placeholder="">

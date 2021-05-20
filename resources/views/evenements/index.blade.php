@@ -56,9 +56,9 @@
                                                                     <i class="dw dw-more"></i>
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                                    <a class="dropdown-item" href="{{ route('evenement.show',$evenement) }}"><i class="dw dw-eye"></i> View</a>
-                                                                    <a class="dropdown-item" href="{{ route('evenement.edit',$evenement) }}"><i class="dw dw-edit2"></i> Edit</a>
-                                                                    <a class="dropdown-item" href="{{ route('evenement.delete',$evenement) }}"><i class="dw dw-delete-3"></i> Delete</a>
+                                                                    <a class="dropdown-item" href="{{ route('evenement.show',$evenement) }}"><i class="dw dw-eye"></i> Détailes</a>
+                                                                    <a class="dropdown-item" href="{{ route('evenement.edit',$evenement) }}"><i class="dw dw-edit2"></i> Editer</a>
+                                                                    <a class="dropdown-item" href="{{ route('evenement.delete',$evenement) }}"><i class="dw dw-delete-3"></i> Supprimer</a>
                                                                 </div>
                                                             </div>
                                                             @endcan
