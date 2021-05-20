@@ -26,6 +26,7 @@ use DataTables;
 use Egulias\EmailValidator\Exception\UnclosedComment;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportEtudiants;
+use App\Models\env_vars;
 use App\Models\Profile;
 use App\Models\Semestre;
 use Illuminate\Support\Facades\Log;
@@ -563,6 +564,33 @@ class MasterController extends Controller
 
         $mailData = ['mailTo' => request('ajemail'), 'Username' => strval(request('ajnom') . ' ' . request('ajprenom')), 'email' => request('ajemail'), 'password' => $RandPass];
         SendAccountEmail::dispatch($mailData);
+    }
+
+    public function EnregistrerVars()
+    {
+        $val = env_vars::where('name','ConstantVal')->select('id')->get();
+        $rat = env_vars::where('name','ConstantRat')->select('id')->get();
+        if(!$rat->isEmpty() && !$val->isEmpty())
+        {
+            $val =$val->toArray();
+            $rat =$rat->toArray();
+            $validationval = env_vars::find($val[0]['id']);
+            $validationval->value=request('val');
+            $validationval->save();
+            $validationrat = env_vars::find($rat[0]['id']);
+            $validationrat->value=request('rat');
+            $validationrat->save();
+        }else if($rat->isEmpty() && $val->isEmpty())
+        {
+            $validationval = new env_vars;
+            $validationval->name="ConstantVal";
+            $validationval->value=request('val');
+            $validationval->save();
+            $validationrat = new env_vars;
+            $validationrat->name="ConstantRat";
+            $validationrat->value=request('rat');
+            $validationrat->save();
+        }
     }
 }
 

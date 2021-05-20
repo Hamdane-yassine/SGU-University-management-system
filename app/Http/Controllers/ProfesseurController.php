@@ -276,6 +276,8 @@ class ProfesseurController extends Controller
             if(!empty($ratt))
             {
                 $note->noteRatt=$ratt;
+            }else{
+                $note->noteRatt=null;
             }
             $note->noteGeneral = $notegeneral;
             $note->Coefcontrole = $coefcontrol;
@@ -290,6 +292,8 @@ class ProfesseurController extends Controller
             if(!empty($ratt))
             {
                 $note->noteRatt=$ratt;
+            }else{
+                $note->noteRatt=null;
             }
             $note->noteGeneral = $notegeneral;
             $note->Coefcontrole = $coefcontrol;
