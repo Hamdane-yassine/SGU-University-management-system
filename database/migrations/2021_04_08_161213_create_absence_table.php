@@ -22,6 +22,7 @@ class CreateAbsenceTable extends Migration {
 			$table->string('dateRattrapage');
 			$table->enum('etat', ['rattrapée','en attendant','annulé']);
             $table->string('salle')->nullable();
+			$table->timestamps();
 		});
 	}
 

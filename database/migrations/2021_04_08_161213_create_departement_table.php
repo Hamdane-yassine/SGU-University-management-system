@@ -18,6 +18,7 @@ class CreateDepartementTable extends Migration {
 			$table->id('idDepartement');
             $table->enum('insertion_notes',['ouvert','fermé'])->default('fermé');
 			$table->string('nom', 254);
+			$table->timestamps();
 		});
 	}
 

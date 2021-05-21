@@ -25,6 +25,7 @@ class CreateEtudiantTable extends Migration {
 			$table->string('cinMere', 254);
 			$table->string('cinPere', 254);
 			$table->string('regimeDeCovertureMedicale', 254)->nullable();
+			$table->timestamps();
 		});
 	}
 

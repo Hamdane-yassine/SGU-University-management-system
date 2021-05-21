@@ -1,4 +1,3 @@
 <div class="footer-wrap pd-20 mb-20 card-box">
-    DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
-        Hingarajiya</a>
+   Réalisé pour le projet de fin d’étude diplôme DUT 2020/2021
 </div>

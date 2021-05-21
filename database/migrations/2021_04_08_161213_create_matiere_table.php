@@ -21,6 +21,7 @@ class CreateMatiereTable extends Migration {
 			$table->string('nom', 254);
 			$table->integer('vh');
 			$table->integer('coeff');
+			$table->timestamps();
 		});
 	}
 
