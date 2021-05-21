@@ -18,6 +18,9 @@ $(document).ready(function() {
             },
             error: function(err) {
 
+            },
+            complete: function (data) {
+                document.getElementById("uploadedFile").value = "";
             }
         });
     });

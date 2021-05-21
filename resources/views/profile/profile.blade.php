@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title'," $nomPrenom ")
 @section('content')
     @section('SpecialStyles')
         <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/cropperjs/dist/cropper.css') }}">
