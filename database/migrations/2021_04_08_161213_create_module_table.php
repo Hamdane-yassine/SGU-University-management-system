@@ -19,6 +19,7 @@ class CreateModuleTable extends Migration {
 			$table->bigInteger('idSemestre')->unsigned();
 			$table->string('nom', 254);
 			$table->integer('vh');
+			$table->timestamps();
 		});
 	}
 

@@ -22,6 +22,7 @@ class CreateFiliereTable extends Migration {
 			$table->string('diplome', 254);
 			$table->integer('niveau');
             $table->bigInteger('idEmploi')->unsigned()->nullable();
+			$table->timestamps();
 		});
 	}
 

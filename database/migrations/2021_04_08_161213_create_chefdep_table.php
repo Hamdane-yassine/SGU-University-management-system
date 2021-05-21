@@ -18,7 +18,7 @@ class CreateChefdepTable extends Migration {
 			$table->id('ID_chef');
 			$table->bigInteger('idDepartement')->unsigned();
 			$table->bigInteger('idProf')->unsigned();
-
+            $table->timestamps();
 			
 		});
 	}

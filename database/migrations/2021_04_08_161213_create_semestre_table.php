@@ -19,6 +19,7 @@ class CreateSemestreTable extends Migration {
 			$table->bigInteger('idFiliere')->unsigned();
 			$table->bigInteger('num')->unsigned();
 			$table->string('Annee_universaitaire', 254);
+			$table->timestamps();
 		});
 	}
 
