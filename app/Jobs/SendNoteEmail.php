@@ -35,7 +35,7 @@ class SendNoteEmail implements ShouldQueue
      */
     public function handle()
     {
-        $email = new NoteMail($this->details['filieresnotes'],$this->details['etudiant'],$this->details['consval'],$this->details['consratt']);
+        $email = new NoteMail($this->details['filiere'],$this->details['etudiant']);
         Mail::to($this->details['mailTo'])->send($email);
     }
 }
