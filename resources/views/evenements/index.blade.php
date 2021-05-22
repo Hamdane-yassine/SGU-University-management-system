@@ -17,7 +17,7 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ redirect('/') }}">Tableau de bord</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Evènements</li>
                             </ol>
                         </nav>
