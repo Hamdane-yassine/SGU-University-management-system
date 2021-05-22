@@ -38,7 +38,8 @@ class EtudiantPolicy
                         ->where('idDepartement',$chefsDep)
                         ->pluck('idEtudiant')
                         ->toArray();
-            return in_array($etudiant, $etudiants);
+                        // dd($etudiant);
+            return in_array($etudiant->idEtudiant, $etudiants);
         }
         else if($user->hasRole('prof')){
             $filieres = DB::table('matiere')
