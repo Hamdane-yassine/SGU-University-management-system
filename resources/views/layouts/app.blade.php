@@ -127,9 +127,14 @@
                             </a>
                             <ul class="submenu">
                                 @php
+                                    if(auth()->user()->hasRole('chefdep'))
+                                        $user = \App\Models\Chefdep::find(auth()->user()->getAuthIdentifier());
+                                    else {
+                                        $user =auth()->user();
+                                    }
                                     $filieres = [];
-                                    if (!empty(auth()->user()->professeur->matieres)) {
-                                        foreach (auth()->user()->professeur->matieres as $matiere) {
+                                    if (!empty($user->professeur->matieres)) {
+                                        foreach ($user->professeur->matieres as $matiere) {
                                             array_push($filieres, $matiere->module->semestre->filiere);
                                         }
                                         $filieres = array_unique($filieres);
@@ -169,8 +174,13 @@
                             <ul class="submenu">
                                 @php
                                     $filieres = [];
-                                    if (!empty(auth()->user()->professeur->matieres)) {
-                                        foreach (auth()->user()->professeur->matieres as $matiere) {
+                                    if(auth()->user()->hasRole('chefdep'))
+                                        $userz = \App\Models\Chefdep::find(auth()->user()->getAuthIdentifier());
+                                    else {
+                                        $userz =auth()->user();
+                                    }
+                                    if (!empty($userz->professeur->matieres)) {
+                                        foreach ($userz->professeur->matieres as $matiere) {
                                             array_push($filieres, $matiere->module->semestre->filiere);
                                         }
                                         $filieres = array_unique($filieres);
@@ -227,7 +237,7 @@
                                     étudiants</span>
                             </a>
                             <ul class="submenu">
-                                @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
+                                @foreach (\App\Models\Chefdep::find(auth()->user()->getAuthIdentifier())->professeur->chefdep->departement->filieres as $filiere)
                                     <li><a
                                             href="/chef/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom . ' ' . $filiere->niveau }}</a>
                                     </li>
@@ -242,7 +252,7 @@
                                     class="mtext">Notes</span>
                             </a>
                             <ul class="submenu">
-                                @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
+                                @foreach (\App\Models\Chefdep::find(auth()->user()->getAuthIdentifier())->departement->filieres as $filiere)
                                     <li><a
                                             href="/chef/matieres/{{ $filiere->idFiliere }}">{{ $filiere->nom . ' ' . $filiere->niveau }}</a>
                                     </li>
