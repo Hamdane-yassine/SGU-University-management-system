@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Chefdep;
 use App\Models\Evenement;
+use App\Models\Matiere;
+use App\Models\Professeur;
 use App\Models\User;
 use App\Notifications\NotifyEmailChanged;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -28,6 +30,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/1', function () {
+    // return dd(Chefdep::find(auth()->user()->professeur->chefdep->ID_chef)->ID_chef, Professeur::find(1)->chefdep->ID_chef);
+    dd(auth()->user()->professeur->matieres[0]->module->semestre->idFiliere);
+});
 
 Auth::routes();
 

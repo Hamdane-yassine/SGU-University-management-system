@@ -33,7 +33,7 @@ class EtudiantPolicy
     public function view(User $user, Etudiant $etudiant)
     {
         if($user->hasRole('chefdep')){
-            $chefsDep = Chefdep::find($user->id)->departement->idDepartement;
+            $chefsDep = $user->professeur->chefdep->departement->idDepartement;
             $etudiants = Etudiant::join('filiere','filiere.idFiliere','etudiant.idFiliere')
                         ->where('idDepartement',$chefsDep)
                         ->pluck('idEtudiant')

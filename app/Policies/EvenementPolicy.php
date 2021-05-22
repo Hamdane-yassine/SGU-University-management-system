@@ -25,7 +25,7 @@ class EvenementPolicy
     {
         // dd($user->id, $evenement->chefdep->professeur->user->id)
         // dd(auth()->user()->professeur);
-        return $user->hasRole('master') ? true : ($user->hasRole('chefdep') ? (Chefdep::find($user->id)->professeur->user->id == $evenement->chefdep->professeur->user->id) : false );
+        return $user->hasRole('master') ? true : ($user->hasRole('chefdep') ? $user->professeur->idProf == $evenement->chefdep->professeur->user->id : false );
         // return true;
     }
     public function create(User $user)
@@ -35,7 +35,7 @@ class EvenementPolicy
 
     public function delete(User $user, Evenement $evenement)
     {
-        return auth()->user()->hasRole('master') ? true  : Chefdep::find(auth()->user()->id)->professeur->user->id == Chefdep::find($user->id)->professeur->user->id;
+        return auth()->user()->hasRole('master') ? true  : auth()->user()->professeur->user->id == $user->professeur->user->id;
     }
 
 }

@@ -32,7 +32,7 @@ class ProfesseurPolicy
      */
     public function view(User $user, Professeur $professeur)
     {
-        $chefsDep = Chefdep::find($user->id)->departement->idDepartement;
+        $chefsDep = auth()->user()->professeur->chefdep->departement->idDepartement;
         $profs = Prof_departement::where('idDepartement', $chefsDep)->pluck('idProf')->toArray();
         return in_array($professeur->idProf, $profs);
     }

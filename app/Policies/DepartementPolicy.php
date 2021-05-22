@@ -31,8 +31,7 @@ class DepartementPolicy
      */
     public function view(User $user, Departement $departement)
     {
-
-            return Chefdep::find($user->id)->departement->idDepartement == $departement->idDepartement;
+        return $user->professeur->chefdep->departement->idDepartement == $departement->idDepartement;
     }
 
     /**

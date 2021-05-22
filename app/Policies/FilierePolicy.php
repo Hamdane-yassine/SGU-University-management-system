@@ -36,7 +36,7 @@ class FilierePolicy
             $filieres = DB::table('matiere')
                 ->join('module','matiere.idModule','module.idModule')
                 ->join('semestre','semestre.idSemestre','module.idSemestre')
-                ->where('idProf', Chefdep::find($user->id)->professeur->idProf)
+                ->where('idProf', $user->professeur->idProf)
                 ->distinct()
                 ->pluck('idFiliere')->toArray();
             return in_array($filiere->idFiliere ,$filieres);
@@ -52,7 +52,7 @@ class FilierePolicy
         }
         else if($user->hasRole('chefdep') || request()->session()->get('changeView') == 0){
             // $chefsDep = $user->professeur->chefdep->departement->idDepartement;
-            $chefsDep = Chefdep::find($user->id)->departement->idDepartement;
+            $chefsDep = $user->professeur->chefdep->departement->idDepartement;
             $filieres = Filiere::where('idDepartement', $chefsDep)->pluck('idFiliere')->toArray();
             return in_array($filiere->idFiliere, $filieres);
         }
