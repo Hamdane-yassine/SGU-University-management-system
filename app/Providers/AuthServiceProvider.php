@@ -2,9 +2,23 @@
 
 namespace App\Providers;
 
+use App\Models\Absence;
+use App\Models\Departement;
+use App\Models\Etudiant;
 use App\Models\Evenement;
+use App\Models\Filiere;
+use App\Models\Matiere;
+use App\Models\Note;
+use App\Models\Professeur;
 use App\Models\Profile;
+use App\Policies\AbsencePolicy;
+use App\Policies\DepartementPolicy;
+use App\Policies\EtudiantPolicy;
 use App\Policies\EvenementPolicy;
+use App\Policies\FilierePolicy;
+use App\Policies\MatierePolicy;
+use App\Policies\NotePolicy;
+use App\Policies\ProfesseurPolicy;
 use App\Policies\ProfilePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -23,6 +37,21 @@ class AuthServiceProvider extends ServiceProvider
         Profile::class => ProfilePolicy::class,
         Evenement::class => EvenementPolicy::class,
         User::class => UserPolicy::class,
+
+        // chef
+        Departement::class => DepartementPolicy::class,
+        Absence::class => AbsencePolicy::class,
+        // end chef
+
+        // prof
+        Etudiant::class => EtudiantPolicy::class,
+        Filiere::class => FilierePolicyPolicyPolicy::class,
+        Matiere::class => MatierePolicy::class,
+        Professeur::class => ProfesseurPolicyPolicy::class,
+        Filiere::class => FilierePolicy::class,
+        Note::class => NotePolicy::class,
+        Professeur::class => ProfesseurPolicy::class,
+        // end prof
     ];
 
     /**

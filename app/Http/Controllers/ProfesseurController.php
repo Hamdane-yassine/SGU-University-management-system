@@ -227,13 +227,13 @@ class ProfesseurController extends Controller
         return view('prof.emploi', ['path_to_file' => 'notFound', 'Mine' => 'true']);
     }
 
-    public function getEmploiByFiliere($id)
+    public function getEmploiByFiliere(Request $request,Filiere $filiere)
     {
-        $idEmploi = Filiere::find($id)->idEmploi;
+        $idEmploi = Filiere::find($filiere->idFiliere)->idEmploi;
         if (is_null($idEmploi)) {
             return view('prof.emploi', ['path_to_file' => 'notFound', 'Mine' => 'false']);
         }
-        echo $file_name = Emploi::find($idEmploi)->fileName;
+        $file_name = Emploi::find($idEmploi)->fileName;
         $path_to_file = asset('storage/emploi/filiere/' . $file_name);
         if (Storage::exists('emploi/filiere/' . $file_name)) {;
             return view('prof.emploi', ['path_to_file' => $path_to_file, 'Mine' => 'false']);

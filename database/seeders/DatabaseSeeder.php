@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
 
         // Truncate all tables, except migrations
         // +++++++++++ START +++++++++++++
-        Schema::disableForeignKeyConstraints();
-        $tables = DB::select('SHOW TABLES');
-        foreach ($tables as $table) {
-            if ($table->Tables_in_pfe !== 'migrations')
-                DB::table($table->Tables_in_pfe)->truncate();
-        }
-        Schema::enableForeignKeyConstraints();
+        // Schema::disableForeignKeyConstraints();
+        // $tables = DB::select('SHOW TABLES');
+        // foreach ($tables as $table) {
+        //     if ($table->Tables_in_pfe !== 'migrations')
+        //         DB::table($table->Tables_in_pfe)->truncate();
+        // }
+        // Schema::enableForeignKeyConstraints();
         // +++++++++++ END +++++++++++++++=
 
 
@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Chefdep::factory(20)->create();
         \App\Models\Filiere::factory(100)->create();
         \App\Models\Etudiant::factory(200)->create();
-        \App\Models\Semestre::factory(8)->create();
+        \App\Models\Semestre::factory(100)->create();
         \App\Models\Module::factory(30)->create();
         \App\Models\Matiere::factory(100)->create();
         \App\Models\Note::factory(100)->create();

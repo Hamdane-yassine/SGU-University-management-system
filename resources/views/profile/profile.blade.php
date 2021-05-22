@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title'," $nomPrenom ")
 @section('content')
     @section('SpecialStyles')
         <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/cropperjs/dist/cropper.css') }}">
@@ -315,6 +316,10 @@
             var cropper;
 
             $('#modal').on('shown.bs.modal', function () {
+                var [uploaded] = imgUpload.files;
+                if (uploaded){
+                    image.src = URL.createObjectURL(uploaded);
+                }
                 cropper = new Cropper(image, {
                     autoCropArea: 0.5,
                     dragMode: 'move',
@@ -397,10 +402,6 @@
             if($('.avatar-photo').attr('src') == "{{ url('/vendors/images/user.svg') }}"){
                 $('input[value=Update]').hide();
             }
-
-            $('#modal-close').change(e => {
-                $('#newImage').value = "";
-            });
 
 
             $('#formPhoto').ajaxForm({

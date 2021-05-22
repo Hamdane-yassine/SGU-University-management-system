@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chefdep;
 use App\Models\Evenement;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class EvenementController extends Controller
             ['attachments.max'=>'vous avez uploader plus que 3 fichiers']
         );
         $evenement = Evenement::create([
-            'ID_chef'=>auth()->user()->professeur->chefdep->ID_chef,
+            'ID_chef'=>Chefdep::find(auth()->user()->getAuthIdentifier())->ID_chef,
             'titre'=>$request->input('titre'),
             'date'=>$request->input('date'),
             'html'=>$request->input('corps'),

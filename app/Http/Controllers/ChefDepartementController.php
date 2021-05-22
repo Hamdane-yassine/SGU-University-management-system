@@ -536,10 +536,9 @@ class ChefDepartementController extends Controller
         return view('chef.rattrapage', ['absences' => $absences]);
     }
 
-    public function AnnulerRatt(Request $request, $idAbsence)
+    public function AnnulerRatt(Request $request, Absence $absence)
     {
         //get the old absence instance of absence and update it
-        $absence = Absence::find($idAbsence);
         $absence->etat = 'annulé';
         $absence->save();
 
@@ -550,9 +549,8 @@ class ChefDepartementController extends Controller
         return redirect('/chef/rattrapages');
     }
 
-    public function ValiderRatt(Request $request, $idAbsence)
+    public function ValiderRatt(Request $request,Absence $absence)
     {
-        $absence = Absence::find($idAbsence);
         $absence->etat = 'rattrapée';  //validée
         $absence->salle = $request->salle;
         if (!is_null($request->dateRattOptionnel)) {
@@ -571,13 +569,14 @@ class ChefDepartementController extends Controller
     public function mode(Request $request)
     {
 
-        // dd($request->session()->get('changeView'));
-        $request->session()->put('changeView', $request->changeView);
-        if ($request->changeView) {
-            // dd($request->all());
+        if(!$request->session()->exists('changeView'))
+            $request->session()->put('changeView',1);
+
+        if ($request->session()->get('changeView') == 0) {
+            $request->session()->put('changeView', 1);
             return redirect('/Dashboard');
         } else {
-            $request->session()->forget('changeView');
+            $request->session()->put('changeView', 0);
             return redirect('chef/dashboard');
         }
         return redirect('/');
