@@ -68,8 +68,8 @@
                         <a class="dropdown-item" href="{{ url('profile/' . Auth::user()->id) }}"><i
                                 class="dw dw-user1"></i> Profil</a>
                         @if(Auth::user()->hasRole('chefdep'))
-                            <a class="dropdown-item" href="{{ route('chef.mode',['changeView'=> request()->path() == 'chef/dashboard' ? 1 : 0 ]) }}"><i class="dw dw-help"></i>
-                                {{ request()->path() === 'chef/dashboard' ? 'Mode professeur' : 'Mode Chef departement' }}
+                            <a class="dropdown-item" href="{{ route('chef.mode') }}"><i class="dw dw-help"></i>
+                                {{ request()->session()->get('changeView') ? 'Mode Chef departement' : 'Mode professeur' }}
                             </a>
                         @endif
                         @if (Auth::user()->canImpersonate())
@@ -121,9 +121,14 @@
                             </a>
                             <ul class="submenu">
                                 @php
+                                    if(auth()->user()->hasRole('chefdep'))
+                                        $user = \App\Models\Chefdep::find(auth()->user()->getAuthIdentifier());
+                                    else {
+                                        $user =auth()->user();
+                                    }
                                     $filieres = [];
-                                    if (!empty(auth()->user()->professeur->matieres)) {
-                                        foreach (auth()->user()->professeur->matieres as $matiere) {
+                                    if (!empty($user->professeur->matieres)) {
+                                        foreach ($user->professeur->matieres as $matiere) {
                                             array_push($filieres, $matiere->module->semestre->filiere);
                                         }
                                         $filieres = array_unique($filieres);
@@ -163,8 +168,13 @@
                             <ul class="submenu">
                                 @php
                                     $filieres = [];
-                                    if (!empty(auth()->user()->professeur->matieres)) {
-                                        foreach (auth()->user()->professeur->matieres as $matiere) {
+                                    if(auth()->user()->hasRole('chefdep'))
+                                        $userz = \App\Models\Chefdep::find(auth()->user()->getAuthIdentifier());
+                                    else {
+                                        $userz =auth()->user();
+                                    }
+                                    if (!empty($userz->professeur->matieres)) {
+                                        foreach ($userz->professeur->matieres as $matiere) {
                                             array_push($filieres, $matiere->module->semestre->filiere);
                                         }
                                         $filieres = array_unique($filieres);
@@ -202,7 +212,7 @@
                     </ul>
                 </div>
             </div>
-        @elseif (auth()->user()->hasRole('chefdep') && !request()->session()->has('changeView'))
+        @elseif (auth()->user()->hasRole('chefdep') && request()->session()->get('changeView') == 0)
             <div class="menu-block customscroll">
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
@@ -221,7 +231,7 @@
                                     étudiants</span>
                             </a>
                             <ul class="submenu">
-                                @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
+                                @foreach (\App\Models\Chefdep::find(auth()->user()->getAuthIdentifier())->professeur->chefdep->departement->filieres as $filiere)
                                     <li><a
                                             href="/chef/etudiants/{{ $filiere->idFiliere }}">{{ $filiere->nom . ' ' . $filiere->niveau }}</a>
                                     </li>
@@ -236,7 +246,7 @@
                                     class="mtext">Notes</span>
                             </a>
                             <ul class="submenu">
-                                @foreach (auth()->user()->professeur->chefdep->departement->filieres as $filiere)
+                                @foreach (\App\Models\Chefdep::find(auth()->user()->getAuthIdentifier())->departement->filieres as $filiere)
                                     <li><a
                                             href="/chef/matieres/{{ $filiere->idFiliere }}">{{ $filiere->nom . ' ' . $filiere->niveau }}</a>
                                     </li>

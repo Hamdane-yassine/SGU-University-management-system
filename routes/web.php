@@ -57,40 +57,40 @@ Route::middleware(['auth','prof'])->group(function () {
     Route::post('addRatt', [ProfesseurController::class, 'addRatt']);
     Route::get('/absences', [ProfesseurController::class, 'index']);
     Route::get('/AbsencesList', [ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
-    Route::get('/absences/getMatiere/{idFiliere}', [ProfesseurController::class, 'getMatiere']);
-    Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'Etudiants'])->name('Etudiants');
-    Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList');
-    Route::get('/Etudiant/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiant'])->name('getEtudiant');
+    Route::get('/absences/getMatiere/{idFiliere}', [ProfesseurController::class, 'getMatiere'])->middleware('can:view,idFiliere');
+    Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'Etudiants'])->name('Etudiants')->middleware('can:view,filiere');
+    Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList')->middleware('can:view,filiere');
+    Route::get('/Etudiant/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiant'])->name('getEtudiant')->middleware('can:view,etudiant');
     Route::get('/Dashboard', [App\Http\Controllers\ProfesseurController::class, 'FetchDashBoardData']);
-    Route::get('/notes/{matiere}', [App\Http\Controllers\ProfesseurController::class, 'getNotes'])->name('Matiere');
+    Route::get('/notes/{matiere}', [App\Http\Controllers\ProfesseurController::class, 'getNotes'])->name('Matiere')->middleware('can:view,matiere');
     Route::get('/NotesList/{matiere}', [App\Http\Controllers\ProfesseurController::class, 'getListNotes'])->name('getListNotes');
     Route::get('/emploi/my', [App\Http\Controllers\ProfesseurController::class, 'getMyEmploi']);
-    Route::get('/emploi/filiere/{idFiliere}', [App\Http\Controllers\ProfesseurController::class, 'getEmploiByFiliere']);
-    Route::get('/note/{note}', [App\Http\Controllers\ProfesseurController::class, 'getNote']);
-    Route::get('/Nonote/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiantId']);
+    Route::get('/emploi/filiere/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEmploiByFiliere'])->middleware('can:view,filiere');
+    Route::get('/note/{note}', [App\Http\Controllers\ProfesseurController::class, 'getNote'])->middleware('can:view,note');
+    Route::get('/Nonote/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiantId'])->middleware('can:view,etudiant');
     Route::post('updateNote', [ProfesseurController::class, 'updateNote'])->name('updateNote');
 });
 
 Route::middleware(['auth','chefdep'])->group(function () {
     Route::get('/chef/emploi', [ChefDepartementController::class, 'index']);
-    Route::get('/chef/etudiants/{filiere}', [ChefDepartementController::class, 'Etudiants']);
-    Route::get('/chef/EtudiantsList/{filiere}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiants'])->name('EtudiantsListChef');
-    Route::get('/chef/Etudiant/{etudiant}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiant']);
+    Route::get('/chef/etudiants/{filiere}', [ChefDepartementController::class, 'Etudiants'])->middleware('can:view,filiere');
+    Route::get('/chef/EtudiantsList/{filiere}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiants'])->name('EtudiantsListChef')->middleware('can:view,filiere');
+    Route::get('/chef/Etudiant/{etudiant}', [App\Http\Controllers\ChefDepartementController::class, 'getEtudiant'])->middleware('can:view,etudiant');
     Route::post('/suppetudiant', [ChefDepartementController::class, 'SupprimerEtudiant'])->name('SupprimerEtudiant');
     Route::post('updateetudiant', [ChefDepartementController::class, 'UpdateEtudiant'])->name('updateEtudiant');
     Route::post('envoyerresultats', [ChefDepartementController::class, 'EnvoyerNotes'])->name('EnvoyerResultats');
     Route::post('envoyerresultatetudiant', [ChefDepartementController::class, 'EnvoyerNote'])->name('EnvoyerResultatEtudiant');
-    Route::get('/chef/matieres/{filiere}', [ChefDepartementController::class, 'Matieres']);
+    Route::get('/chef/matieres/{filiere}', [ChefDepartementController::class, 'Matieres'])->middleware('can:view,filiere');
     Route::get('/chef/notes/{matiere}', [App\Http\Controllers\ChefDepartementController::class, 'getNotes']);
     Route::get('/chef/NotesList/{matiere}', [App\Http\Controllers\ChefDepartementController::class, 'getListNotes'])->name('ListNotesChef');
-    Route::get('/chef/professeurs/{departement}', [App\Http\Controllers\ChefDepartementController::class, 'Professeurs']);
-    Route::get('/chef/professeurslist/{departement}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseurs'])->name('getListProfesseurs');
-    Route::get('/chef/professeur/{professeur}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseur']);
-    Route::get('/chef/professeur/getMatiere/{professeur}/{departement}', [ChefDepartementController::class, 'getMatiere']);
+    Route::get('/chef/professeurs/{departement}', [App\Http\Controllers\ChefDepartementController::class, 'Professeurs'])->middleware('can:view,departement');
+    Route::get('/chef/professeurslist/{departement}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseurs'])->name('getListProfesseurs')->middleware('can:view,departement');
+    Route::get('/chef/professeur/{professeur}', [App\Http\Controllers\ChefDepartementController::class, 'getProfesseur'])->middleware('can:view,professeur');
+    Route::get('/chef/professeur/getMatiere/{professeur}/{departement}', [ChefDepartementController::class, 'getMatiere'])->middleware('can:view,departement');
     Route::post('/chef/affectermatiere', [ChefDepartementController::class, 'AffecterMatiere'])->name('AffecterMatiere');
     Route::post('/chef/detachermatiere', [ChefDepartementController::class, 'DetacherMatiere'])->name('DetacherMatiere');
     Route::post('/chef/transetudiant', [ChefDepartementController::class, 'TransEtudiants'])->name('transEtudiants');
-    Route::get('/chef/loadselects/{filiere}', [ChefDepartementController::class, 'getEtudiantsForSelects'])->name('getEtudiantsForSelects');
+    Route::get('/chef/loadselects/{filiere}', [ChefDepartementController::class, 'getEtudiantsForSelects'])->name('getEtudiantsForSelects')->middleware('can:view,filiere');
     Route::get('chef/emploi/filieres', [ChefDepartementController::class, 'getListOfFilieresEmploi'])->name('getFilieresEmploi');
     Route::post('chef/emploi/delete/filiere', [ChefDepartementController::class, 'deleteEmploiFiliere'])->name('deleteEmploiFiliere');
     Route::post('/chef/upload/', [ChefDepartementController::class, 'uploadEmploi'])->name('uploadEmploi');
@@ -99,10 +99,12 @@ Route::middleware(['auth','chefdep'])->group(function () {
     Route::get('/chef/dashboard', [ChefDepartementController::class, 'getChefDashboard']);
     Route::get('/chef/dashboard/Absencesdatatable', [ChefDepartementController::class, 'getAbsencesListForChefDashboard'])->name('getAbsencesListForChefDashboard');
     Route::get('/chef/rattrapages', [ChefDepartementController::class, 'RattrapagesIndex']);
-    Route::post('/chef/rattrapages/valider/{idAbsence}', [ChefDepartementController::class, 'ValiderRatt'])->name('ValiderRatt');
-    Route::post('/chef/rattrapages/annuler/{idAbsence}', [ChefDepartementController::class, 'AnnulerRatt'])->name('AnnulerRatt');
+    // start to verify
+    Route::post('/chef/rattrapages/valider/{absence}', [ChefDepartementController::class, 'ValiderRatt'])->name('ValiderRatt')->middleware('can:update,absence');
+    Route::post('/chef/rattrapages/annuler/{absence}', [ChefDepartementController::class, 'AnnulerRatt'])->name('AnnulerRatt')->middleware('can:update,absence');
+    // end to verify
     Route::get('chef/mode', [ChefDepartementController::class, 'mode'])->name('chef.mode');
-    Route::get('/chef/resultat/{etudiant}', [ChefDepartementController::class, 'getResulatEtudiant']);
+    Route::get('/chef/resultat/{etudiant}', [ChefDepartementController::class, 'getResulatEtudiant'])->middleware('can:view,etudiant');
 });
 
 
@@ -136,34 +138,6 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/profile/' . Auth::user()->getAuthIdentifier());
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-
-// ===============
-Route::get('/{nb}', function ($nb) {
-    // broadcast(new \App\Events\Evt())->toOthers();
-    // \App\Events\Evt::dispatch();
-    // event(new \App\Notifications\NotifyEvent(auth()->user,Evenement::find(1)));
-    // \App\Models\Evenement::factory()->create(['ID_chef'=>auth()->user()->id]);
-    switch ($nb) {
-        case 1:
-            // return Auth::user()->impersonate(User::find(3));
-            return view('test');
-            break;
-        // case 2:
-        //     return view('evenements.event-editor');
-        //     break;
-        case 3:
-            return redirect('/evenement/');
-            break;
-
-            // default:
-            //     return view('Chef.absences');
-            //     break;
-    }
-});
-
-// Route::prefix('/notifications')->group(function () {
-//     // Route::get('', [UserController::class,'Notifs']);
-// });
 
 Route::prefix('profile')->middleware(['auth'])->group(function () {
     Route::get('/{user}', [ProfileController::class, 'show'])->name('profile.show');
