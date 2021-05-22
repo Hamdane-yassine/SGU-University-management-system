@@ -31,6 +31,12 @@
 </head>
 
 <body>
+    @php
+        if(auth()->user()->hasRole('chefdep')){
+            if(!request()->session()->exists('changeView'))
+                request()->session()->put('changeView',0);
+        }
+    @endphp
     <div class="header">
         <div class="header-left">
             <div class="menu-icon dw dw-menu"></div>

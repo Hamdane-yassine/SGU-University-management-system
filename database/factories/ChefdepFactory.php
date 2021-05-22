@@ -21,13 +21,15 @@ class ChefdepFactory extends Factory
      */
     public function definition()
     {
+        static $i = 1;
         return [
-            'idProf' => function (){
-                if(\App\Models\Professeur::count())
-                    return $this->faker->randomElement(\App\Models\Professeur::pluck('idProf'));
-                return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
+            // 'idProf' => function (){
+            //     if(\App\Models\Professeur::count())
+            //         return $this->faker->randomElement(\App\Models\Professeur::pluck('idProf'));
+            //     return \App\Models\Professeur::factory()->create()->get()[0]['idProf'];
 
-            },
+            // },
+            'idProf' => $i++ ,
 
             'idDepartement' => function (){
                 if(\App\Models\Departement::count())
