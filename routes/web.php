@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Chefdep;
 use App\Models\Evenement;
+use App\Models\Matiere;
+use App\Models\Professeur;
 use App\Models\User;
 use App\Notifications\NotifyEmailChanged;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -28,6 +30,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/1', function () {
+    // return dd(Chefdep::find(auth()->user()->professeur->chefdep->ID_chef)->ID_chef, Professeur::find(1)->chefdep->ID_chef);
+    dd(auth()->user()->professeur->matieres[0]->module->semestre->idFiliere);
+});
 
 Auth::routes();
 
@@ -57,7 +64,7 @@ Route::middleware(['auth','prof'])->group(function () {
     Route::post('addRatt', [ProfesseurController::class, 'addRatt']);
     Route::get('/absences', [ProfesseurController::class, 'index']);
     Route::get('/AbsencesList', [ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
-    Route::get('/absences/getMatiere/{idFiliere}', [ProfesseurController::class, 'getMatiere'])->middleware('can:view,idFiliere');
+    Route::get('/absences/getMatiere/{filiere}', [ProfesseurController::class, 'getMatiere'])->middleware('can:view,filiere');
     Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'Etudiants'])->name('Etudiants')->middleware('can:view,filiere');
     Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList')->middleware('can:view,filiere');
     Route::get('/Etudiant/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiant'])->name('getEtudiant')->middleware('can:view,etudiant');

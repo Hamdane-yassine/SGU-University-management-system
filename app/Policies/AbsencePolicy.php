@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Absence;
+use App\Models\Chefdep;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\DB;
@@ -55,9 +56,9 @@ class AbsencePolicy
     public function update(User $user, Absence $absence)
     {
         // if prof in chef dep
-        $chefsDep = Chefdep::find($user->id)->departement->idDepartement;
+        $chefsDep = $user->professeur->chefdep->departement->idDepartement;
         $absneteProf = $absence->professeur->idProf;
-        return DB::table('prof_departement')->where('idProf',$absneteProf)->where('idDepartement',$chefsdep)->exists();
+        return DB::table('prof_departement')->where('idProf',$absneteProf)->where('idDepartement',$chefsDep)->exists();
     }
 
     /**

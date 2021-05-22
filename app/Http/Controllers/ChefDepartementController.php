@@ -569,8 +569,8 @@ class ChefDepartementController extends Controller
     public function mode(Request $request)
     {
 
-        if(!$request->session()->exists('changeView'))
-            $request->session()->put('changeView',1);
+        // if(!$request->session()->exists('changeView'))
+        //     $request->session()->put('changeView',1);
 
         if ($request->session()->get('changeView') == 0) {
             $request->session()->put('changeView', 1);
