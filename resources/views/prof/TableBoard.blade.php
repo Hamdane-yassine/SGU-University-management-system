@@ -64,7 +64,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
                                 <div class="weight-700 font-24 text-dark">{{ $MatiereCount }}</div>
-                                <div class="font-14 text-secondary weight-500">Matières<span style="opacity:0;">xxxx xxxxxx</span></div>
+                                <div class="font-14 text-secondary weight-500">Matières<span style="opacity:0;">xxxx xxxx</span></div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon"><i class="icon-copy fi-book-bookmark" aria-hidden="true"></i>
