@@ -17,7 +17,7 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ redirect('/') }}">Tableau de bord</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Evènements</li>
                             </ol>
                         </nav>
@@ -30,6 +30,7 @@
                         <div class="col-md-8 col-sm-12">
                             <div class="blog-list">
                                 <ul>
+                                    @if($evenements->count())
                                     @foreach ($evenements as $evenement )
                                     <li>
                                         <div class="row no-gutters">
@@ -69,6 +70,15 @@
                                         </div>
                                     </li>
                                     @endforeach
+                                    @else
+                                    <li>
+                                        <div class="chat-body clearfix ml-3">
+                                            <p style="word-wrap: break-word"><span class="d-block text-secondary pb-1">
+                                            </span class="align-self-center" ><i class="fa fa-info-circle mr-1"></i>Aucun événement n'est trouvé pour le moment</span>
+                                            <div class="chat_time float-right mb-10"> </div>
+                                        </div>
+                                    </li>
+                                    @endif
                                 </ul>
                             </div>
                             <div class="blog-pagination">
@@ -82,13 +92,21 @@
                                 <h5 class="pd-20 h5 mb-0">Les évènements les plus récents</h5>
                                 <div class="latest-post">
                                     <ul>
-                                        @foreach (\App\Models\Evenement::all()->take(6) as $evt)
-                                        <li>
-                                            <a href="{{ url('/evenement/'.$evt->idEvenement) }}">{{ $evt->titre }}
-                                                <p class="caption" style="word-break:break-all">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date }}</small></p>
-                                            </a>
-                                        </li>
-                                        @endforeach
+                                        @if(\App\Models\Evenement::first())
+                                            @foreach (\App\Models\Evenement::all()->take(6) as $evt)
+                                            <li>
+                                                <a href="{{ url('/evenement/'.$evt->idEvenement) }}">{{ $evt->titre }}
+                                                    <p class="caption" style="word-break:break-all">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date->format('Y M D') }}</small></p>
+                                                </a>
+                                            </li>
+                                            @endforeach
+                                        @else
+                                        <div class="chat-body clearfix ml-3">
+                                            <p style="word-wrap: break-word"><span class="d-block text-secondary pb-1">
+                                            </span class="align-self-center" ><i class="fa fa-info-circle mr-1"></i>Aucun événement n'est trouvé pour le moment</span>
+                                            <div class="chat_time float-right mb-10"> </div>
+                                        </div>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
