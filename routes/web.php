@@ -64,7 +64,7 @@ Route::middleware(['auth','prof'])->group(function () {
     Route::post('addRatt', [ProfesseurController::class, 'addRatt']);
     Route::get('/absences', [ProfesseurController::class, 'index']);
     Route::get('/AbsencesList', [ProfesseurController::class, 'getAbsences'])->name('getAbsencesList');
-    Route::get('/absences/getMatiere/{idFiliere}', [ProfesseurController::class, 'getMatiere'])->middleware('can:view,idFiliere');
+    Route::get('/absences/getMatiere/{filiere}', [ProfesseurController::class, 'getMatiere'])->middleware('can:view,filiere');
     Route::get('/etudiants/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'Etudiants'])->name('Etudiants')->middleware('can:view,filiere');
     Route::get('/EtudiantsList/{filiere}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiants'])->name('getEtudiantsList')->middleware('can:view,filiere');
     Route::get('/Etudiant/{etudiant}', [App\Http\Controllers\ProfesseurController::class, 'getEtudiant'])->name('getEtudiant')->middleware('can:view,etudiant');

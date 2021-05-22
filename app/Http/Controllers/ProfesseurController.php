@@ -63,9 +63,9 @@ class ProfesseurController extends Controller
         }
     }
 
-    public function getMatiere($idFiliere) //get Matiere based on idFiliere
+    public function getMatiere(Filiere $filiere) //get Matiere based on idFiliere
     {
-        $MatieresList = Filiere::where('filiere.idFiliere', $idFiliere)
+        $MatieresList = Filiere::where('filiere.idFiliere', $filiere->idFiliere)
             ->where('matiere.idProf', Auth::user()->professeur->idProf)
             ->join('semestre', 'filiere.idFiliere', '=', 'semestre.idFiliere')
             ->join('module', 'module.idSemestre', '=', 'semestre.idSemestre')
