@@ -1,5 +1,5 @@
 @if(Auth::User()->notifications->count())
-@foreach (Auth::User()->UnreadNotifications as $notification)
+@foreach (Auth::User()->UnreadNotifications->limit(50) as $notification)
 <li>
     @if($notification->type === 'App\Notifications\NotifyEvent' )
     <a href="{{ url('/evenement/'.$notification->data['idEvent']) .'?idNotif='.$notification->data['idNotif']}}" target="_blank">

@@ -9,7 +9,27 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="title">
                             <h4>{{ $evenement->titre }}</h4>
+                            @can('update', $evenement)
+                            <mtext class="pull-right">
+                                <div class="dropdown mt-10 justify-between">
+                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle text-danger" href="#" role="button" data-toggle="dropdown">
+                                        <i class="dw dw-more"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                        <a class="dropdown-item" href="{{ route('evenement.edit',$evenement) }}"><i class="dw dw-edit2"></i> Editer</a>
+                                        <a class="dropdown-item" href="{{ route('evenement.delete',$evenement) }}"><i class="dw dw-delete-3"></i> Supprimer</a>
+                                    </div>
+                                </div>
+                            </mtext>
+                            @endcan
                         </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('evenement.index') }}">Evénements</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $evenement->titre }}</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -31,7 +51,7 @@
                             </div>
                             <div class="col-md-8 col-sm-12">
                                 <div class=" overflow-hidden mb-30">
-                                    @if($attachments)
+                                    @if(!empty($attachments))
                                     <form method="GET" action="{{ route('evenement.download', $evenement->idEvenement) }}">
                                         <div class="form-group">
                                             <button type="submit" id="download" type="button" class="btn btn-success">

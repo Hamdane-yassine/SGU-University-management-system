@@ -195,7 +195,7 @@
                             <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-globe"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Evènements</span>
+                                    class="mtext">Evénements</span>
                             </a>
                         </li>
                         <li>
@@ -287,7 +287,7 @@
                             <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-globe"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Evènements</span>
+                                    class="mtext">Evénements</span>
                             </a>
                         </li>
                         <li>
@@ -362,7 +362,7 @@
                             <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-globe"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Evènements</span>
+                                    class="mtext">Evénements</span>
                             </a>
                         </li>
                         <li>
@@ -404,7 +404,7 @@
                             <a href="{{ url('/evenement') }}" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-globe"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Evènements</span>
+                                    class="mtext">Evénements</span>
                             </a>
                         </li>
                         <li>

@@ -10,25 +10,14 @@
                             <div class="title">
                                 <h4>Evénements</h4>
                             </div>
-                            {{-- <nav aria-label="breadcrumb" role="navigation">
+                            <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Form</li>
+                                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('evenement.index') }}">Evénements</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ $evenement->titre }}</li>
                                 </ol>
-                            </nav> --}}
+                            </nav>
                         </div>
-                        {{-- <div class="col-md-6 col-sm-12 text-right">
-                            <div class="dropdown">
-                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                    January 2018
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Export List</a>
-                                    <a class="dropdown-item" href="#">Policies</a>
-                                    <a class="dropdown-item" href="#">View Assets</a>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
 
@@ -88,9 +77,22 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>attachments</label>
+                            <label>Image d'entête</label>
                             <div class="custom-file">
-                                <label class="custom-file-label" for="attachments">ajouter des fichiers (max 3 avec image headingImg.*)</label>
+                                <label class="custom-file-label" for="">ajouter une image d'entête</label>
+                                <input id="" name="headingImg" type="file"
+                                    class="custom-file-input @error('headingImg') is-invalid @enderror"
+                                    accept="image/*" >
+                            </div>
+                            @error('headingImg')
+                                <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Pièces jointe</label>
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="attachments">Ajouter des fichiers (max 3)</label>
                                 <input id="attachments" name="attachments[]" type="file"
                                     class="custom-file-input @error('attachments') is-invalid @enderror" multiple>
                             </div>
@@ -121,13 +123,5 @@
     <script src="{{ asset('vendors/scripts/process.js') }}"></script>
     <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
     <script>
-        // $(function(){
-        //         $("input[type = 'submit']").click(function(){
-        //            var $fileUpload = $("input[type='file']");
-        //            if (parseInt($fileUpload.get(0).files.length) > 3){
-        //               alert("You are only allowed to upload a maximum of 3 files");
-        //            }
-        //         });
-        //     });
     </script>
 @endsection

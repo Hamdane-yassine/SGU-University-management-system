@@ -10,12 +10,13 @@
                             <div class="title">
                                 <h4>Evénements</h4>
                             </div>
-                            {{-- <nav aria-label="breadcrumb" role="navigation">
+                            <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Form</li>
+                                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('evenement.index') }}">Evénements</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">créer</li>
                                 </ol>
-                            </nav> --}}
+                            </nav>
                         </div>
                         {{-- <div class="col-md-6 col-sm-12 text-right">
                             <div class="dropdown">
@@ -88,10 +89,22 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>attachments</label>
+                            <label>Image d'entête</label>
                             <div class="custom-file">
-                                <label class="custom-file-label" for="attachments">ajouter des fichiers (max 3 avec image
-                                    headingImg.*)</label>
+                                <label class="custom-file-label" for="">ajouter une image d'entête</label>
+                                <input id="" name="headingImg" type="file"
+                                    class="custom-file-input @error('headingImg') is-invalid @enderror"
+                                    accept="image/*" >
+                            </div>
+                            @error('headingImg')
+                                <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Pièces jointes</label>
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="attachments">ajouter des fichiers (max 3)</label>
                                 <input id="attachments" name="attachments[]" type="file"
                                     class="custom-file-input @error('attachments') is-invalid @enderror" multiple>
                             </div>

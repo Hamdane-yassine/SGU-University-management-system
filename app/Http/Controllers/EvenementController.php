@@ -63,6 +63,7 @@ class EvenementController extends Controller
             'corps'=>'required',
             'attachments.*'=>'file|mimes:png,jpg,pdf|max:20000',
             'attachments'=>'max:3',
+            'headingImg'=>'nullable|file|max:5000|mimes:jpg,jpeg,png',
             ],
             ['attachments.max'=>'vous avez uploader plus que 3 fichiers']
         );
@@ -73,29 +74,23 @@ class EvenementController extends Controller
             'html'=>$request->input('corps'),
             'resume'=>$request->input('resume'),
         ]);
-        // dd($request->file('attachments'));
+
+        if($request->hasFile('headingImg'))
+            $evenement->headingImg = $request->file('headingImg') ? $request->file('headingImg')->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('headingImg')->getClientOriginalName()) : asset('vendors/images/event-default.jpg');
+
         if(is_array($request->file('attachments'))){
             if(count($request->file('attachments')) > 1){
                 $filePaths = array();
                 foreach ($files as $file) {
-                    // $filePaths .= array_push($file->store('attachments/'.$evenement->idEvenement));
-                    if(preg_match('/(headingImg)/',$file->getClientOriginalName()))
-                        $headingImg = $file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName());
-                    else
-                        array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
+                    array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
                 }
                 $evenement->attachments = $filePaths;
             }
             else if(count($request->file('attachments')) == 1){
-                if(preg_match('/(headingImg)/',$request->file('attachments')[0]->getClientOriginalName()))
-                    $headingImg = $request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName());
-                else
                     $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
             }
         }
-        $evenement->headingImg = $headingImg;
         $evenement->save();
-        // $files->store('attachments/'.$evenement->idEvenement);
         return redirect('/evenement/'.$evenement->idEvenement);
     }
 
@@ -153,6 +148,7 @@ class EvenementController extends Controller
             'corps'=>'required',
             'attachments.*'=>'file|mimes:png,jpg,pdf|max:20000',
             'attachments'=>'max:3',
+            'headingImg'=>'nullable|file|max:5000|mimes:jpg,jpeg,png',
             ],
             ['attachments.max'=>'vous avez uploader plus que 3 fichiers']
         );
@@ -164,26 +160,20 @@ class EvenementController extends Controller
         $evenement->html = $request->input('corps');
         $evenement->resume = $request->input('resume');
 
+        if($request->hasFile('headingImg'))
+            $evenement->headingImg = $request->file('headingImg')->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('headingImg')->getClientOriginalName());
+
         // dd($request->file('attachments'));
         if(is_array($request->file('attachments'))){
             if(count($request->file('attachments')) > 1){
+                $filePaths = array();
                 foreach ($files as $file) {
-                    // $filePaths .= array_push($file->store('attachments/'.$evenement->idEvenement));
-                    if(!Storage::exists('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName())){
-                        if(preg_match('/(headingImg)/',$file->getClientOriginalName()))
-                            $evenement->headingImg = $file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName());
-                        else
-                            array_push($evenement->attachments, $file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
-                    }
+                    array_push($filePaths,$file->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$file->getClientOriginalName()));
                 }
+                $evenement->attachments = $filePaths;
             }
             else if(count($request->file('attachments')) == 1){
-                if(!Storage::exists('evenements/'.$evenement->idEvenement.'/attachements',$files[0]->getClientOriginalName())){
-                    if(preg_match('/(headingImg)/',$request->file('attachments')[0]->getClientOriginalName()))
-                        $evenement->headingImg = $request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName());
-                    else
-                        $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
-                }
+                    $evenement->attachments = array($request->file('attachments')[0]->storeAs('evenements/'.$evenement->idEvenement.'/attachements',$request->file('attachments')[0]->getClientOriginalName()));
             }
         }
         $evenement->save();
@@ -204,18 +194,19 @@ class EvenementController extends Controller
 
     public function downloadAttachements(Evenement $evenement)
     {
-        $files = File::files(public_path('storage/evenements/2/attachements'));
+        $files = File::files(public_path('storage/evenements/'.$evenement->idEvenement.'/attachements'));
 
         $zip = new ZipArchive;
 
-        $fileName = '/storage/temp/Example.zip';
+        $fileName = '/storage/temp/Fichiers.zip';
         //if smthing went wrog back to last modif
         if ($zip->open(public_path($fileName), ZipArchive::CREATE|ZipArchive::OVERWRITE) === TRUE)
         {
 
         foreach ($files as $key => $value) {
             $file = basename($value);
-            $zip->addFile($value, $file);
+            if($file != basename($evenement->headingImg))
+                $zip->addFile($value, $file);
         }
 
         $zip->close();

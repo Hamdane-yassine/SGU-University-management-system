@@ -13,12 +13,12 @@
                                 <mtext class="pull-right pt-3 fa-2x fa fa-plus"></mtext>
                             </a>
                             @endcan
-                            <h4>Evènements</h4>
+                            <h4>Evénements</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Evènements</li>
+                                <li class="breadcrumb-item active" aria-current="page">Evénements</li>
                             </ol>
                         </nav>
                     </div>
