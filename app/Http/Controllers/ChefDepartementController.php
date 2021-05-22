@@ -588,6 +588,7 @@ class ChefDepartementController extends Controller
         foreach ($etudiant->notes as $note) {
             array_push($filieres, $note->matiere->module->semestre->filiere);
         }
+        array_push($filieres, $etudiant->filiere);
         $filieres = array_unique($filieres);
         $filieresnotes = array();
         $consratt = -100;

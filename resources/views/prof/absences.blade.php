@@ -111,8 +111,5 @@
         <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('vendors/scripts/dashboard3.js') }}"></script>
-        <script src="{{ asset('src/plugins/jquery-steps/jquery.steps.js') }}"></script>
-        <script src="{{ asset('vendors/scripts/steps-setting.js') }}"></script>
         <script src="{{ asset('vendors/scripts/prof/absences.js') }}"></script>
     @endsection
