@@ -29,22 +29,3 @@
         </div>
     </div>
     @endsection
-    @section('SpecialScripts')
-    <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-    <!-- buttons for Export datatable -->
-    <script src="{{ asset('src/plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/buttons.printprint.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-    <!-- Datatable Setting js -->
-    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
-
-    <script src="{{ asset('vendors/scripts/printThis.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/print.min.js') }}"></script>
-    @endsection
