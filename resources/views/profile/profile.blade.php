@@ -15,7 +15,8 @@
                             </div>
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">Profil</li>
+                                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
+                                    <li class="breadcrumb-item active">Profile</li>
                                 </ol>
                             </nav>
                         </div>
@@ -91,18 +92,27 @@
                                     </li>
                                 </ul>
                             </div>
+                            @if($profile->facebook || $profile->skype || $profile->linkedin)
+
                             <div class="profile-social">
                                 <h5 class="mb-20 h5 text-blue">Réseau sociaux</h5>
                                 <ul class="clearfix">
+                                    @if($profile->facebook)
                                     <li><a href="{{ $profile->facebook }}" class="btn" data-bgcolor="#3b5998" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(59, 89, 152);"><i class="fa fa-facebook"></i></a></li>
-                                    {{-- <li><a href="#" class="btn" data-bgcolor="#1da1f2" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);"><i class="fa fa-twitter"></i></a></li> --}}
+                                    @endif
+                                    @if($profile->skype)
+                                    <li><a href="{{ $profile->skype }}" class="btn" data-bgcolor="#00aff0" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 175, 240);"><i class="fa fa-skype"></i></a></li>
+                                    @endif
+                                    @if($profile->linkedin)
                                     <li><a href="{{ $profile->linkedin }}" class="btn" data-bgcolor="#007bb5" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 123, 181);"><i class="fa fa-linkedin"></i></a></li>
+                                    @endif
+                                    {{-- <li><a href="#" class="btn" data-bgcolor="#1da1f2" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);"><i class="fa fa-twitter"></i></a></li> --}}
                                     {{-- <li><a href="#" class="btn" data-bgcolor="#c32361" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(195, 35, 97);"><i class="fa fa-dribbble"></i></a></li> --}}
                                     {{-- <li><a href="{{ $profile- }}" class="btn" data-bgcolor="#3d464d" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(61, 70, 77);"><i class="fa fa-dropbox"></i></a></li> --}}
                                     {{-- <li><a href="#" class="btn" data-bgcolor="#db4437" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(219, 68, 55);"><i class="fa fa-google-plus"></i></a></li> --}}
-                                    <li><a href="{{ $profile->skype }}" class="btn" data-bgcolor="#00aff0" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 175, 240);"><i class="fa fa-skype"></i></a></li>
                                 </ul>
                             </div>
+                            @endif
                         </div>
                     </div>
                     @can('update', $profile)

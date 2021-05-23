@@ -10,7 +10,9 @@
                         <div class="title">
                             @can('create', App\Models\Evenement::class)
                             <a href="{{ route('evenement.create') }}">
-                                <mtext class="pull-right pt-3 fa-2x fa fa-plus"></mtext>
+                                <div class="pull-right fa-2x">
+                                    <small class="pt-3"><i class="fa fa-plus"></i>  Ajouter</small>
+                                </div>
                             </a>
                             @endcan
                             <h4>Evénements</h4>
