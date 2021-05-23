@@ -10,6 +10,7 @@
         <p style="word-wrap: break-word">{{Str::substr($notification->data['brief'], 0, 50) }}...</p>
     </a>
 </li>
+
 @endforeach
 @endif
 
