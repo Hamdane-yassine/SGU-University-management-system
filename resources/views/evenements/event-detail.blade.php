@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-8 col-sm-12">
                                 <div class=" overflow-hidden mb-30">
-                                    @if(!empty($attachments))
+                                    @if(!empty($attachments[0]))
                                     <form method="GET" action="{{ route('evenement.download', $evenement->idEvenement) }}">
                                         <div class="form-group">
                                             <button type="submit" id="download" type="button" class="btn btn-success">
