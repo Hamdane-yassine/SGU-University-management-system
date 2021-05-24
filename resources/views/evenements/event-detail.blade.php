@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-md-4 col-sm-12">
                             <div class="card-box mb-30">
-                                <h5 class="pd-20 h5 mb-0">les evenement les plus recents</h5>
+                                <h5 class="pd-20 h5 mb-0">Les évènements les plus récents</h5>
                                 {{-- where('id_chef','<>',Auth::user()->ID_chef) --}}
                                 @foreach (\App\Models\Evenement::where('idEvenement','<>',request()->idEvenement)->orderBy('created_at','DESC')->take(5)->get() as $evt)
                                     <div class="latest-post pd-1">
