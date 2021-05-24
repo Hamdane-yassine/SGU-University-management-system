@@ -606,6 +606,17 @@ class AdminController extends Controller
     {
         $idDepart = request('depD');
         $idProf = request('profdet');
+        $professeur = Professeur::find($idProf);
+        foreach($professeur->matieres as $matiere)
+        {
+            if($matiere->module->semestre->filiere->departement->idDepartement==$idDepart)
+            {
+                $idMatiere = $matiere->idMatiere;
+                $matiere = Matiere::find($idMatiere);
+                $matiere->idProf = null;
+                $matiere->save();
+            }
+        }
         $profdep = Prof_departement::where('idDepartement', $idDepart)->where('idProf', $idProf)->select('idProfDep')->get()[0];
         DB::table('prof_departement')->where('idProfDep', '=', $profdep->idProfDep)->delete();
     }

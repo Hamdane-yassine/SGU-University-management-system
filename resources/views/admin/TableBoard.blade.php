@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Tableau de board')
+@section('title', 'Tableau de bord')
 @section('content')
     <div class="main-container">
         <div class="xs-pd-20-10 pd-ltr-20">
