@@ -15,12 +15,12 @@
                                 </div>
                             </a>
                             @endcan
-                            <h4>Evénements</h4>
+                            <h4>Evènementss</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Evénements</li>
+                                <li class="breadcrumb-item active" aria-current="page">Evènementss</li>
                             </ol>
                         </nav>
                     </div>
@@ -76,7 +76,7 @@
                                     <li>
                                         <div class="chat-body clearfix ml-3">
                                             <p style="word-wrap: break-word"><span class="d-block text-secondary pb-1">
-                                            </span class="align-self-center" ><i class="fa fa-info-circle mr-1"></i>Aucun événement n'est trouvé pour le moment</span>
+                                            </span class="align-self-center" ><i class="fa fa-info-circle mr-1"></i>Aucun évènements n'est trouvé pour le moment</span>
                                             <div class="chat_time float-right mb-10"> </div>
                                         </div>
                                     </li>
@@ -106,7 +106,7 @@
                                         @else
                                         <div class="chat-body clearfix ml-3">
                                             <p style="word-wrap: break-word"><span class="d-block text-secondary pb-1">
-                                            </span class="align-self-center" ><i class="fa fa-info-circle mr-1"></i>Aucun événement n'est trouvé pour le moment</span>
+                                            </span class="align-self-center" ><i class="fa fa-info-circle mr-1"></i>Aucun évènements n'est trouvé pour le moment</span>
                                             <div class="chat_time float-right mb-10"> </div>
                                         </div>
                                         @endif

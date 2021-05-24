@@ -26,7 +26,7 @@
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
-                                <li class="breadcrumb-item"><a href="{{ route('evenement.index') }}">Evénements</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('evenement.index') }}">Evènementss</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ $evenement->titre }}</li>
                             </ol>
                         </nav>
