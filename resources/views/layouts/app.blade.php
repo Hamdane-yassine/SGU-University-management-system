@@ -116,7 +116,7 @@
                                 <span class="micon fa fa-dashboard"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau
                                     de
-                                    board</span>
+                                    bord</span>
                             </a>
                         </li>
                         <li class="dropdown">
@@ -217,7 +217,7 @@
                                 <span class="micon fa fa-dashboard"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span class="mtext">Tableau
                                     de
-                                    board</span>
+                                    bord</span>
                             </a>
                         </li>
                         <li class="dropdown">
