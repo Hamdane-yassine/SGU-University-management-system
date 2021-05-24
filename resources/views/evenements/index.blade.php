@@ -11,7 +11,7 @@
                             @can('create', App\Models\Evenement::class)
                             <a href="{{ route('evenement.create') }}">
                                 <div class="pull-right fa-2x">
-                                    <small class="pt-3"><i class="fa fa-plus"></i>  Ajouter</small>
+                                    <small class="pt-3"><i class="fa fa-plus"></i></small>
                                 </div>
                             </a>
                             @endcan
@@ -97,9 +97,10 @@
                                         @if(\App\Models\Evenement::first())
                                             @foreach (\App\Models\Evenement::all()->take(6) as $evt)
                                             <li>
-                                                <a href="{{ url('/evenement/'.$evt->idEvenement) }}">{{ $evt->titre }}
-                                                    <p class="caption" style="word-break:break-all">{{ Str::substr($evt->resume,0,50) }}... <small class="pull-right">{{ $evt->date->format('Y M D') }}</small></p>
-                                                </a>
+                                                <h4><a href="{{ url('/evenement/'.$evt->idEvenement) }}">{{ $evt->titre }}</a></h4>
+                                                <p class="caption" style="word-break:break-all">{{ Str::substr($evt->resume,0,50) }}...</p>
+                                                <span>{{ $evt->date->format('Y M D') }}</span>
+
                                             </li>
                                             @endforeach
                                         @else

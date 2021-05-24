@@ -50,6 +50,7 @@ class Absence extends Model
 		'idMatiere',
 		'dateAbsence',
 		'dateRattrapage',
+        'salle',
 		'etat'
 	];
 
