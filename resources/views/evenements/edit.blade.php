@@ -26,7 +26,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="clearfix">
                         <div class="pull-left">
-                            <h4 class="text-blue h4">Ajouter un événement</h4>
+                            <h4 class="text-blue h4">Editer l'événement</h4>
                             <p class="mb-30">remplire les champs nécessaires</p>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <div class="html-editor mb-30">
                                 <h4 class="h4 text-blue">Corps</h4>
-                                <p>Modifier l'évenement</p>
+                                <p>Ajouter le corps d'évenement</p>
                                 <textarea id="corps" name="corps"
                                     class="textarea_editor form-control border-radius-0 @error('corps') is-invalid @enderror"
                                     type="text"
