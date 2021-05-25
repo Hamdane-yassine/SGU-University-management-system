@@ -292,7 +292,7 @@
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-group mb-0">
-                                                                    <input type="submit" class="btn btn-primary" value="Save & Update">
+                                                                    <input type="submit" class="btn btn-primary" value="Enregistrer">
                                                                 </div>
                                                             </li>
                                                             </ul>
