@@ -15,12 +15,12 @@
                                 </div>
                             </a>
                             @endcan
-                            <h4>Evènementss</h4>
+                            <h4>Evènements</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Evènementss</li>
+                                <li class="breadcrumb-item active" aria-current="page">Evènements</li>
                             </ol>
                         </nav>
                     </div>
