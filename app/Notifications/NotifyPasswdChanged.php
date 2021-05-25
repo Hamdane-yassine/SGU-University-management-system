@@ -57,7 +57,7 @@ class NotifyPasswdChanged extends Notification implements ShouldBroadcast
     {
         return [
             'image' => '/vendors/images/success.svg',
-            'from'=>'votre mot de passe à était modifié',
+            'from'=>'votre mot de passe a été modifié',
             'idNotif'=>$this->id,
             // 'idEvent'=>json_decode($this->event)->idEvenement,
             'brief'=>'Votre profil est mis à jours',
