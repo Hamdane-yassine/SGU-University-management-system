@@ -72,7 +72,7 @@
                                     type="text"
                                     form="evtform">{{ $evenement->html }}</textarea>
                             </div>
-                            @error('htmlEditor')
+                            @error('corps')
                                 <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
                                 </span>
                             @enderror
