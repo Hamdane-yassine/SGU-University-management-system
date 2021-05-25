@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <div class="html-editor mb-30">
                                 <h4 class="h4 text-blue">Corps</h4>
-                                <p>Ajouter le corps d'évenement</p>
+                                <p>Modifier l'évenement</p>
                                 <textarea id="corps" name="corps"
                                     class="textarea_editor form-control border-radius-0 @error('corps') is-invalid @enderror"
                                     type="text"
@@ -78,9 +78,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Image d'entête</label>
+                            <label>Image d'en-tête</label>
                             <div class="custom-file">
-                                <label class="custom-file-label" for="">ajouter une image d'entête</label>
+                                <label class="custom-file-label" for="">ajouter une image d'en-tête</label>
                                 <input id="" name="headingImg" type="file"
                                     class="custom-file-input @error('headingImg') is-invalid @enderror"
                                     accept="image/*" >
