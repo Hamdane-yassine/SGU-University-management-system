@@ -81,7 +81,8 @@
                                 <p>Ajouter le corp d'évenement</p>
                                 <textarea id="corps" name="corps"
                                     class="textarea_editor form-control border-radius-0 @error('corps') is-invalid @enderror"
-                                    form="evtform" required>{{ old('corps') }}</textarea>
+                                    type="text"
+                                    form="evtform">{{ old('corps') }}</textarea>
                             </div>
                             @error('htmlEditor')
                                 <small class="form-text text-danger"><strong>{{ $message }}</strong></small>
