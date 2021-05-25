@@ -8,12 +8,12 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="title">
-                                <h4>Evénements</h4>
+                                <h4>Evènements</h4>
                             </div>
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Tableau de bord</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('evenement.index') }}">Evénements</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('evenement.index') }}">Evènements</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ $evenement->titre }}</li>
                                 </ol>
                             </nav>
