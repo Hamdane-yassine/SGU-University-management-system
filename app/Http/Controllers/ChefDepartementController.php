@@ -500,7 +500,7 @@ class ChefDepartementController extends Controller
             ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
             ->join('users', 'users.id', '=', 'professeur.idUtilisateur')
             ->join('personne', 'personne.idPersonne', 'users.idPersonne')
-            ->get()->toArray();
+            ->all();
 
         if ($request->ajax()) {
             return Datatables::of($absences)
