@@ -280,7 +280,7 @@
                             <a href="/chef/rattrapages" class="dropdown-toggle no-arrow">
                                 <span class="micon fa fa-calendar-minus-o"
                                     style="padding-left: 15px; padding-bottom: 5px;"></span><span
-                                    class="mtext">Rattrapage</span>
+                                    class="mtext">Rattrapages</span>
                             </a>
                         </li>
                         <li>
