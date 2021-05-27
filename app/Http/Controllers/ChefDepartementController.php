@@ -490,7 +490,6 @@ class ChefDepartementController extends Controller
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $profs = Prof_departement::where('idDepartement', $idDepartement)->select('idProf')->get()->toArray();
         $absences = Absence::whereIn('absence.idProf', $profs)
-            ->select('Absence.idAbsence as idAbsence', 'personne.nom as nomProf', 'Absence.dateAbsence as dateAbsence')
             ->where('absence.etat', 'en attendant')
             ->where('filiere.idDepartement', $idDepartement)
             ->join('professeur', 'absence.idProf', '=', 'professeur.idProf')
@@ -500,7 +499,8 @@ class ChefDepartementController extends Controller
             ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
             ->join('users', 'users.id', '=', 'professeur.idUtilisateur')
             ->join('personne', 'personne.idPersonne', 'users.idPersonne')
-            ->all();
+            ->select('Absence.idAbsence as idAbsence', 'personne.nom as nomProf', 'Absence.dateAbsence as dateAbsence')
+            ->get();
 
         if ($request->ajax()) {
             return Datatables::of($absences)
