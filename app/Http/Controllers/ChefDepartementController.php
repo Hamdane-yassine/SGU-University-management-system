@@ -499,7 +499,7 @@ class ChefDepartementController extends Controller
             ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
             ->join('users', 'users.id', '=', 'professeur.idUtilisateur')
             ->join('personne', 'personne.idPersonne', 'users.idPersonne')
-            ->select('Absence.idAbsence', 'personne.nom', 'Absence.dateAbsence')
+            ->select('Absence.idAbsence as idAbsence', 'personne.nom as nomProf', 'Absence.dateAbsence as dateAbsence')
             ->get();
 
         if ($request->ajax()) {
