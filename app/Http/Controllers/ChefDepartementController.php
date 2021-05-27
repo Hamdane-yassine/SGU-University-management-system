@@ -48,7 +48,7 @@ class ChefDepartementController extends Controller
 
         //return list of filiere in that departement
         $filieres = Filiere::where('idDepartement', $idDepartement)->select('idFiliere', 'nom', 'niveau')->get();
-        return view('chef.emploi', ['filieres' => $filieres]);
+        return view('Chef.emploi', ['filieres' => $filieres]);
     }
 
 
@@ -78,7 +78,7 @@ class ChefDepartementController extends Controller
     public function Etudiants(Filiere $filiere)
     {
         $filieres = $filiere->departement->filieres;
-        return view('chef.Etudiant', ['filiere' => $filiere, 'filieres' => $filieres]);
+        return view('Chef.Etudiant', ['filiere' => $filiere, 'filieres' => $filieres]);
     }
 
     public function getEtudiants(Request $request, Filiere $filiere)  //an ajax function to retrieve tha data
@@ -288,12 +288,12 @@ class ChefDepartementController extends Controller
 
     public function Matieres(Filiere $filiere)
     {
-        return view('chef.matieres', ['filiere' => $filiere]);
+        return view('Chef.matieres', ['filiere' => $filiere]);
     }
 
     public function getNotes(Matiere $matiere)
     {
-        return view('chef.Notes', ['matiere' => $matiere]);
+        return view('Chef.Notes', ['matiere' => $matiere]);
     }
 
     public function getListNotes(Request $request, Matiere $matiere)  //an ajax function to retrieve tha data
@@ -316,7 +316,7 @@ class ChefDepartementController extends Controller
     }
     public function Professeurs(Departement $departement)
     {
-        return view('chef.profs', ['departement' => $departement]);
+        return view('Chef.profs', ['departement' => $departement]);
     }
 
     public function getProfesseurs(Request $request, Departement $departement)
@@ -403,7 +403,7 @@ class ChefDepartementController extends Controller
     }
     public function AbsencesIndex() //load abseces and return view for /chef/absence
     {
-        return view('chef.absences');
+        return view('Chef.absences');
     }
 
     public function getAbsencesForChef(Request $request)
@@ -479,7 +479,7 @@ class ChefDepartementController extends Controller
 
         //echo $annee.'<br>'.$date.'<br>'.$Count_etudiants.'<br>'.$Count_filieres.'<br>'.$Count_absences.'<br>'.$etat_notes;
 
-        return view('chef.TableBoard', [
+        return view('Chef.TableBoard', [
             'annee' => $annee, 'date' => $date, 'Count_etudiants' => $Count_etudiants,
             'Count_filieres' => $Count_filieres, 'Count_absences' => $Count_absences, 'etat_notes' => $etat_notes
         ]);
@@ -533,7 +533,7 @@ class ChefDepartementController extends Controller
             ->join('personne', 'personne.idPersonne', 'users.idPersonne')
             ->get();
 
-        return view('chef.rattrapage', ['absences' => $absences]);
+        return view('Chef.rattrapage', ['absences' => $absences]);
     }
 
     public function AnnulerRatt(Request $request, Absence $absence)
@@ -623,7 +623,7 @@ class ChefDepartementController extends Controller
                 "CheckAnneRatt" => $calc->CheckRatt()
             ));
         }
-        return view('chef.resultat', ['filieresnotes' => $filieresnotes, 'etudiant' => $etudiant, 'consratt' => $consratt, 'consval' => $consval]);
+        return view('Chef.resultat', ['filieresnotes' => $filieresnotes, 'etudiant' => $etudiant, 'consratt' => $consratt, 'consval' => $consval]);
     }
     public function EnvoyerNotes()
     {
