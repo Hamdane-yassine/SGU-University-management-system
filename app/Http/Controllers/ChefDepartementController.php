@@ -57,7 +57,7 @@ class ChefDepartementController extends Controller
         $idDepartement = auth()->user()->professeur->chefdep->idDepartement;
         $emplois = Filiere::where('idDepartement', $idDepartement)
             ->join('emploi', 'emploi.idEmploi', '=', 'filiere.idEmploi')
-            ->select('emploi.idEmploi as idEmploi', 'filename', 'filiere.nom as nom', 'niveau', 'emploi.updated_at as UpdateDate')->get();
+            ->select('emploi.idEmploi as idEmploi', 'fileName', 'filiere.nom as nom', 'niveau', 'emploi.updated_at as UpdateDate')->get();
 
         if ($request->ajax()) {
             return Datatables::of($emplois)
