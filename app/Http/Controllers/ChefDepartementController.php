@@ -422,7 +422,7 @@ class ChefDepartementController extends Controller
             ->join('filiere', 'semestre.idFiliere', '=', 'filiere.idFiliere')
             ->join('users', 'users.id', '=', 'professeur.idUtilisateur')
             ->join('personne', 'personne.idPersonne', 'users.idPersonne')
-            ->select('idAbsence', 'matiere.nom as nomMatiere', DB::raw("concat_ws(' ',filiere.nom, filiere.niveau) AS nomFiliere"), DB::raw("concat_ws(' ',personne.nom, personne.prenom) AS nomProf"), 'absence.dateAbsence as date', 'absence.etat')
+            ->select('IdAbsence', 'matiere.nom as nomMatiere', DB::raw("concat_ws(' ',filiere.nom, filiere.niveau) AS nomFiliere"), DB::raw("concat_ws(' ',personne.nom, personne.prenom) AS nomProf"), 'absence.dateAbsence as date', 'absence.etat')
             ->get();
 
         if ($request->ajax()) {
