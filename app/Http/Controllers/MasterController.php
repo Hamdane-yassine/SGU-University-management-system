@@ -533,7 +533,7 @@ class MasterController extends Controller
         //first create the person
         $personne = new Personne;
         $personne->nom = $request->ajnom;
-        $personne->prenom = $request->ajnom;
+        $personne->prenom = $request->ajprenom;
         $personne->genre = $request->ajgenre;
         $personne->dateNaissance = $request->ajdatenais;
         $personne->situationFamiliale = $request->ajsituation;

@@ -467,19 +467,19 @@ class AdminController extends Controller
         $personne->emailInstitutionne = request('inemailins');
         $professeur->specialite = request('inspecialite');
         if (request('role') == 1 && $user->role == "chefdep") {
-            DB::table('chefdep')->where('idProf', '=', $idProf)->delete();
+            DB::table('chefdep')->where('idProf','=',$idProf)->delete();
             $user->role = "prof";
         } elseif (request('role') == 2 && $user->role == "prof") {
-            $oldchefdata = Chefdep::where('idDepartement', $idDep)->select('idProf')->get();
+            $oldchefdata = Chefdep::where('idDepartement',$idDep)->select('idProf')->get();
             if ($oldchefdata->isEmpty()) {
                 $dep = new Chefdep;
                 $dep->idDepartement = $idDep;
                 $dep->idProf = $idProf;
                 $dep->save();
             } else {
-                DB::table('chefdep')->where('idDepartement', '=', $idDep)->delete();
-                $idProf = $oldchefdata[0]->idProf;
-                $oldchef = Professeur::find($idProf);
+                DB::table('chefdep')->where('idDepartement','=',$idDep)->delete();
+                $idProf1 = $oldchefdata[0]->idProf;
+                $oldchef = Professeur::find($idProf1);
                 $idUser = $oldchef->idUtilisateur;
                 $oldchefuser = User::find($idUser);
                 $oldchefuser->role = "prof";
@@ -567,14 +567,14 @@ class AdminController extends Controller
         $prof_departement->idDepartement = $idDepart;
         $prof_departement->save();
         if (request('ajrole') == 2) {
-            $oldchefdata = Chefdep::where('idDepartement', $idDepart)->select('idProf')->get();
+            $oldchefdata = Chefdep::where('idDepartement',$idDepart)->select('idProf')->get();
             if ($oldchefdata->isEmpty()) {
                 $dep = new Chefdep;
                 $dep->idDepartement = $idDepart;
                 $dep->idProf = $ProfesseurId;
                 $dep->save();
             } else {
-                DB::table('chefdep')->where('idDepartement', '=', $idDepart)->delete();
+                DB::table('chefdep')->where('idDepartement','=',$idDepart)->delete();
                 $idProf = $oldchefdata[0]->idProf;
                 $oldchef = Professeur::find($idProf);
                 $idUser = $oldchef->idUtilisateur;
