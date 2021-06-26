@@ -26,7 +26,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="clearfix">
                         <div class="pull-left">
-                            <h4 class="text-blue h4">Ajouter un événement</h4>
+                            <h4 class="text-blue h4">Editer l'événement</h4>
                             <p class="mb-30">remplire les champs nécessaires</p>
                         </div>
                     </div>
@@ -78,9 +78,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Image d'entête</label>
+                            <label>Image d'en-tête</label>
                             <div class="custom-file">
-                                <label class="custom-file-label" for="">ajouter une image d'entête</label>
+                                <label class="custom-file-label" for="">ajouter une image d'en-tête</label>
                                 <input id="" name="headingImg" type="file"
                                     class="custom-file-input @error('headingImg') is-invalid @enderror"
                                     accept="image/*" >

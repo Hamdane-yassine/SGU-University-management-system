@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         //     if ($table->Tables_in_pfe !== 'migrations')
         //         DB::table($table->Tables_in_pfe)->truncate();
         // }
-        // Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
         // +++++++++++ END +++++++++++++++=
 
 

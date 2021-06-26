@@ -80,7 +80,7 @@
                         @endif
                         @if (Auth::user()->canImpersonate())
                             <a class="dropdown-item" href="{{ url('user/impersonate') }}"><i class="dw dw-help"></i>
-                                {{ app('impersonate')->isImpersonating() ? 'Quitter' : 'personnifier' }}
+                                {{ app('impersonate')->isImpersonating() ? 'Quitter' : 'Impersonate' }}
                             </a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}"

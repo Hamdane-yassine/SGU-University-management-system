@@ -33,7 +33,7 @@ class MatierePolicy
     {
         $matieres = DB::table('matiere')
             ->where('idProf', $user->professeur->idProf)
-            ->pluck('idMAtiere')->toArray();
+            ->pluck('idMatiere')->toArray();
         return in_array($matiere->idMatiere, $matieres);
     }
 

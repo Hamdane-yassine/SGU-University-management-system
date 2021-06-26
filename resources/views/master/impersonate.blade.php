@@ -27,7 +27,7 @@
                                         <td>{{ $other_user->role }}</td>
                                         <td>
                                             <input type="hidden" name="id" value="{{ $other_user->id }}" />
-                                            <button class="btn btn-success">personnifier</button>
+                                            <button class="btn btn-success">choisir</button>
                                         </td>
                                     </tr>
                                 </form>
