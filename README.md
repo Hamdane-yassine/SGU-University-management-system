@@ -36,4 +36,4 @@ The application is deployed using Heroku, a cloud platform as a service (PaaS).
 ## Contributors
 - HAMDANE Yassine
 - EL GAOUT EL Mehdi
-- DAOUDI Otman
+- DAOUDI Otmane
