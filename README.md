@@ -4,7 +4,7 @@
 
 SGU (Système de Gestion Universitaire) is a comprehensive university management system designed to streamline administrative tasks, improve communication, and enhance overall efficiency in educational institutions. This web-based application provides a centralized platform for various stakeholders including administrators, department heads, professors, and students to interact and manage university-related tasks.
 
-[Overview](overview.png)
+![Overview](overview.png)
 
 ## Key Features
 
